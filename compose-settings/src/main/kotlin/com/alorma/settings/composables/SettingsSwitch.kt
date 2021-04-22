@@ -44,6 +44,11 @@ fun SettingsSwitch(
         mutableStateOf(booleanSettingsProvider.getValue(key, checked))
     }
 
+    fun updateValue(newValue: Boolean) {
+        booleanSettingsProvider.setValue(key, newValue)
+        rememberSwitchPref = newValue
+    }
+
     Surface {
         Row(
             modifier = Modifier
@@ -51,8 +56,7 @@ fun SettingsSwitch(
                 .clickable(
                     onClick = {
                         val newVal = !rememberSwitchPref
-                        booleanSettingsProvider.setValue(key, newVal)
-                        rememberSwitchPref = newVal
+                        updateValue(newValue = newVal)
                     },
                 ),
             verticalAlignment = Alignment.CenterVertically,
@@ -88,7 +92,7 @@ fun SettingsSwitch(
             ) {
                 Switch(
                     checked = rememberSwitchPref,
-                    onCheckedChange = { rememberSwitchPref = it }
+                    onCheckedChange = { updateValue(newValue = it) }
                 )
             }
         }

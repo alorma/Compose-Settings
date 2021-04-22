@@ -44,6 +44,11 @@ fun SettingsCheckbox(
         mutableStateOf(booleanSettingsProvider.getValue(key, checked))
     }
 
+    fun updateValue(newValue: Boolean) {
+        booleanSettingsProvider.setValue(key, newValue)
+        rememberCheckboxPref = newValue
+    }
+
     Surface {
         Row(
             modifier = Modifier
@@ -51,8 +56,7 @@ fun SettingsCheckbox(
                 .clickable(
                     onClick = {
                         val newVal = !rememberCheckboxPref
-                        booleanSettingsProvider.setValue(key, newVal)
-                        rememberCheckboxPref = newVal
+                        updateValue(newValue = newVal)
                     },
                 ),
             verticalAlignment = Alignment.CenterVertically,
@@ -88,7 +92,7 @@ fun SettingsCheckbox(
             ) {
                 Checkbox(
                     checked = rememberCheckboxPref,
-                    onCheckedChange = { rememberCheckboxPref = it }
+                    onCheckedChange = { updateValue(newValue = it) }
                 )
             }
         }
