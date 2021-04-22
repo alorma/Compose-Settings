@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
@@ -34,9 +33,9 @@ import com.alorma.settings.storage.LocalBooleanSettings
 @Composable
 fun SettingsSwitch(
     key: String,
-    icon: @Composable() (() -> Unit)? = null,
-    title: @Composable() () -> Unit,
-    subtitle: @Composable() (() -> Unit)? = null,
+    icon: @Composable (() -> Unit)? = null,
+    title: @Composable () -> Unit,
+    subtitle: @Composable (() -> Unit)? = null,
     checked: Boolean,
 ) {
     val booleanSettingsProvider = LocalBooleanSettings.current
@@ -84,7 +83,7 @@ fun SettingsSwitch(
                 }
             }
             Box(
-                modifier = Modifier.padding(end = 16.dp),
+                modifier = Modifier.size(64.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Switch(

@@ -12,6 +12,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.preference.PreferenceManager
 import com.alorma.settings.SettingsList
+import com.alorma.settings.composables.SettingsCheckbox
 import com.alorma.settings.composables.SettingsSwitch
 import com.alorma.settings.storage.BooleanAndroidPreferences
 import com.alorma.settings.storage.LocalBooleanSettings
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
                         checked = true
                     )
                     Divider()
-                    SettingsSwitch(
+                    SettingsCheckbox(
                         key = "Demo2",
                         icon = {
                             Icon(

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.alorma.settings.composables.SettingsCheckbox
 import com.alorma.settings.composables.SettingsSwitch
 
 @Composable
@@ -47,7 +48,7 @@ fun SettingsListPreview() {
                 checked = false
             )
             Divider()
-            SettingsSwitch(
+            SettingsCheckbox(
                 key = "Demo2",
                 icon = { Icon(imageVector = Icons.Default.VerifiedUser, contentDescription = "User") },
                 title = { Text(text = "Demo 2") },

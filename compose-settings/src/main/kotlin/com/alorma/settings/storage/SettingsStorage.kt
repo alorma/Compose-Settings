@@ -22,7 +22,6 @@ class BooleanAndroidPreferences(
             putBoolean(key, value)
         }
     }
-
 }
 
 val LocalBooleanSettings = compositionLocalOf<SettingsStorage<Boolean>> {
