@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="compose_settings_header_back_action">Back</string>
+    <string name="compose_settings_header_help_action">Help</string>
+    <string name="compose_settings_header_search_action">Search</string>
+</resources>
