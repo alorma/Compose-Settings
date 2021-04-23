@@ -3,7 +3,9 @@ plugins {
     kotlin("android")
 }
 
-apply(from = "${rootProject.projectDir}/scripts/publish-mavencentral.gradle")
+ext["PUBLISH_ARTIFACT_ID"] = "compose-settings"
+
+apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 android {
     compileSdkVersion(30)
