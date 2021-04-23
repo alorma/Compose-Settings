@@ -5,11 +5,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.platform.LocalContext
-import androidx.preference.PreferenceManager
-import com.alorma.settings.storage.BooleanAndroidPreferences
-import com.alorma.settings.storage.LocalBooleanSettings
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -42,15 +37,10 @@ fun SettingsLibTheme(
     } else {
         LightColorPalette
     }
-    val context = LocalContext.current
-    val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-    CompositionLocalProvider(LocalBooleanSettings provides BooleanAndroidPreferences(prefs)) {
-        MaterialTheme(
-            colors = colors,
-            typography = Typography,
-            shapes = Shapes,
-            content = content
-        )
-    }
-
+    MaterialTheme(
+        colors = colors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
 }

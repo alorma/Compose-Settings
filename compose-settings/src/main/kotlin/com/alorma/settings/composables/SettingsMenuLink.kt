@@ -2,7 +2,6 @@ package com.alorma.settings.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alorma.settings.composables.internal.SettingsIcon
 
 @Composable
 fun SettingsMenuLink(
@@ -42,14 +42,7 @@ fun SettingsMenuLink(
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Box(
-                modifier = Modifier.size(64.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                if (icon != null) {
-                    icon()
-                }
-            }
+            SettingsIcon(icon = icon)
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.Center,

@@ -28,7 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alorma.settings.storage.LocalBooleanSettings
+import com.alorma.settings.composables.internal.SettingsIcon
 
 @Composable
 fun SettingsSwitch(
@@ -37,15 +37,13 @@ fun SettingsSwitch(
     title: @Composable () -> Unit,
     subtitle: @Composable (() -> Unit)? = null,
     checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
 ) {
-    val booleanSettingsProvider = LocalBooleanSettings.current
 
-    var rememberSwitchPref by remember {
-        mutableStateOf(booleanSettingsProvider.getValue(key, checked))
-    }
+    var rememberSwitchPref by remember { mutableStateOf(checked) }
 
     fun updateValue(newValue: Boolean) {
-        booleanSettingsProvider.setValue(key, newValue)
+        onCheckedChange(newValue)
         rememberSwitchPref = newValue
     }
 
@@ -61,14 +59,7 @@ fun SettingsSwitch(
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Box(
-                modifier = Modifier.size(64.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                if (icon != null) {
-                    icon()
-                }
-            }
+            SettingsIcon(icon = icon)
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.Center,
@@ -109,6 +100,6 @@ fun SettingsSwitchPreview() {
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
             checked = true,
-        )
+        ) {}
     }
 }

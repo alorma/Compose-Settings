@@ -16,6 +16,7 @@ import com.alorma.settings.composables.SettingsCheckbox
 import com.alorma.settings.composables.SettingsGroup
 import com.alorma.settings.composables.SettingsMenuLink
 import com.alorma.settings.composables.SettingsSwitch
+import com.alorma.settings.composables.internal.SettingsToolbar
 
 @Composable
 fun SettingsList(
@@ -49,7 +50,7 @@ fun SettingsListPreview() {
                     icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
                     title = { Text(text = "Demo 1") },
                     checked = false
-                )
+                ) {}
                 Divider()
                 SettingsCheckbox(
                     key = "Demo2",
@@ -60,7 +61,7 @@ fun SettingsListPreview() {
                     title = { Text(text = "Demo 2") },
                     subtitle = { Text(text = "This a subtitle") },
                     checked = true
-                )
+                ) {}
             }
             SettingsGroup(
                 title = { Text(text = "Group 2") },
@@ -74,10 +75,7 @@ fun SettingsListPreview() {
                 Divider()
                 SettingsMenuLink(
                     key = "Demo4",
-                    icon = {
-                        Icon(imageVector = Icons.Default.VerifiedUser,
-                            contentDescription = "User")
-                    },
+                    icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
                     title = { Text(text = "Demo 4") },
                     subtitle = { Text(text = "This a subtitle") },
                     onClick = {},

@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                             },
                             title = { Text(text = "Demo 1") },
                             checked = false
-                        )
+                        ) {}
                         Divider()
                         SettingsCheckbox(
                             key = "Demo2",
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                             title = { Text(text = "Demo 2") },
                             subtitle = { Text(text = "This a subtitle") },
                             checked = true
-                        )
+                        ) {}
                     }
                     SettingsGroup(
                         title = { Text(text = "Group 2") },
