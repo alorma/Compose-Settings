@@ -39,9 +39,8 @@ if (secretPropsFile.exists()) {
         ext[name] = value
     }
 } else {
-    ext["signing.keyId"] = System.getenv('SIGNING_KEY_ID')
-    ext["signing.password"] = System.getenv('SIGNING_PASSWORD')
-    ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_SECRET_KEY_RING_FILE')
+    ext["signing.keyId"] = System.getenv('GPG_KEY_NAME')
+    ext["signing.password"] = System.getenv('GPG_PASSPHRASE')
     ext["ossrhUsername"] = System.getenv('OSSRH_USERNAME')
     ext["ossrhPassword"] = System.getenv('OSSRH_PASSWORD')
     ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
