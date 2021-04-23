@@ -1,2 +1,0 @@
-com/alorma/settings/BuildConfig.java
- com.alorma.settings.BuildConfig

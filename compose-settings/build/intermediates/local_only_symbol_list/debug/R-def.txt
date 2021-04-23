@@ -1,5 +1,0 @@
-R_DEF: Internal format may change without notice
-local
-string compose_settings_header_back_action
-string compose_settings_header_help_action
-string compose_settings_header_search_action
