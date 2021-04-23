@@ -3,14 +3,17 @@ package com.alorma.settings.composables
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -19,29 +22,48 @@ fun SettingsGroup(
     title: @Composable (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Column(
-        modifier = modifier.fillMaxWidth(),
+    Surface {
+        Column(
+            modifier = modifier.fillMaxWidth(),
+        ) {
+            if (title != null) {
+                SettingsGroupTitle(title)
+            }
+            content()
+        }
+    }
+}
+
+@Composable
+internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(64.dp)
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.CenterStart
     ) {
-        if (title != null) {
-            ProvideTextStyle(
-                value = MaterialTheme.typography.subtitle1.copy(
-                    color = MaterialTheme.colors.primary
-                )
+        val primary = MaterialTheme.colors.primary
+        val titleStyle = MaterialTheme.typography.subtitle1.copy(color = primary)
+        ProvideTextStyle(value = titleStyle) { title() }
+    }
+}
+
+@Preview
+@Composable
+fun SettingsGroupPreview() {
+    MaterialTheme {
+        SettingsGroup(
+            title = { Text(text = "Title") }
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(64.dp)
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center,
             ) {
-                Spacer(modifier = Modifier.size(8.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            vertical = 16.dp,
-                            horizontal = 16.dp
-                        ),
-                ) {
-                    title()
-                }
-                Spacer(modifier = Modifier.size(8.dp))
+                Text(text = "Settings group")
             }
         }
-        content()
     }
 }
