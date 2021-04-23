@@ -32,5 +32,5 @@ jobs:
         run: ./gradlew assembleRelease -x :app:assembleRelease
       - name: Source jar
         run: ./gradlew androidSourcesJar javadocJar
-      - name: Sign
+      - name: Signature
         run: ./gradlew signReleasePublication
