@@ -28,9 +28,9 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId PUBLISH_GROUP_ID
-                artifactId PUBLISH_ARTIFACT_ID
-                version PUBLISH_VERSION
+                groupId project.property("libGroup")
+                artifactId project.project.getName()
+                version project.property("libVersion")
                 if (project.plugins.findPlugin("com.android.library")) {
                     from components.release
                 } else {
@@ -41,7 +41,7 @@ afterEvaluate {
                 artifact javadocJar
 
                 pom {
-                    name = PUBLISH_ARTIFACT_ID
+                    name = project.project.getName()
                     description = 'Compose settings'
                     url = 'https://github.com/alorma/Compose-Settings'
                     licenses {
