@@ -6,13 +6,6 @@ on:
       - main
 
 jobs:
-  prepare_sign:
-    name: Sign environment
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
   release:
     name: Release build
     runs-on: ubuntu-latest
@@ -44,5 +37,5 @@ jobs:
         with:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Signature
+      - name: Sign release
         run: ./gradlew signReleasePublication
