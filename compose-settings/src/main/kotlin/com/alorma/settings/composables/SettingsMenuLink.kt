@@ -26,10 +26,9 @@ import com.alorma.settings.composables.internal.SettingsIcon
 
 @Composable
 fun SettingsMenuLink(
-    key: String,
-    icon: @Composable (() -> Unit)? = null,
-    title: @Composable () -> Unit,
-    subtitle: @Composable (() -> Unit)? = null,
+    icon: @Composable() (() -> Unit)? = null,
+    title: @Composable() () -> Unit,
+    subtitle: @Composable() (() -> Unit)? = null,
     onClick: () -> Unit,
 ) {
 
@@ -69,7 +68,6 @@ fun SettingsMenuLink(
 fun SettingsMenuLinkPreview() {
     MaterialTheme {
         SettingsMenuLink(
-            key = "Demo",
             icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },

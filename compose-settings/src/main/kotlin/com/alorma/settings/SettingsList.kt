@@ -46,14 +46,12 @@ fun SettingsListPreview() {
         ) {
             SettingsGroup {
                 SettingsSwitch(
-                    key = "Demo1",
                     icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
                     title = { Text(text = "Demo 1") },
                     checked = false
                 ) {}
                 Divider()
                 SettingsCheckbox(
-                    key = "Demo2",
                     icon = {
                         Icon(imageVector = Icons.Default.VerifiedUser,
                             contentDescription = "User")
@@ -67,19 +65,16 @@ fun SettingsListPreview() {
                 title = { Text(text = "Group 2") },
             ) {
                 SettingsMenuLink(
-                    key = "Demo3",
                     icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
                     title = { Text(text = "Demo 3") },
                     onClick = {},
                 )
                 Divider()
                 SettingsMenuLink(
-                    key = "Demo4",
                     icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
                     title = { Text(text = "Demo 4") },
                     subtitle = { Text(text = "This a subtitle") },
-                    onClick = {},
-                )
+                ) {}
             }
         }
     }

@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
                 SettingsList(title = { Text(text = "Demo settings") }) {
                     SettingsGroup {
                         SettingsSwitch(
-                            key = "Demo1",
                             icon = {
                                 Icon(imageVector = Icons.Default.MailOutline,
                                     contentDescription = "Wifi")
@@ -39,7 +38,6 @@ class MainActivity : ComponentActivity() {
                         ) {}
                         Divider()
                         SettingsCheckbox(
-                            key = "Demo2",
                             icon = {
                                 Icon(imageVector = Icons.Default.Settings,
                                     contentDescription = "User")
@@ -53,7 +51,6 @@ class MainActivity : ComponentActivity() {
                         title = { Text(text = "Group 2") },
                     ) {
                         SettingsMenuLink(
-                            key = "Demo3",
                             icon = {
                                 Icon(imageVector = Icons.Default.Info,
                                     contentDescription = "Wifi")
@@ -65,17 +62,15 @@ class MainActivity : ComponentActivity() {
                         )
                         Divider()
                         SettingsMenuLink(
-                            key = "Demo4",
                             icon = {
                                 Icon(imageVector = Icons.Default.Call,
                                     contentDescription = "User")
                             },
                             title = { Text(text = "Demo 4") },
                             subtitle = { Text(text = "This a subtitle") },
-                            onClick = {
-                                Toast.makeText(context, "Demo 4", Toast.LENGTH_SHORT).show()
-                            },
-                        )
+                        ) {
+                            Toast.makeText(context, "Demo 4", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
