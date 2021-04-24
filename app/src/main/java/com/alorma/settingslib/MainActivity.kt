@@ -26,7 +26,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             val context = LocalContext.current
             SettingsLibTheme {
-                SettingsList(title = { Text(text = "Demo settings") }) {
+                SettingsList(
+                    title = { Text(text = "Demo settings") },
+                    onBack = { finish() },
+                    onHelp = {
+                        Toast.makeText(context, "Help: Not implemented", Toast.LENGTH_SHORT).show()
+                    },
+                    onSearch = {
+                        Toast.makeText(context, "Search: Not implemented", Toast.LENGTH_SHORT).show()
+                    }
+                ) {
                     SettingsGroup {
                         SettingsSwitch(
                             icon = {

@@ -21,16 +21,35 @@ import com.alorma.settings.composables.internal.SettingsToolbar
 @Composable
 fun SettingsList(
     title: @Composable () -> Unit,
+    onBack: (() -> Unit)? = null,
+    onSearch: (() -> Unit)? = null,
+    onHelp: (() -> Unit)? = null,
+    settings: @Composable ColumnScope.() -> Unit,
+) {
+    SettingsList(
+        header = {
+            SettingsToolbar(
+                title = title,
+                onBack = onBack,
+                onSearch = onSearch,
+                onHelp = onHelp,
+            )
+        },
+        settings = settings,
+    )
+}
+
+
+@Composable
+fun SettingsList(
+    header: (@Composable () -> Unit)? = null,
     settings: @Composable ColumnScope.() -> Unit,
 ) {
     Scaffold(
         topBar = {
-            SettingsToolbar(
-                title = title,
-                onBack = {},
-                onSearch = {},
-                onHelp = {},
-            )
+            if (header != null) {
+                header()
+            }
         }
     ) {
         Column(content = settings)

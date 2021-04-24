@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.settings.R
 
 @Composable
-internal fun SettingsToolbar(
+fun SettingsToolbar(
     title: @Composable () -> Unit,
     onBack: (() -> Unit)? = null,
     onSearch: (() -> Unit)? = null,
