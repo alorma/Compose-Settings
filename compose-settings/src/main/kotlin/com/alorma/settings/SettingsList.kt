@@ -6,10 +6,12 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.settings.composables.SettingsCheckbox
@@ -20,13 +22,15 @@ import com.alorma.settings.composables.internal.SettingsToolbar
 
 @Composable
 fun SettingsList(
+    scaffoldState: ScaffoldState = rememberScaffoldState(),
     title: @Composable () -> Unit,
     onBack: (() -> Unit)? = null,
     onSearch: (() -> Unit)? = null,
     onHelp: (() -> Unit)? = null,
-    settings: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     SettingsList(
+        scaffoldState = scaffoldState,
         header = {
             SettingsToolbar(
                 title = title,
@@ -35,24 +39,26 @@ fun SettingsList(
                 onHelp = onHelp,
             )
         },
-        settings = settings,
+        content = content,
     )
 }
 
 
 @Composable
 fun SettingsList(
+    scaffoldState: ScaffoldState = rememberScaffoldState(),
     header: (@Composable () -> Unit)? = null,
-    settings: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             if (header != null) {
                 header()
             }
         }
     ) {
-        Column(content = settings)
+        Column(content = content)
     }
 }
 
