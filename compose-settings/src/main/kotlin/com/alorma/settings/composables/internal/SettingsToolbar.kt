@@ -24,33 +24,39 @@ fun SettingsToolbar(
     TopAppBar(
         title = title,
         navigationIcon = {
-            IconButton(onClick = { onBack?.invoke() }) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(
-                        R.string.compose_settings_header_back_action
-                    ),
-                )
+            if (onBack != null) {
+                IconButton(onClick = { onBack.invoke() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = stringResource(
+                            R.string.compose_settings_header_back_action
+                        ),
+                    )
+                }
             }
         },
         backgroundColor = MaterialTheme.colors.surface,
         contentColor = MaterialTheme.colors.primary,
         actions = {
-            IconButton(onClick = { onSearch?.invoke() }) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(
-                        R.string.compose_settings_header_search_action
-                    ),
-                )
+            if (onSearch != null) {
+                IconButton(onClick = { onSearch.invoke() }) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = stringResource(
+                            R.string.compose_settings_header_search_action
+                        ),
+                    )
+                }
             }
-            IconButton(onClick = { onHelp?.invoke() }) {
-                Icon(
-                    imageVector = Icons.Default.HelpOutline,
-                    contentDescription = stringResource(
-                        R.string.compose_settings_header_help_action
-                    ),
-                )
+            if (onHelp != null) {
+                IconButton(onClick = { onHelp.invoke() }) {
+                    Icon(
+                        imageVector = Icons.Default.HelpOutline,
+                        contentDescription = stringResource(
+                            R.string.compose_settings_header_help_action
+                        ),
+                    )
+                }
             }
         },
     )
