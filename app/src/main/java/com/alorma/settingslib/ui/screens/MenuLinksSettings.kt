@@ -1,5 +1,6 @@
 package com.alorma.settingslib.ui.screens
 
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.ModalBottomSheetValue
@@ -61,6 +62,33 @@ fun MenuLinksSettings(
             ) {
                 coroutineScope.launch {
                     scaffoldState.showSnackbar(message = "Click on menu 1")
+                }
+            }
+            Divider()
+            SettingsMenuLink(
+                title = { Text(text = "Menu 2") },
+                subtitle = { Text(text = "Without icon") },
+            ) {
+                coroutineScope.launch {
+                    scaffoldState.showSnackbar(message = "Click on menu 2")
+                }
+            }
+            Divider()
+            SettingsMenuLink(
+                title = { Text(text = "Menu 3") }, icon = {
+                    Icon(imageVector = Icons.Default.SortByAlpha,
+                        contentDescription = "Menu 1")
+                }
+            ) {
+                coroutineScope.launch {
+                    scaffoldState.showSnackbar(message = "Click on menu 3")
+                }
+            }
+            SettingsMenuLink(
+                title = { Text(text = "Menu 4") },
+            ) {
+                coroutineScope.launch {
+                    scaffoldState.showSnackbar(message = "Click on menu 4")
                 }
             }
         }
