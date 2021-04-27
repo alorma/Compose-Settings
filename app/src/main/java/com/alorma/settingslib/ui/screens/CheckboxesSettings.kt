@@ -12,77 +12,80 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.settings.SettingsList
-import com.alorma.settings.composables.SettingsSwitch
+import com.alorma.settings.composables.SettingsCheckbox
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.alorma.settingslib.ui.theme.SettingsLibTheme
 
 @Composable
-fun SwitchesSettings(navController: NavHostController) {
+fun CheckboxesSettings(navController: NavHostController) {
     val coroutineScope = rememberCoroutineScope()
 
     val scaffoldState = rememberScaffoldState()
 
-    var switch1 by remember { mutableStateOf(Random.nextBoolean()) }
-    var switch2 by remember { mutableStateOf(Random.nextBoolean()) }
-    var switch3 by remember { mutableStateOf(Random.nextBoolean()) }
-    var switch4 by remember { mutableStateOf(Random.nextBoolean()) }
+    var checked1 by remember { mutableStateOf(Random.nextBoolean()) }
+    var checked2 by remember { mutableStateOf(Random.nextBoolean()) }
+    var checked3 by remember { mutableStateOf(Random.nextBoolean()) }
+    var checked4 by remember { mutableStateOf(Random.nextBoolean()) }
 
     SettingsList(
         scaffoldState = scaffoldState,
-        title = { Text(text = "Switches") },
+        title = { Text(text = "Checkboxes") },
         onBack = {
             navController.popBackStack()
         },
     ) {
-        SettingsSwitch(
+        SettingsCheckbox(
             title = { Text(text = "Menu 1") },
             subtitle = { Text(text = "Subtitle of menu 1") },
             icon = {
                 Icon(imageVector = Icons.Default.SortByAlpha,
                     contentDescription = "Menu 1")
             },
-            checked = switch1,
+            checked = checked1,
         ) { changed ->
             coroutineScope.launch {
-                switch1 = changed
-                scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
+                checked1 = changed
+                scaffoldState.showSnackbar(message = "Checkbox changed to:  $changed")
             }
         }
         Divider()
-        SettingsSwitch
+        SettingsCheckbox(
             title = { Text(text = "Menu 2") },
             subtitle = { Text(text = "Without icon") },
-            checked = switch2,
+            checked = checked2,
         ) { changed ->
             coroutineScope.launch {
-                switch2 = changed
-                scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
+                checked2 = changed
+                scaffoldState.showSnackbar(message = "Checkbox changed to:  $changed")
             }
         }
         Divider()
-        SettingsSwitch(
+        SettingsCheckbox(
             title = { Text(text = "Menu 3") },
             icon = {
                 Icon(imageVector = Icons.Default.SortByAlpha,
                     contentDescription = "Menu 1")
             },
-            checked = switch3,
+            checked = checked3,
         ) { changed ->
             coroutineScope.launch {
-                switch3 = changed
-                scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
+                checked3 = changed
+                scaffoldState.showSnackbar(message = "Checkbox changed to:  $changed")
             }
         }
-        SettingsSwitch(
+        SettingsCheckbox(
             title = { Text(text = "Menu 4") },
-            checked = switch4,
+            checked = checked4,
         ) { changed ->
             coroutineScope.launch {
-                switch4 = changed
-                scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
+                checked4 = changed
+                scaffoldState.showSnackbar(message = "Checkbox changed to:  $changed")
             }
         }
     }

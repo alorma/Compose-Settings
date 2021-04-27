@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.alorma.settingslib.ui.Navigation
+import com.alorma.settingslib.ui.screens.CheckboxesSettings
 import com.alorma.settingslib.ui.screens.MenuLinksSettings
 import com.alorma.settingslib.ui.screens.SwitchesSettings
 import com.alorma.settingslib.ui.screens.TopLevelSettings
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
                         SwitchesSettings(navController = navController)
                     }
                     composable(Navigation.NAV_CHECKBOXES) {
-                        Text(text = "NAV_CHECKBOXES")
+                        CheckboxesSettings(navController = navController)
                     }
                 }
 
