@@ -67,7 +67,10 @@ fun SettingsToolbar(
 fun SearchToolbarPreview() {
     MaterialTheme {
         SettingsToolbar(
-            title = { Text(text = "Title") }
+            title = { Text(text = "Title") },
+            onBack = {},
+            onSearch = {},
+            onHelp = {},
         )
     }
 }
