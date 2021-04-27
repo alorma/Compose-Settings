@@ -2,7 +2,7 @@
 
 ### Versions
 
-![compose-settings](https://img.shields.io/badge/ComposeSettings-0.4.0-brightgreen)
+![compose-settings](https://img.shields.io/badge/ComposeSettings-0.0.4-brightgreen)
 
 ![Compatible with Compose](https://img.shields.io/badge/Compose-1.0.0--beta05-brightgreen)
 
