@@ -7,17 +7,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
 import com.alorma.settings.SettingsList
 import com.alorma.settings.composables.SettingsSwitch
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
 import kotlin.random.Random
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 
 @Composable
 fun SwitchesSettings(navController: NavHostController) {
@@ -52,9 +52,12 @@ fun SwitchesSettings(navController: NavHostController) {
             }
         }
         Divider()
-        SettingsSwitch
+        SettingsSwitch(
             title = { Text(text = "Menu 2") },
-            subtitle = { Text(text = "Without icon") },
+            icon = {
+                Icon(imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Menu 2")
+            },
             checked = switch2,
         ) { changed ->
             coroutineScope.launch {
