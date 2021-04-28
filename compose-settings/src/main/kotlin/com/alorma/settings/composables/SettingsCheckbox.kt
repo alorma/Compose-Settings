@@ -31,33 +31,19 @@ fun SettingsCheckbox(
     onCheckedChange: (Boolean) -> Unit,
 ) {
 
-    var rememberCheckboxPref by remember {
-        mutableStateOf(checked)
-    }
-
-    fun updateValue(newValue: Boolean) {
-        onCheckedChange(newValue)
-        rememberCheckboxPref = newValue
-    }
-
     Surface {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(
-                    onClick = {
-                        val newVal = !rememberCheckboxPref
-                        updateValue(newValue = newVal)
-                    },
-                ),
+                .clickable(onClick = { onCheckedChange(!checked) }),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingsTileIcon(icon = icon)
             SettingsTileTexts(title = title, subtitle = subtitle)
             SettingsTileAction {
                 Checkbox(
-                    checked = rememberCheckboxPref,
-                    onCheckedChange = { updateValue(newValue = it) }
+                    checked = checked,
+                    onCheckedChange = { onCheckedChange(!checked) }
                 )
             }
         }
@@ -68,11 +54,13 @@ fun SettingsCheckbox(
 @Composable
 internal fun SettingsCheckboxPreview() {
     MaterialTheme {
+        var state by remember { mutableStateOf(true) }
         SettingsCheckbox(
             icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
-            checked = true,
-        ) {}
+            checked = state,
+            onCheckedChange = { state = it }
+        )
     }
 }
