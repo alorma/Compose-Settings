@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsIcon
+import com.alorma.settings.composables.internal.SettingsSubtitleText
 import com.alorma.settings.composables.internal.SettingsTitleText
 
 @Composable
@@ -69,12 +70,7 @@ fun SettingsCheckbox(
                 SettingsTitleText(title)
                 if (subtitle != null) {
                     Spacer(modifier = Modifier.size(2.dp))
-                    ProvideTextStyle(value = MaterialTheme.typography.caption) {
-                        CompositionLocalProvider(
-                            LocalContentAlpha provides ContentAlpha.medium,
-                            content = subtitle
-                        )
-                    }
+                    SettingsSubtitleText(subtitle)
                 }
             }
             Box(

@@ -12,18 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Checkbox
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsIcon
+import com.alorma.settings.composables.internal.SettingsSubtitleText
 import com.alorma.settings.composables.internal.SettingsTitleText
 
 @Composable
@@ -49,7 +46,9 @@ fun SettingsMenuLink(
             modifier = Modifier.fillMaxWidth(),
         ) {
             Row(
-                modifier = Modifier.weight(1f).clickable {  },
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable { },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SettingsIcon(icon = icon)
@@ -60,12 +59,7 @@ fun SettingsMenuLink(
                     SettingsTitleText(title)
                     if (subtitle != null) {
                         Spacer(modifier = Modifier.size(2.dp))
-                        ProvideTextStyle(value = MaterialTheme.typography.caption) {
-                            CompositionLocalProvider(
-                                LocalContentAlpha provides ContentAlpha.medium,
-                                content = subtitle
-                            )
-                        }
+                        SettingsSubtitleText(subtitle)
                     }
                 }
             }
