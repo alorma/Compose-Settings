@@ -1,11 +1,8 @@
 package com.alorma.settings.composables
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,8 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsTileIcon
-import com.alorma.settings.composables.internal.SettingsTileSubtitle
-import com.alorma.settings.composables.internal.SettingsTileTitle
+import com.alorma.settings.composables.internal.SettingsTileTexts
 
 @Composable
 fun SettingsMenuLink(
@@ -52,16 +48,7 @@ fun SettingsMenuLink(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SettingsTileIcon(icon = icon)
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    SettingsTileTitle(title)
-                    if (subtitle != null) {
-                        Spacer(modifier = Modifier.size(2.dp))
-                        SettingsTileSubtitle(subtitle)
-                    }
-                }
+                SettingsTileTexts(title = title, subtitle = subtitle)
             }
             if (action != null) {
                 Divider(
