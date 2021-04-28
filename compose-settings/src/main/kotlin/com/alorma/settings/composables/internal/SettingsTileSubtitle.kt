@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
 @Composable
-internal fun SettingsSubtitleText(subtitle: @Composable () -> Unit) {
+internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
     ProvideTextStyle(value = MaterialTheme.typography.caption) {
         CompositionLocalProvider(
             LocalContentAlpha provides ContentAlpha.medium,

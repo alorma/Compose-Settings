@@ -28,9 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alorma.settings.composables.internal.SettingsIcon
-import com.alorma.settings.composables.internal.SettingsSubtitleText
-import com.alorma.settings.composables.internal.SettingsTitleText
+import com.alorma.settings.composables.internal.SettingsTileIcon
+import com.alorma.settings.composables.internal.SettingsTileSubtitle
+import com.alorma.settings.composables.internal.SettingsTileTitle
 
 @Composable
 fun SettingsMenuLink(
@@ -51,15 +51,15 @@ fun SettingsMenuLink(
                     .clickable { },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                SettingsIcon(icon = icon)
+                SettingsTileIcon(icon = icon)
                 Column(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.Center,
                 ) {
-                    SettingsTitleText(title)
+                    SettingsTileTitle(title)
                     if (subtitle != null) {
                         Spacer(modifier = Modifier.size(2.dp))
-                        SettingsSubtitleText(subtitle)
+                        SettingsTileSubtitle(subtitle)
                     }
                 }
             }

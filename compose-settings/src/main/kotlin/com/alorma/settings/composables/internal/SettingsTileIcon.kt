@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun SettingsIcon(
+internal fun SettingsTileIcon(
     modifier: Modifier = Modifier,
     icon: @Composable (() -> Unit)? = null,
 ) {
@@ -36,7 +36,7 @@ internal fun SettingsIcon(
 @Composable
 fun SettingsIconPreview() {
     MaterialTheme {
-        SettingsIcon {
+        SettingsTileIcon {
             Icon(imageVector = Icons.Default.Wifi, contentDescription = "")
         }
     }
@@ -46,6 +46,6 @@ fun SettingsIconPreview() {
 @Composable
 fun SettingsIconPreviewEmpty() {
     MaterialTheme {
-        SettingsIcon()
+        SettingsTileIcon()
     }
 }
