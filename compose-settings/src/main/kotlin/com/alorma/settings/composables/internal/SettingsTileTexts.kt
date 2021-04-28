@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun RowScope.SettingsTileTexts(
-    title: @Composable() () -> Unit,
-    subtitle: @Composable() (() -> Unit)?,
+    title: @Composable () -> Unit,
+    subtitle: @Composable (() -> Unit)?,
 ) {
     Column(
         modifier = Modifier.Companion.weight(1f),
