@@ -12,17 +12,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
-import com.alorma.settings.SettingsList
 import com.alorma.settings.composables.SettingsMenuLink
+import com.alorma.settings.composables.demo.AppScaffold
 import com.alorma.settingslib.extensions.popOrFinish
 import com.alorma.settingslib.ui.Navigation
 
 @Composable
-fun TopLevelSettings(
+fun TopLevelScreen(
     navController: NavController = rememberNavController(),
 ) {
     val context = LocalContext.current
-    SettingsList(
+    AppScaffold(
         title = { Text(text = "Demo settings") },
         onBack = { navController.popOrFinish(context = context) },
     ) {

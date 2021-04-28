@@ -13,14 +13,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
-import com.alorma.settings.SettingsList
 import com.alorma.settings.composables.SettingsSwitch
+import com.alorma.settings.composables.demo.AppScaffold
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 @Composable
-fun SwitchesSettings(navController: NavHostController) {
+fun SwitchesScreen(navController: NavHostController) {
     val coroutineScope = rememberCoroutineScope()
 
     val scaffoldState = rememberScaffoldState()
@@ -30,7 +30,7 @@ fun SwitchesSettings(navController: NavHostController) {
     var switch3 by remember { mutableStateOf(Random.nextBoolean()) }
     var switch4 by remember { mutableStateOf(Random.nextBoolean()) }
 
-    SettingsList(
+    AppScaffold(
         scaffoldState = scaffoldState,
         title = { Text(text = "Switches") },
         onBack = {

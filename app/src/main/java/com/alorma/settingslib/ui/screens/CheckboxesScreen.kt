@@ -11,19 +11,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
-import com.alorma.settings.SettingsList
 import com.alorma.settings.composables.SettingsCheckbox
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.alorma.settingslib.ui.theme.SettingsLibTheme
+import com.alorma.settings.composables.demo.AppScaffold
 
 @Composable
-fun CheckboxesSettings(navController: NavHostController) {
+fun CheckboxesScreen(navController: NavHostController) {
     val coroutineScope = rememberCoroutineScope()
 
     val scaffoldState = rememberScaffoldState()
@@ -33,7 +30,7 @@ fun CheckboxesSettings(navController: NavHostController) {
     var checked3 by remember { mutableStateOf(Random.nextBoolean()) }
     var checked4 by remember { mutableStateOf(Random.nextBoolean()) }
 
-    SettingsList(
+    AppScaffold(
         scaffoldState = scaffoldState,
         title = { Text(text = "Checkboxes") },
         onBack = {

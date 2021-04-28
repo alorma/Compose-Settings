@@ -3,17 +3,14 @@ package com.alorma.settingslib
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.alorma.settingslib.ui.Navigation
-import com.alorma.settingslib.ui.screens.CheckboxesSettings
-import com.alorma.settingslib.ui.screens.MenuLinksSettings
-import com.alorma.settingslib.ui.screens.SwitchesSettings
-import com.alorma.settingslib.ui.screens.TopLevelSettings
+import com.alorma.settingslib.ui.screens.CheckboxesScreen
+import com.alorma.settingslib.ui.screens.MenuLinksScreen
+import com.alorma.settingslib.ui.screens.SwitchesScreen
+import com.alorma.settingslib.ui.screens.TopLevelScreen
 import com.alorma.settingslib.ui.theme.SettingsLibTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,16 +24,16 @@ class MainActivity : ComponentActivity() {
                     startDestination = Navigation.NAV_TOP_SETTINGS,
                 ) {
                     composable(Navigation.NAV_TOP_SETTINGS) {
-                        TopLevelSettings(navController = navController)
+                        TopLevelScreen(navController = navController)
                     }
                     composable(Navigation.NAV_MENU_LINKS) {
-                        MenuLinksSettings(navController = navController)
+                        MenuLinksScreen(navController = navController)
                     }
                     composable(Navigation.NAV_SWITCHES) {
-                        SwitchesSettings(navController = navController)
+                        SwitchesScreen(navController = navController)
                     }
                     composable(Navigation.NAV_CHECKBOXES) {
-                        CheckboxesSettings(navController = navController)
+                        CheckboxesScreen(navController = navController)
                     }
                 }
 

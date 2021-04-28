@@ -14,8 +14,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alorma.settings.SettingsList
 import com.alorma.settings.composables.SettingsMenuLink
+import com.alorma.settings.composables.demo.AppScaffold
 import com.alorma.settingslib.R
 import com.alorma.settingslib.extensions.showSnackbar
 import com.alorma.settingslib.extensions.toggle
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MenuLinksSettings(
+fun MenuLinksScreen(
     navController: NavController = rememberNavController(),
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -40,7 +40,7 @@ fun MenuLinksSettings(
 
         val scaffoldState = rememberScaffoldState()
 
-        SettingsList(
+        AppScaffold(
             scaffoldState = scaffoldState,
             title = { Text(text = "Menu links") },
             onBack = {
