@@ -1,16 +1,27 @@
 package com.alorma.settingslib.ui.screens
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -68,6 +79,25 @@ fun MenuLinksScreen(
             SettingsMenuLink(
                 title = { Text(text = "Menu 2") },
                 subtitle = { Text(text = "Without icon") },
+                action = {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clickable {
+                                coroutineScope.launch {
+                                    scaffoldState.snackbarHostState.showSnackbar(
+                                        message = "Action click"
+                                    )
+                                }
+                            },
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowForward,
+                            contentDescription = null,
+                        )
+                    }
+                },
             ) {
                 coroutineScope.launch {
                     scaffoldState.showSnackbar(message = "Click on menu 2")
@@ -84,8 +114,20 @@ fun MenuLinksScreen(
                     scaffoldState.showSnackbar(message = "Click on menu 3")
                 }
             }
+
+            var rememberCheckBoxState by remember { mutableStateOf(true) }
             SettingsMenuLink(
                 title = { Text(text = "Menu 4") },
+                action = {
+                    Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
+                        rememberCheckBoxState = newState
+                        coroutineScope.launch {
+                            scaffoldState.snackbarHostState.showSnackbar(
+                                message = "Checkbox update to: $newState"
+                            )
+                        }
+                    })
+                },
             ) {
                 coroutineScope.launch {
                     scaffoldState.showSnackbar(message = "Click on menu 4")
