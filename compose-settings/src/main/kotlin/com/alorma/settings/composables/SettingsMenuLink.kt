@@ -2,12 +2,18 @@ package com.alorma.settings.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Checkbox
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
@@ -26,37 +32,65 @@ import com.alorma.settings.composables.internal.SettingsIcon
 
 @Composable
 fun SettingsMenuLink(
-    icon: @Composable() (() -> Unit)? = null,
-    title: @Composable() () -> Unit,
-    subtitle: @Composable() (() -> Unit)? = null,
+    icon: (@Composable () -> Unit)? = null,
+    title: @Composable () -> Unit,
+    subtitle: (@Composable () -> Unit)? = null,
+    action: (@Composable () -> Unit)? = null,
     onClick: () -> Unit,
 ) {
+
+    val clickableRow = if (action != null) {
+        Modifier
+    } else {
+        Modifier.clickable(onClick = onClick)
+    }
+    val clickableContent = if (action != null) {
+        Modifier.clickable(onClick = onClick)
+    } else {
+        Modifier
+    }
 
     Surface {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(
-                    onClick = onClick,
-                ),
-            verticalAlignment = Alignment.CenterVertically,
+                .then(clickableRow),
         ) {
-            SettingsIcon(icon = icon)
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.Center,
+            Row(
+                modifier = clickableContent.weight(1f),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
-                    title()
-                }
-                if (subtitle != null) {
-                    Spacer(modifier = Modifier.size(2.dp))
-                    ProvideTextStyle(value = MaterialTheme.typography.caption) {
-                        CompositionLocalProvider(
-                            LocalContentAlpha provides ContentAlpha.medium,
-                            content = subtitle
-                        )
+                SettingsIcon(icon = icon)
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
+                        title()
                     }
+                    if (subtitle != null) {
+                        Spacer(modifier = Modifier.size(2.dp))
+                        ProvideTextStyle(value = MaterialTheme.typography.caption) {
+                            CompositionLocalProvider(
+                                LocalContentAlpha provides ContentAlpha.medium,
+                                content = subtitle
+                            )
+                        }
+                    }
+                }
+            }
+            if (action != null) {
+                Divider(
+                    modifier = Modifier
+                        .padding(vertical = 4.dp)
+                        .height(56.dp)
+                        .width(1.dp),
+                )
+                Box(
+                    modifier = Modifier.size(64.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    action.invoke()
                 }
             }
         }
@@ -71,6 +105,23 @@ fun SettingsMenuLinkPreview() {
             icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
+        ) {
+
+        }
+    }
+}
+
+@Preview
+@Composable
+fun SettingsMenuLinkActionPreview() {
+    MaterialTheme {
+        SettingsMenuLink(
+            icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
+            title = { Text(text = "Hello") },
+            subtitle = { Text(text = "This is a longer text") },
+            action = {
+                Checkbox(checked = true, onCheckedChange = {})
+            },
         ) {
 
         }

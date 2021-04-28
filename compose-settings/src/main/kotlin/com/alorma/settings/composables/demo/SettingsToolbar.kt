@@ -10,9 +10,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.HelpOutline
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.alorma.settings.R
 
 @Composable
 fun SettingsToolbar(
@@ -28,9 +26,7 @@ fun SettingsToolbar(
                 IconButton(onClick = { onBack.invoke() }) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(
-                            R.string.compose_settings_header_back_action
-                        ),
+                        contentDescription = null,
                     )
                 }
             }
@@ -42,9 +38,7 @@ fun SettingsToolbar(
                 IconButton(onClick = { onSearch.invoke() }) {
                     Icon(
                         imageVector = Icons.Default.Search,
-                        contentDescription = stringResource(
-                            R.string.compose_settings_header_search_action
-                        ),
+                        contentDescription = null,
                     )
                 }
             }
@@ -52,9 +46,7 @@ fun SettingsToolbar(
                 IconButton(onClick = { onHelp.invoke() }) {
                     Icon(
                         imageVector = Icons.Default.HelpOutline,
-                        contentDescription = stringResource(
-                            R.string.compose_settings_header_help_action
-                        ),
+                        contentDescription = null,
                     )
                 }
             }
