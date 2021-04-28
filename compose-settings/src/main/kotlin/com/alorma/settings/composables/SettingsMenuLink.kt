@@ -24,11 +24,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsIcon
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 @Composable
 fun SettingsMenuLink(
@@ -114,13 +118,16 @@ fun SettingsMenuLinkPreview() {
 @Preview
 @Composable
 fun SettingsMenuLinkActionPreview() {
+    var rememberCheckBoxState by remember { mutableStateOf(true) }
     MaterialTheme {
         SettingsMenuLink(
             icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
             action = {
-                Checkbox(checked = true, onCheckedChange = {})
+                Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
+                    rememberCheckBoxState = newState
+                })
             },
         ) {
 
