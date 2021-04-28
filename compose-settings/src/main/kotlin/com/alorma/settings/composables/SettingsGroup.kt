@@ -51,7 +51,7 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
 
 @Preview
 @Composable
-fun SettingsGroupPreview() {
+internal fun SettingsGroupPreview() {
     MaterialTheme {
         SettingsGroup(
             title = { Text(text = "Title") }

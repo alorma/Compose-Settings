@@ -91,7 +91,7 @@ fun SettingsSwitch(
 
 @Preview
 @Composable
-fun SettingsSwitchPreview() {
+internal fun SettingsSwitchPreview() {
     MaterialTheme {
         SettingsSwitch(
             icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },

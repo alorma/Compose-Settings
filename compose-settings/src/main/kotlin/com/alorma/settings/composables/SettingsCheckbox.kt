@@ -93,7 +93,7 @@ fun SettingsCheckbox(
 
 @Preview
 @Composable
-fun SettingsCheckboxPreview() {
+internal fun SettingsCheckboxPreview() {
     MaterialTheme {
         SettingsCheckbox(
             icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
