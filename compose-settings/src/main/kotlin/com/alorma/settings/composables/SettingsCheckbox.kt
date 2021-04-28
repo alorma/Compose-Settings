@@ -24,16 +24,17 @@ import com.alorma.settings.composables.internal.SettingsTileTexts
 
 @Composable
 fun SettingsCheckbox(
-    icon: @Composable() (() -> Unit)? = null,
-    title: @Composable() () -> Unit,
-    subtitle: @Composable() (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    icon: @Composable (() -> Unit)? = null,
+    title: @Composable () -> Unit,
+    subtitle: @Composable (() -> Unit)? = null,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
 ) {
 
     Surface {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .clickable(onClick = { onCheckedChange(!checked) }),
             verticalAlignment = Alignment.CenterVertically,

@@ -29,6 +29,7 @@ import com.alorma.settings.composables.internal.SettingsTileTexts
 
 @Composable
 fun SettingsMenuLink(
+    modifier: Modifier = Modifier,
     icon: (@Composable () -> Unit)? = null,
     title: @Composable () -> Unit,
     subtitle: (@Composable () -> Unit)? = null,
@@ -37,7 +38,7 @@ fun SettingsMenuLink(
 ) {
     Surface {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
         ) {
             Row(
                 modifier = Modifier

@@ -24,6 +24,7 @@ import com.alorma.settings.composables.internal.SettingsTileTexts
 
 @Composable
 fun SettingsSwitch(
+    modifier: Modifier = Modifier,
     icon: @Composable (() -> Unit)? = null,
     title: @Composable () -> Unit,
     subtitle: @Composable (() -> Unit)? = null,
@@ -33,7 +34,7 @@ fun SettingsSwitch(
 
     Surface {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .clickable(onClick = { onCheckedChange(!checked) }),
             verticalAlignment = Alignment.CenterVertically,
