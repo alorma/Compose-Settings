@@ -1,4 +1,4 @@
-package com.alorma.settings.composables.demo
+package com.alorma.settingslib.demo
 
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable

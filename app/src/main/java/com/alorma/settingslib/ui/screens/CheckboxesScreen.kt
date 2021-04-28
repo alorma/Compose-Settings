@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.alorma.settings.composables.demo.AppScaffold
+import com.alorma.settingslib.demo.AppScaffold
 
 @Composable
 fun CheckboxesScreen(navController: NavHostController) {

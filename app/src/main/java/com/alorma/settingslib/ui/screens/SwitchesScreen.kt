@@ -14,7 +14,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsSwitch
-import com.alorma.settings.composables.demo.AppScaffold
+import com.alorma.settingslib.demo.AppScaffold
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
 import kotlin.random.Random

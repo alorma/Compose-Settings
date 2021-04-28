@@ -21,7 +21,7 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.alorma.settings.composables.SettingsGroup
 import com.alorma.settings.composables.SettingsMenuLink
-import com.alorma.settings.composables.demo.AppScaffold
+import com.alorma.settingslib.demo.AppScaffold
 import com.alorma.settingslib.extensions.popOrFinish
 import com.alorma.settingslib.ui.Navigation
 import kotlinx.coroutines.launch
