@@ -55,6 +55,18 @@ SettingsMenuLink(
 )
 ```
 
+`action` can be provided:
+
+```kotlin
+SettingsMenuLink(
+    title = { Text(text = "Menu 4") },
+    action = { ... },
+)
+```
+
+![](docs/art/setting_menu_action.png)
+
+
 ### Switch && Checkboxes
 
 [Android docs - Switch](https://source.android.com/devices/tech/settings/settings-guidelines#switch)
