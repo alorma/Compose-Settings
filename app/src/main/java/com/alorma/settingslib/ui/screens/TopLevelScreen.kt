@@ -43,7 +43,6 @@ fun TopLevelScreen(
 
     val context = LocalContext.current
 
-
     val customModifier = Modifier
         .padding(8.dp)
         .background(
