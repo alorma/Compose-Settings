@@ -114,7 +114,7 @@ fun MenuLinksScreen(
                     scaffoldState.showSnackbar(message = "Click on menu 3")
                 }
             }
-
+            Divider()
             var rememberCheckBoxState by remember { mutableStateOf(true) }
             SettingsMenuLink(
                 title = { Text(text = "Menu 4") },

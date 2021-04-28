@@ -79,6 +79,7 @@ fun SwitchesScreen(navController: NavHostController) {
                 scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
             }
         }
+        Divider()
         SettingsSwitch(
             title = { Text(text = "Menu 4") },
             checked = switch4,

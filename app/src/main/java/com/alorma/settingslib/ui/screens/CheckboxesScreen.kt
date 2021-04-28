@@ -76,6 +76,7 @@ fun CheckboxesScreen(navController: NavHostController) {
                 scaffoldState.showSnackbar(message = "Checkbox changed to:  $changed")
             }
         }
+        Divider()
         SettingsCheckbox(
             title = { Text(text = "Menu 4") },
             checked = checked4,

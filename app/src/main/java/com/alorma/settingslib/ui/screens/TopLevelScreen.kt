@@ -1,8 +1,11 @@
 package com.alorma.settingslib.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material.ModalBottomSheetValue
@@ -15,7 +18,10 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
@@ -37,12 +43,23 @@ fun TopLevelScreen(
 
     val context = LocalContext.current
 
+
+    val customModifier = Modifier
+        .padding(8.dp)
+        .background(
+            color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f),
+            shape = MaterialTheme.shapes.medium,
+        )
+        .clip(shape = MaterialTheme.shapes.medium)
+
     ModalBottomSheetLayout(
         sheetState = sheetState,
         sheetContent = {
             TopLevelScreenContent(
+                modifier = customModifier,
                 navController = navController,
                 sheetState = sheetState,
+                divider = null,
             )
         }) {
         AppScaffold(
@@ -70,12 +87,15 @@ fun TopLevelScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TopLevelScreenContent(
+    modifier: Modifier = Modifier,
+    divider: (@Composable () -> Unit)? = { Divider() },
     navController: NavController,
     sheetState: ModalBottomSheetState,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
     SettingsMenuLink(
+        modifier = modifier,
         icon = {
             Icon(
                 imageVector = Icons.Default.Link,
@@ -89,8 +109,9 @@ fun TopLevelScreenContent(
             navController.navigate(Navigation.NAV_MENU_LINKS)
         }
     }
-    Divider()
+    divider?.invoke()
     SettingsMenuLink(
+        modifier = modifier,
         icon = {
             Icon(
                 imageVector = Icons.Default.SwitchLeft,
@@ -105,8 +126,9 @@ fun TopLevelScreenContent(
             }
         },
     )
-    Divider()
+    divider?.invoke()
     SettingsMenuLink(
+        modifier = modifier,
         icon = {
             Icon(
                 imageVector = Icons.Default.CheckBox,
