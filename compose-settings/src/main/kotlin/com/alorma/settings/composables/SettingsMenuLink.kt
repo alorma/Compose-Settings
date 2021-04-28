@@ -43,25 +43,12 @@ fun SettingsMenuLink(
     onClick: () -> Unit,
 ) {
 
-    val clickableRow = if (action != null) {
-        Modifier
-    } else {
-        Modifier.clickable(onClick = onClick)
-    }
-    val clickableContent = if (action != null) {
-        Modifier.clickable(onClick = onClick)
-    } else {
-        Modifier
-    }
-
     Surface {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .then(clickableRow),
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Row(
-                modifier = clickableContent.weight(1f),
+                modifier = Modifier.weight(1f).clickable {  },
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SettingsIcon(icon = icon)
