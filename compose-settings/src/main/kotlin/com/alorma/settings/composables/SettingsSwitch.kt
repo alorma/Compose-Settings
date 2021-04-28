@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
 
@@ -54,10 +55,7 @@ fun SettingsSwitch(
         ) {
             SettingsTileIcon(icon = icon)
             SettingsTileTexts(title = title, subtitle = subtitle)
-            Box(
-                modifier = Modifier.size(64.dp),
-                contentAlignment = Alignment.Center,
-            ) {
+            SettingsTileAction {
                 Switch(
                     checked = rememberSwitchPref,
                     onCheckedChange = { updateValue(newValue = it) }
@@ -66,6 +64,7 @@ fun SettingsSwitch(
         }
     }
 }
+
 
 @Preview
 @Composable
