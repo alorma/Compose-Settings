@@ -35,7 +35,6 @@ fun SettingsMenuLink(
     action: (@Composable () -> Unit)? = null,
     onClick: () -> Unit,
 ) {
-
     Surface {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -43,7 +42,7 @@ fun SettingsMenuLink(
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable { },
+                    .clickable(onClick = onClick),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 SettingsTileIcon(icon = icon)
