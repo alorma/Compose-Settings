@@ -2,11 +2,12 @@
 
 ### Versions
 
-![compose-settings](https://img.shields.io/badge/ComposeSettings-0.0.4-brightgreen)
+![compose-settings](https://img.shields.io/badge/ComposeSettings-0.0.5-brightgreen)
 
 ![Compatible with Compose](https://img.shields.io/badge/Compose-1.0.0--beta05-brightgreen)
 
-## Demo
+This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
+developers build complex settings screens without all the boilerplate
 
 ## Install
 
@@ -27,23 +28,15 @@ implementation 'com.github.alorma:compose-settings:$version'
 
 ## Demo
 
-|Menu|Switch|Checkbox|
+|Menu link|Switch|Checkbox|
 |--|--|--|
 |<img width="300" src="docs/art/screenshot_links.jpeg" />|<img width="300" src="docs/art/screenshot_switches.jpeg" />|<img width="300" src="docs/art/screenshot_checkboxes.jpeg" />|
 
 ## Usage
 
-Use `SettingsList` it's composed of a `Scaffold` and receives all settings in `content`
+This library provide some `@Composable` items that can be used to build your settings screen.
 
-```kotlin
-    SettingsList(
-    scaffoldState = scaffoldState,
-    title = { Text(text = "Screen title") },
-    onBack = {},
-    onSearch = {},
-    onHelp = {}
-) { ... }
-```
+`Scaffold`, `Column`... is not provided by the library, you can place items wherever you want.
 
 ### Menu Link
 
@@ -51,15 +44,22 @@ Use `SettingsList` it's composed of a `Scaffold` and receives all settings in `c
 
 ![](docs/art/setting_menu.png)
 
-This can be used to open another settings screen, open link, show a dialog....
+This can be used to open another settings screen, open link, show a dialog...
+
+```kotlin
+SettingsMenuLink(
+    icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
+    title = { Text(text = "Hello") },
+    subtitle = { Text(text = "This is a longer text") },
+    onClick = {},
+)
+```
 
 ### Switch && Checkboxes
 
 [Android docs - Switch](https://source.android.com/devices/tech/settings/settings-guidelines#switch)
 
-
 ![](docs/art/setting_switch.png)
-
 
 [Android docs - Checkbox](https://source.android.com/devices/tech/settings/settings-guidelines#checkbox)
 
@@ -73,7 +73,8 @@ SettingsSwitch(
     title = { Text(text = "Hello") },
     subtitle = { Text(text = "This is a longer text") },
     checked = true,
-) {}
+    onCheckedChange = {},
+)
 ```
 
 ```kotlin
@@ -82,27 +83,7 @@ SettingsCheckbox(
     title = { Text(text = "Hello") },
     subtitle = { Text(text = "This is a longer text") },
     checked = true,
-) {}
-```
-
-#### Customization
-
-**Header**
-
-By default, this library provided a `TopAppBar` composable with a slot to setup the text:
-
-![](docs/art/screenshot_toolbar.png)
-
-You can provide `onBack = {}`, `onHelp = {}` and `onSearch = {}` to show the corresponding actions
-
-**Custom header**
-
-If you need to build a custom header, you can use the alternative `SettingsList`
-
-```kotlin
-SettingsList(
-    scaffoldState = scaffoldState,
-    header = { ... }.
-) { ... }
+    onCheckedChange = {},
+)
 ```
 
