@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
 
     defaultConfig {
         applicationId = "com.alorma.settingslib"
-        minSdkVersion(23)
-        targetSdkVersion(30)
+        minSdk = 23
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
     }
@@ -24,9 +24,9 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
         useIR = true
         freeCompilerArgs = freeCompilerArgs + listOf(
-                "-Xopt-in=kotlin.RequiresOptIn",
-                "-Xopt-in=kotlin.Experimental",
-                "-Xuse-experimental=kotlin.Experimental"
+            "-Xopt-in=kotlin.RequiresOptIn",
+            "-Xopt-in=kotlin.Experimental",
+            "-Xuse-experimental=kotlin.Experimental"
         )
     }
     buildFeatures {

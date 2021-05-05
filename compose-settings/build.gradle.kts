@@ -8,13 +8,11 @@ ext["PUBLISH_ARTIFACT_ID"] = "compose-settings"
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
 
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = 23
+        targetSdk = 30
     }
 
     buildTypes {
