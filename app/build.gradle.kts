@@ -34,7 +34,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-beta07"
+        kotlinCompilerExtensionVersion = "1.0.0-beta08"
     }
 
     lint {
@@ -50,16 +50,16 @@ dependencies {
 
     implementation("androidx.activity:activity-compose:1.3.0-alpha08")
 
-    implementation("androidx.compose.foundation:foundation:1.0.0-beta07")
-    implementation("androidx.compose.foundation:foundation-layout:1.0.0-beta07")
-    implementation("androidx.compose.ui:ui:1.0.0-beta07")
-    implementation("androidx.compose.material:material:1.0.0-beta07")
-    implementation("androidx.compose.ui:ui-tooling:1.0.0-beta07")
+    implementation("androidx.compose.foundation:foundation:1.0.0-beta08")
+    implementation("androidx.compose.foundation:foundation-layout:1.0.0-beta08")
+    implementation("androidx.compose.ui:ui:1.0.0-beta08")
+    implementation("androidx.compose.material:material:1.0.0-beta08")
+    implementation("androidx.compose.ui:ui-tooling:1.0.0-beta08")
 
     implementation("androidx.core:core-ktx:1.5.0")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha01")
     implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.compose.material:material-icons-extended:1.0.0-beta07")
+    implementation("androidx.compose.material:material-icons-extended:1.0.0-beta08")
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha01")
 
     implementation("androidx.preference:preference:1.1.1")
