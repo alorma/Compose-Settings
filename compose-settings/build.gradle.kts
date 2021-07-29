@@ -45,7 +45,8 @@ android {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xopt-in=kotlin.Experimental",
-            "-Xuse-experimental=kotlin.Experimental"
+            "-Xuse-experimental=kotlin.Experimental",
+            "-XXLanguage:+NonParenthesizedAnnotationsOnFunctionalTypes",
         )
     }
 }
@@ -53,6 +54,10 @@ android {
 dependencies {
     implementation("androidx.compose.foundation:foundation:1.0.0")
     implementation("androidx.compose.foundation:foundation-layout:1.0.0")
+
+    implementation("androidx.datastore:datastore:1.0.0-rc02")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
+
     implementation("androidx.compose.ui:ui:1.0.0")
     implementation("androidx.compose.material:material:1.0.0")
     implementation("androidx.compose.material:material-icons-extended:1.0.0")

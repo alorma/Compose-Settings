@@ -26,7 +26,8 @@ android {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xopt-in=kotlin.Experimental",
-            "-Xuse-experimental=kotlin.Experimental"
+            "-Xuse-experimental=kotlin.Experimental",
+            "-XXLanguage:+NonParenthesizedAnnotationsOnFunctionalTypes",
         )
     }
     buildFeatures {
@@ -45,6 +46,9 @@ android {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+
+    implementation("androidx.datastore:datastore:1.0.0-rc02")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
 
     implementation(project(":compose-settings"))
 
