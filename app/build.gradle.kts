@@ -7,8 +7,8 @@ android {
     compileSdk = 30
 
     defaultConfig {
-        applicationId = "com.alorma.settingslib"
-        minSdk = 23
+        applicationId = "com.alorma.composedrawer"
+        minSdk = 21
         targetSdk = 30
         versionCode = 1
         versionName = "1.0"
@@ -22,7 +22,7 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-        useIR = true
+
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
             "-Xopt-in=kotlin.Experimental",
@@ -34,7 +34,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.0-rc01"
+        kotlinCompilerExtensionVersion = "1.0.0"
     }
 
     lint {
@@ -48,22 +48,13 @@ dependencies {
 
     implementation(project(":compose-settings"))
 
-    implementation("androidx.activity:activity-compose:1.3.0-alpha08")
+    implementation("androidx.activity:activity-compose:1.3.0")
 
-    implementation("androidx.compose.foundation:foundation:1.0.0-rc01")
-    implementation("androidx.compose.foundation:foundation-layout:1.0.0-rc01")
-    implementation("androidx.compose.ui:ui:1.0.0-rc01")
-    implementation("androidx.compose.material:material:1.0.0-rc01")
-    implementation("androidx.compose.ui:ui-tooling:1.0.0-rc01")
-
-    implementation("androidx.core:core-ktx:1.5.0")
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha01")
-    implementation("com.google.android.material:material:1.3.0")
-    implementation("androidx.compose.material:material-icons-extended:1.0.0-rc01")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha01")
-
-    implementation("androidx.preference:preference:1.1.1")
-
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-
+    implementation("androidx.compose.foundation:foundation:1.0.0")
+    implementation("androidx.compose.foundation:foundation-layout:1.0.0")
+    implementation("androidx.compose.ui:ui:1.0.0")
+    implementation("androidx.compose.material:material:1.0.0")
+    implementation("androidx.compose.material:material-icons-extended:1.0.0")
+    implementation("androidx.compose.ui:ui-tooling:1.0.0")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
 }
