@@ -55,8 +55,8 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.0.1")
     implementation("androidx.compose.foundation:foundation-layout:1.0.1")
 
-    implementation("androidx.datastore:datastore:1.0.1-rc02")
-    implementation("androidx.datastore:datastore-preferences:1.0.1-rc02")
+    implementation("androidx.datastore:datastore:1.0.0-rc02")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
 
     implementation("androidx.compose.ui:ui:1.0.1")
     implementation("androidx.compose.material:material:1.0.1")
