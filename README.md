@@ -4,7 +4,7 @@
 
 ![compose-settings](https://img.shields.io/badge/ComposeSettings-0.2.0-brightgreen)
 
-![Compatible with Compose](https://img.shields.io/badge/Compose-1.0.0-brightgreen)
+![Compatible with Compose](https://img.shields.io/badge/Compose-1.0.1-brightgreen)
 
 This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
 developers build complex settings screens without all the boilerplate
