@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.alorma.settingslib.ui.Navigation
 import com.alorma.settingslib.ui.screens.CheckboxesScreen
 import com.alorma.settingslib.ui.screens.MenuLinksScreen
+import com.alorma.settingslib.ui.screens.SlidersScreen
 import com.alorma.settingslib.ui.screens.SwitchesScreen
 import com.alorma.settingslib.ui.screens.TopLevelScreen
 import com.alorma.settingslib.ui.theme.SettingsLibTheme
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
             SettingsLibTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = Navigation.NAV_TOP_SETTINGS,
+                    startDestination = Navigation.NAV_SLIDERS,
                 ) {
                     composable(Navigation.NAV_TOP_SETTINGS) {
                         TopLevelScreen(navController = navController)
@@ -35,8 +36,10 @@ class MainActivity : ComponentActivity() {
                     composable(Navigation.NAV_CHECKBOXES) {
                         CheckboxesScreen(navController = navController)
                     }
+                    composable(Navigation.NAV_SLIDERS) {
+                        SlidersScreen(navController = navController)
+                    }
                 }
-
             }
         }
     }

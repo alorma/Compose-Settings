@@ -31,7 +31,6 @@ fun SettingsSwitch(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
 ) {
-
     Surface {
         Row(
             modifier = modifier
