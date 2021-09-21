@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             SettingsLibTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = Navigation.NAV_SLIDERS,
+                    startDestination = Navigation.NAV_TOP_SETTINGS,
                 ) {
                     composable(Navigation.NAV_TOP_SETTINGS) {
                         TopLevelScreen(navController = navController)

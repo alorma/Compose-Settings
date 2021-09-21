@@ -4,6 +4,7 @@ import androidx.annotation.IntRange
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.SliderColors
 import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Surface
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileSlider
 
@@ -31,7 +33,9 @@ fun SettingsSlider(
 ) {
     Surface {
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .height(72.dp)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingsTileIcon(icon = icon)
