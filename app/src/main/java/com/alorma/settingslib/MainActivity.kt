@@ -15,32 +15,32 @@ import com.alorma.settingslib.ui.screens.TopLevelScreen
 import com.alorma.settingslib.ui.theme.SettingsLibTheme
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            val navController = rememberNavController()
-            SettingsLibTheme {
-                NavHost(
-                    navController = navController,
-                    startDestination = Navigation.NAV_TOP_SETTINGS,
-                ) {
-                    composable(Navigation.NAV_TOP_SETTINGS) {
-                        TopLevelScreen(navController = navController)
-                    }
-                    composable(Navigation.NAV_MENU_LINKS) {
-                        MenuLinksScreen(navController = navController)
-                    }
-                    composable(Navigation.NAV_SWITCHES) {
-                        SwitchesScreen(navController = navController)
-                    }
-                    composable(Navigation.NAV_CHECKBOXES) {
-                        CheckboxesScreen(navController = navController)
-                    }
-                    composable(Navigation.NAV_SLIDERS) {
-                        SlidersScreen(navController = navController)
-                    }
-                }
-            }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContent {
+      val navController = rememberNavController()
+      SettingsLibTheme {
+        NavHost(
+          navController = navController,
+          startDestination = Navigation.NAV_TOP_SETTINGS.first,
+        ) {
+          composable(Navigation.NAV_TOP_SETTINGS.first) {
+            TopLevelScreen(navController = navController)
+          }
+          composable(Navigation.NAV_MENU_LINKS.first) {
+            MenuLinksScreen(navController = navController)
+          }
+          composable(Navigation.NAV_SWITCHES.first) {
+            SwitchesScreen(navController = navController)
+          }
+          composable(Navigation.NAV_CHECKBOXES.first) {
+            CheckboxesScreen(navController = navController)
+          }
+          composable(Navigation.NAV_SLIDERS.first) {
+            SlidersScreen(navController = navController)
+          }
         }
+      }
     }
+  }
 }

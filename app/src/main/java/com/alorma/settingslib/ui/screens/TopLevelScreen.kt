@@ -3,7 +3,6 @@ package com.alorma.settingslib.ui.screens
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Divider
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
@@ -12,13 +11,11 @@ import com.alorma.settings.composables.SettingsMenuLink
 import com.alorma.settingslib.demo.AppScaffold
 import com.alorma.settingslib.ui.Navigation
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TopLevelScreen(
   navController: NavController = rememberNavController(),
 ) {
   val navigations = listOf(
-    Navigation.NAV_TOP_SETTINGS,
     Navigation.NAV_MENU_LINKS,
     Navigation.NAV_SWITCHES,
     Navigation.NAV_CHECKBOXES,
@@ -31,8 +28,8 @@ fun TopLevelScreen(
     LazyColumn {
       itemsIndexed(navigations) { index, nav ->
         SettingsMenuLink(
-          title = { Text(text = nav) },
-          onClick = { navController.navigate(route = nav) },
+          title = { Text(text = nav.second) },
+          onClick = { navController.navigate(route = nav.first) },
         )
         if (index < navigations.size) {
           Divider()
