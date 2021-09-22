@@ -1,61 +1,43 @@
 package com.alorma.settingslib.ui.screens
 
-import android.content.Context
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.semantics.Role
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alorma.settings.composables.datastore.SettingsScaffold
-import com.alorma.settings.composables.internal.SettingsToolbar
-
-val Context.datastore by preferencesDataStore(name = "TopLevel")
+import com.alorma.settings.composables.SettingsMenuLink
+import com.alorma.settingslib.demo.AppScaffold
+import com.alorma.settingslib.ui.Navigation
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TopLevelScreen(
-    navController: NavController = rememberNavController(),
+  navController: NavController = rememberNavController(),
 ) {
-    val usedPrefs = listOf(
-        Triple(booleanPreferencesKey("clock_enabled"), "Enable clock", Role.Checkbox),
-        Triple(booleanPreferencesKey("sync_enabled"), "Enable sync", Role.Switch),
-    )
-    val scaffoldState = rememberScaffoldState()
-
-    val context = LocalContext.current
-
-    LaunchedEffect(key1 = usedPrefs) {
-        context.datastore.edit { preferences ->
-            usedPrefs.toList()
-                .map { it.first }
-                .forEach { key ->
-                    if (!preferences.contains(key)) {
-                        preferences[key] = false
-                    }
-                }
+  val navigations = listOf(
+    Navigation.NAV_TOP_SETTINGS,
+    Navigation.NAV_MENU_LINKS,
+    Navigation.NAV_SWITCHES,
+    Navigation.NAV_CHECKBOXES,
+    Navigation.NAV_SLIDERS,
+  )
+  AppScaffold(
+    title = { Text(text = "Switches") },
+    onBack = { navController.popBackStack() },
+  ) {
+    LazyColumn {
+      itemsIndexed(navigations) { index, nav ->
+        SettingsMenuLink(
+          title = { Text(text = nav) },
+          onClick = { navController.navigate(route = nav) },
+        )
+        if (index < navigations.size) {
+          Divider()
         }
+      }
     }
-
-    SettingsScaffold(
-        scaffoldState = scaffoldState,
-        topBar = {
-            SettingsToolbar(
-                title = { Text(text = "Demo settings") },
-            )
-        },
-        dataStore = context.datastore,
-        booleanRoleMapper = { prefKey ->
-            usedPrefs.first { it.first == prefKey }.third
-        },
-        preferenceTitleMapper = { prefKey ->
-            usedPrefs.first { it.first == prefKey }.second
-        }
-    )
+  }
 }
