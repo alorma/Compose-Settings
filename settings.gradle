@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 rootProject.name = "SettingsLib"
 include ':app'
 include ':compose-settings'
+include ':storage-base'
