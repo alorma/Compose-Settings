@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsSwitch
-import com.alorma.settings.storage.rememberSettingsStorage
+import com.alorma.settings.storage.preferences.rememberPreferenceBooleanStorage
 import com.alorma.settingslib.demo.AppScaffold
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
@@ -32,11 +32,6 @@ fun SwitchesScreen(navController: NavHostController) {
   val coroutineScope = rememberCoroutineScope()
 
   val scaffoldState = rememberScaffoldState()
-
-  var switch1 by remember { mutableStateOf(Random.nextBoolean()) }
-  var switch2 by remember { mutableStateOf(Random.nextBoolean()) }
-  var switch3 by remember { mutableStateOf(Random.nextBoolean()) }
-  var switch4 by remember { mutableStateOf(Random.nextBoolean()) }
 
   AppScaffold(
     scaffoldState = scaffoldState,
@@ -54,8 +49,9 @@ fun SwitchesScreen(navController: NavHostController) {
         style = MaterialTheme.typography.subtitle1,
       )
     }
-    val storage = rememberSettingsStorage()
+    val storage = rememberPreferenceBooleanStorage()
     SettingsSwitch(
+      key = "Switch1",
       storage = storage,
       title = { Text(text = "Menu 1") },
       subtitle = { Text(text = "Subtitle of menu 1") },
@@ -79,6 +75,7 @@ fun SwitchesScreen(navController: NavHostController) {
       )
     }
     Divider()
+    var switch1 by remember { mutableStateOf(Random.nextBoolean()) }
     SettingsSwitch(
       title = { Text(text = "Menu 1") },
       subtitle = { Text(text = "Subtitle of menu 1") },
@@ -96,6 +93,7 @@ fun SwitchesScreen(navController: NavHostController) {
       }
     }
     Divider()
+    var switch2 by remember { mutableStateOf(Random.nextBoolean()) }
     SettingsSwitch(
       title = { Text(text = "Menu 2") },
       icon = {
@@ -112,6 +110,8 @@ fun SwitchesScreen(navController: NavHostController) {
       }
     }
     Divider()
+    var switch3 by remember { mutableStateOf(Random.nextBoolean()) }
+
     SettingsSwitch(
       title = { Text(text = "Menu 3") },
       icon = {
@@ -124,16 +124,6 @@ fun SwitchesScreen(navController: NavHostController) {
     ) { changed ->
       coroutineScope.launch {
         switch3 = changed
-        scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
-      }
-    }
-    Divider()
-    SettingsSwitch(
-      title = { Text(text = "Menu 4") },
-      checked = switch4,
-    ) { changed ->
-      coroutineScope.launch {
-        switch4 = changed
         scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
       }
     }

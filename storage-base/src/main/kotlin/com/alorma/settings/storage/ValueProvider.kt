@@ -1,42 +1,37 @@
 package com.alorma.settings.storage
 
-import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
-fun rememberSettingsStorage(): ValueStorage {
+fun rememberBooleanStorage(): ValueStorage<Boolean> {
   return rememberSaveable(saver = ValueStorage.Saver) {
-    ValueStorage.NoOp
+    ValueStorage.noOp()
   }
 }
 
-interface ValueStorage {
-  val key: String
+abstract class ValueStorage<T> {
 
-  fun save(key: String, value: Boolean)
+  @Composable
+  fun state(key: String): MutableState<T> = remember { mutableStateOf(get(key)) }
 
-  fun save(value: Boolean) = save(key, value)
+  abstract fun save(key: String, value: Boolean)
 
-  fun getBoolean(key: String): Boolean
-
-  fun getBoolean() = getBoolean(key)
+  abstract fun get(key: String): T
 
   companion object {
-    val NoOp = object : ValueStorage {
-      override val key: String = "NoOp"
-
-      override fun save(key: String, value: Boolean) {
-        Log.i("alorma", "Key: $key: $value")
-      }
-
-      override fun getBoolean(key: String): Boolean = true
+    internal fun noOp() = object : ValueStorage<Boolean>() {
+      override fun save(key: String, value: Boolean) {}
+      override fun get(key: String): Boolean = false
     }
 
-    val Saver: Saver<ValueStorage, *> = androidx.compose.runtime.saveable.Saver(
+    val Saver: Saver<ValueStorage<Boolean>, *> = androidx.compose.runtime.saveable.Saver(
       save = { "" },
-      restore = { NoOp },
+      restore = { noOp() },
     )
   }
 }

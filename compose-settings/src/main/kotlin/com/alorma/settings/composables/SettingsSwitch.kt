@@ -22,7 +22,7 @@ import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
 import com.alorma.settings.storage.ValueStorage
-import com.alorma.settings.storage.rememberSettingsStorage
+import com.alorma.settings.storage.rememberBooleanStorage
 
 @Composable
 fun SettingsSwitch(
@@ -55,18 +55,24 @@ fun SettingsSwitch(
 @Composable
 fun SettingsSwitch(
   modifier: Modifier = Modifier,
-  storage: ValueStorage = rememberSettingsStorage(),
+  key: String,
+  storage: ValueStorage<Boolean> = rememberBooleanStorage(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
 ) {
+  var state by storage.state(key = key)
+
   SettingsSwitch(
     modifier = modifier,
     icon = icon,
     title = title,
     subtitle = subtitle,
-    checked = storage.getBoolean(),
-    onCheckedChange = { newValue -> storage.save(newValue) },
+    checked = state,
+    onCheckedChange = { newValue ->
+      storage.save(key = key, value = newValue)
+      state = newValue
+    },
   )
 }
 
