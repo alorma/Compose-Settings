@@ -21,47 +21,66 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
+import com.alorma.settings.storage.ValueStorage
+import com.alorma.settings.storage.rememberSettingsStorage
 
 @Composable
 fun SettingsSwitch(
-    modifier: Modifier = Modifier,
-    icon: @Composable (() -> Unit)? = null,
-    title: @Composable () -> Unit,
-    subtitle: @Composable (() -> Unit)? = null,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+  modifier: Modifier = Modifier,
+  icon: @Composable (() -> Unit)? = null,
+  title: @Composable () -> Unit,
+  subtitle: @Composable (() -> Unit)? = null,
+  checked: Boolean,
+  onCheckedChange: (Boolean) -> Unit,
 ) {
-    Surface {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .clickable(onClick = { onCheckedChange(!checked) }),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            SettingsTileIcon(icon = icon)
-            SettingsTileTexts(title = title, subtitle = subtitle)
-            SettingsTileAction {
-                Switch(
-                    checked = checked,
-                    onCheckedChange = { onCheckedChange(!checked) }
-                )
-            }
-        }
+  Surface {
+    Row(
+      modifier = modifier
+        .fillMaxWidth()
+        .clickable(onClick = { onCheckedChange(!checked) }),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      SettingsTileIcon(icon = icon)
+      SettingsTileTexts(title = title, subtitle = subtitle)
+      SettingsTileAction {
+        Switch(
+          checked = checked,
+          onCheckedChange = { onCheckedChange(!checked) }
+        )
+      }
     }
+  }
 }
 
+@Composable
+fun SettingsSwitch(
+  modifier: Modifier = Modifier,
+  storage: ValueStorage = rememberSettingsStorage(),
+  icon: @Composable (() -> Unit)? = null,
+  title: @Composable () -> Unit,
+  subtitle: @Composable (() -> Unit)? = null,
+) {
+  SettingsSwitch(
+    modifier = modifier,
+    icon = icon,
+    title = title,
+    subtitle = subtitle,
+    checked = storage.getBoolean(),
+    onCheckedChange = { newValue -> storage.save(newValue) },
+  )
+}
 
 @Preview
 @Composable
 internal fun SettingsSwitchPreview() {
-    MaterialTheme {
-        var state by remember { mutableStateOf(true) }
-        SettingsSwitch(
-            icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
-            title = { Text(text = "Hello") },
-            subtitle = { Text(text = "This is a longer text") },
-            checked = state,
-            onCheckedChange = { state = it }
-        )
-    }
+  MaterialTheme {
+    var state by remember { mutableStateOf(true) }
+    SettingsSwitch(
+      icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
+      title = { Text(text = "Hello") },
+      subtitle = { Text(text = "This is a longer text") },
+      checked = state,
+      onCheckedChange = { state = it }
+    )
+  }
 }
