@@ -92,40 +92,5 @@ fun SwitchesScreen(navController: NavHostController) {
         scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
       }
     }
-    Divider()
-    var switch2 by remember { mutableStateOf(Random.nextBoolean()) }
-    SettingsSwitch(
-      title = { Text(text = "Menu 2") },
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 2"
-        )
-      },
-      checked = switch2,
-    ) { changed ->
-      coroutineScope.launch {
-        switch2 = changed
-        scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
-      }
-    }
-    Divider()
-    var switch3 by remember { mutableStateOf(Random.nextBoolean()) }
-
-    SettingsSwitch(
-      title = { Text(text = "Menu 3") },
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
-        )
-      },
-      checked = switch3,
-    ) { changed ->
-      coroutineScope.launch {
-        switch3 = changed
-        scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
-      }
-    }
   }
 }
