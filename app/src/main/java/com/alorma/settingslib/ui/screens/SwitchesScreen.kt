@@ -49,19 +49,20 @@ fun SwitchesScreen(navController: NavHostController) {
         style = MaterialTheme.typography.subtitle1,
       )
     }
-    val storage = rememberPreferenceBooleanStorage()
+    val storage = rememberPreferenceBooleanStorage(
+      key = "switch_1",
+      defaultValue = false,
+    )
     SettingsSwitch(
-      key = "Switch1",
       storage = storage,
-      title = { Text(text = "Menu 1") },
-      subtitle = { Text(text = "Subtitle of menu 1") },
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
           contentDescription = "Menu 1"
         )
       },
-    )
+      title = { Text(text = "Menu 1") },
+    ) { Text(text = "Subtitle of menu 1") }
     Divider()
     Box(
       modifier = Modifier

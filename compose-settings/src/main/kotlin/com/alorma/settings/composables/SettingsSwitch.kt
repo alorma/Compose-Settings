@@ -55,24 +55,19 @@ fun SettingsSwitch(
 @Composable
 fun SettingsSwitch(
   modifier: Modifier = Modifier,
-  key: String,
   storage: ValueStorage<Boolean> = rememberBooleanStorage(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
 ) {
-  var state by storage.state(key = key)
 
   SettingsSwitch(
     modifier = modifier,
     icon = icon,
     title = title,
     subtitle = subtitle,
-    checked = state,
-    onCheckedChange = { newValue ->
-      storage.save(key = key, value = newValue)
-      state = newValue
-    },
+    checked = storage.value,
+    onCheckedChange = { newValue -> storage.value = newValue },
   )
 }
 
