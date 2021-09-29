@@ -29,3 +29,6 @@ jobs:
         # Builds the release artifacts of the library
       - name: Release build
         run: ./gradlew assembleRelease -x :app:assembleRelease
+concurrency: 
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
