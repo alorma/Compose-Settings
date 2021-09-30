@@ -1,23 +1,20 @@
 package com.alorma.settings.storage
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 @Composable
-fun rememberBooleanStorage(): ValueStorage<Boolean> {
-  return remember { InMemoryBooleanValueStorage() }
+fun rememberBooleanStorage(defaultValue: Boolean = false): ValueStorage<Boolean> {
+  return remember { InMemoryBooleanValueStorage(defaultValue) }
 }
 
-abstract class ValueStorage<T> : MutableState<T> {
-
-  override fun component1(): T = value
-
-  override fun component2(): (T) -> Unit {
-    return { t -> value = t }
-  }
+interface ValueStorage<T> {
+  var value: T
 }
 
-internal class InMemoryBooleanValueStorage : ValueStorage<Boolean>() {
-  override var value: Boolean = true
+internal class InMemoryBooleanValueStorage(defaultValue: Boolean) : ValueStorage<Boolean> {
+  override var value: Boolean by mutableStateOf(defaultValue)
 }

@@ -3,7 +3,10 @@ package com.alorma.settings.storage.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
@@ -23,18 +26,17 @@ fun rememberPreferenceBooleanStorage(key: String, defaultValue: Boolean): ValueS
 
 class PreferenceStorage(
   context: Context,
+  private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
   private val key: String,
-  private val defaultValue: Boolean = false,
-) : ValueStorage<Boolean>() {
+  val defaultValue: Boolean = false,
+) : ValueStorage<Boolean> {
 
-  private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+  private var _value by mutableStateOf(preferences.getBoolean(key, defaultValue))
 
-  override var value: Boolean = false
-    get() {
-      return preferences.getBoolean(key, defaultValue)
-    }
+  override var value: Boolean
     set(value) {
-      field = value
+      _value = value
       preferences.edit { putBoolean(key, value) }
     }
+    get() = _value
 }

@@ -1,11 +1,7 @@
 package com.alorma.settingslib.ui.screens
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
@@ -16,12 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsSwitch
 import com.alorma.settings.storage.preferences.rememberPreferenceBooleanStorage
+import com.alorma.settings.storage.rememberBooleanStorage
 import com.alorma.settingslib.demo.AppScaffold
 import com.alorma.settingslib.extensions.showSnackbar
 import kotlinx.coroutines.launch
@@ -38,48 +32,35 @@ fun SwitchesScreen(navController: NavHostController) {
     title = { Text(text = "Switches") },
     onBack = { navController.popBackStack() },
   ) {
-    Box(
-      modifier = Modifier
-        .heightIn(100.dp)
-        .padding(16.dp),
-      contentAlignment = Alignment.CenterStart,
-    ) {
-      Text(
-        text = "Storage style",
-        style = MaterialTheme.typography.subtitle1,
-      )
-    }
-    val storage = rememberPreferenceBooleanStorage(
-      key = "switch_1",
-      defaultValue = false,
-    )
+    val memoryStorage = rememberBooleanStorage(defaultValue = false)
     SettingsSwitch(
-      storage = storage,
+      storage = memoryStorage,
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
+          contentDescription = "Memory switch 1"
         )
       },
-      title = { Text(text = "Menu 1") },
-    ) { Text(text = "Subtitle of menu 1") }
-    Divider()
-    Box(
-      modifier = Modifier
-        .heightIn(100.dp)
-        .padding(16.dp),
-      contentAlignment = Alignment.CenterStart,
-    ) {
-      Text(
-        text = "Lambda style",
-        style = MaterialTheme.typography.subtitle1,
-      )
-    }
+      title = { Text(text = "Memory") },
+    )
+    val preferenceStorage = rememberPreferenceBooleanStorage(
+      key = "switch_2",
+      defaultValue = false,
+    )
+    SettingsSwitch(
+      storage = preferenceStorage,
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "Preferences switch 1"
+        )
+      },
+      title = { Text(text = "Preferences") },
+    )
     Divider()
     var switch1 by remember { mutableStateOf(Random.nextBoolean()) }
     SettingsSwitch(
-      title = { Text(text = "Menu 1") },
-      subtitle = { Text(text = "Subtitle of menu 1") },
+      title = { Text(text = "Hoisting state") },
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,

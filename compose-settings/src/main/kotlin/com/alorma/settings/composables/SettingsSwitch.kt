@@ -60,7 +60,6 @@ fun SettingsSwitch(
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
 ) {
-
   SettingsSwitch(
     modifier = modifier,
     icon = icon,
