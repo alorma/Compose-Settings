@@ -17,21 +17,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
-import com.alorma.settings.storage.ValueStorage
+import com.alorma.settings.storage.ValueSetting
 import com.alorma.settings.storage.getValue
-import com.alorma.settings.storage.rememberBooleanStorage
+import com.alorma.settings.storage.rememberBooleanSetting
 import com.alorma.settings.storage.setValue
 
 @Composable
 fun SettingsCheckbox(
   modifier: Modifier = Modifier,
-  storage: ValueStorage<Boolean> = rememberBooleanStorage(),
+  setting: ValueSetting<Boolean> = rememberBooleanSetting(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
-  var storageValue by storage
+  var storageValue by setting
   val update: (Boolean) -> Unit = { boolean ->
     storageValue = boolean
     onCheckedChange(storageValue)
@@ -59,9 +59,9 @@ fun SettingsCheckbox(
 @Composable
 internal fun SettingsCheckboxPreview() {
   MaterialTheme {
-    val storage = rememberBooleanStorage(defaultValue = true)
+    val storage = rememberBooleanSetting(defaultValue = true)
     SettingsCheckbox(
-      storage = storage,
+      setting = storage,
       icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
       title = { Text(text = "Hello") },
       subtitle = { Text(text = "This is a longer text") },

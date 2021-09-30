@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsCheckbox
-import com.alorma.settings.storage.ValueStorage
-import com.alorma.settings.storage.preferences.BooleanPreferenceStorage
-import com.alorma.settings.storage.preferences.rememberPreferenceBooleanStorage
-import com.alorma.settings.storage.rememberBooleanStorage
+import com.alorma.settings.storage.ValueSetting
+import com.alorma.settings.storage.preferences.BooleanPreferenceSetting
+import com.alorma.settings.storage.preferences.rememberPreferenceBooleanSetting
+import com.alorma.settings.storage.rememberBooleanSetting
 import com.alorma.settingslib.demo.AppScaffold
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -29,9 +29,9 @@ fun CheckboxesScreen(navController: NavHostController) {
     title = { Text(text = "Checkboxes") },
     onBack = { navController.popBackStack() },
   ) {
-    val memoryStorage = rememberBooleanStorage(defaultValue = false)
+    val memoryStorage = rememberBooleanSetting(defaultValue = false)
     SettingsCheckbox(
-      storage = memoryStorage,
+      setting = memoryStorage,
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
@@ -43,16 +43,16 @@ fun CheckboxesScreen(navController: NavHostController) {
         scaffoldState.showChange(
           coroutineScope = coroutineScope,
           key = "Memory",
-          valueStorage = memoryStorage
+          valueSetting = memoryStorage
         )
       },
     )
-    val preferenceStorage: BooleanPreferenceStorage = rememberPreferenceBooleanStorage(
+    val preferenceStorage: BooleanPreferenceSetting = rememberPreferenceBooleanSetting(
       key = "switch_2",
       defaultValue = false,
     )
     SettingsCheckbox(
-      storage = preferenceStorage,
+      setting = preferenceStorage,
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
@@ -64,7 +64,7 @@ fun CheckboxesScreen(navController: NavHostController) {
         scaffoldState.showChange(
           coroutineScope = coroutineScope,
           key = "Preferences",
-          valueStorage = preferenceStorage,
+          valueSetting = preferenceStorage,
         )
       },
     )
@@ -74,10 +74,10 @@ fun CheckboxesScreen(navController: NavHostController) {
 private fun ScaffoldState.showChange(
   coroutineScope: CoroutineScope,
   key: String,
-  valueStorage: ValueStorage<Boolean>
+  valueSetting: ValueSetting<Boolean>
 ) {
   coroutineScope.launch {
     snackbarHostState.currentSnackbarData?.dismiss()
-    snackbarHostState.showSnackbar(message = "[$key]:  ${valueStorage.value}")
+    snackbarHostState.showSnackbar(message = "[$key]:  ${valueSetting.value}")
   }
 }

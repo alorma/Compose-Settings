@@ -8,22 +8,22 @@ import androidx.compose.runtime.setValue
 import kotlin.reflect.KProperty
 
 @Composable
-fun rememberBooleanStorage(defaultValue: Boolean = false): ValueStorage<Boolean> {
-  return remember { InMemoryBooleanValueStorage(defaultValue) }
+fun rememberBooleanSetting(defaultValue: Boolean = false): ValueSetting<Boolean> {
+  return remember { InMemoryBooleanValueSetting(defaultValue) }
 }
 
 @Suppress("NOTHING_TO_INLINE")
-inline operator fun <T> ValueStorage<T>.getValue(thisObj: Any?, property: KProperty<*>): T = value
+inline operator fun <T> ValueSetting<T>.getValue(thisObj: Any?, property: KProperty<*>): T = value
 
 @Suppress("NOTHING_TO_INLINE")
-inline operator fun <T> ValueStorage<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T) {
+inline operator fun <T> ValueSetting<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T) {
   this.value = value
 }
 
-interface ValueStorage<T> {
+interface ValueSetting<T> {
   var value: T
 }
 
-internal class InMemoryBooleanValueStorage(defaultValue: Boolean) : ValueStorage<Boolean> {
+internal class InMemoryBooleanValueSetting(defaultValue: Boolean) : ValueSetting<Boolean> {
   override var value: Boolean by mutableStateOf(defaultValue)
 }
