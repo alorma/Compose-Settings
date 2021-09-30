@@ -12,6 +12,11 @@ fun rememberBooleanSetting(defaultValue: Boolean = false): ValueSetting<Boolean>
   return remember { InMemoryBooleanValueSetting(defaultValue) }
 }
 
+@Composable
+fun rememberFloatSetting(defaultValue: Float = 0f): ValueSetting<Float> {
+  return remember { InMemoryFloatValueSetting(defaultValue) }
+}
+
 @Suppress("NOTHING_TO_INLINE")
 inline operator fun <T> ValueSetting<T>.getValue(thisObj: Any?, property: KProperty<*>): T = value
 
@@ -26,4 +31,8 @@ interface ValueSetting<T> {
 
 internal class InMemoryBooleanValueSetting(defaultValue: Boolean) : ValueSetting<Boolean> {
   override var value: Boolean by mutableStateOf(defaultValue)
+}
+
+internal class InMemoryFloatValueSetting(defaultValue: Float) : ValueSetting<Float> {
+  override var value: Float by mutableStateOf(defaultValue)
 }
