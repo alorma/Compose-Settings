@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsSlider
 import com.alorma.settings.storage.preferences.rememberPreferenceFloatSetting
-import com.alorma.settings.storage.rememberFloatSetting
 import com.alorma.settingslib.demo.AppScaffold
 
 @Composable
@@ -25,9 +24,9 @@ fun SlidersScreen(navController: NavHostController) {
 
   val scaffoldState = rememberScaffoldState()
 
-  val settingBrightness = rememberPreferenceFloatSetting(
-    key = "slider_1"
-  )
+  val settingBrightness = rememberPreferenceFloatSetting(key = "brightness")
+  val settingVolume = rememberPreferenceFloatSetting(key = "volume")
+  val settingColors = rememberPreferenceFloatSetting(key = "colors")
 
   AppScaffold(
     scaffoldState = scaffoldState,
@@ -62,17 +61,17 @@ fun SlidersScreen(navController: NavHostController) {
       },
       title = { Text(text = "Brightness") },
     )
-      /*
     SettingsSlider(
+      setting = settingVolume,
       icon = {
         when {
-          volumeSliderPosition < 0.1 -> {
+          settingVolume.value < 0.1 -> {
             Icon(
               imageVector = Icons.Default.VolumeMute,
               contentDescription = "Volume Mute"
             )
           }
-          volumeSliderPosition in 0.1f..0.8f -> {
+          settingVolume.value in 0.1f..0.8f -> {
             Icon(
               imageVector = Icons.Default.VolumeDown,
               contentDescription = "Volume Down"
@@ -84,8 +83,6 @@ fun SlidersScreen(navController: NavHostController) {
         }
       },
       title = { Text(text = "Volume") },
-      value = volumeSliderPosition,
-      onValueChange = { volumeSliderPosition = it },
       steps = 3,
       colors = SliderDefaults.colors(
         activeTickColor = Color.Transparent,
@@ -95,12 +92,11 @@ fun SlidersScreen(navController: NavHostController) {
       )
     )
     SettingsSlider(
+      setting = settingColors,
       icon = {
         Icon(imageVector = Icons.Default.Colorize, contentDescription = "Custom colors")
       },
       title = { Text(text = "Custom colors") },
-      value = customColorsSliderPosition,
-      onValueChange = { customColorsSliderPosition = it },
       steps = 4,
       colors = SliderDefaults.colors(
         thumbColor = Color.Green,
@@ -109,6 +105,5 @@ fun SlidersScreen(navController: NavHostController) {
         activeTickColor = Color.Red
       )
     )
-       */
   }
 }
