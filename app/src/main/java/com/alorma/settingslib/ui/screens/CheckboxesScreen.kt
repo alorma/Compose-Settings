@@ -1,31 +1,22 @@
 package com.alorma.settingslib.ui.screens
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsCheckbox
+import com.alorma.settings.storage.ValueStorage
+import com.alorma.settings.storage.preferences.BooleanPreferenceStorage
 import com.alorma.settings.storage.preferences.rememberPreferenceBooleanStorage
+import com.alorma.settings.storage.rememberBooleanStorage
 import com.alorma.settingslib.demo.AppScaffold
-import com.alorma.settingslib.extensions.showSnackbar
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 @Composable
 fun CheckboxesScreen(navController: NavHostController) {
@@ -38,60 +29,55 @@ fun CheckboxesScreen(navController: NavHostController) {
     title = { Text(text = "Checkboxes") },
     onBack = { navController.popBackStack() },
   ) {
-    Box(
-      modifier = Modifier
-          .heightIn(100.dp)
-          .padding(16.dp),
-      contentAlignment = Alignment.CenterStart,
-    ) {
-      Text(
-        text = "Storage style",
-        style = MaterialTheme.typography.subtitle1,
-      )
-    }
-    val storage = rememberPreferenceBooleanStorage(
-      key = "switch_1",
+    val memoryStorage = rememberBooleanStorage(defaultValue = false)
+    SettingsCheckbox(
+      storage = memoryStorage,
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "Memory switch 1"
+        )
+      },
+      title = { Text(text = "Memory") },
+      onCheckedChange = {
+        scaffoldState.showChange(
+          coroutineScope = coroutineScope,
+          key = "Memory",
+          valueStorage = memoryStorage
+        )
+      },
+    )
+    val preferenceStorage: BooleanPreferenceStorage = rememberPreferenceBooleanStorage(
+      key = "switch_2",
       defaultValue = false,
     )
     SettingsCheckbox(
-      storage = storage,
+      storage = preferenceStorage,
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
+          contentDescription = "Preferences switch 1"
         )
       },
-      title = { Text(text = "Menu 1") },
-    ) { Text(text = "Subtitle of menu 1") }
-    Divider()
-    Box(
-      modifier = Modifier
-          .heightIn(100.dp)
-          .padding(16.dp),
-      contentAlignment = Alignment.CenterStart,
-    ) {
-      Text(
-        text = "Lambda style",
-        style = MaterialTheme.typography.subtitle1,
-      )
-    }
-    Divider()
-    var check1 by remember { mutableStateOf(Random.nextBoolean()) }
-    SettingsCheckbox(
-      title = { Text(text = "Menu 1") },
-      subtitle = { Text(text = "Subtitle of menu 1") },
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
+      title = { Text(text = "Preferences") },
+      onCheckedChange = {
+        scaffoldState.showChange(
+          coroutineScope = coroutineScope,
+          key = "Preferences",
+          valueStorage = preferenceStorage,
         )
       },
-      checked = check1,
-    ) { changed ->
-      coroutineScope.launch {
-        check1 = changed
-        scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
-      }
-    }
+    )
+  }
+}
+
+private fun ScaffoldState.showChange(
+  coroutineScope: CoroutineScope,
+  key: String,
+  valueStorage: ValueStorage<Boolean>
+) {
+  coroutineScope.launch {
+    snackbarHostState.currentSnackbarData?.dismiss()
+    snackbarHostState.showSnackbar(message = "[$key]:  ${valueStorage.value}")
   }
 }

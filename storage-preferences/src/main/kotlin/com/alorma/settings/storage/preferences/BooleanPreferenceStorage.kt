@@ -13,10 +13,10 @@ import androidx.preference.PreferenceManager
 import com.alorma.settings.storage.ValueStorage
 
 @Composable
-fun rememberPreferenceBooleanStorage(key: String, defaultValue: Boolean): ValueStorage<Boolean> {
+fun rememberPreferenceBooleanStorage(key: String, defaultValue: Boolean): BooleanPreferenceStorage {
   val context = LocalContext.current
   return remember {
-    PreferenceStorage(
+    BooleanPreferenceStorage(
       context = context,
       key = key,
       defaultValue = defaultValue
@@ -24,10 +24,10 @@ fun rememberPreferenceBooleanStorage(key: String, defaultValue: Boolean): ValueS
   }
 }
 
-class PreferenceStorage(
+class BooleanPreferenceStorage(
   context: Context,
   private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
-  private val key: String,
+  val key: String,
   val defaultValue: Boolean = false,
 ) : ValueStorage<Boolean> {
 

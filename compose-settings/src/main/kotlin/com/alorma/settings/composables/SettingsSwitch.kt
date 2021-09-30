@@ -11,10 +11,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,35 +18,9 @@ import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
 import com.alorma.settings.storage.ValueStorage
+import com.alorma.settings.storage.getValue
 import com.alorma.settings.storage.rememberBooleanStorage
-
-@Composable
-fun SettingsSwitch(
-  modifier: Modifier = Modifier,
-  icon: @Composable (() -> Unit)? = null,
-  title: @Composable () -> Unit,
-  subtitle: @Composable (() -> Unit)? = null,
-  checked: Boolean,
-  onCheckedChange: (Boolean) -> Unit,
-) {
-  Surface {
-    Row(
-      modifier = modifier
-        .fillMaxWidth()
-        .clickable(onClick = { onCheckedChange(!checked) }),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      SettingsTileIcon(icon = icon)
-      SettingsTileTexts(title = title, subtitle = subtitle)
-      SettingsTileAction {
-        Switch(
-          checked = checked,
-          onCheckedChange = { onCheckedChange(!checked) }
-        )
-      }
-    }
-  }
-}
+import com.alorma.settings.storage.setValue
 
 @Composable
 fun SettingsSwitch(
@@ -59,28 +29,43 @@ fun SettingsSwitch(
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
+  onCheckedChange: (Boolean) -> Unit = {},
 ) {
-  SettingsSwitch(
-    modifier = modifier,
-    icon = icon,
-    title = title,
-    subtitle = subtitle,
-    checked = storage.value,
-    onCheckedChange = { newValue -> storage.value = newValue },
-  )
+  var storageValue by storage
+  val update: (Boolean) -> Unit = { boolean ->
+    storageValue = boolean
+    onCheckedChange(storageValue)
+  }
+  Surface {
+    Row(
+      modifier = modifier
+        .fillMaxWidth()
+        .clickable(onClick = { update(!storageValue) }),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      SettingsTileIcon(icon = icon)
+      SettingsTileTexts(title = title, subtitle = subtitle)
+      SettingsTileAction {
+        Switch(
+          checked = storageValue,
+          onCheckedChange = update
+        )
+      }
+    }
+  }
 }
 
 @Preview
 @Composable
 internal fun SettingsSwitchPreview() {
   MaterialTheme {
-    var state by remember { mutableStateOf(true) }
+    val storage = rememberBooleanStorage(defaultValue = true)
     SettingsSwitch(
+      storage = storage,
       icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
       title = { Text(text = "Hello") },
       subtitle = { Text(text = "This is a longer text") },
-      checked = state,
-      onCheckedChange = { state = it }
+      onCheckedChange = { }
     )
   }
 }

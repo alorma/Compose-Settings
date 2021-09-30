@@ -1,25 +1,22 @@
 package com.alorma.settingslib.ui.screens
 
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsSwitch
+import com.alorma.settings.storage.ValueStorage
+import com.alorma.settings.storage.preferences.BooleanPreferenceStorage
 import com.alorma.settings.storage.preferences.rememberPreferenceBooleanStorage
 import com.alorma.settings.storage.rememberBooleanStorage
 import com.alorma.settingslib.demo.AppScaffold
-import com.alorma.settingslib.extensions.showSnackbar
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 @Composable
 fun SwitchesScreen(navController: NavHostController) {
@@ -42,8 +39,15 @@ fun SwitchesScreen(navController: NavHostController) {
         )
       },
       title = { Text(text = "Memory") },
+      onCheckedChange = {
+        scaffoldState.showChange(
+          coroutineScope = coroutineScope,
+          key = "Memory",
+          valueStorage = memoryStorage
+        )
+      },
     )
-    val preferenceStorage = rememberPreferenceBooleanStorage(
+    val preferenceStorage: BooleanPreferenceStorage = rememberPreferenceBooleanStorage(
       key = "switch_2",
       defaultValue = false,
     )
@@ -56,23 +60,24 @@ fun SwitchesScreen(navController: NavHostController) {
         )
       },
       title = { Text(text = "Preferences") },
-    )
-    Divider()
-    var switch1 by remember { mutableStateOf(Random.nextBoolean()) }
-    SettingsSwitch(
-      title = { Text(text = "Hoisting state") },
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
+      onCheckedChange = {
+        scaffoldState.showChange(
+          coroutineScope = coroutineScope,
+          key = "Preferences",
+          valueStorage = preferenceStorage,
         )
       },
-      checked = switch1,
-    ) { changed ->
-      coroutineScope.launch {
-        switch1 = changed
-        scaffoldState.showSnackbar(message = "Switch changed to:  $changed")
-      }
-    }
+    )
+  }
+}
+
+private fun ScaffoldState.showChange(
+  coroutineScope: CoroutineScope,
+  key: String,
+  valueStorage: ValueStorage<Boolean>
+) {
+  coroutineScope.launch {
+    snackbarHostState.currentSnackbarData?.dismiss()
+    snackbarHostState.showSnackbar(message = "[$key]:  ${valueStorage.value}")
   }
 }

@@ -11,10 +11,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,66 +18,54 @@ import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
 import com.alorma.settings.storage.ValueStorage
+import com.alorma.settings.storage.getValue
 import com.alorma.settings.storage.rememberBooleanStorage
+import com.alorma.settings.storage.setValue
 
 @Composable
 fun SettingsCheckbox(
   modifier: Modifier = Modifier,
+  storage: ValueStorage<Boolean> = rememberBooleanStorage(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
-  checked: Boolean,
-  onCheckedChange: (Boolean) -> Unit,
+  onCheckedChange: (Boolean) -> Unit = {},
 ) {
+  var storageValue by storage
+  val update: (Boolean) -> Unit = { boolean ->
+    storageValue = boolean
+    onCheckedChange(storageValue)
+  }
   Surface {
     Row(
       modifier = modifier
         .fillMaxWidth()
-        .clickable(onClick = { onCheckedChange(!checked) }),
+        .clickable(onClick = { update(!storageValue) }),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileIcon(icon = icon)
       SettingsTileTexts(title = title, subtitle = subtitle)
       SettingsTileAction {
         Checkbox(
-          checked = checked,
-          onCheckedChange = { onCheckedChange(!checked) }
+          checked = storageValue,
+          onCheckedChange = update
         )
       }
     }
   }
 }
 
-@Composable
-fun SettingsCheckbox(
-  modifier: Modifier = Modifier,
-  storage: ValueStorage<Boolean> = rememberBooleanStorage(),
-  icon: @Composable() (() -> Unit)? = null,
-  title: @Composable () -> Unit,
-  subtitle: @Composable() (() -> Unit)? = null,
-) {
-
-  SettingsCheckbox(
-    modifier = modifier,
-    icon = icon,
-    title = title,
-    subtitle = subtitle,
-    checked = storage.value,
-    onCheckedChange = { newValue -> storage.value = newValue },
-  )
-}
-
 @Preview
 @Composable
 internal fun SettingsCheckboxPreview() {
   MaterialTheme {
-    var state by remember { mutableStateOf(true) }
+    val storage = rememberBooleanStorage(defaultValue = true)
     SettingsCheckbox(
+      storage = storage,
       icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
       title = { Text(text = "Hello") },
       subtitle = { Text(text = "This is a longer text") },
-      checked = state,
-      onCheckedChange = { state = it }
+      onCheckedChange = { }
     )
   }
 }
