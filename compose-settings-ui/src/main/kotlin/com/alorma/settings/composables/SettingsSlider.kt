@@ -17,13 +17,13 @@ import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileSlider
 import com.alorma.settings.storage.SettingValueState
 import com.alorma.settings.storage.getValue
-import com.alorma.settings.storage.rememberFloatSetting
+import com.alorma.settings.storage.rememberFloatSettingState
 import com.alorma.settings.storage.setValue
 
 @Composable
 fun SettingsSlider(
   modifier: Modifier = Modifier,
-  state: SettingValueState<Float> = rememberFloatSetting(),
+  state: SettingValueState<Float> = rememberFloatSettingState(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   onValueChange: (Float) -> Unit = {},
@@ -39,8 +39,8 @@ fun SettingsSlider(
   Surface {
     Row(
       modifier = modifier
-          .height(72.dp)
-          .fillMaxWidth(),
+        .height(72.dp)
+        .fillMaxWidth(),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileIcon(icon = icon)

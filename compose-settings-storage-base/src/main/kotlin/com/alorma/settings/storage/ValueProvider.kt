@@ -13,7 +13,7 @@ fun rememberBooleanSettingState(defaultValue: Boolean = false): SettingValueStat
 }
 
 @Composable
-fun rememberFloatSetting(defaultValue: Float = 0f): SettingValueState<Float> {
+fun rememberFloatSettingState(defaultValue: Float = 0f): SettingValueState<Float> {
   return remember { InMemoryFloatSettingValueState(defaultValue) }
 }
 

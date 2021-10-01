@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager
 import com.alorma.settings.storage.SettingValueState
 
 @Composable
-fun rememberPreferenceBooleanState(key: String, defaultValue: Boolean): BooleanPreferenceSettingValueState {
+fun rememberPreferenceBooleanSettingState(key: String, defaultValue: Boolean): BooleanPreferenceSettingValueState {
   val context = LocalContext.current
   return remember {
     BooleanPreferenceSettingValueState(

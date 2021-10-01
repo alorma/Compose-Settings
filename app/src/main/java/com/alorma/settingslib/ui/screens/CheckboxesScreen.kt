@@ -11,8 +11,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.settings.composables.SettingsCheckbox
 import com.alorma.settings.storage.SettingValueState
-import com.alorma.settings.storage.preferences.BooleanPreferenceSettingValueState
-import com.alorma.settings.storage.preferences.rememberPreferenceBooleanState
+import com.alorma.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.settings.storage.rememberBooleanSettingState
 import com.alorma.settingslib.demo.AppScaffold
 import kotlinx.coroutines.CoroutineScope
@@ -47,7 +46,7 @@ fun CheckboxesScreen(navController: NavHostController) {
         )
       },
     )
-    val preferenceStorage: BooleanPreferenceSettingValueState = rememberPreferenceBooleanState(
+    val preferenceStorage = rememberPreferenceBooleanSettingState(
       key = "switch_2",
       defaultValue = false,
     )

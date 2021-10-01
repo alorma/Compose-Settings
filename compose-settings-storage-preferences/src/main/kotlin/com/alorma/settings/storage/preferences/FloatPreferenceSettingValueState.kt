@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager
 import com.alorma.settings.storage.SettingValueState
 
 @Composable
-fun rememberPreferenceFloatState(key: String, defaultValue: Float = 0f): FloatPreferenceSettingValueState {
+fun rememberPreferenceFloatSettingState(key: String, defaultValue: Float = 0f): FloatPreferenceSettingValueState {
   val context = LocalContext.current
   return remember {
     FloatPreferenceSettingValueState(
