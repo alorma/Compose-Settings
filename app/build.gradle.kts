@@ -46,12 +46,12 @@ android {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+  implementation(project(":compose-settings-ui"))
 
-    implementation(project(":compose-settings"))
-    implementation(project(":storage-base"))
-    implementation(project(":storage-preferences"))
+  implementation(project(":compose-settings-storage-base"))
+  implementation(project(":compose-settings-storage-preferences"))
 
-    implementation("androidx.activity:activity-compose:1.3.0")
+  implementation("androidx.activity:activity-compose:1.3.0")
 
     implementation("androidx.compose.foundation:foundation:1.0.2")
     implementation("androidx.compose.foundation:foundation-layout:1.0.2")

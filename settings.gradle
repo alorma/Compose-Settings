@@ -7,6 +7,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SettingsLib"
 include ':app'
-include ':compose-settings'
-include ':storage-base'
-include ':storage-preferences'
+include ':compose-settings-ui'
+include ':compose-settings-storage-base'
+include ':compose-settings-storage-preferences'
