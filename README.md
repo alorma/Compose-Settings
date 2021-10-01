@@ -2,7 +2,7 @@
 
 ### Versions
 
-![compose-settings](https://img.shields.io/badge/ComposeSettings-0.4.0-brightgreen)
+![compose-settings](https://img.shields.io/badge/ComposeSettings-0.5.0-brightgreen)
 
 ![Compatible with Compose](https://img.shields.io/badge/Compose-1.0.3-brightgreen)
 
@@ -23,7 +23,14 @@ allprojects {
 Add dependencies:
 
 ```groovy
-implementation 'com.github.alorma:compose-settings:$version'
+implementation 'com.github.alorma:compose-settings-ui:$version'
+```
+
+In order to use storage:
+
+```groovy
+implementation 'com.github.alorma:compose-settings-storage:$version'
+implementation 'com.github.alorma:compose-settings-storage-preferences:$version'
 ```
 
 ## Demo
