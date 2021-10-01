@@ -26,13 +26,6 @@ Add dependencies:
 implementation 'com.github.alorma:compose-settings-ui:$version'
 ```
 
-In order to use storage:
-
-```groovy
-implementation 'com.github.alorma:compose-settings-storage:$version'
-implementation 'com.github.alorma:compose-settings-storage-preferences:$version'
-```
-
 ## Demo
 
 |Menu link|Switch|Checkbox|
@@ -106,6 +99,12 @@ SettingsCheckbox(
 ### State
 
 In order to provide a default value for the setting and recompose when state changes, you must use `state` parameter.
+
+#### Installation
+
+```groovy
+implementation 'com.github.alorma:compose-settings-storage-preferences:$version'
+```
 
 ```kotlin
 val state = rememberBooleanSettingState()
