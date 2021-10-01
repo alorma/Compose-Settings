@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileSlider
-import com.alorma.settings.storage.ValueSetting
+import com.alorma.settings.storage.SettingValueState
 import com.alorma.settings.storage.getValue
 import com.alorma.settings.storage.rememberFloatSetting
 import com.alorma.settings.storage.setValue
@@ -23,7 +23,7 @@ import com.alorma.settings.storage.setValue
 @Composable
 fun SettingsSlider(
   modifier: Modifier = Modifier,
-  setting: ValueSetting<Float> = rememberFloatSetting(),
+  state: SettingValueState<Float> = rememberFloatSetting(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   onValueChange: (Float) -> Unit = {},
@@ -35,7 +35,7 @@ fun SettingsSlider(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   colors: SliderColors = SliderDefaults.colors()
 ) {
-  var settingValue by setting
+  var settingValue by state
   Surface {
     Row(
       modifier = modifier

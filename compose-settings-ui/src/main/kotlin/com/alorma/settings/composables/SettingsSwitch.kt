@@ -17,21 +17,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.settings.composables.internal.SettingsTileAction
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileTexts
-import com.alorma.settings.storage.ValueSetting
+import com.alorma.settings.storage.SettingValueState
 import com.alorma.settings.storage.getValue
-import com.alorma.settings.storage.rememberBooleanSetting
+import com.alorma.settings.storage.rememberBooleanSettingState
 import com.alorma.settings.storage.setValue
 
 @Composable
 fun SettingsSwitch(
   modifier: Modifier = Modifier,
-  setting: ValueSetting<Boolean> = rememberBooleanSetting(),
+  state: SettingValueState<Boolean> = rememberBooleanSettingState(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
-  var storageValue by setting
+  var storageValue by state
   val update: (Boolean) -> Unit = { boolean ->
     storageValue = boolean
     onCheckedChange(storageValue)
@@ -59,9 +59,9 @@ fun SettingsSwitch(
 @Composable
 internal fun SettingsSwitchPreview() {
   MaterialTheme {
-    val storage = rememberBooleanSetting(defaultValue = true)
+    val storage = rememberBooleanSettingState(defaultValue = true)
     SettingsSwitch(
-      setting = storage,
+      state = storage,
       icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
       title = { Text(text = "Hello") },
       subtitle = { Text(text = "This is a longer text") },
