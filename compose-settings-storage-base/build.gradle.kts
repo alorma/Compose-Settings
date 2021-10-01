@@ -36,7 +36,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion = "1.0.2"
+    kotlinCompilerExtensionVersion = "1.0.3"
   }
 
   kotlinOptions {
@@ -52,6 +52,6 @@ android {
 }
 
 dependencies {
-  implementation("androidx.compose.foundation:foundation:1.0.2")
-  implementation("androidx.compose.ui:ui-tooling:1.0.2")
+  implementation("androidx.compose.foundation:foundation:1.0.3")
+  implementation("androidx.compose.ui:ui-tooling:1.0.3")
 }
