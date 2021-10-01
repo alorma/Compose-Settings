@@ -1,6 +1,5 @@
 package com.alorma.settings.storage.preferences
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,11 +12,14 @@ import androidx.preference.PreferenceManager
 import com.alorma.settings.storage.SettingValueState
 
 @Composable
-fun rememberPreferenceBooleanSettingState(key: String, defaultValue: Boolean): BooleanPreferenceSettingValueState {
-  val context = LocalContext.current
+fun rememberPreferenceBooleanSettingState(
+  key: String,
+  defaultValue: Boolean,
+  preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
+): BooleanPreferenceSettingValueState {
   return remember {
     BooleanPreferenceSettingValueState(
-      context = context,
+      preferences = preferences,
       key = key,
       defaultValue = defaultValue
     )
@@ -25,8 +27,7 @@ fun rememberPreferenceBooleanSettingState(key: String, defaultValue: Boolean): B
 }
 
 class BooleanPreferenceSettingValueState(
-  context: Context,
-  private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
+  private val preferences: SharedPreferences,
   val key: String,
   val defaultValue: Boolean = false,
 ) : SettingValueState<Boolean> {

@@ -1,6 +1,5 @@
 package com.alorma.settings.storage.preferences
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,20 +12,22 @@ import androidx.preference.PreferenceManager
 import com.alorma.settings.storage.SettingValueState
 
 @Composable
-fun rememberPreferenceFloatSettingState(key: String, defaultValue: Float = 0f): FloatPreferenceSettingValueState {
-  val context = LocalContext.current
+fun rememberPreferenceFloatSettingState(
+  key: String,
+  defaultValue: Float = 0f,
+  preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
+): FloatPreferenceSettingValueState {
   return remember {
     FloatPreferenceSettingValueState(
-      context = context,
       key = key,
+      preferences = preferences,
       defaultValue = defaultValue
     )
   }
 }
 
 class FloatPreferenceSettingValueState(
-  context: Context,
-  private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context),
+  private val preferences: SharedPreferences,
   val key: String,
   val defaultValue: Float = 0f,
 ) : SettingValueState<Float> {
