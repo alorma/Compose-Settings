@@ -35,8 +35,9 @@ implementation 'com.github.alorma:compose-settings-storage-preferences:$version'
 
 ## Demo
 
-|Menu link|Switch|Checkbox| |--|--|--| |<img width="300" src="docs/art/screenshot_links.jpeg" />
-|<img width="300" src="docs/art/screenshot_switches.jpeg" />|<img width="300" src="docs/art/screenshot_checkboxes.jpeg" />|
+|Menu link|Switch|Checkbox|
+|--|--|--|
+|<img width="300" src="docs/art/screenshot_links.jpeg" /> |<img width="300" src="docs/art/screenshot_switches.jpeg" />|<img width="300" src="docs/art/screenshot_checkboxes.jpeg" />|
 
 ## Usage
 
