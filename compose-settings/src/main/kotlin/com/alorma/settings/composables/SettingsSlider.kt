@@ -15,42 +15,50 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.composables.internal.SettingsTileIcon
 import com.alorma.settings.composables.internal.SettingsTileSlider
+import com.alorma.settings.storage.ValueSetting
+import com.alorma.settings.storage.getValue
+import com.alorma.settings.storage.rememberFloatSetting
+import com.alorma.settings.storage.setValue
 
 @Composable
 fun SettingsSlider(
-    modifier: Modifier = Modifier,
-    icon: @Composable (() -> Unit)? = null,
-    title: @Composable () -> Unit,
-    value: Float,
-    onValueChange: (Float) -> Unit,
-    sliderModifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-    @IntRange(from = 0) steps: Int = 0,
-    onValueChangeFinished: (() -> Unit)? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    colors: SliderColors = SliderDefaults.colors()
+  modifier: Modifier = Modifier,
+  setting: ValueSetting<Float> = rememberFloatSetting(),
+  icon: @Composable (() -> Unit)? = null,
+  title: @Composable () -> Unit,
+  onValueChange: (Float) -> Unit = {},
+  sliderModifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+  @IntRange(from = 0) steps: Int = 0,
+  onValueChangeFinished: (() -> Unit)? = null,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  colors: SliderColors = SliderDefaults.colors()
 ) {
-    Surface {
-        Row(
-            modifier = modifier
-                .height(72.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            SettingsTileIcon(icon = icon)
-            SettingsTileSlider(
-                title,
-                value,
-                onValueChange,
-                sliderModifier,
-                enabled,
-                valueRange,
-                steps,
-                onValueChangeFinished,
-                interactionSource,
-                colors
-            )
-        }
+  var settingValue by setting
+  Surface {
+    Row(
+      modifier = modifier
+          .height(72.dp)
+          .fillMaxWidth(),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      SettingsTileIcon(icon = icon)
+      SettingsTileSlider(
+        title,
+        settingValue,
+        { value ->
+          settingValue = value
+          onValueChange(settingValue)
+        },
+        sliderModifier,
+        enabled,
+        valueRange,
+        steps,
+        onValueChangeFinished,
+        interactionSource,
+        colors
+      )
     }
+  }
 }

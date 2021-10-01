@@ -22,8 +22,7 @@ fun TopLevelScreen(
     Navigation.NAV_SLIDERS,
   )
   AppScaffold(
-    title = { Text(text = "Switches") },
-    onBack = { navController.popBackStack() },
+    title = { Text(text = Navigation.NAV_TOP_SETTINGS.second) },
   ) {
     LazyColumn {
       itemsIndexed(navigations) { index, nav ->

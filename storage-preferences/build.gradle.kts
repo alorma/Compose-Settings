@@ -3,7 +3,7 @@ plugins {
   kotlin("android")
 }
 
-ext["PUBLISH_ARTIFACT_ID"] = "compose-settings"
+ext["PUBLISH_ARTIFACT_ID"] = "compose-settings-storage-preferences"
 
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
@@ -54,11 +54,9 @@ android {
 dependencies {
   implementation(project(":storage-base"))
 
-  implementation("androidx.compose.foundation:foundation:1.0.2")
-  implementation("androidx.compose.foundation:foundation-layout:1.0.2")
+  implementation("androidx.preference:preference:1.1.1")
+  implementation("androidx.preference:preference-ktx:1.1.1")
 
-  implementation("androidx.compose.ui:ui:1.0.2")
-  implementation("androidx.compose.material:material:1.0.2")
-  implementation("androidx.compose.material:material-icons-extended:1.0.2")
+  implementation("androidx.compose.foundation:foundation:1.0.2")
   implementation("androidx.compose.ui:ui-tooling:1.0.2")
 }

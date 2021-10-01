@@ -15,11 +15,11 @@ import com.alorma.settings.composables.internal.SettingsToolbar
 @Composable
 fun AppScaffold(
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    title: @Composable() (() -> Unit)? = null,
+    title: @Composable (() -> Unit)? = null,
     onBack: (() -> Unit)? = null,
     onSearch: (() -> Unit)? = null,
     onHelp: (() -> Unit)? = null,
-    content: @Composable() (ColumnScope.() -> Unit),
+    content: @Composable (ColumnScope.() -> Unit),
 ) {
     Scaffold(
         scaffoldState = scaffoldState,
