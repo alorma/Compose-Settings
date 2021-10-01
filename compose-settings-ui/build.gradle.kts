@@ -53,7 +53,7 @@ android {
 
 dependencies {
 
-  implementation(project(":compose-settings-storage-base"))
+  api(project(":compose-settings-storage-base"))
   implementation("androidx.compose.foundation:foundation:1.0.3")
   implementation("androidx.compose.foundation:foundation-layout:1.0.3")
 
