@@ -14,7 +14,7 @@ import com.alorma.settings.storage.SettingValueState
 @Composable
 fun rememberPreferenceIntSettingState(
   key: String,
-  defaultValue: Int = 0,
+  defaultValue: Int = -1,
   preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
 ): IntPreferenceSettingValueState {
   return remember {

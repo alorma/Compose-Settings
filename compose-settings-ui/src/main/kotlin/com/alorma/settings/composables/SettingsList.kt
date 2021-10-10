@@ -1,62 +1,106 @@
 package com.alorma.settings.composables
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Divider
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material.AlertDialog
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alorma.settings.composables.internal.SettingsTileAction
-import com.alorma.settings.composables.internal.SettingsTileIcon
-import com.alorma.settings.composables.internal.SettingsTileTexts
+import com.alorma.settings.storage.SettingValueState
+import com.alorma.settings.storage.rememberIntSettingState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsList(
   modifier: Modifier = Modifier,
-  icon: (@Composable () -> Unit)? = null,
+  state: SettingValueState<Int> = rememberIntSettingState(),
   title: @Composable () -> Unit,
+  items: List<String>,
+  icon: (@Composable () -> Unit)? = null,
   subtitle: (@Composable () -> Unit)? = null,
+  closeDialogDelay: Long = 200,
   action: (@Composable () -> Unit)? = null,
-  onClick: () -> Unit,
 ) {
-  Surface {
-    Row(
-      modifier = modifier.fillMaxWidth(),
-    ) {
-      Row(
-        modifier = Modifier
-            .weight(1f)
-            .clickable(onClick = onClick),
-        verticalAlignment = Alignment.CenterVertically,
-      ) {
-        SettingsTileIcon(icon = icon)
-        SettingsTileTexts(title = title, subtitle = subtitle)
-      }
-      if (action != null) {
-        Divider(
-          modifier = Modifier
-              .padding(vertical = 4.dp)
-              .height(56.dp)
-              .width(1.dp),
-        )
-        SettingsTileAction {
-          action.invoke()
+
+  if (state.value >= items.size) {
+    throw IndexOutOfBoundsException("Current value for $title list setting cannot be grater than items size")
+  }
+
+  var showDialog by remember { mutableStateOf(false) }
+
+  SettingsMenuLink(
+    modifier = modifier,
+    icon = icon,
+    title = title,
+    subtitle = subtitle,
+    action = action,
+    onClick = { showDialog = true },
+  )
+
+  if (!showDialog) return
+
+  val coroutineScope = rememberCoroutineScope()
+  val onSelected: (Int) -> Unit = { selectedIndex ->
+    coroutineScope.launch {
+      state.value = selectedIndex
+      delay(closeDialogDelay)
+      showDialog = false
+    }
+  }
+
+  AlertDialog(
+    title = title,
+    text = subtitle,
+    onDismissRequest = { showDialog = false },
+    buttons = {
+      Column {
+        items.forEachIndexed { index, item ->
+          val isSelected by rememberUpdatedState(newValue = state.value == index)
+          Row(
+            modifier = Modifier
+              .fillMaxWidth()
+              .selectable(
+                selected = isSelected,
+                onClick = { if (!isSelected) onSelected(index) }
+              )
+              .padding(
+                start = 32.dp,
+                top = 16.dp,
+                end = 32.dp,
+                bottom = 16.dp
+              )
+          ) {
+            RadioButton(
+              selected = isSelected,
+              onClick = { if (!isSelected) onSelected(index) }
+            )
+            Text(
+              text = item,
+              style = MaterialTheme.typography.body1,
+              modifier = Modifier.padding(start = 16.dp)
+            )
+          }
         }
       }
     }
-  }
+  )
 }
 
 @Preview
@@ -64,11 +108,10 @@ fun SettingsList(
 internal fun ListLinkPreview() {
   MaterialTheme {
     SettingsList(
+      items = listOf("Banana", "Kiwi", "Pineapple"),
       icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
       title = { Text(text = "Hello") },
       subtitle = { Text(text = "This is a longer text") },
-    ) {
-
-    }
+    )
   }
 }
