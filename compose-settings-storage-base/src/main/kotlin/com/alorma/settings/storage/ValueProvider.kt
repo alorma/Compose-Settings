@@ -22,6 +22,11 @@ fun rememberIntSettingState(defaultValue: Int = -1): SettingValueState<Int> {
   return remember { InMemoryIntSettingValueState(defaultValue) }
 }
 
+@Composable
+fun rememberStringSettingState(defaultValue: String? = null): SettingValueState<String?> {
+  return remember { InMemoryStringSettingValueState(defaultValue) }
+}
+
 @Suppress("NOTHING_TO_INLINE")
 inline operator fun <T> SettingValueState<T>.getValue(thisObj: Any?, property: KProperty<*>): T = value
 
@@ -52,6 +57,13 @@ internal class InMemoryFloatSettingValueState(private val defaultValue: Float) :
 
 internal class InMemoryIntSettingValueState(private val defaultValue: Int) : SettingValueState<Int> {
   override var value: Int by mutableStateOf(defaultValue)
+  override fun reset() {
+    value = defaultValue
+  }
+}
+
+internal class InMemoryStringSettingValueState(private val defaultValue: String?) : SettingValueState<String?> {
+  override var value: String? by mutableStateOf(defaultValue)
   override fun reset() {
     value = defaultValue
   }
