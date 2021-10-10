@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alorma.settingslib.ui.Navigation
 import com.alorma.settingslib.ui.screens.CheckboxesScreen
+import com.alorma.settingslib.ui.screens.ListScreen
 import com.alorma.settingslib.ui.screens.MenuLinksScreen
 import com.alorma.settingslib.ui.screens.SlidersScreen
 import com.alorma.settingslib.ui.screens.SwitchesScreen
@@ -38,6 +39,9 @@ class MainActivity : ComponentActivity() {
           }
           composable(Navigation.NAV_SLIDERS.first) {
             SlidersScreen(navController = navController)
+          }
+          composable(Navigation.NAV_LIST.first) {
+            ListScreen(navController = navController)
           }
         }
       }
