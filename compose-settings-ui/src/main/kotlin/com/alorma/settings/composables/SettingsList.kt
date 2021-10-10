@@ -34,6 +34,7 @@ fun SettingsList(
   title: @Composable () -> Unit,
   items: List<String>,
   icon: (@Composable () -> Unit)? = null,
+  useSelectedValueAsSubtitle: Boolean = false,
   subtitle: (@Composable () -> Unit)? = null,
   closeDialogDelay: Long = 200,
   action: (@Composable () -> Unit)? = null,
@@ -45,11 +46,15 @@ fun SettingsList(
 
   var showDialog by remember { mutableStateOf(false) }
 
+  val safeSubtitle = if (state.value >= 0 && useSelectedValueAsSubtitle) {
+    { Text(text = items[state.value]) }
+  } else subtitle
+
   SettingsMenuLink(
     modifier = modifier,
     icon = icon,
     title = title,
-    subtitle = subtitle,
+    subtitle = safeSubtitle,
     action = action,
     onClick = { showDialog = true },
   )

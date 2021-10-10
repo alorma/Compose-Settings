@@ -40,4 +40,8 @@ class BooleanPreferenceSettingValueState(
       preferences.edit { putBoolean(key, value) }
     }
     get() = _value
+
+  override fun reset() {
+    value = defaultValue
+  }
 }

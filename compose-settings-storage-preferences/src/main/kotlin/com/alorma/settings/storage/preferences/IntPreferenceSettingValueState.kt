@@ -40,4 +40,8 @@ class IntPreferenceSettingValueState(
       preferences.edit { putInt(key, value) }
     }
     get() = _value
+
+  override fun reset() {
+    value = defaultValue
+  }
 }

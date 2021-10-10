@@ -40,4 +40,8 @@ class FloatPreferenceSettingValueState(
       preferences.edit { putFloat(key, value) }
     }
     get() = _value
+
+  override fun reset() {
+    value = defaultValue
+  }
 }

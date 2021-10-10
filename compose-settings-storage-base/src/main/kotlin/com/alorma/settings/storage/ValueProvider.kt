@@ -31,17 +31,28 @@ inline operator fun <T> SettingValueState<T>.setValue(thisObj: Any?, property: K
 }
 
 interface SettingValueState<T> {
+  fun reset()
+
   var value: T
 }
 
-internal class InMemoryBooleanSettingValueState(defaultValue: Boolean) : SettingValueState<Boolean> {
+internal class InMemoryBooleanSettingValueState(private val defaultValue: Boolean) : SettingValueState<Boolean> {
   override var value: Boolean by mutableStateOf(defaultValue)
+  override fun reset() {
+    value = defaultValue
+  }
 }
 
-internal class InMemoryFloatSettingValueState(defaultValue: Float) : SettingValueState<Float> {
+internal class InMemoryFloatSettingValueState(private val defaultValue: Float) : SettingValueState<Float> {
   override var value: Float by mutableStateOf(defaultValue)
+  override fun reset() {
+    value = defaultValue
+  }
 }
 
-internal class InMemoryIntSettingValueState(defaultValue: Int) : SettingValueState<Int> {
+internal class InMemoryIntSettingValueState(private val defaultValue: Int) : SettingValueState<Int> {
   override var value: Int by mutableStateOf(defaultValue)
+  override fun reset() {
+    value = defaultValue
+  }
 }
