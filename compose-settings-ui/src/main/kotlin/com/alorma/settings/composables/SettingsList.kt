@@ -20,6 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.storage.SettingValueState
@@ -34,7 +35,7 @@ fun SettingsList(
   title: @Composable () -> Unit,
   items: List<String>,
   icon: (@Composable () -> Unit)? = null,
-  useSelectedValueAsSubtitle: Boolean = false,
+  useSelectedValueAsSubtitle: Boolean = true,
   subtitle: (@Composable () -> Unit)? = null,
   closeDialogDelay: Long = 200,
   action: (@Composable () -> Unit)? = null,
@@ -82,6 +83,7 @@ fun SettingsList(
             modifier = Modifier
               .fillMaxWidth()
               .selectable(
+                role = Role.RadioButton,
                 selected = isSelected,
                 onClick = { if (!isSelected) onSelected(index) }
               )

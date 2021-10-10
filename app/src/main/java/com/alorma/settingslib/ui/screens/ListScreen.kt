@@ -27,7 +27,7 @@ fun ListScreen(
     SettingsList(
       state = singleChoiceState,
       title = { Text(text = "Single choice") },
-      useSelectedValueAsSubtitle = true,
+      subtitle = { Text(text = "Select a fruit") },
       items = listOf("Banana", "Kiwi", "Pineapple"),
       action = {
         IconButton(onClick = { singleChoiceState.reset() }) {
@@ -43,6 +43,7 @@ fun ListScreen(
     SettingsListMultiSelect(
       state = multiChoiceState,
       title = { Text(text = "Multi choice") },
+      subtitle = { Text(text = "Select multiple fruits") },
       items = listOf("Banana", "Kiwi", "Pineapple"),
       action = {
         IconButton(onClick = { multiChoiceState.reset() }) {
@@ -52,6 +53,7 @@ fun ListScreen(
           )
         }
       },
+      confirmButton = "Select"
     )
   }
 }
