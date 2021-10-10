@@ -11,8 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.settings.composables.SettingsList
 import com.alorma.settings.composables.SettingsListMultiSelect
+import com.alorma.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.settings.storage.preferences.rememberPreferenceIntSettingState
-import com.alorma.settings.storage.preferences.rememberPreferenceStringSettingState
 import com.alorma.settingslib.demo.AppScaffold
 
 @Composable
@@ -39,7 +39,7 @@ fun ListScreen(
       },
     )
     Divider()
-    val multiChoiceState = rememberPreferenceStringSettingState(key = "list_pref_2")
+    val multiChoiceState = rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
     SettingsListMultiSelect(
       state = multiChoiceState,
       title = { Text(text = "Multi choice") },

@@ -18,19 +18,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.settings.storage.SettingValueState
-import com.alorma.settings.storage.rememberStringSettingState
+import com.alorma.settings.storage.rememberIntSetSettingState
 
 @Composable
 fun SettingsListMultiSelect(
   modifier: Modifier = Modifier,
-  state: SettingValueState<String?> = rememberStringSettingState(),
+  state: SettingValueState<Set<Int>> = rememberIntSetSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
-  icon: (@Composable () -> Unit)? = null,
-  subtitle: (@Composable () -> Unit)? = null,
-  delimiter: String = "|",
-  action: (@Composable () -> Unit)? = null,
+  icon: @Composable() (() -> Unit)? = null,
+  subtitle: @Composable() (() -> Unit)? = null,
+  action: @Composable() (() -> Unit)? = null,
 ) {
+
+  if (state.value.any { index -> index >= items.size }) {
+    throw IndexOutOfBoundsException("Current indexes for $title list setting cannot be grater than items size")
+  }
 
   var showDialog by remember { mutableStateOf(false) }
 
@@ -47,23 +50,15 @@ fun SettingsListMultiSelect(
 
   if (!showDialog) return
 
-  val selectedItems = state.value.orEmpty()
-    .split(delimiter)
-    .filter { it.isNotEmpty() }
-    .map { it.toInt() }
-    .toMutableSet()
-
-  fun updateItems() {
-    state.value = selectedItems.joinToString(separator = delimiter) { it.toString() }
-  }
-
   val onAdd: (Int) -> Unit = { selectedIndex ->
-    selectedItems.add(selectedIndex)
-    updateItems()
+    val mutable = state.value.toMutableSet()
+    mutable.add(selectedIndex)
+    state.value = mutable
   }
   val onRemove: (Int) -> Unit = { selectedIndex ->
-    selectedItems.remove(selectedIndex)
-    updateItems()
+    val mutable = state.value.toMutableSet()
+    mutable.remove(selectedIndex)
+    state.value = mutable
   }
 
   AlertDialog(
@@ -73,7 +68,7 @@ fun SettingsListMultiSelect(
     buttons = {
       Column {
         items.forEachIndexed { index, item ->
-          val isSelected by rememberUpdatedState(newValue = selectedItems.contains(index))
+          val isSelected by rememberUpdatedState(newValue = state.value.contains(index))
           Row(
             modifier = Modifier
               .fillMaxWidth()
