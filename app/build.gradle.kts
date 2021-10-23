@@ -7,7 +7,7 @@ android {
     compileSdk = 30
 
     defaultConfig {
-        applicationId = "com.alorma.composedrawer"
+        applicationId = "com.alorma.compose.settings.example"
         minSdk = 21
         targetSdk = 30
         versionCode = 1
@@ -46,12 +46,12 @@ android {
 
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-  implementation(project(":compose-settings-ui"))
+    implementation(project(":compose-settings-ui"))
 
-  implementation(project(":compose-settings-storage-base"))
-  implementation(project(":compose-settings-storage-preferences"))
+    implementation(project(":compose-settings-storage-base"))
+    implementation(project(":compose-settings-storage-preferences"))
 
-  implementation("androidx.activity:activity-compose:1.3.0")
+    implementation("androidx.activity:activity-compose:1.3.0")
 
     implementation("androidx.compose.foundation:foundation:1.0.3")
     implementation("androidx.compose.foundation:foundation-layout:1.0.3")
