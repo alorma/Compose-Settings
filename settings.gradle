@@ -5,7 +5,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "SettingsLib"
+rootProject.name = "Compose-Settings"
 include ':app'
 include ':compose-settings-ui'
 include ':compose-settings-storage-base'
