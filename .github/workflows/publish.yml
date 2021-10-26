@@ -1,12 +1,9 @@
 name: Build
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  release:
+    # We'll run this workflow when a new GitHub release is created
+    types: [released]
 
 jobs:
   publish:
