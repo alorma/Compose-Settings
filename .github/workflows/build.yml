@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   publish:
-    name: Release build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -16,16 +18,5 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-
-        # Base64 decodes and pipes the GPG key content into the secret file
-      - name: Prepare environment
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-        run: |
-          git fetch --unshallow
-          sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
-
-        # Builds the release artifacts of the library
-      - name: Release build
-        run: ./gradlew assembleRelease -x :app:assembleRelease
+      - name: Build with Gradle
+        run: ./gradlew build
