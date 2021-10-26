@@ -10,7 +10,7 @@ on:
 
 jobs:
   publish:
-    name: Release build
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
