@@ -7,7 +7,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -37,7 +37,7 @@ internal fun SettingsTileIcon(
 fun SettingsIconPreview() {
     MaterialTheme {
         SettingsTileIcon {
-            Icon(imageVector = Icons.Default.Wifi, contentDescription = "")
+            Icon(imageVector = Icons.Default.Clear, contentDescription = "")
         }
     }
 }

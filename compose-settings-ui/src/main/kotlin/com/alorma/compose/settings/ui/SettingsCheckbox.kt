@@ -9,7 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -67,7 +67,7 @@ internal fun SettingsCheckboxPreview() {
         val storage = rememberBooleanSettingState(defaultValue = true)
         SettingsCheckbox(
             state = storage,
-            icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
+            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
             onCheckedChange = { }

@@ -13,7 +13,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -69,7 +69,7 @@ fun SettingsMenuLink(
 internal fun SettingsMenuLinkPreview() {
     MaterialTheme {
         SettingsMenuLink(
-            icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
+            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
         ) {
@@ -84,7 +84,7 @@ internal fun SettingsMenuLinkActionPreview() {
     var rememberCheckBoxState by remember { mutableStateOf(true) }
     MaterialTheme {
         SettingsMenuLink(
-            icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
+            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
             action = {
