@@ -2,7 +2,7 @@
 
 ### Versions
 
-![compose-settings](https://img.shields.io/badge/ComposeSettings-0.7.2-brightgreen)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.alorma/compose-settings-ui.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.alorma%22%20AND%20a:%22compose-settings-ui%22)
 
 ![Compatible with Compose](https://img.shields.io/badge/Compose-1.0.3-brightgreen)
 
