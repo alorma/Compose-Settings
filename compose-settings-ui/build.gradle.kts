@@ -59,6 +59,5 @@ dependencies {
 
   implementation("androidx.compose.ui:ui:1.0.3")
   implementation("androidx.compose.material:material:1.0.3")
-  implementation("androidx.compose.material:material-icons-extended:1.0.3")
   implementation("androidx.compose.ui:ui-tooling:1.0.3")
 }
