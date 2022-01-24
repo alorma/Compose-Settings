@@ -1,3 +1,6 @@
+import com.alorma.compose.settings.Libs
+import com.alorma.compose.settings.Versions
+
 plugins {
   id("com.android.library")
   kotlin("android")
@@ -36,7 +39,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion = "1.0.3"
+    kotlinCompilerExtensionVersion = Versions.compose
   }
 
   kotlinOptions {
@@ -52,6 +55,8 @@ android {
 }
 
 dependencies {
-  implementation("androidx.compose.foundation:foundation:1.0.3")
-  implementation("androidx.compose.ui:ui-tooling:1.0.3")
+  with(Libs.AndroidX.Compose) {
+    implementation(foundation)
+    implementation(uiTooling)
+  }
 }

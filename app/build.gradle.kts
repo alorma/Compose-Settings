@@ -1,3 +1,6 @@
+import com.alorma.compose.settings.Libs
+import com.alorma.compose.settings.Versions
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -35,7 +38,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.3"
+        kotlinCompilerExtensionVersion = Versions.compose
     }
 
     lint {
@@ -47,17 +50,19 @@ android {
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
     implementation(project(":compose-settings-ui"))
-
     implementation(project(":compose-settings-storage-base"))
     implementation(project(":compose-settings-storage-preferences"))
 
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation("androidx.activity:activity-compose:1.4.0")
 
-    implementation("androidx.compose.foundation:foundation:1.0.3")
-    implementation("androidx.compose.foundation:foundation-layout:1.0.3")
-    implementation("androidx.compose.ui:ui:1.0.3")
-    implementation("androidx.compose.material:material:1.0.3")
-    implementation("androidx.compose.material:material-icons-extended:1.0.3")
-    implementation("androidx.compose.ui:ui-tooling:1.0.3")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
+    with(Libs.AndroidX.Compose) {
+        implementation(foundation)
+        implementation(foundationLayout)
+        implementation(material)
+        implementation(materialIconsExtended)
+        implementation(ui)
+        implementation(uiTooling)
+    }
+
+    implementation("androidx.navigation:navigation-compose:2.4.0-rc01")
 }
