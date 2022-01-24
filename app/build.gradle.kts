@@ -35,7 +35,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.3"
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
 
     lint {
@@ -51,13 +51,12 @@ dependencies {
     implementation(project(":compose-settings-storage-base"))
     implementation(project(":compose-settings-storage-preferences"))
 
-    implementation("androidx.activity:activity-compose:1.3.0")
-
-    implementation("androidx.compose.foundation:foundation:1.0.3")
-    implementation("androidx.compose.foundation:foundation-layout:1.0.3")
-    implementation("androidx.compose.ui:ui:1.0.3")
-    implementation("androidx.compose.material:material:1.0.3")
-    implementation("androidx.compose.material:material-icons-extended:1.0.3")
-    implementation("androidx.compose.ui:ui-tooling:1.0.3")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.compose.foundation.foundation)
+    implementation(libs.compose.foundation.layout)
+    implementation(libs.compose.material.material)
+    implementation(libs.compose.material.iconsextended)
+    implementation(libs.compose.ui.ui)
+    implementation(libs.compose.ui.tooling)
 }

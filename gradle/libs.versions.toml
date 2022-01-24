@@ -1,0 +1,23 @@
+[versions]
+androidxnavigation = "2.4.0-rc01"
+androidxpreference = "1.1.1"
+compose = "1.0.5"
+gradlePlugin = "7.0.4"
+kotlin = "1.5.31"
+
+[libraries]
+androidx-activity-compose = "androidx.activity:activity-compose:1.4.0"
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxnavigation" }
+androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidxpreference" }
+
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
+
+compose-foundation-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "compose" }
+compose-material-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-material-iconsextended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
+compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
