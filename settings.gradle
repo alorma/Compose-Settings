@@ -10,3 +10,5 @@ include ':app'
 include ':compose-settings-ui'
 include ':compose-settings-storage-base'
 include ':compose-settings-storage-preferences'
+
+enableFeaturePreview('VERSION_CATALOGS')
