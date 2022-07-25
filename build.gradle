@@ -8,7 +8,7 @@ buildscript {
         classpath libs.android.gradlePlugin
         classpath libs.kotlin.gradlePlugin
         classpath "io.github.gradle-nexus:publish-plugin:1.1.0"
-        classpath("io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.22.0")
+        classpath("io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0")
     }
 }
 apply plugin: 'io.github.gradle-nexus.publish-plugin'
