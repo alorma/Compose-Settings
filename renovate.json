@@ -1,6 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
+    "extends": [
     "config:base"
-  ]
+  ],
+  "commitMessagePrefix": "DEPS: ",
+  "ignoreDeps": []
 }
