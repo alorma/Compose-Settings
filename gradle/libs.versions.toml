@@ -1,5 +1,5 @@
 [versions]
-androidxnavigation = "2.4.0-rc01"
+androidxnavigation = "2.5.0"
 androidxpreference = "1.2.0"
 compose = "1.0.5"
 gradlePlugin = "7.0.4"
