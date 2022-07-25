@@ -1,7 +1,7 @@
 [versions]
 androidxnavigation = "2.5.0"
 androidxpreference = "1.2.0"
-compose = "1.0.5"
+compose = "1.1.1"
 gradlePlugin = "7.0.4"
 kotlin = "1.5.31"
 
