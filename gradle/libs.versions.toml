@@ -2,7 +2,7 @@
 androidxnavigation = "2.5.0"
 androidxpreference = "1.2.0"
 compose = "1.1.1"
-gradlePlugin = "7.0.4"
+gradlePlugin = "7.2.1"
 kotlin = "1.6.10"
 
 [libraries]
