@@ -4,5 +4,11 @@
     "config:base"
   ],
   "commitMessagePrefix": "DEPS: ",
-  "ignoreDeps": []
+  "ignoreDeps": [],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
