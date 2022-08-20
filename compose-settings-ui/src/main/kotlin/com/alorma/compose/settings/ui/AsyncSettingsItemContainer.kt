@@ -61,7 +61,6 @@ class AsyncValueUpdateHandler<TMarker : SettingsSnapshotMarker, TValue, TReadonl
                     it.cancel()
                 }
             }
-            lastJob?.cancel()
             lastJob = itemScope.update(key, value)
         }
     }
