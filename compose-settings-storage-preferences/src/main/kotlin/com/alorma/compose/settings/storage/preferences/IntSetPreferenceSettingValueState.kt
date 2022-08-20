@@ -56,12 +56,6 @@ class IntSetPreferenceSettingValueState(
   private fun Set<Int>.toPrefString(delimiter: String) =
     joinToString(separator = delimiter) { it.toString() }
 
-  private fun String.toIntSet(delimiter: String) =
-    split(delimiter)
-      .filter { it.isNotEmpty() }
-      .map { it.toInt() }
-      .toMutableSet()
-
   override fun reset() {
     value = defaultValue
   }
