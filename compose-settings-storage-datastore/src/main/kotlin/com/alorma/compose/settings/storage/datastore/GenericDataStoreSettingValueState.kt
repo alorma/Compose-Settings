@@ -38,11 +38,6 @@ class GenericDataStoreSettingValueState<T>(
     }
 
   override fun reset() {
-    _value = defaultValue
-    coroutineScope.launch {
-      dataStore.edit { mutablePreferences ->
-        mutablePreferences[dataStoreKey] = defaultValue
-      }
-    }
+    value = defaultValue
   }
 }
