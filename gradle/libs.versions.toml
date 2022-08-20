@@ -22,6 +22,7 @@ compose-material-iconsextended = { module = "androidx.compose.material:material-
 compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 
-androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
+androidx-datastore-preference-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "dataStore" }
+androidx-datastore-preference-android = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

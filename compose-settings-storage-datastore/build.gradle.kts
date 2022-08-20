@@ -55,7 +55,9 @@ dependencies {
 
   implementation(projects.composeSettingsStorageBase)
 
-  implementation(libs.androidx.datastore)
+  implementation(libs.androidx.datastore.preference.core)
+  implementation(libs.androidx.datastore.preference.android)
+
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.ui.tooling)
 }

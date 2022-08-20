@@ -8,10 +8,12 @@ import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import com.alorma.compose.settings.storage.datastore.rememberDataStoreBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import kotlinx.coroutines.CoroutineScope
@@ -64,6 +66,28 @@ fun CheckboxesScreen(navController: NavHostController) {
                     coroutineScope = coroutineScope,
                     key = "Preferences",
                     state = preferenceStorage,
+                )
+            },
+        )
+
+        val dataStoreStorage = rememberDataStoreBooleanSettingState(
+            key = booleanPreferencesKey("checkbox_dataStore"),
+            defaultValue = false
+        )
+        SettingsCheckbox(
+            state = dataStoreStorage,
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Preferences switch 2"
+                )
+            },
+            title = { Text(text = "DataStore") },
+            onCheckedChange = {
+                scaffoldState.showChange(
+                    coroutineScope = coroutineScope,
+                    key = "DataStore",
+                    state = dataStoreStorage,
                 )
             },
         )
