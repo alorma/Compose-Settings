@@ -12,9 +12,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.base.*
+import com.alorma.compose.settings.storage.base.SettingValueState
+import com.alorma.compose.settings.storage.base.SettingsSnapshot
+import com.alorma.compose.settings.storage.base.SettingsSnapshotMarker
+import com.alorma.compose.settings.storage.base.rememberFloatSettingState
 import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileSlider
+
+private val settingsSliderKey = SingleValueStateSnapshot.Key(0f)
 
 @Composable
 fun SettingsSlider(
@@ -31,31 +36,21 @@ fun SettingsSlider(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: SliderColors = SliderDefaults.colors()
 ) {
-    var settingValue by state
-    Surface {
-        Row(
-            modifier = modifier
-                .height(72.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            SettingsTileIcon(icon = icon)
-            SettingsTileSlider(
-                title,
-                settingValue,
-                { value ->
-                    settingValue = value
-                    onValueChange(settingValue)
-                },
-                sliderModifier,
-                enabled,
-                valueRange,
-                steps,
-                onValueChangeFinished,
-                interactionSource,
-                colors
-            )
-        }
+    SyncOverAsync(state) {
+        SettingsSlider(
+            modifier,
+            settingsSliderKey,
+            icon,
+            title,
+            onValueChange,
+            sliderModifier,
+            enabled,
+            valueRange,
+            steps,
+            onValueChangeFinished,
+            interactionSource,
+            colors
+        )
     }
 }
 
