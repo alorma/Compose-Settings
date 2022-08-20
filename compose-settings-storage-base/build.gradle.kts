@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+  implementation(libs.kotlin.coroutines)
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.ui.tooling)
 }

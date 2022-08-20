@@ -4,12 +4,15 @@ androidxpreference = "1.2.0"
 compose = "1.1.1"
 gradlePlugin = "7.2.2"
 kotlin = "1.6.10"
+kotlinCoroutines="1.6.4"
+dataStore = "1.0.0"
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.5.1"
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxnavigation" }
 androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidxpreference" }
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
 
@@ -21,3 +24,4 @@ compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-coroutines = { module ="org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinCoroutines" }
