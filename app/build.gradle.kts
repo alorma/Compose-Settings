@@ -46,7 +46,6 @@ android {
 
 dependencies {
     //noinspection GradleDependency
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.9")
     implementation(projects.composeSettingsUi)
 
     implementation(projects.composeSettingsStorageBase)

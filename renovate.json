@@ -4,7 +4,6 @@
     "config:base"
   ],
   "commitMessagePrefix": "DEPS: ",
-  "ignoreDeps": ["com.android.tools:desugar_jdk_libs"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
