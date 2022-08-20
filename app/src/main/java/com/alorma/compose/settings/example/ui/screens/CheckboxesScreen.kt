@@ -71,7 +71,7 @@ fun CheckboxesScreen(navController: NavHostController) {
         )
 
         val dataStoreStorage = rememberDataStoreBooleanSettingState(
-            key = booleanPreferencesKey("checkbox_dataStore"),
+            key = "checkbox_dataStore",
             defaultValue = false
         )
         SettingsCheckbox(
