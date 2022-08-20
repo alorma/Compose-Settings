@@ -5,6 +5,7 @@ compose = "1.2.1"
 composeCompiler = "1.2.0"
 gradlePlugin = "7.2.2"
 kotlin = "1.7.0"
+dataStore = "1.0.0"
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.5.1"
@@ -20,5 +21,7 @@ compose-material-material = { module = "androidx.compose.material:material", ver
 compose-material-iconsextended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
