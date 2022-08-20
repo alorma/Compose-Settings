@@ -1,15 +1,10 @@
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+enableFeaturePreview('VERSION_CATALOGS')
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "Compose-Settings"
+
 include ':app'
 include ':compose-settings-ui'
 include ':compose-settings-storage-base'
 include ':compose-settings-storage-preferences'
 include ':compose-settings-storage-datastore'
-
-enableFeaturePreview('VERSION_CATALOGS')

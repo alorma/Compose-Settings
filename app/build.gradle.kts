@@ -4,18 +4,17 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "com.alorma.compose.settings.example"
         minSdk = 21
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
     }
 
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -35,7 +34,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     lint {
@@ -46,11 +45,10 @@ android {
 
 dependencies {
     //noinspection GradleDependency
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.9")
-    implementation(project(":compose-settings-ui"))
+    implementation(projects.composeSettingsUi)
 
-    implementation(project(":compose-settings-storage-base"))
-    implementation(project(":compose-settings-storage-preferences"))
+    implementation(projects.composeSettingsStorageBase)
+    implementation(projects.composeSettingsStoragePreferences)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)

@@ -8,11 +8,11 @@ ext["PUBLISH_ARTIFACT_ID"] = "compose-settings"
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 android {
-  compileSdk = 31
+  compileSdk = 32
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 31
+    targetSdk = 32
   }
 
   buildTypes {
@@ -36,7 +36,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
   }
 
   kotlinOptions {
@@ -53,7 +53,7 @@ android {
 
 dependencies {
 
-  api(project(":compose-settings-storage-base"))
+  api(projects.composeSettingsStorageBase)
 
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.foundation.layout)
