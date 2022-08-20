@@ -24,11 +24,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
+
     kotlinOptions {
         jvmTarget = "1.8"
 
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xopt-in=kotlinx.coroutines.FlowPreview",
+            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
         )
     }
 }

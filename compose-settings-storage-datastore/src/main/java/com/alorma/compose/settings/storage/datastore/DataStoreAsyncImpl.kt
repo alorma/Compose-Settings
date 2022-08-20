@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import com.alorma.compose.settings.storage.base.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 
 class DataStoreSnapshotMarker : SettingsSnapshotMarker
@@ -42,20 +43,20 @@ internal fun <T> SettingsSnapshot.Key<DataStoreSnapshotMarker, T>.getPreferences
 }
 
 class AsyncDataStoreSnapshotProvider(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
+    stateScope: CoroutineScope,
 ) : AsyncSettingsSnapshotProvider<DataStoreSnapshotMarker, DataStoreSnapshot, MutableDataStoreSnapshot> {
     private val retryTriggerFlow = MutableStateFlow(Any())
 
-    override val snapshotStateFlow: Flow<SettingsSnapshotLoadState<DataStoreSnapshot>>
-        get() = retryTriggerFlow.flatMapConcat {
-            dataStore.data.map<Preferences, SettingsSnapshotLoadState<DataStoreSnapshot>> {
-                SettingsSnapshotLoadState.Success(DataStoreSnapshot(it))
-            }.onStart {
-                emit(SettingsSnapshotLoadState.Loading())
-            }.catch { cause ->
-                emit(SettingsSnapshotLoadState.Error(cause))
-            }
+    override val snapshotStateFlow = retryTriggerFlow.flatMapLatest {
+        dataStore.data.map<Preferences, SettingsSnapshotLoadState<DataStoreSnapshot>> {
+            SettingsSnapshotLoadState.Success(DataStoreSnapshot(it))
+        }.onStart {
+            emit(SettingsSnapshotLoadState.Loading())
+        }.catch { cause ->
+            emit(SettingsSnapshotLoadState.Error(cause))
         }
+    }.stateIn(stateScope, SharingStarted.Lazily, SettingsSnapshotLoadState.Loading())
 
     override fun retryLoadSnapshot() {
         retryTriggerFlow.value = Any()

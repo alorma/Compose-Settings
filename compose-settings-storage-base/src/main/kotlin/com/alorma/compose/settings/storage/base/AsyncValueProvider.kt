@@ -21,8 +21,8 @@ interface MutableSettingsSnapshot<TMarker: SettingsSnapshotMarker> : SettingsSna
 
 sealed interface SettingsSnapshotLoadState<T : SettingsSnapshot<*>> {
     class Loading<T : SettingsSnapshot<*>> : SettingsSnapshotLoadState<T>
-    class Error<T : SettingsSnapshot<*>>(val cause: Throwable): SettingsSnapshotLoadState<T>
-    class Success<T : SettingsSnapshot<*>>(val value: T): SettingsSnapshotLoadState<T>
+    data class Error<T : SettingsSnapshot<*>>(val cause: Throwable): SettingsSnapshotLoadState<T>
+    data class Success<T : SettingsSnapshot<*>>(val value: T): SettingsSnapshotLoadState<T>
 }
 
 interface AsyncSettingsSnapshotProvider<TMarker: SettingsSnapshotMarker, TReadonly : SettingsSnapshot<TMarker>, TMutable : MutableSettingsSnapshot<TMarker>> {

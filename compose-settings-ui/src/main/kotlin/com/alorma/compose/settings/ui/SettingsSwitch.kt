@@ -10,15 +10,12 @@ import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.getValue
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.base.setValue
+import com.alorma.compose.settings.storage.base.*
 import com.alorma.compose.settings.ui.internal.SettingsTileAction
 import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileTexts
@@ -40,12 +37,12 @@ fun SettingsSwitch(
     Surface {
         Row(
             modifier = modifier
-              .fillMaxWidth()
-              .toggleable(
-                value = storageValue,
-                role = Role.Switch,
-                onValueChange = { update(!storageValue) }
-              ),
+                .fillMaxWidth()
+                .toggleable(
+                    value = storageValue,
+                    role = Role.Switch,
+                    onValueChange = { update(!storageValue) }
+                ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             SettingsTileIcon(icon = icon)
@@ -53,6 +50,57 @@ fun SettingsSwitch(
             SettingsTileAction {
                 Switch(
                     checked = storageValue,
+                    onCheckedChange = update
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun<TMarker : SettingsSnapshotMarker> AsyncSettingsItemScope<TMarker, *, *>.SettingsSwitch(
+    modifier: Modifier = Modifier,
+    key: SettingsSnapshot.Key<TMarker, Boolean>,
+    icon: @Composable (() -> Unit)? = null,
+    title: @Composable () -> Unit,
+    subtitle: @Composable (() -> Unit)? = null,
+    onCheckedChange: (Boolean) -> Unit = {},
+) {
+    val storageValue by getValueFlow(key).collectAsState(initial = key.defaultValue)
+
+    // When an user clicks on the switch, it's expected that the change will be observed instantly.
+    // As 'update' is async operation, storageValue won't be updated instantly.
+    // visualValue fixes that issue. It mirrors storageValue and allows the change to be observed instantly.
+    var visualValue by remember(storageValue) {
+        mutableStateOf(storageValue)
+    }
+
+    val updateHandler by remember(key) {
+        derivedStateOf { updateHandlerFor(key) }
+    }
+
+    val update: (Boolean) -> Unit = { newValue ->
+        visualValue = newValue
+        updateHandler.update(newValue)
+        onCheckedChange(newValue)
+    }
+
+    Surface {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .toggleable(
+                    value = visualValue,
+                    role = Role.Switch,
+                    onValueChange = { update(!visualValue) }
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            SettingsTileIcon(icon = icon)
+            SettingsTileTexts(title = title, subtitle = subtitle)
+            SettingsTileAction {
+                Switch(
+                    checked = visualValue,
                     onCheckedChange = update
                 )
             }
