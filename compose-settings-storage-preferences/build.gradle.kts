@@ -53,7 +53,7 @@ android {
 
 dependencies {
 
-  implementation(project(":compose-settings-storage-base"))
+  implementation(projects.composeSettingsStorageBase)
 
   implementation(libs.androidx.preference.preference)
   implementation(libs.androidx.preference.ktx)
