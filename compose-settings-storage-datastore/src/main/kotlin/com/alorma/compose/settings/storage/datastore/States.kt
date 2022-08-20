@@ -17,7 +17,7 @@ fun rememberDataStoreBooleanSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
   dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
   key: String,
-  defaultValue: Boolean,
+  defaultValue: Boolean = false,
 ): GenericDataStoreSettingValueState<Boolean> {
   return remember {
     GenericDataStoreSettingValueState(
@@ -34,7 +34,7 @@ fun rememberDataStoreFloatSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
   dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
   key: String,
-  defaultValue: Float,
+  defaultValue: Float = 0F,
 ): GenericDataStoreSettingValueState<Float> {
   return remember {
     GenericDataStoreSettingValueState(
@@ -51,7 +51,7 @@ fun rememberDataStoreIntSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
   dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
   key: String,
-  defaultValue: Int,
+  defaultValue: Int = -1,
 ): GenericDataStoreSettingValueState<Int> {
   return remember {
     GenericDataStoreSettingValueState(
