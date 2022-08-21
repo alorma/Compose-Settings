@@ -43,8 +43,8 @@ android {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
 
     freeCompilerArgs = freeCompilerArgs + listOf(
-      "-Xopt-in=kotlin.RequiresOptIn",
-      "-Xopt-in=kotlin.Experimental",
+      "-opt-in=kotlin.RequiresOptIn",
+      "-opt-in=kotlin.Experimental",
       "-Xuse-experimental=kotlin.Experimental",
       "-XXLanguage:+NonParenthesizedAnnotationsOnFunctionalTypes",
     )
