@@ -106,9 +106,9 @@ fun SettingsListMultiSelect(
                             checked = isSelected,
                             onCheckedChange = { checked ->
                                 if (checked) {
-                                    onRemove(index)
-                                } else {
                                     onAdd(index)
+                                } else {
+                                    onRemove(index)
                                 }
                             }
                         )
