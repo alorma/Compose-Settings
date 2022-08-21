@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
+import com.alorma.compose.settings.storage.datastore.rememberDataStoreIntSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSettingState
 import com.alorma.compose.settings.ui.SettingsList
@@ -23,7 +24,7 @@ fun ListScreen(
     title = { Text(text = "List") },
     onBack = { navController.popBackStack() },
   ) {
-    val singleChoiceState = rememberPreferenceIntSettingState(key = "list_pref_1")
+    val singleChoiceState = rememberDataStoreIntSettingState(key = "list_pref_1")
     SettingsList(
       state = singleChoiceState,
       title = { Text(text = "Single choice") },
