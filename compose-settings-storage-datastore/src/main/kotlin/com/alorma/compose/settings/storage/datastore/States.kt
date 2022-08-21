@@ -9,13 +9,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.stringSetPreferencesKey
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun rememberDataStoreBooleanSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
   key: String,
   defaultValue: Boolean = false,
 ): GenericDataStoreSettingValueState<Boolean> {
@@ -32,7 +31,7 @@ fun rememberDataStoreBooleanSettingState(
 @Composable
 fun rememberDataStoreFloatSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
   key: String,
   defaultValue: Float = 0F,
 ): GenericDataStoreSettingValueState<Float> {
@@ -49,7 +48,7 @@ fun rememberDataStoreFloatSettingState(
 @Composable
 fun rememberDataStoreIntSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.dataStore,
+  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
   key: String,
   defaultValue: Int = -1,
 ): GenericDataStoreSettingValueState<Int> {
