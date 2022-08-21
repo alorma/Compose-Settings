@@ -141,10 +141,20 @@ val state = rememberBooleanSettingState(defaultValue = true)
 val state = rememberFloatSettingState(defaultValue = 0.1f)
 ```
 
-Also, the library provides a **preferences** version of the state, so when setting state is changed, the value is persisted on the
+The library provides a **preferences** version of the state, so when setting state is changed, the value is persisted on the
 preferences.
 
 ```kotlin
 val state = rememberPreferenceBooleanSettingState(key = "pref_key", defaultValue = true)
 val state = rememberPreferenceFloatSettingState(key = "pref_key", defaultValue = 0.1f)
+val state = rememberPreferenceIntSettingState(key = "pref_key", defaultValue = 1)
+```
+
+Also, the library provides a **DataStore** version of the state, so when setting state is changed, the value is persisted on the
+DataStore preferences.
+
+```kotlin
+val state = rememberDataStoreBooleanSettingState(key = "pref_key", defaultValue = true)
+val state = rememberDataStoreFloatSettingState(key = "pref_key", defaultValue = 0.1f)
+val state = rememberDataStoreIntSettingState(key = "pref_key", defaultValue = 1)
 ```
