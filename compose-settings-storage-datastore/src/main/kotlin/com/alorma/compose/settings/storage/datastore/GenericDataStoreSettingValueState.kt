@@ -20,23 +20,25 @@ class GenericDataStoreSettingValueState<T>(
   private val dataStoreKey: Preferences.Key<T>,
   private val defaultValue: T,
 ) : SettingValueState<T> {
-
   private var job: Job? = null
+  private val valueFlow = dataStore.data.map { it[dataStoreKey] ?: defaultValue }
 
-  private var _value: T by mutableStateOf(runBlocking {
-    dataStore.data.map { preferences ->
-      preferences[dataStoreKey] ?: defaultValue
-    }.first()
-  })
+  private var _value: T by mutableStateOf(runBlocking { valueFlow.first() })
+
+  init {
+    coroutineScope.launch {
+      valueFlow.collect { _value = it }
+    }
+  }
 
   override var value: T
     get() = _value
-    set(value: T) {
+    set(value) {
       _value = value
       job?.cancel()
       job = coroutineScope.launch {
-        dataStore.edit { mutablePreferences ->
-          mutablePreferences[dataStoreKey] = value
+        dataStore.edit {
+          it[dataStoreKey] = value
         }
       }
     }
