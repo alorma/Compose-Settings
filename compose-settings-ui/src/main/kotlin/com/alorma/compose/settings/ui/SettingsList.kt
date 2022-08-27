@@ -83,17 +83,17 @@ fun SettingsList(
                             top = 16.dp,
                             end = 32.dp,
                             bottom = 16.dp
-                          )
+                          ),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
                             selected = isSelected,
-                            onClick = { if (!isSelected) onSelected(index) },
-                            modifier = Modifier.align(Alignment.CenterVertically),
+                            onClick = { if (!isSelected) onSelected(index) }
                         )
                         Text(
                             text = item,
                             style = MaterialTheme.typography.body1,
-                            modifier = Modifier.padding(start = 16.dp).align(Alignment.CenterVertically)
+                            modifier = Modifier.padding(start = 16.dp)
                         )
                     }
                 }

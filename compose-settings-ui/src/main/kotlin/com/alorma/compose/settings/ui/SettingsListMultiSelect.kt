@@ -96,12 +96,13 @@ fun SettingsListMultiSelect(
                           .padding(
                             top = 16.dp,
                             bottom = 16.dp
-                          )
+                          ),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = item,
                             style = MaterialTheme.typography.body1,
-                            modifier = Modifier.weight(1f).align(Alignment.CenterVertically)
+                            modifier = Modifier.weight(1f)
                         )
                         Checkbox(
                             checked = isSelected,
@@ -111,8 +112,7 @@ fun SettingsListMultiSelect(
                                 } else {
                                     onRemove(index)
                                 }
-                            },
-                            modifier = Modifier.align(Alignment.CenterVertically)
+                            }
                         )
                     }
                 }
