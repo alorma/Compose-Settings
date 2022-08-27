@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -100,7 +101,7 @@ fun SettingsListMultiSelect(
                         Text(
                             text = item,
                             style = MaterialTheme.typography.body1,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f).align(Alignment.CenterVertically)
                         )
                         Checkbox(
                             checked = isSelected,
@@ -110,7 +111,8 @@ fun SettingsListMultiSelect(
                                 } else {
                                     onRemove(index)
                                 }
-                            }
+                            },
+                            modifier = Modifier.align(Alignment.CenterVertically)
                         )
                     }
                 }
