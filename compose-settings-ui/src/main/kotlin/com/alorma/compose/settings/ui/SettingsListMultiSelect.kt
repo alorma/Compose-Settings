@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -95,7 +96,8 @@ fun SettingsListMultiSelect(
                           .padding(
                             top = 16.dp,
                             bottom = 16.dp
-                          )
+                          ),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = item,
