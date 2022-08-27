@@ -58,7 +58,8 @@ fun SettingsListDropdown(
           Text(text = items[state.value])
           Icon(
             modifier = Modifier.padding(start = 8.dp),
-            imageVector = Icons.Outlined.ArrowDropDown, contentDescription = null
+            imageVector = Icons.Outlined.ArrowDropDown,
+            contentDescription = null
           )
         }
 
