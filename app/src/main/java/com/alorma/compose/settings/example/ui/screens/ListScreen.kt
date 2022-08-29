@@ -14,6 +14,7 @@ import com.alorma.compose.settings.storage.datastore.rememberDataStoreIntSetting
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSettingState
 import com.alorma.compose.settings.ui.SettingsList
+import com.alorma.compose.settings.ui.SettingsListDropdown
 import com.alorma.compose.settings.ui.SettingsListMultiSelect
 
 @Composable
@@ -56,6 +57,15 @@ fun ListScreen(
         }
       },
       confirmButton = "Select"
+    )
+
+    val dropdownChoiceState = rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
+
+    SettingsListDropdown(
+      state = dropdownChoiceState,
+      title = { Text(text = "Dropdown choice") },
+      subtitle = { Text(text = "Select a single fruit") },
+      items = listOf("Banana", "Kiwi", "Pineapple"),
     )
   }
 }
