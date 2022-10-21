@@ -8,11 +8,11 @@ ext["PUBLISH_ARTIFACT_ID"] = "compose-settings-storage-preferences"
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 android {
-  compileSdk = 32
+  compileSdk = 33
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 32
+    targetSdk = 33
   }
 
   buildTypes {

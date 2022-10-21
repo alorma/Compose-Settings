@@ -79,9 +79,9 @@ fun SettingsList(
                             onClick = { if (!isSelected) onSelected(index) }
                           )
                           .padding(
-                            start = 32.dp,
+                            start = 33.dp,
                             top = 16.dp,
-                            end = 32.dp,
+                            end = 33.dp,
                             bottom = 16.dp
                           ),
                         verticalAlignment = Alignment.CenterVertically
