@@ -45,7 +45,7 @@ android {
 
 dependencies {
     //noinspection GradleDependency
-    implementation(projects.composeSettingsUi)
+    //implementation(projects.composeSettingsUi)
     implementation(projects.composeSettingsUiM3)
 
     implementation(projects.composeSettingsStorageBase)
@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.compose.foundation.foundation)
     implementation(libs.compose.foundation.layout)
     implementation(libs.compose.material.material)
+    implementation(libs.compose.material.material3)
     implementation(libs.compose.material.iconsextended)
     implementation(libs.compose.ui.ui)
     implementation(libs.compose.ui.tooling)

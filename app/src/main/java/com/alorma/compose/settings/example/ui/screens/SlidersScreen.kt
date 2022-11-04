@@ -1,7 +1,6 @@
 package com.alorma.compose.settings.example.ui.screens
 
 import androidx.compose.material.Icon
-import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BrightnessHigh
@@ -12,12 +11,12 @@ import androidx.compose.material.icons.filled.VolumeDown
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.storage.datastore.rememberDataStoreFloatSettingState
-import com.alorma.compose.settings.storage.preferences.rememberPreferenceFloatSettingState
 import com.alorma.compose.settings.ui.SettingsSlider
 
 @Composable
