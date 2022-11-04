@@ -1,7 +1,5 @@
 package com.alorma.compose.settings.example.ui.screens
 
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BrightnessHigh
 import androidx.compose.material.icons.filled.BrightnessLow
@@ -10,8 +8,9 @@ import androidx.compose.material.icons.filled.Colorize
 import androidx.compose.material.icons.filled.VolumeDown
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Icon
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
@@ -21,15 +20,11 @@ import com.alorma.compose.settings.ui.SettingsSlider
 
 @Composable
 fun SlidersScreen(navController: NavHostController) {
-
-  val scaffoldState = rememberScaffoldState()
-
   val settingBrightness = rememberDataStoreFloatSettingState(key = "brightness")
   val settingVolume = rememberDataStoreFloatSettingState(key = "volume")
   val settingColors = rememberDataStoreFloatSettingState(key = "colors")
 
   AppScaffold(
-    scaffoldState = scaffoldState,
     title = { Text(text = "Sliders") },
     onBack = {
       navController.popBackStack()
