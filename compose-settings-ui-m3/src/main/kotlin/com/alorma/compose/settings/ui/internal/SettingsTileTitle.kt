@@ -1,12 +1,12 @@
 package com.alorma.compose.settings.ui.internal
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 
 @Composable
 internal fun SettingsTileTitle(title: @Composable () -> Unit) {
-    ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
-        title()
-    }
+  ProvideTextStyle(value = MaterialTheme.typography.headlineMedium) {
+    title()
+  }
 }

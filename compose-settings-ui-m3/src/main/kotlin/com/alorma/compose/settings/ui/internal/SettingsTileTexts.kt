@@ -11,17 +11,17 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun RowScope.SettingsTileTexts(
-    title: @Composable () -> Unit,
-    subtitle: @Composable (() -> Unit)?,
+  title: @Composable () -> Unit,
+  subtitle: @Composable (() -> Unit)?,
 ) {
-    Column(
-        modifier = Modifier.Companion.weight(1f),
-        verticalArrangement = Arrangement.Center,
-    ) {
-        SettingsTileTitle(title)
-        if (subtitle != null) {
-            Spacer(modifier = Modifier.size(2.dp))
-            SettingsTileSubtitle(subtitle)
-        }
+  Column(
+    modifier = Modifier.Companion.weight(1f),
+    verticalArrangement = Arrangement.Center,
+  ) {
+    SettingsTileTitle(title)
+    if (subtitle != null) {
+      Spacer(modifier = Modifier.size(2.dp))
+      SettingsTileSubtitle(subtitle)
     }
+  }
 }

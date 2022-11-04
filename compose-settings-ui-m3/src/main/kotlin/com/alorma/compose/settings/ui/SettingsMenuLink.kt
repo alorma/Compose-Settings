@@ -6,14 +6,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,71 +29,71 @@ import com.alorma.compose.settings.ui.internal.SettingsTileTexts
 
 @Composable
 fun SettingsMenuLink(
-    modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
-    title: @Composable () -> Unit,
-    subtitle: (@Composable () -> Unit)? = null,
-    action: (@Composable () -> Unit)? = null,
-    onClick: () -> Unit,
+  modifier: Modifier = Modifier,
+  icon: (@Composable () -> Unit)? = null,
+  title: @Composable () -> Unit,
+  subtitle: (@Composable () -> Unit)? = null,
+  action: (@Composable () -> Unit)? = null,
+  onClick: () -> Unit,
 ) {
-    Surface {
-        Row(
-            modifier = modifier.fillMaxWidth(),
-        ) {
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable(onClick = onClick),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                SettingsTileIcon(icon = icon)
-                SettingsTileTexts(title = title, subtitle = subtitle)
-            }
-            if (action != null) {
-                Divider(
-                    modifier = Modifier
-                        .padding(vertical = 4.dp)
-                        .height(56.dp)
-                        .width(1.dp),
-                )
-                SettingsTileAction {
-                    action.invoke()
-                }
-            }
+  Surface {
+    Row(
+      modifier = modifier.fillMaxWidth(),
+    ) {
+      Row(
+        modifier = Modifier
+          .weight(1f)
+          .clickable(onClick = onClick),
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        SettingsTileIcon(icon = icon)
+        SettingsTileTexts(title = title, subtitle = subtitle)
+      }
+      if (action != null) {
+        Divider(
+          modifier = Modifier
+            .padding(vertical = 4.dp)
+            .height(56.dp)
+            .width(1.dp),
+        )
+        SettingsTileAction {
+          action.invoke()
         }
+      }
     }
+  }
 }
 
 @Preview
 @Composable
 internal fun SettingsMenuLinkPreview() {
-    MaterialTheme {
-        SettingsMenuLink(
-            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-            title = { Text(text = "Hello") },
-            subtitle = { Text(text = "This is a longer text") },
-        ) {
+  MaterialTheme {
+    SettingsMenuLink(
+      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
+      title = { Text(text = "Hello") },
+      subtitle = { Text(text = "This is a longer text") },
+    ) {
 
-        }
     }
+  }
 }
 
 @Preview
 @Composable
 internal fun SettingsMenuLinkActionPreview() {
-    var rememberCheckBoxState by remember { mutableStateOf(true) }
-    MaterialTheme {
-        SettingsMenuLink(
-            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-            title = { Text(text = "Hello") },
-            subtitle = { Text(text = "This is a longer text") },
-            action = {
-                Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
-                    rememberCheckBoxState = newState
-                })
-            },
-        ) {
+  var rememberCheckBoxState by remember { mutableStateOf(true) }
+  MaterialTheme {
+    SettingsMenuLink(
+      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
+      title = { Text(text = "Hello") },
+      subtitle = { Text(text = "This is a longer text") },
+      action = {
+        Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
+          rememberCheckBoxState = newState
+        })
+      },
+    ) {
 
-        }
     }
+  }
 }

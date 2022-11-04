@@ -9,10 +9,10 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun SettingsTileAction(content: @Composable () -> Unit) {
-    Box(
-        modifier = Modifier.size(64.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        content()
-    }
+  Box(
+    modifier = Modifier.size(64.dp),
+    contentAlignment = Alignment.Center,
+  ) {
+    content()
+  }
 }
