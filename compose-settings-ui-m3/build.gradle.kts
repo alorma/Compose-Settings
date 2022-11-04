@@ -57,7 +57,7 @@ dependencies {
 
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.foundation.layout)
-  implementation(libs.compose.material.material)
+  implementation(libs.compose.material.material3)
   implementation(libs.compose.ui.ui)
   implementation(libs.compose.ui.tooling)
 }

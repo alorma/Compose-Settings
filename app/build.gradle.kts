@@ -46,6 +46,7 @@ android {
 dependencies {
     //noinspection GradleDependency
     implementation(projects.composeSettingsUi)
+    implementation(projects.composeSettingsUiM3)
 
     implementation(projects.composeSettingsStorageBase)
     implementation(projects.composeSettingsStoragePreferences)
