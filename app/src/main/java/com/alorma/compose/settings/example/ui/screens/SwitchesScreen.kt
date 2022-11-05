@@ -2,6 +2,7 @@ package com.alorma.compose.settings.example.ui.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -24,8 +25,8 @@ fun SwitchesScreen(navController: NavHostController) {
   val snackbarHostState = remember { SnackbarHostState() }
 
   AppScaffold(
-    snackbarHostState = snackbarHostState,
     title = { Text(text = "Switches") },
+    snackbarHostState = snackbarHostState,
     onBack = { navController.popBackStack() },
   ) {
     val memoryStorage = rememberBooleanSettingState(defaultValue = false)
@@ -46,6 +47,7 @@ fun SwitchesScreen(navController: NavHostController) {
         )
       },
     )
+    Divider()
     val preferenceStorage = rememberPreferenceBooleanSettingState(
       key = "switch_2",
       defaultValue = false,

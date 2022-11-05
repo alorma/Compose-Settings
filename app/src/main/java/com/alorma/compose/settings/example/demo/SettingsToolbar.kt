@@ -2,7 +2,6 @@ package com.alorma.compose.settings.example.demo
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 fun SettingsToolbar(
   title: @Composable () -> Unit,
   onBack: (() -> Unit)? = null,
-  onSearch: (() -> Unit)? = null,
 ) {
   TopAppBar(
     title = title,
@@ -26,16 +24,6 @@ fun SettingsToolbar(
         IconButton(onClick = { onBack.invoke() }) {
           Icon(
             imageVector = Icons.Default.ArrowBack,
-            contentDescription = null,
-          )
-        }
-      }
-    },
-    actions = {
-      if (onSearch != null) {
-        IconButton(onClick = { onSearch.invoke() }) {
-          Icon(
-            imageVector = Icons.Default.Search,
             contentDescription = null,
           )
         }
@@ -51,7 +39,6 @@ fun SearchToolbarPreview() {
     SettingsToolbar(
       title = { Text(text = "Title") },
       onBack = {},
-      onSearch = {},
     )
   }
 }

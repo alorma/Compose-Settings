@@ -41,8 +41,7 @@ fun ListScreen(
       },
     )
     Divider()
-    val multiChoiceState =
-      rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
+    val multiChoiceState = rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
     SettingsListMultiSelect(
       state = multiChoiceState,
       title = { Text(text = "Multi choice") },
@@ -58,9 +57,8 @@ fun ListScreen(
       },
       confirmButton = "Select"
     )
-
+    Divider()
     val dropdownChoiceState = rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
-
     SettingsListDropdown(
       state = dropdownChoiceState,
       title = { Text(text = "Dropdown choice") },

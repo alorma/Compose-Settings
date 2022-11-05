@@ -2,6 +2,7 @@ package com.alorma.compose.settings.example.ui.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -47,6 +48,7 @@ fun CheckboxesScreen(navController: NavHostController) {
         )
       },
     )
+    Divider()
     val preferenceStorage = rememberPreferenceBooleanSettingState(
       key = "switch_2",
       defaultValue = false,
@@ -68,7 +70,7 @@ fun CheckboxesScreen(navController: NavHostController) {
         )
       },
     )
-
+    Divider()
     val dataStoreStorage = rememberDataStoreBooleanSettingState(
       key = "checkbox_dataStore",
       defaultValue = false

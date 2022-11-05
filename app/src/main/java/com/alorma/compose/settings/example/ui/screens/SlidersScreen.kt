@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Colorize
 import androidx.compose.material.icons.filled.VolumeDown
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -56,6 +57,7 @@ fun SlidersScreen(navController: NavHostController) {
       },
       title = { Text(text = "Brightness") },
     )
+    Divider()
     SettingsSlider(
       state = settingVolume,
       icon = {
@@ -86,6 +88,7 @@ fun SlidersScreen(navController: NavHostController) {
         inactiveTickColor = Color.Transparent
       )
     )
+    Divider()
     SettingsSlider(
       state = settingColors,
       icon = {
