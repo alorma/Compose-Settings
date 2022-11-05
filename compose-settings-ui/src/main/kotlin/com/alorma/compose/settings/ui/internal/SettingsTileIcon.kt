@@ -2,10 +2,10 @@ package com.alorma.compose.settings.ui.internal
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ContentAlpha
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentAlpha
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
