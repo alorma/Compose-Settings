@@ -23,7 +23,11 @@ allprojects {
 Add dependencies:
 
 ```groovy
+Material 2 version
 implementation 'com.github.alorma:compose-settings-ui:$version'
+
+Material 3 version
+implementation 'com.github.alorma:compose-settings-ui-m3:$version'
 ```
 
 ## Demo
