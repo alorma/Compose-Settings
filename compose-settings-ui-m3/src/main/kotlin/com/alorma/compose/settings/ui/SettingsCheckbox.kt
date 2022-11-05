@@ -19,8 +19,6 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.getValue
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.base.setValue
-import com.alorma.compose.settings.ui.internal.SettingsTileAction
-import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileTexts
 
 @Composable
@@ -48,14 +46,17 @@ fun SettingsCheckbox(
         ),
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      SettingsTileIcon(icon = icon)
-      SettingsTileTexts(title = title, subtitle = subtitle)
-      SettingsTileAction {
-        Checkbox(
-          checked = storageValue,
-          onCheckedChange = update
-        )
-      }
+      SettingsTileTexts(
+        title = title,
+        subtitle = subtitle,
+        icon = icon,
+        action = {
+          Checkbox(
+            checked = storageValue,
+            onCheckedChange = update
+          )
+        },
+      )
     }
   }
 }

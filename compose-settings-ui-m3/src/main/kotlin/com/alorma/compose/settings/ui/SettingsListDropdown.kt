@@ -22,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberIntSettingState
-import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileTexts
 
 @Composable
@@ -44,54 +43,55 @@ fun SettingsListDropdown(
       modifier = modifier.fillMaxWidth(),
       verticalAlignment = Alignment.CenterVertically
     ) {
-      SettingsTileIcon(icon = icon)
       SettingsTileTexts(
         title = title,
-        subtitle = subtitle
-      )
-
-      var isDropdownExpanded by remember {
-        mutableStateOf(false)
-      }
-
-      Column(
-        modifier = Modifier.padding(end = 8.dp)
-      ) {
-        Row(
-          modifier = Modifier
-            .clickable { isDropdownExpanded = true }
-            .padding(vertical = 5.dp),
-          verticalAlignment = Alignment.CenterVertically
-        ) {
-          Text(text = items[state.value])
-          Icon(
-            modifier = Modifier.padding(start = 8.dp),
-            imageVector = Icons.Outlined.ArrowDropDown,
-            contentDescription = null
-          )
-        }
-
-        DropdownMenu(
-          expanded = isDropdownExpanded,
-          onDismissRequest = { isDropdownExpanded = false }
-        ) {
-          items.forEachIndexed { index, text ->
-            DropdownMenuItem(
-              text = {
-                if (menuItem != null) {
-                  menuItem(index, text)
-                } else {
-                  Text(text = text)
-                }
-              },
-              onClick = {
-                state.value = index
-                isDropdownExpanded = false
-              }
-            )
+        subtitle = subtitle,
+        icon = icon,
+        action = {
+          var isDropdownExpanded by remember {
+            mutableStateOf(false)
           }
-        }
-      }
+
+          Column(
+            modifier = Modifier.padding(end = 8.dp)
+          ) {
+            Row(
+              modifier = Modifier
+                .clickable { isDropdownExpanded = true }
+                .padding(vertical = 5.dp),
+              verticalAlignment = Alignment.CenterVertically
+            ) {
+              Text(text = items[state.value])
+              Icon(
+                modifier = Modifier.padding(start = 8.dp),
+                imageVector = Icons.Outlined.ArrowDropDown,
+                contentDescription = null
+              )
+            }
+
+            DropdownMenu(
+              expanded = isDropdownExpanded,
+              onDismissRequest = { isDropdownExpanded = false }
+            ) {
+              items.forEachIndexed { index, text ->
+                DropdownMenuItem(
+                  text = {
+                    if (menuItem != null) {
+                      menuItem(index, text)
+                    } else {
+                      Text(text = text)
+                    }
+                  },
+                  onClick = {
+                    state.value = index
+                    isDropdownExpanded = false
+                  }
+                )
+              }
+            }
+          }
+        },
+      )
     }
   }
 }

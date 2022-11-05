@@ -17,7 +17,6 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.getValue
 import com.alorma.compose.settings.storage.base.rememberFloatSettingState
 import com.alorma.compose.settings.storage.base.setValue
-import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileSlider
 
 @Composable
@@ -43,7 +42,6 @@ fun SettingsSlider(
         .fillMaxWidth(),
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      SettingsTileIcon(icon = icon)
       SettingsTileSlider(
         title,
         settingValue,
@@ -52,6 +50,7 @@ fun SettingsSlider(
           onValueChange(settingValue)
         },
         sliderModifier,
+        icon,
         enabled,
         valueRange,
         steps,
