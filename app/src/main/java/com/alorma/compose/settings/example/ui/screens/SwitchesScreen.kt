@@ -1,12 +1,13 @@
 package com.alorma.compose.settings.example.ui.screens
 
-import androidx.compose.material.Icon
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
@@ -19,64 +20,65 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SwitchesScreen(navController: NavHostController) {
-    val coroutineScope = rememberCoroutineScope()
+  val coroutineScope = rememberCoroutineScope()
 
-    val scaffoldState = rememberScaffoldState()
+  val snackbarHostState = remember { SnackbarHostState() }
 
-    AppScaffold(
-        scaffoldState = scaffoldState,
-        title = { Text(text = "Switches") },
-        onBack = { navController.popBackStack() },
-    ) {
-        val memoryStorage = rememberBooleanSettingState(defaultValue = false)
-        SettingsSwitch(
-            state = memoryStorage,
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.SortByAlpha,
-                    contentDescription = "Memory switch 1"
-                )
-            },
-            title = { Text(text = "Memory") },
-            onCheckedChange = {
-                scaffoldState.showChange(
-                    coroutineScope = coroutineScope,
-                    key = "Memory",
-                    state = memoryStorage
-                )
-            },
+  AppScaffold(
+    title = { Text(text = "Switches") },
+    snackbarHostState = snackbarHostState,
+    onBack = { navController.popBackStack() },
+  ) {
+    val memoryStorage = rememberBooleanSettingState(defaultValue = false)
+    SettingsSwitch(
+      state = memoryStorage,
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "Memory switch 1"
         )
-        val preferenceStorage = rememberPreferenceBooleanSettingState(
-            key = "switch_2",
-            defaultValue = false,
+      },
+      title = { Text(text = "Memory") },
+      onCheckedChange = {
+        snackbarHostState.showChange(
+          coroutineScope = coroutineScope,
+          key = "Memory",
+          state = memoryStorage
         )
-        SettingsSwitch(
-            state = preferenceStorage,
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.SortByAlpha,
-                    contentDescription = "Preferences switch 1"
-                )
-            },
-            title = { Text(text = "Preferences") },
-            onCheckedChange = {
-                scaffoldState.showChange(
-                    coroutineScope = coroutineScope,
-                    key = "Preferences",
-                    state = preferenceStorage,
-                )
-            },
+      },
+    )
+    Divider()
+    val preferenceStorage = rememberPreferenceBooleanSettingState(
+      key = "switch_2",
+      defaultValue = false,
+    )
+    SettingsSwitch(
+      state = preferenceStorage,
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "Preferences switch 1"
         )
-    }
+      },
+      title = { Text(text = "Preferences") },
+      onCheckedChange = {
+        snackbarHostState.showChange(
+          coroutineScope = coroutineScope,
+          key = "Preferences",
+          state = preferenceStorage,
+        )
+      },
+    )
+  }
 }
 
-private fun ScaffoldState.showChange(
-    coroutineScope: CoroutineScope,
-    key: String,
-    state: SettingValueState<Boolean>
+private fun SnackbarHostState.showChange(
+  coroutineScope: CoroutineScope,
+  key: String,
+  state: SettingValueState<Boolean>
 ) {
-    coroutineScope.launch {
-        snackbarHostState.currentSnackbarData?.dismiss()
-        snackbarHostState.showSnackbar(message = "[$key]:  ${state.value}")
-    }
+  coroutineScope.launch {
+    currentSnackbarData?.dismiss()
+    showSnackbar(message = "[$key]:  ${state.value}")
+  }
 }

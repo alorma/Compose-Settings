@@ -1,11 +1,11 @@
 package com.alorma.compose.settings.example.ui.screens
 
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -41,8 +41,7 @@ fun ListScreen(
       },
     )
     Divider()
-    val multiChoiceState =
-      rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
+    val multiChoiceState = rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
     SettingsListMultiSelect(
       state = multiChoiceState,
       title = { Text(text = "Multi choice") },
@@ -58,9 +57,8 @@ fun ListScreen(
       },
       confirmButton = "Select"
     )
-
+    Divider()
     val dropdownChoiceState = rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
-
     SettingsListDropdown(
       state = dropdownChoiceState,
       title = { Text(text = "Dropdown choice") },
