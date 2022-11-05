@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alorma.compose.settings.ui.internal.SettingsTileTexts
+import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsMenuLink(
@@ -39,7 +39,7 @@ fun SettingsMenuLink(
           .clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
       ) {
-        SettingsTileTexts(
+        SettingsTileScaffold(
           title = title,
           subtitle = subtitle,
           icon = icon,

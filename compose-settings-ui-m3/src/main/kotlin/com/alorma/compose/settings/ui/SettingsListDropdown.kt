@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberIntSettingState
-import com.alorma.compose.settings.ui.internal.SettingsTileTexts
+import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsListDropdown(
@@ -43,7 +43,7 @@ fun SettingsListDropdown(
       modifier = modifier.fillMaxWidth(),
       verticalAlignment = Alignment.CenterVertically
     ) {
-      SettingsTileTexts(
+      SettingsTileScaffold(
         title = title,
         subtitle = subtitle,
         icon = icon,

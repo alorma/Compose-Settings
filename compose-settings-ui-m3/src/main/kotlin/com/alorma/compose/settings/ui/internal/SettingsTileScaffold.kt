@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun SettingsTileTexts(
+internal fun SettingsTileScaffold(
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
   icon: (@Composable () -> Unit)? = null,

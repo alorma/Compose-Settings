@@ -26,7 +26,7 @@ internal fun SettingsTileSlider(
   colors: SliderColors = SliderDefaults.colors()
 ) {
 
-  SettingsTileTexts(
+  SettingsTileScaffold(
     title = title,
     subtitle = {
       Slider(

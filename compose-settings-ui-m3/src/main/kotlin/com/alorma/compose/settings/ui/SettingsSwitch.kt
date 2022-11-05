@@ -19,7 +19,7 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.getValue
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.base.setValue
-import com.alorma.compose.settings.ui.internal.SettingsTileTexts
+import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsSwitch(
@@ -46,7 +46,7 @@ fun SettingsSwitch(
         ),
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      SettingsTileTexts(
+      SettingsTileScaffold(
         title = title,
         subtitle = subtitle,
         icon = icon,
