@@ -2,9 +2,11 @@ package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -75,26 +77,27 @@ fun SettingsListMultiSelect(
     title = title,
     text = {
       Column {
-        subtitle?.invoke()
+        if (subtitle != null) {
+          subtitle()
+          Spacer(modifier = Modifier.size(8.dp))
+        }
+
         items.forEachIndexed { index, item ->
           val isSelected by rememberUpdatedState(newValue = state.value.contains(index))
           Row(
             modifier = Modifier
               .fillMaxWidth()
-              .selectable(
+              .height(56.dp)
+              .toggleable(
                 role = Role.Checkbox,
-                selected = isSelected,
-                onClick = {
+                value = isSelected,
+                onValueChange = {
                   if (isSelected) {
                     onRemove(index)
                   } else {
                     onAdd(index)
                   }
                 }
-              )
-              .padding(
-                top = 16.dp,
-                bottom = 16.dp
               ),
             verticalAlignment = Alignment.CenterVertically
           ) {
@@ -105,13 +108,7 @@ fun SettingsListMultiSelect(
             )
             Checkbox(
               checked = isSelected,
-              onCheckedChange = { checked ->
-                if (checked) {
-                  onAdd(index)
-                } else {
-                  onRemove(index)
-                }
-              }
+              onCheckedChange = null
             )
           }
         }
