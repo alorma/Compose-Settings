@@ -6,7 +6,7 @@ composeMaterial3 = "1.0.0"
 composeCompiler = "1.2.0"
 gradlePlugin = "7.3.1"
 kotlin = "1.7.0"
-dataStore = "1.1.0-dev01"
+dataStore = "1.1.0-alpha01"
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.6.1"
