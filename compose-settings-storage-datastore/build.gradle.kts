@@ -49,6 +49,7 @@ android {
       "-XXLanguage:+NonParenthesizedAnnotationsOnFunctionalTypes",
     )
   }
+  namespace = "com.alorma.compose.settings.storage.datastore"
 }
 
 dependencies {
