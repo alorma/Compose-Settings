@@ -23,7 +23,6 @@ fun TopLevelScreen(
     Navigation.NAV_CHECKBOXES,
     Navigation.NAV_SLIDERS,
     Navigation.NAV_LIST,
-    Navigation.NAV_TEST,
   )
   AppScaffold(
     title = { Text(text = Navigation.NAV_TOP_SETTINGS.second) },
