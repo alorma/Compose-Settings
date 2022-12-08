@@ -59,6 +59,7 @@ dependencies {
   implementation(libs.androidx.datastore.preference.core)
   implementation(libs.androidx.datastore.preference.android)
 
+  implementation(platform(libs.compose.bom))
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.ui.tooling)
 }

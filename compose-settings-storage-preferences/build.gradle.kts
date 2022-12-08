@@ -58,6 +58,8 @@ dependencies {
 
   implementation(libs.androidx.preference.preference)
   implementation(libs.androidx.preference.ktx)
+
+  implementation(platform(libs.compose.bom))
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.ui.tooling)
 }
