@@ -56,6 +56,7 @@ dependencies {
 
   api(projects.composeSettingsStorageBase)
 
+  implementation(platform(libs.compose.bom))
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.foundation.layout)
   implementation(libs.compose.material.material)
