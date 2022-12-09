@@ -154,11 +154,34 @@ val state = rememberPreferenceFloatSettingState(key = "pref_key", defaultValue =
 val state = rememberPreferenceIntSettingState(key = "pref_key", defaultValue = 1)
 ```
 
-Also, the library provides a **DataStore** version of the state, so when setting state is changed, the value is persisted on the
+Also, the library provides a **DataStore (Both Preference and Proto)** version of the state, so when setting state is changed, the value is persisted on the
 DataStore preferences.
 
+Add dependencies:
+
+```groovy
+PreferenceDataStore version
+implementation 'com.github.alorma:compose-settings-storage-datastore:$version'
+
+ProtoDatastore version
+implementation 'com.github.alorma:compose-settings-storage-datastore-proto:$version'
+```
+
+
 ```kotlin
-val state = rememberDataStoreBooleanSettingState(key = "pref_key", defaultValue = true)
-val state = rememberDataStoreFloatSettingState(key = "pref_key", defaultValue = 0.1f)
-val state = rememberDataStoreIntSettingState(key = "pref_key", defaultValue = 1)
+// PreferenceDataStore
+val state = rememberPreferenceDataStoreBooleanSettingState(key = "pref_key", defaultValue = true)
+val state = rememberPreferenceDataStoreFloatSettingState(key = "pref_key", defaultValue = 0.1f)
+val state = rememberPreferenceDataStoreIntSettingState(key = "pref_key", defaultValue = 1)
+
+
+// ProtoDataStore
+val datastoreState = rememberProtoDataStoreState(SettingsSerializer)
+
+val state = rememberProtoDataStoreTransformSettingState(
+  protoDataStoreState = dataStoreState,
+  encoder = {savedValue, newValue -> savedValue.toBuilder().setProtoValue(newValue).build() },
+  decoder = { it.protoValue }
+)
+val state = rememberProtoDataStoreSettingState(protoDataStoreState = dataStoreState)
 ```
