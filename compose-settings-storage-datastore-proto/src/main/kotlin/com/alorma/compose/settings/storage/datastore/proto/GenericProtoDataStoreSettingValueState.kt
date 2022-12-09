@@ -1,11 +1,9 @@
-package com.alorma.compose.settings.storage.datastore
+package com.alorma.compose.settings.storage.datastore.proto
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import com.alorma.compose.settings.storage.base.SettingValueState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -14,14 +12,15 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class GenericDataStoreSettingValueState<T>(
+class GenericProtoDataStoreSettingValueState<T, R>(
   private val coroutineScope: CoroutineScope,
-  private val dataStore: DataStore<Preferences>,
-  private val dataStoreKey: Preferences.Key<T>,
+  private val dataStore: DataStore<R>,
   private val defaultValue: T,
+  private val getter: suspend (savedValue: R) -> T,
+  private val setter: suspend (savedValue: R, newValue: T) -> R
 ) : SettingValueState<T> {
   private var job: Job? = null
-  private val valueFlow = dataStore.data.map { it[dataStoreKey] ?: defaultValue }
+  private val valueFlow = dataStore.data.map(getter)
 
   private var _value: T by mutableStateOf(runBlocking { valueFlow.first() })
 
@@ -37,8 +36,8 @@ class GenericDataStoreSettingValueState<T>(
       _value = value
       job?.cancel()
       job = coroutineScope.launch {
-        dataStore.edit {
-          it[dataStoreKey] = value
+        dataStore.updateData {
+          setter(it, value)
         }
       }
     }
