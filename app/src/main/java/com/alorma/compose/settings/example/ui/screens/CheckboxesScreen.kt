@@ -11,8 +11,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
+import com.alorma.compose.settings.example.serializer.SettingsSerializer
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import com.alorma.compose.settings.storage.datastore.proto.rememberProtoDataStoreSettingState
+import com.alorma.compose.settings.storage.datastore.proto.rememberProtoDataStoreState
+import com.alorma.compose.settings.storage.datastore.proto.rememberProtoDataStoreTransformSettingState
 import com.alorma.compose.settings.storage.datastore.rememberDataStoreBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
@@ -71,24 +75,50 @@ fun CheckboxesScreen(navController: NavHostController) {
       },
     )
     Divider()
-    val dataStoreStorage = rememberDataStoreBooleanSettingState(
-      key = "checkbox_dataStore",
+    val preferenceDataStoreStorage = rememberDataStoreBooleanSettingState(
+      key = "checkbox_dataStore_preference",
       defaultValue = false
     )
     SettingsCheckbox(
-      state = dataStoreStorage,
+      state = preferenceDataStoreStorage,
       icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
           contentDescription = "Preferences switch 2"
         )
       },
-      title = { Text(text = "DataStore") },
+      title = { Text(text = "PreferenceDataStore") },
       onCheckedChange = {
         snackbarHostState.showChange(
           coroutineScope = coroutineScope,
-          key = "DataStore",
-          state = dataStoreStorage,
+          key = "PreferenceDataStore",
+          state = preferenceDataStoreStorage,
+        )
+      },
+    )
+    Divider()
+    val dataStoreState = rememberProtoDataStoreState(
+      serializer = SettingsSerializer
+    )
+    val protoDataStoreStorage = rememberProtoDataStoreTransformSettingState(
+      protoDataStoreState = dataStoreState,
+      encoder = {savedValue, newValue -> savedValue.toBuilder().setCheckboxDataStoreProto(newValue).build() },
+      decoder = { it.checkboxDataStoreProto },
+    )
+    SettingsCheckbox(
+      state = protoDataStoreStorage,
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "ProtoDataStore switch 3"
+        )
+      },
+      title = { Text(text = "ProtoDataStore") },
+      onCheckedChange = {
+        snackbarHostState.showChange(
+          coroutineScope = coroutineScope,
+          key = "ProtoDataStore",
+          state = protoDataStoreStorage,
         )
       },
     )

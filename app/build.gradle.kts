@@ -1,6 +1,10 @@
+import com.google.protobuf.gradle.generateProtoTasks
+import com.google.protobuf.gradle.protoc
+
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("com.google.protobuf") version "0.8.17"
 }
 
 android {
@@ -52,8 +56,11 @@ dependencies {
     implementation(projects.composeSettingsStorageBase)
     implementation(projects.composeSettingsStoragePreferences)
     implementation(projects.composeSettingsStorageDatastore)
+    implementation(projects.composeSettingsStorageDatastoreProto)
 
     implementation(libs.androidx.datastore.preference.android)
+    implementation(libs.androidx.datastore.proto.android)
+    implementation(libs.protobuf.javalite)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -64,4 +71,23 @@ dependencies {
     implementation(libs.compose.material.iconsextended)
     implementation(libs.compose.ui.ui)
     implementation(libs.compose.ui.tooling)
+}
+
+protobuf {
+    protobuf.protoc {
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    protobuf.generateProtoTasks {
+        all().forEach { task ->
+            task.plugins{
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }

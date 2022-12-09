@@ -7,6 +7,7 @@ composeCompiler = "1.3.2"
 gradlePlugin = "7.3.1"
 kotlin = "1.7.20"
 dataStore = "1.1.0-alpha01"
+protobuf = "3.18.0"
 
 [libraries]
 androidx-activity-compose = "androidx.activity:activity-compose:1.6.1"
@@ -27,5 +28,7 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 
 androidx-datastore-preference-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "dataStore" }
 androidx-datastore-preference-android = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
+androidx-datastore-proto-android = { module = "androidx.datastore:datastore", version.ref = "dataStore" }
+protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobuf" }
 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
