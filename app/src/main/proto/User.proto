@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+
+option java_package = "com.alorma.compose.settings.example";
+option java_multiple_files = true;
+
+
+message User {
+  int32 userId1 = 1;
+  string userName1 = 2;
+  int32 userId2 = 3;
+  string userName2 = 4;
+  int32 userId3 = 5;
+  string userName3 = 6;
+}

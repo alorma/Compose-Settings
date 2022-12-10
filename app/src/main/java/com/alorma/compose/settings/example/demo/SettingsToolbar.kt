@@ -2,12 +2,7 @@ package com.alorma.compose.settings.example.demo
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -16,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 fun SettingsToolbar(
   title: @Composable () -> Unit,
   onBack: (() -> Unit)? = null,
+  scrollBehavior: TopAppBarScrollBehavior,
 ) {
   TopAppBar(
     title = title,
@@ -29,9 +25,11 @@ fun SettingsToolbar(
         }
       }
     },
+    scrollBehavior = scrollBehavior
   )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun SearchToolbarPreview() {
@@ -39,6 +37,7 @@ fun SearchToolbarPreview() {
     SettingsToolbar(
       title = { Text(text = "Title") },
       onBack = {},
+      scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     )
   }
 }

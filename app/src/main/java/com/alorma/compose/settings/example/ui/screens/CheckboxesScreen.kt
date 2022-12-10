@@ -97,6 +97,7 @@ fun CheckboxesScreen(navController: NavHostController) {
     )
     Divider()
     val dataStoreState = rememberProtoDataStoreState(
+      filename = "checkboxes_screen_sample.pb",
       serializer = SettingsSerializer
     )
     val protoDataStoreStorage = rememberProtoDataStoreTransformSettingState(
