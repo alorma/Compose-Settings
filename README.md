@@ -178,7 +178,11 @@ val state = rememberPreferenceDataStoreIntSettingState(key = "pref_key", default
 
 
 // ProtoDataStore
-val datastoreState = rememberProtoDataStoreState(SettingsSerializer)
+val datastoreState = rememberProtoDataStoreState(
+  // "filename" is optional, but it is recommended to set the protobuf file name so that it wouldn't conflict with other datastore definition.
+  filename = "compose_settings_datastore_proto.pb",
+  serializer = SettingsSerializer,
+)
 
 val state = rememberProtoDataStoreTransformSettingState(
   protoDataStoreState = dataStoreState,
