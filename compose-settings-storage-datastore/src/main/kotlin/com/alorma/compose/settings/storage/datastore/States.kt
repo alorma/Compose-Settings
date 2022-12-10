@@ -77,7 +77,7 @@ fun rememberPreferenceDataStoreFloatSettingState(
 
 @Deprecated("Unclear Method Name", ReplaceWith("rememberPreferenceDataStoreIntSettingState(coroutineScope, dataStore, key, defaultValue)"))
 @Composable
-fun rememberDataStoreImtSettingState(
+fun rememberDataStoreIntSettingState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(),
   dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
   key: String,

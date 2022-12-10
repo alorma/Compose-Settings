@@ -14,10 +14,8 @@ import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.example.serializer.SettingsSerializer
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.datastore.proto.rememberProtoDataStoreSettingState
 import com.alorma.compose.settings.storage.datastore.proto.rememberProtoDataStoreState
 import com.alorma.compose.settings.storage.datastore.proto.rememberProtoDataStoreTransformSettingState
-import com.alorma.compose.settings.storage.datastore.rememberDataStoreBooleanSettingState
 import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
