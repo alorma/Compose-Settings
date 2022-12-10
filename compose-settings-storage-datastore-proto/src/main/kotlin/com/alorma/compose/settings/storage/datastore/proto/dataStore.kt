@@ -16,7 +16,7 @@ import kotlin.reflect.KProperty
 @Composable
 inline fun <reified T : Any> rememberProtoDataStoreState(
     context: Context = LocalContext.current,
-    filename: String = "compose_settings_datastore_proto.pb",
+    filename: String = "compose_settings_datastore_proto_" + T::class.java.`package`!!.name.replace('.', '_') + ".pb",
     serializer: Serializer<T>
 ): ProtoDataStoreState<T> {
 
