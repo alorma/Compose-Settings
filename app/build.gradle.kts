@@ -75,7 +75,7 @@ dependencies {
 
 protobuf {
     protobuf.protoc {
-        artifact = "com.google.protobuf:protoc:3.14.0"
+        artifact = "com.google.protobuf:protoc:3.21.11"
     }
 
     // Generates the java Protobuf-lite code for the Protobufs in this project. See
