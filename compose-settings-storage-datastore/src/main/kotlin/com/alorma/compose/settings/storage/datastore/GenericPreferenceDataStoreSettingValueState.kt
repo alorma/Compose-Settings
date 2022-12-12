@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class GenericDataStoreSettingValueState<T>(
+class GenericPreferenceDataStoreSettingValueState<T>(
   private val coroutineScope: CoroutineScope,
   private val dataStore: DataStore<Preferences>,
   private val dataStoreKey: Preferences.Key<T>,

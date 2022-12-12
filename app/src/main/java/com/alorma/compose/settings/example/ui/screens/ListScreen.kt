@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
-import com.alorma.compose.settings.storage.datastore.rememberDataStoreIntSettingState
+import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreIntSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSettingState
 import com.alorma.compose.settings.ui.SettingsList
@@ -25,7 +25,7 @@ fun ListScreen(
     title = { Text(text = "List") },
     onBack = { navController.popBackStack() },
   ) {
-    val singleChoiceState = rememberDataStoreIntSettingState(key = "list_pref_1")
+    val singleChoiceState = rememberPreferenceDataStoreIntSettingState(key = "list_pref_1")
     SettingsList(
       state = singleChoiceState,
       title = { Text(text = "Single choice") },
@@ -41,7 +41,8 @@ fun ListScreen(
       },
     )
     Divider()
-    val multiChoiceState = rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
+    val multiChoiceState =
+      rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
     SettingsListMultiSelect(
       state = multiChoiceState,
       title = { Text(text = "Multi choice") },
@@ -58,7 +59,8 @@ fun ListScreen(
       confirmButton = "Select"
     )
     Divider()
-    val dropdownChoiceState = rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
+    val dropdownChoiceState =
+      rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
     SettingsListDropdown(
       state = dropdownChoiceState,
       title = { Text(text = "Dropdown choice") },
