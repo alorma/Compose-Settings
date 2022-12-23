@@ -1,14 +1,12 @@
 package com.alorma.compose.settings.example.ui.screens
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,8 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
@@ -56,15 +52,12 @@ fun MenuLinksScreen(
       title = { Text(text = "Menu 2") },
       subtitle = { Text(text = "Without icon") },
       action = {
-        Box(
-          modifier = Modifier
-              .fillMaxSize()
-              .clickable {
-                  coroutineScope.launch {
-                      snackbarHostState.showSnackbar(message = "Action click")
-                  }
-              },
-          contentAlignment = Alignment.Center,
+        IconButton(
+          onClick = {
+            coroutineScope.launch {
+              snackbarHostState.showSnackbar(message = "Action click")
+            }
+          }
         ) {
           Icon(
             imageVector = Icons.Default.ArrowForward,
