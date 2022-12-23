@@ -22,8 +22,8 @@ fun ListScreen(
   navController: NavController = rememberNavController(),
 ) {
   AppScaffold(
+    navController = navController,
     title = { Text(text = "List") },
-    onBack = { navController.popBackStack() },
   ) {
     val singleChoiceState = rememberPreferenceDataStoreIntSettingState(key = "list_pref_1")
     SettingsList(

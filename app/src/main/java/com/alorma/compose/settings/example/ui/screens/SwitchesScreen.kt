@@ -25,9 +25,9 @@ fun SwitchesScreen(navController: NavHostController) {
   val snackbarHostState = remember { SnackbarHostState() }
 
   AppScaffold(
+    navController = navController,
     title = { Text(text = "Switches") },
     snackbarHostState = snackbarHostState,
-    onBack = { navController.popBackStack() },
   ) {
     val memoryStorage = rememberBooleanSettingState(defaultValue = false)
     SettingsSwitch(

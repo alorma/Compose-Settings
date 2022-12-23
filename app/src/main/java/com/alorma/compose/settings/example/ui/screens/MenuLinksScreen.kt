@@ -33,11 +33,9 @@ fun MenuLinksScreen(
   val snackbarHostState = remember { SnackbarHostState() }
 
   AppScaffold(
+    navController = navController,
     title = { Text(text = "Menu links") },
     snackbarHostState = snackbarHostState,
-    onBack = {
-      navController.popBackStack()
-    },
   ) {
     SettingsMenuLink(
       title = { Text(text = "Menu 1") },

@@ -41,9 +41,9 @@ fun ProtoScreen(
 
 
     AppScaffold(
+        navController = navController,
         title = { Text(text = "DataClassScreen") },
         snackbarHostState = snackbarHostState,
-        onBack = { navController.popBackStack() },
     ) {
         val dataStoreState = rememberProtoDataStoreState(
             filename = "proto_screen_sample.pb",

@@ -26,10 +26,8 @@ fun SlidersScreen(navController: NavHostController) {
   val settingColors = rememberDataStoreFloatSettingState(key = "colors")
 
   AppScaffold(
+    navController = navController,
     title = { Text(text = "Sliders") },
-    onBack = {
-      navController.popBackStack()
-    }
   ) {
     SettingsSlider(
       state = settingBrightness,

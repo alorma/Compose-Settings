@@ -29,9 +29,9 @@ fun CheckboxesScreen(navController: NavHostController) {
   val snackbarHostState = remember { SnackbarHostState() }
 
   AppScaffold(
+    navController = navController,
     title = { Text(text = "Checkboxes") },
     snackbarHostState = snackbarHostState,
-    onBack = { navController.popBackStack() },
   ) {
     val memoryStorage = rememberBooleanSettingState(defaultValue = false)
     SettingsCheckbox(

@@ -26,6 +26,8 @@ fun TopLevelScreen(
     Navigation.NAV_PROTO_CLASS
   )
   AppScaffold(
+    navController = navController,
+    onBack = null,
     title = { Text(text = Navigation.NAV_TOP_SETTINGS.second) },
   ) {
     LazyColumn(

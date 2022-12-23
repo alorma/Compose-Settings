@@ -6,18 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.ui.Navigation
+import com.alorma.compose.settings.example.ui.screens.AppSettingsScreen
 import com.alorma.compose.settings.example.ui.screens.CheckboxesScreen
 import com.alorma.compose.settings.example.ui.screens.ListScreen
 import com.alorma.compose.settings.example.ui.screens.MenuLinksScreen
@@ -27,7 +22,6 @@ import com.alorma.compose.settings.example.ui.screens.SwitchesScreen
 import com.alorma.compose.settings.example.ui.screens.TopLevelScreen
 import com.alorma.compose.settings.example.ui.theme.ComposeSettingsTheme
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
-import com.alorma.compose.settings.ui.SettingsSwitch
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,29 +48,6 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background),
         ) {
-          Card(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(8.dp),
-            elevation = CardDefaults.elevatedCardElevation(),
-          ) {
-            Column(
-              modifier = Modifier.fillMaxWidth(),
-            ) {
-              SettingsSwitch(
-                state = darkThemePreference,
-                title = { Text(text = "Dark theme") },
-                subtitle = { Text(text = "Change between dark and light") },
-                modifier = Modifier.fillMaxWidth(),
-              )
-              SettingsSwitch(
-                state = dynamicThemePreference,
-                title = { Text(text = "Dynamic theme") },
-                subtitle = { Text(text = "Dynamic theme based on wallpaper") },
-                modifier = Modifier.fillMaxWidth(),
-              )
-            }
-          }
           NavHost(
             navController = navController,
             startDestination = Navigation.NAV_TOP_SETTINGS.first,
@@ -101,6 +72,13 @@ class MainActivity : ComponentActivity() {
             }
             composable(Navigation.NAV_PROTO_CLASS.first) {
               ProtoScreen(navController = navController)
+            }
+            composable(Navigation.NAV_SETTINGS.first) {
+              AppSettingsScreen(
+                navController = navController,
+                darkThemePreference = darkThemePreference,
+                dynamicThemePreference = dynamicThemePreference,
+              )
             }
           }
         }
