@@ -4,7 +4,7 @@ import com.google.protobuf.gradle.protoc
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("com.google.protobuf") version "0.8.17"
+    id("com.google.protobuf") version "0.9.2"
 }
 
 android {
