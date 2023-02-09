@@ -30,5 +30,7 @@ androidx-datastore-preference-core = { module = "androidx.datastore:datastore-pr
 androidx-datastore-preference-android = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 androidx-datastore-proto-android = { module = "androidx.datastore:datastore", version.ref = "dataStore" }
 protobuf-javalite = { module = "com.google.protobuf:protobuf-javalite", version.ref = "protobuf" }
+protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobuf" }
+protobuf-google = { module = "com.google.protobuf:protoc", version.ref = "protobuf" }
 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

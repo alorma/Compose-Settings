@@ -23,7 +23,6 @@ fun TopLevelScreen(
     Navigation.NAV_CHECKBOXES,
     Navigation.NAV_SLIDERS,
     Navigation.NAV_LIST,
-    Navigation.NAV_PROTO_CLASS
   )
   AppScaffold(
     navController = navController,
