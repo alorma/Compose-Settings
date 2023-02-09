@@ -16,7 +16,6 @@ import com.alorma.compose.settings.example.ui.screens.AppSettingsScreen
 import com.alorma.compose.settings.example.ui.screens.CheckboxesScreen
 import com.alorma.compose.settings.example.ui.screens.ListScreen
 import com.alorma.compose.settings.example.ui.screens.MenuLinksScreen
-import com.alorma.compose.settings.example.ui.screens.ProtoScreen
 import com.alorma.compose.settings.example.ui.screens.SlidersScreen
 import com.alorma.compose.settings.example.ui.screens.SwitchesScreen
 import com.alorma.compose.settings.example.ui.screens.TopLevelScreen
@@ -69,9 +68,6 @@ class MainActivity : ComponentActivity() {
             }
             composable(Navigation.NAV_LIST.first) {
               ListScreen(navController = navController)
-            }
-            composable(Navigation.NAV_PROTO_CLASS.first) {
-              ProtoScreen(navController = navController)
             }
             composable(Navigation.NAV_SETTINGS.first) {
               AppSettingsScreen(

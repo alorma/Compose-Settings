@@ -7,6 +7,5 @@ object Navigation {
     val NAV_CHECKBOXES = "checkboxes" to "Checkboxes"
     val NAV_SLIDERS = "sliders" to "Sliders"
     val NAV_LIST = "lists" to "List"
-    val NAV_PROTO_CLASS = "proto" to "ProtoClass"
     val NAV_SETTINGS = "settings" to "Settings"
 }
