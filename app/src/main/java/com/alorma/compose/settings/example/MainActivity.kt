@@ -12,7 +12,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.ui.Navigation
-import com.alorma.compose.settings.example.ui.screens.*
+import com.alorma.compose.settings.example.ui.screens.AppSettingsScreen
+import com.alorma.compose.settings.example.ui.screens.CheckboxesScreen
+import com.alorma.compose.settings.example.ui.screens.ListScreen
+import com.alorma.compose.settings.example.ui.screens.MenuLinksScreen
+import com.alorma.compose.settings.example.ui.screens.SlidersScreen
+import com.alorma.compose.settings.example.ui.screens.SwitchesScreen
+import com.alorma.compose.settings.example.ui.screens.TopLevelScreen
 import com.alorma.compose.settings.example.ui.theme.ComposeSettingsTheme
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 
@@ -28,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
       val dynamicThemePreference = rememberPreferenceBooleanSettingState(
         key = "dynamicThemePreference",
-        defaultValue = true
+        defaultValue = true,
       )
 
       val navController = rememberNavController()
