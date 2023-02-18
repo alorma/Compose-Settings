@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.example.ui.theme
 
+import android.os.Build
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -15,7 +16,7 @@ fun ComposeSettingsTheme(
   content: @Composable () -> Unit,
 ) {
   MaterialTheme(
-    colorScheme = if (dynamicThemePreference) {
+    colorScheme = if (Build.VERSION.SDK_INT >= 31 && dynamicThemePreference) {
       if (darkThemePreference) {
         dynamicDarkColorScheme(LocalContext.current)
       } else {
