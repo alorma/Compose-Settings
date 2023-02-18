@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.example.ui.screens
 
+import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -31,12 +32,16 @@ fun AppSettingsScreen(
         subtitle = { Text(text = "Change between dark and light") },
         modifier = Modifier.fillMaxWidth(),
       )
-      SettingsSwitch(
-        state = dynamicThemePreference,
-        title = { Text(text = "Dynamic theme") },
-        subtitle = { Text(text = "Dynamic theme based on wallpaper") },
-        modifier = Modifier.fillMaxWidth(),
-      )
+
+      // Dynamic theme is not supported on lower API levels.
+      if (Build.VERSION.SDK_INT >= 31) {
+        SettingsSwitch(
+          state = dynamicThemePreference,
+          title = { Text(text = "Dynamic theme") },
+          subtitle = { Text(text = "Dynamic theme based on wallpaper") },
+          modifier = Modifier.fillMaxWidth(),
+        )
+      }
     }
   }
 }
