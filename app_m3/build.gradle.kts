@@ -41,7 +41,7 @@ android {
     checkReleaseBuilds = false
     abortOnError = false
   }
-  namespace = "com.alorma.compose.settings.example"
+  namespace = "com.alorma.compose.settings.example.m3"
 }
 
 dependencies {
