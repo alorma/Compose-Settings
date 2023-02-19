@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Compose Settings Sample App</string>
+    <string name="help_menu_links_text">The title is mandatory. You should also show subtext that highlights the status of the setting. Using an icon is optional.  Try to keep title text concise. If titles are long, they can continue on the next line instead of being truncated. Don\'t enable menus or actions on long press.</string>
+    <string name="help_menu_links_title">Menu links help</string>
+</resources>

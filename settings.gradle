@@ -3,6 +3,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Compose-Settings"
 
 include ':app'
+include ':app_m3'
 include ':compose-settings-ui'
 include ':compose-settings-ui-m3'
 include ':compose-settings-storage-base'

@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.ui.internal
 
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -15,7 +16,10 @@ internal fun WrapContentColor(
     0.6f
   }
   val contentColor = LocalContentColor.current.copy(alpha = alpha)
-  CompositionLocalProvider(LocalContentColor provides contentColor) {
+  CompositionLocalProvider(
+    LocalContentColor provides contentColor,
+    LocalContentAlpha provides alpha,
+  ) {
     content()
   }
 }

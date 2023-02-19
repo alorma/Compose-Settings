@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-  implementation(projects.composeSettingsUi)
+  implementation(projects.composeSettingsUiM3)
 
   implementation(projects.composeSettingsStorageBase)
   implementation(projects.composeSettingsStoragePreferences)
@@ -60,7 +60,7 @@ dependencies {
   implementation(libs.androidx.navigation.compose)
   implementation(libs.compose.foundation.foundation)
   implementation(libs.compose.foundation.layout)
-  implementation(libs.compose.material.material)
+  implementation(libs.compose.material.material3)
   implementation(libs.compose.material.iconsextended)
   implementation(libs.compose.ui.ui)
   implementation(libs.compose.ui.tooling)

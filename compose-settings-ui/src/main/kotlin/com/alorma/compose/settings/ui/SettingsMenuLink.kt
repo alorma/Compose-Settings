@@ -47,7 +47,11 @@ fun SettingsMenuLink(
         verticalAlignment = Alignment.CenterVertically,
       ) {
         SettingsTileIcon(icon = icon)
-        SettingsTileTexts(title = title, subtitle = subtitle)
+        SettingsTileTexts(title = {
+          WrapContentColor(enabled = enabled) {
+            title()
+          }
+        }, subtitle = subtitle)
       }
       if (action != null) {
         Divider(

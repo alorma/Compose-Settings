@@ -1,11 +1,11 @@
 package com.alorma.compose.settings.example.ui.theme
 
 import android.os.Build
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColorScheme
-import androidx.compose.material.dynamicDarkColorScheme
-import androidx.compose.material.dynamicLightColorScheme
-import androidx.compose.material.lightColorScheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
