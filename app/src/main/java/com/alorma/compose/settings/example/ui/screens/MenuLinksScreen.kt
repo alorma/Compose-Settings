@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import com.alorma.compose.settings.ui.SettingsGroup
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import kotlinx.coroutines.launch
 
@@ -26,7 +27,6 @@ import kotlinx.coroutines.launch
 fun MenuLinksScreen(
   navController: NavController = rememberNavController(),
 ) {
-  val coroutineScope = rememberCoroutineScope()
   val snackbarHostState = remember { SnackbarHostState() }
 
   val enabledState = rememberBooleanSettingState(true)
@@ -37,8 +37,21 @@ fun MenuLinksScreen(
     title = { Text(text = "Menu links") },
     snackbarHostState = snackbarHostState,
   ) {
+    DefaultTiles(enabledState.value, snackbarHostState)
+  }
+}
+
+@Composable
+private fun DefaultTiles(
+  enabled: Boolean,
+  snackbarHostState: SnackbarHostState
+) {
+  val coroutineScope = rememberCoroutineScope()
+  SettingsGroup(
+    title = { Text(text = "Default tiles") }
+  ) {
     SettingsMenuLink(
-      enabled = enabledState.value,
+      enabled = enabled,
       title = { Text(text = "Menu 1") },
       subtitle = { Text(text = "Subtitle of menu 1") },
       icon = {
@@ -52,9 +65,10 @@ fun MenuLinksScreen(
         snackbarHostState.showSnackbar(message = "Click on menu 1")
       }
     }
+
     Divider()
     SettingsMenuLink(
-      enabled = enabledState.value,
+      enabled = enabled,
       title = { Text(text = "Menu 2") },
       subtitle = { Text(text = "Without icon") },
       action = { enabled ->
@@ -79,7 +93,7 @@ fun MenuLinksScreen(
     }
     Divider()
     SettingsMenuLink(
-      enabled = enabledState.value,
+      enabled = enabled,
       title = { Text(text = "Menu 3") }, icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
@@ -94,7 +108,7 @@ fun MenuLinksScreen(
     Divider()
     var rememberCheckBoxState by remember { mutableStateOf(true) }
     SettingsMenuLink(
-      enabled = enabledState.value,
+      enabled = enabled,
       title = { Text(text = "Menu 4") },
       action = { enabled ->
         Checkbox(
