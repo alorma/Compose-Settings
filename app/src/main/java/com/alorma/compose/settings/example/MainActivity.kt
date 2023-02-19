@@ -32,20 +32,14 @@ class MainActivity : ComponentActivity() {
         defaultValue = true,
       )
 
-      val dynamicThemePreference = rememberPreferenceBooleanSettingState(
-        key = "dynamicThemePreference",
-        defaultValue = true,
-      )
-
       val navController = rememberNavController()
       ComposeSettingsTheme(
-        darkThemePreference = darkThemePreference.value,
-        dynamicThemePreference = dynamicThemePreference.value
+        darkThemePreference = darkThemePreference.value
       ) {
         Column(
           modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            .background(color = MaterialTheme.colors.background),
         ) {
           NavHost(
             navController = navController,
@@ -73,7 +67,6 @@ class MainActivity : ComponentActivity() {
               AppSettingsScreen(
                 navController = navController,
                 darkThemePreference = darkThemePreference,
-                dynamicThemePreference = dynamicThemePreference,
               )
             }
           }
