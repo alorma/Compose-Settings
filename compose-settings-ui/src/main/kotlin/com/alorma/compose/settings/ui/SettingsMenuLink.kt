@@ -46,7 +46,10 @@ fun SettingsMenuLink(
         Row(
           modifier = Modifier
             .weight(1f)
-            .clickable(onClick = onClick),
+            .clickable(
+              enabled = enabled,
+              onClick = onClick
+            ),
           verticalAlignment = Alignment.CenterVertically,
         ) {
           SettingsTileIcon(icon = icon)
