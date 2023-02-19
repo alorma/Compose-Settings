@@ -28,6 +28,7 @@ import com.alorma.compose.settings.storage.base.rememberIntSetSettingState
 @Composable
 fun SettingsListMultiSelect(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   state: SettingValueState<Set<Int>> = rememberIntSetSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
@@ -53,6 +54,7 @@ fun SettingsListMultiSelect(
 
   SettingsMenuLink(
     modifier = modifier,
+    enabled = enabled,
     icon = icon,
     title = title,
     subtitle = safeSubtitle,

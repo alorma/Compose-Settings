@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
+import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreIntSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSettingState
@@ -21,18 +22,26 @@ import com.alorma.compose.settings.ui.SettingsListMultiSelect
 fun ListScreen(
   navController: NavController = rememberNavController(),
 ) {
+
+  val enabledState = rememberBooleanSettingState(true)
+
   AppScaffold(
+    enabledState = enabledState,
     navController = navController,
     title = { Text(text = "List") },
   ) {
     val singleChoiceState = rememberPreferenceDataStoreIntSettingState(key = "list_pref_1")
     SettingsList(
+      enabled = enabledState.value,
       state = singleChoiceState,
       title = { Text(text = "Single choice") },
       subtitle = { Text(text = "Select a fruit") },
       items = listOf("Banana", "Kiwi", "Pineapple"),
-      action = {
-        IconButton(onClick = { singleChoiceState.reset() }) {
+      action = { enabled ->
+        IconButton(
+          enabled = enabled,
+          onClick = { singleChoiceState.reset() }
+        ) {
           Icon(
             imageVector = Icons.Default.Clear,
             contentDescription = "Clear",
@@ -44,12 +53,17 @@ fun ListScreen(
     val multiChoiceState =
       rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
     SettingsListMultiSelect(
+      enabled = enabledState.value,
       state = multiChoiceState,
       title = { Text(text = "Multi choice") },
       subtitle = { Text(text = "Select multiple fruits") },
       items = listOf("Banana", "Kiwi", "Pineapple"),
-      action = {
-        IconButton(onClick = { multiChoiceState.reset() }) {
+      action = { enabled ->
+        IconButton(
+          enabled = enabled,
+          onClick = { multiChoiceState.reset() },
+
+          ) {
           Icon(
             imageVector = Icons.Default.Clear,
             contentDescription = "Clear",
@@ -62,6 +76,7 @@ fun ListScreen(
     val dropdownChoiceState =
       rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
     SettingsListDropdown(
+      enabled = enabledState.value,
       state = dropdownChoiceState,
       title = { Text(text = "Dropdown choice") },
       subtitle = { Text(text = "Select a single fruit") },
