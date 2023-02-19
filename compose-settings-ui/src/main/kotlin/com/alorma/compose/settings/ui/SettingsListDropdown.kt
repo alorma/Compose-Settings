@@ -20,6 +20,7 @@ import com.alorma.compose.settings.ui.internal.SettingsTileTexts
 @Composable
 fun SettingsListDropdown(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   state: SettingValueState<Int> = rememberIntSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,

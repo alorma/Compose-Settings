@@ -70,18 +70,3 @@ internal fun SettingsTileScaffold(
   )
 }
 
-@Composable
-fun WrapContentColor(
-  enabled: Boolean,
-  content: @Composable () -> Unit,
-) {
-  val alpha = if (enabled) {
-    1.0f
-  } else {
-    0.6f
-  }
-  val contentColor = LocalContentColor.current.copy(alpha = alpha)
-  CompositionLocalProvider(LocalContentColor provides contentColor) {
-    content()
-  }
-}
