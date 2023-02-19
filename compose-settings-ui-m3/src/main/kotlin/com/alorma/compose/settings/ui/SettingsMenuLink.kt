@@ -23,24 +23,31 @@ import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 @Composable
 fun SettingsMenuLink(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   icon: (@Composable () -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: (@Composable () -> Unit)? = null,
-  action: (@Composable () -> Unit)? = null,
+  action: (@Composable (Boolean) -> Unit)? = null,
   onClick: () -> Unit,
 ) {
   Surface {
     Row(
       modifier = modifier.fillMaxWidth(),
     ) {
-      Row(
-        modifier = Modifier
+      val internalModifier = if (enabled) {
+        Modifier
           .weight(1f)
-          .clickable(onClick = onClick),
+          .clickable(onClick = onClick)
+      } else {
+        Modifier.weight(1f)
+      }
+      Row(
+        modifier = internalModifier,
         verticalAlignment = Alignment.CenterVertically,
       ) {
         SettingsTileScaffold(
           title = title,
+          enabled = enabled,
           subtitle = subtitle,
           icon = icon,
           action = action,

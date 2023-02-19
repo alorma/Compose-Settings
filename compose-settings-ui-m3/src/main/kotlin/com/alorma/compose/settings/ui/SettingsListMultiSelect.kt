@@ -35,7 +35,7 @@ fun SettingsListMultiSelect(
   confirmButton: String,
   useSelectedValuesAsSubtitle: Boolean = true,
   subtitle: @Composable (() -> Unit)? = null,
-  action: @Composable (() -> Unit)? = null,
+  action: @Composable ((Boolean) -> Unit)? = null,
 ) {
 
   if (state.value.any { index -> index >= items.size }) {

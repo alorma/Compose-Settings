@@ -43,7 +43,7 @@ fun SettingsList(
   useSelectedValueAsSubtitle: Boolean = true,
   subtitle: (@Composable () -> Unit)? = null,
   closeDialogDelay: Long = 200,
-  action: (@Composable () -> Unit)? = null,
+  action: (@Composable (Boolean) -> Unit)? = null,
 ) {
 
   if (state.value >= items.size) {
