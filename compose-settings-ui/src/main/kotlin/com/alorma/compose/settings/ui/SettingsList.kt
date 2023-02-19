@@ -55,6 +55,7 @@ fun SettingsList(
 
   SettingsMenuLink(
     modifier = modifier,
+    enabled = enabled,
     icon = icon,
     title = title,
     subtitle = safeSubtitle,

@@ -52,6 +52,7 @@ fun SettingsListMultiSelect(
   } else subtitle
 
   SettingsMenuLink(
+    enabled = enabled,
     modifier = modifier,
     icon = icon,
     title = title,

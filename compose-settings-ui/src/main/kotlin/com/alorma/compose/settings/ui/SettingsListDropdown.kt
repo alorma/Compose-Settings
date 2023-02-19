@@ -5,10 +5,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowDropDown
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -16,6 +24,7 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberIntSettingState
 import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileTexts
+import com.alorma.compose.settings.ui.internal.WrapContentColor
 
 @Composable
 fun SettingsListDropdown(
@@ -33,52 +42,59 @@ fun SettingsListDropdown(
   }
 
   Surface {
-    Row(
-      modifier = modifier.fillMaxWidth(),
-      verticalAlignment = Alignment.CenterVertically
-    ) {
-      SettingsTileIcon(icon = icon)
-      SettingsTileTexts(
-        title = title,
-        subtitle = subtitle
-      )
-
-      var isDropdownExpanded by remember {
-        mutableStateOf(false)
-      }
-
-      Column(
-        modifier = Modifier.padding(end = 8.dp)
+    WrapContentColor(enabled = enabled) {
+      Row(
+        modifier = modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
       ) {
         Row(
-          modifier = Modifier
-            .clickable { isDropdownExpanded = true }
-            .padding(vertical = 5.dp),
-          verticalAlignment = Alignment.CenterVertically
+          modifier = Modifier.weight(1f),
+          verticalAlignment = Alignment.CenterVertically,
         ) {
-          Text(text = items[state.value])
-          Icon(
-            modifier = Modifier.padding(start = 8.dp),
-            imageVector = Icons.Outlined.ArrowDropDown,
-            contentDescription = null
+          SettingsTileIcon(icon = icon)
+          SettingsTileTexts(
+            title = title,
+            subtitle = subtitle
           )
         }
 
-        DropdownMenu(
-          expanded = isDropdownExpanded,
-          onDismissRequest = { isDropdownExpanded = false }
+        var isDropdownExpanded by remember {
+          mutableStateOf(false)
+        }
+
+        Column(
+          modifier = Modifier.padding(end = 8.dp)
         ) {
-          items.forEachIndexed { index, text ->
-            DropdownMenuItem(
-              onClick = {
-                state.value = index
-                isDropdownExpanded = false
-              }
-            ) {
-              if (menuItem != null) {
-                menuItem(index, text)
-              } else {
-                Text(text = text)
+          Row(
+            modifier = Modifier
+              .clickable(enabled = enabled) { isDropdownExpanded = true }
+              .padding(vertical = 5.dp),
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(text = items[state.value])
+            Icon(
+              modifier = Modifier.padding(start = 8.dp),
+              imageVector = Icons.Outlined.ArrowDropDown,
+              contentDescription = null
+            )
+          }
+
+          DropdownMenu(
+            expanded = isDropdownExpanded,
+            onDismissRequest = { isDropdownExpanded = false }
+          ) {
+            items.forEachIndexed { index, text ->
+              DropdownMenuItem(
+                onClick = {
+                  state.value = index
+                  isDropdownExpanded = false
+                }
+              ) {
+                if (menuItem != null) {
+                  menuItem(index, text)
+                } else {
+                  Text(text = text)
+                }
               }
             }
           }
