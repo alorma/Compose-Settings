@@ -41,27 +41,27 @@ fun SettingsMenuLink(
   Surface {
     WrapContentColor(enabled = enabled) {
       Row(
-        modifier = modifier
-          .fillMaxWidth()
-          .clickable(enabled = enabled, onClick = onClick),
-        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth(),
       ) {
-        SettingsTileIcon(icon = icon)
-        SettingsTileTexts(title = {
-          WrapContentColor(enabled = enabled) {
-            title()
-          }
-        }, subtitle = subtitle)
-      }
-      if (action != null) {
-        Divider(
+        Row(
           modifier = Modifier
-            .padding(vertical = 4.dp)
-            .height(56.dp)
-            .width(1.dp),
-        )
-        SettingsTileAction {
-          action.invoke(enabled)
+            .weight(1f)
+            .clickable(onClick = onClick),
+          verticalAlignment = Alignment.CenterVertically,
+        ) {
+          SettingsTileIcon(icon = icon)
+          SettingsTileTexts(title = title, subtitle = subtitle)
+        }
+        if (action != null) {
+          Divider(
+            modifier = Modifier
+              .padding(vertical = 4.dp)
+              .height(56.dp)
+              .width(1.dp),
+          )
+          SettingsTileAction {
+            action.invoke(enabled)
+          }
         }
       }
     }

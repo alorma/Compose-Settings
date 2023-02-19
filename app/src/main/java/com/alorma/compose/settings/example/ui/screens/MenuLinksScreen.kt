@@ -67,10 +67,17 @@ private fun DefaultTiles(
     }
 
     Divider()
+
     SettingsMenuLink(
       enabled = enabled,
       title = { Text(text = "Menu 2") },
       subtitle = { Text(text = "Without icon") },
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "Menu 1"
+        )
+      },
       action = { enabled ->
         IconButton(
           enabled = enabled,
