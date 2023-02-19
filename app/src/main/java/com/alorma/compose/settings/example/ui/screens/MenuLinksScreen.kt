@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
+import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import kotlinx.coroutines.launch
 
@@ -28,12 +29,16 @@ fun MenuLinksScreen(
   val coroutineScope = rememberCoroutineScope()
   val snackbarHostState = remember { SnackbarHostState() }
 
+  val enabledState = rememberBooleanSettingState(true)
+
   AppScaffold(
     navController = navController,
+    enabledState = enabledState,
     title = { Text(text = "Menu links") },
     snackbarHostState = snackbarHostState,
   ) {
     SettingsMenuLink(
+      enabled = enabledState.value,
       title = { Text(text = "Menu 1") },
       subtitle = { Text(text = "Subtitle of menu 1") },
       icon = {
@@ -49,10 +54,12 @@ fun MenuLinksScreen(
     }
     Divider()
     SettingsMenuLink(
+      enabled = enabledState.value,
       title = { Text(text = "Menu 2") },
       subtitle = { Text(text = "Without icon") },
-      action = {
+      action = { enabled ->
         IconButton(
+          enabled = enabled,
           onClick = {
             coroutineScope.launch {
               snackbarHostState.showSnackbar(message = "Action click")
@@ -72,6 +79,7 @@ fun MenuLinksScreen(
     }
     Divider()
     SettingsMenuLink(
+      enabled = enabledState.value,
       title = { Text(text = "Menu 3") }, icon = {
         Icon(
           imageVector = Icons.Default.SortByAlpha,
@@ -86,16 +94,21 @@ fun MenuLinksScreen(
     Divider()
     var rememberCheckBoxState by remember { mutableStateOf(true) }
     SettingsMenuLink(
+      enabled = enabledState.value,
       title = { Text(text = "Menu 4") },
-      action = {
-        Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
-          rememberCheckBoxState = newState
-          coroutineScope.launch {
-            snackbarHostState.showSnackbar(
-              message = "Checkbox update to: $newState"
-            )
+      action = { enabled ->
+        Checkbox(
+          enabled = enabled,
+          checked = rememberCheckBoxState,
+          onCheckedChange = { newState ->
+            rememberCheckBoxState = newState
+            coroutineScope.launch {
+              snackbarHostState.showSnackbar(
+                message = "Checkbox update to: $newState"
+              )
+            }
           }
-        })
+        )
       },
     ) {
       coroutineScope.launch {

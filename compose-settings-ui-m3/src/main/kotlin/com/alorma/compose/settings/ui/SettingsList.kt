@@ -36,6 +36,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SettingsList(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   state: SettingValueState<Int> = rememberIntSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
@@ -43,7 +44,7 @@ fun SettingsList(
   useSelectedValueAsSubtitle: Boolean = true,
   subtitle: (@Composable () -> Unit)? = null,
   closeDialogDelay: Long = 200,
-  action: (@Composable () -> Unit)? = null,
+  action: (@Composable (Boolean) -> Unit)? = null,
 ) {
 
   if (state.value >= items.size) {
@@ -60,6 +61,7 @@ fun SettingsList(
 
   SettingsMenuLink(
     modifier = modifier,
+    enabled = enabled,
     icon = icon,
     title = title,
     subtitle = safeSubtitle,

@@ -24,13 +24,17 @@ fun SwitchesScreen(navController: NavHostController) {
 
   val snackbarHostState = remember { SnackbarHostState() }
 
+  val enabledState = rememberBooleanSettingState(true)
+
   AppScaffold(
+    enabledState = enabledState,
     navController = navController,
     title = { Text(text = "Switches") },
     snackbarHostState = snackbarHostState,
   ) {
     val memoryStorage = rememberBooleanSettingState(defaultValue = false)
     SettingsSwitch(
+      enabled = enabledState.value,
       state = memoryStorage,
       icon = {
         Icon(
@@ -53,6 +57,7 @@ fun SwitchesScreen(navController: NavHostController) {
       defaultValue = false,
     )
     SettingsSwitch(
+      enabled = enabledState.value,
       state = preferenceStorage,
       icon = {
         Icon(

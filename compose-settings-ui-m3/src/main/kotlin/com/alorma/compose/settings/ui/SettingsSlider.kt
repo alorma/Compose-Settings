@@ -43,20 +43,20 @@ fun SettingsSlider(
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileSlider(
-        title,
-        settingValue,
-        { value ->
+        title = title,
+        value = settingValue,
+        onValueChange = { value ->
           settingValue = value
           onValueChange(settingValue)
         },
-        sliderModifier,
-        icon,
-        enabled,
-        valueRange,
-        steps,
-        onValueChangeFinished,
-        interactionSource,
-        colors
+        modifier = sliderModifier,
+        icon = icon,
+        enabled = enabled,
+        valueRange = valueRange,
+        steps = steps,
+        onValueChangeFinished = onValueChangeFinished,
+        interactionSource = interactionSource,
+        colors = colors
       )
     }
   }

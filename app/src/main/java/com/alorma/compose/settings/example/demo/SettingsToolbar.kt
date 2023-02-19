@@ -13,6 +13,8 @@ fun SettingsToolbar(
   title: @Composable () -> Unit,
   onBack: (() -> Unit)? = null,
   showSettings: Boolean = true,
+  enabledState: Boolean = true,
+  onEnabledChange: (Boolean) -> Unit,
   onNavigateSettings: () -> Unit,
   scrollBehavior: TopAppBarScrollBehavior,
 ) {
@@ -29,6 +31,9 @@ fun SettingsToolbar(
       }
     },
     actions = {
+      Switch(checked = enabledState, onCheckedChange = {
+        onEnabledChange(it)
+      })
       if (showSettings) {
         IconButton(onClick = onNavigateSettings) {
           Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
@@ -47,7 +52,9 @@ fun SearchToolbarPreview() {
     SettingsToolbar(
       title = { Text(text = "Title") },
       onBack = {},
+      enabledState = true,
       onNavigateSettings = {},
+      onEnabledChange = {},
       scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     )
   }

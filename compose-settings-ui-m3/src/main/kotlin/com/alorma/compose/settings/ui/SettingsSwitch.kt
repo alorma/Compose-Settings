@@ -24,6 +24,7 @@ import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 @Composable
 fun SettingsSwitch(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   state: SettingValueState<Boolean> = rememberBooleanSettingState(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
@@ -40,6 +41,7 @@ fun SettingsSwitch(
       modifier = modifier
         .fillMaxWidth()
         .toggleable(
+          enabled = enabled,
           value = storageValue,
           role = Role.Switch,
           onValueChange = { update(!storageValue) }
@@ -47,11 +49,13 @@ fun SettingsSwitch(
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(
+        enabled = enabled,
         title = title,
         subtitle = subtitle,
         icon = icon,
         action = {
           Switch(
+            enabled = enabled,
             checked = storageValue,
             onCheckedChange = update
           )

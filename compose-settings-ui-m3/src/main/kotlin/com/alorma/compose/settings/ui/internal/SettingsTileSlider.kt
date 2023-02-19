@@ -2,6 +2,7 @@ package com.alorma.compose.settings.ui.internal
 
 import androidx.annotation.IntRange
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
@@ -27,21 +28,28 @@ internal fun SettingsTileSlider(
 ) {
 
   SettingsTileScaffold(
+    enabled = enabled,
     title = title,
     subtitle = {
-      Slider(
-        value = value,
-        onValueChange = onValueChange,
+      Column(
         modifier = Modifier
-          .padding(end = 16.dp)
-          .then(modifier),
-        enabled = enabled,
-        valueRange = valueRange,
-        steps = steps,
-        onValueChangeFinished = onValueChangeFinished,
-        interactionSource = interactionSource,
-        colors = colors
-      )
+          .padding(top = 8.dp, end = 16.dp)
+          .then(modifier)
+      ) {
+        Slider(
+          value = value,
+          onValueChange = onValueChange,
+          modifier = Modifier
+            .padding(end = 16.dp)
+            .then(modifier),
+          enabled = enabled,
+          valueRange = valueRange,
+          steps = steps,
+          onValueChangeFinished = onValueChangeFinished,
+          interactionSource = interactionSource,
+          colors = colors
+        )
+      }
     },
     icon = icon,
   )

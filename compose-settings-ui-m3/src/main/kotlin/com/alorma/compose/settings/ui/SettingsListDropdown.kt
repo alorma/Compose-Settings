@@ -23,10 +23,12 @@ import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberIntSettingState
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.internal.WrapContentColor
 
 @Composable
 fun SettingsListDropdown(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   state: SettingValueState<Int> = rememberIntSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
@@ -44,6 +46,7 @@ fun SettingsListDropdown(
       verticalAlignment = Alignment.CenterVertically
     ) {
       SettingsTileScaffold(
+        enabled = enabled,
         title = title,
         subtitle = subtitle,
         icon = icon,
@@ -52,41 +55,45 @@ fun SettingsListDropdown(
             mutableStateOf(false)
           }
 
-          Column(
-            modifier = Modifier.padding(end = 8.dp)
-          ) {
-            Row(
-              modifier = Modifier
-                .clickable { isDropdownExpanded = true }
-                .padding(vertical = 5.dp),
-              verticalAlignment = Alignment.CenterVertically
+          WrapContentColor(enabled = enabled) {
+            Column(
+              modifier = Modifier.padding(end = 8.dp)
             ) {
-              Text(text = items[state.value])
-              Icon(
-                modifier = Modifier.padding(start = 8.dp),
-                imageVector = Icons.Outlined.ArrowDropDown,
-                contentDescription = null
-              )
-            }
-
-            DropdownMenu(
-              expanded = isDropdownExpanded,
-              onDismissRequest = { isDropdownExpanded = false }
-            ) {
-              items.forEachIndexed { index, text ->
-                DropdownMenuItem(
-                  text = {
-                    if (menuItem != null) {
-                      menuItem(index, text)
-                    } else {
-                      Text(text = text)
-                    }
-                  },
-                  onClick = {
-                    state.value = index
-                    isDropdownExpanded = false
-                  }
+              Row(
+                modifier = Modifier
+                  .clickable(
+                    enabled = enabled,
+                  ) { isDropdownExpanded = true }
+                  .padding(vertical = 5.dp),
+                verticalAlignment = Alignment.CenterVertically
+              ) {
+                Text(text = items[state.value])
+                Icon(
+                  modifier = Modifier.padding(start = 8.dp),
+                  imageVector = Icons.Outlined.ArrowDropDown,
+                  contentDescription = null
                 )
+              }
+
+              DropdownMenu(
+                expanded = isDropdownExpanded,
+                onDismissRequest = { isDropdownExpanded = false }
+              ) {
+                items.forEachIndexed { index, text ->
+                  DropdownMenuItem(
+                    text = {
+                      if (menuItem != null) {
+                        menuItem(index, text)
+                      } else {
+                        Text(text = text)
+                      }
+                    },
+                    onClick = {
+                      state.value = index
+                      isDropdownExpanded = false
+                    }
+                  )
+                }
               }
             }
           }
