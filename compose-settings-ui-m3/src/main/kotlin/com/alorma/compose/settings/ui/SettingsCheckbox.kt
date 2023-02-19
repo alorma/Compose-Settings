@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
@@ -24,6 +25,7 @@ import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 @Composable
 fun SettingsCheckbox(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   state: SettingValueState<Boolean> = rememberBooleanSettingState(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
@@ -40,6 +42,7 @@ fun SettingsCheckbox(
       modifier = modifier
         .fillMaxWidth()
         .toggleable(
+          enabled = enabled,
           value = storageValue,
           role = Role.Checkbox,
           onValueChange = { update(!storageValue) }
@@ -47,11 +50,13 @@ fun SettingsCheckbox(
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(
+        enabled = enabled,
         title = title,
         subtitle = subtitle,
         icon = icon,
         action = {
           Checkbox(
+            enabled = enabled,
             checked = storageValue,
             onCheckedChange = update
           )

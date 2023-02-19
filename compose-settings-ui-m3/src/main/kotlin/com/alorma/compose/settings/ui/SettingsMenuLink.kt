@@ -32,28 +32,21 @@ fun SettingsMenuLink(
 ) {
   Surface {
     Row(
-      modifier = modifier.fillMaxWidth(),
-    ) {
-      val internalModifier = if (enabled) {
-        Modifier
-          .weight(1f)
-          .clickable(onClick = onClick)
-      } else {
-        Modifier.weight(1f)
-      }
-      Row(
-        modifier = internalModifier,
-        verticalAlignment = Alignment.CenterVertically,
-      ) {
-        SettingsTileScaffold(
-          title = title,
+      modifier = modifier.fillMaxWidth()
+        .clickable(
           enabled = enabled,
-          subtitle = subtitle,
-          icon = icon,
-          action = action,
-          actionDivider = true,
-        )
-      }
+          onClick = onClick
+        ),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      SettingsTileScaffold(
+        title = title,
+        enabled = enabled,
+        subtitle = subtitle,
+        icon = icon,
+        action = action,
+        actionDivider = true,
+      )
     }
   }
 }

@@ -24,14 +24,17 @@ fun CheckboxesScreen(navController: NavHostController) {
 
   val coroutineScope = rememberCoroutineScope()
   val snackbarHostState = remember { SnackbarHostState() }
+  val enabledState = rememberBooleanSettingState(true)
 
   AppScaffold(
+    enabledState = enabledState,
     navController = navController,
     title = { Text(text = "Checkboxes") },
     snackbarHostState = snackbarHostState,
   ) {
     val memoryStorage = rememberBooleanSettingState(defaultValue = false)
     SettingsCheckbox(
+      enabled = enabledState.value,
       state = memoryStorage,
       icon = {
         Icon(
@@ -54,6 +57,7 @@ fun CheckboxesScreen(navController: NavHostController) {
       defaultValue = false,
     )
     SettingsCheckbox(
+      enabled = enabledState.value,
       state = preferenceStorage,
       icon = {
         Icon(
@@ -76,6 +80,7 @@ fun CheckboxesScreen(navController: NavHostController) {
       defaultValue = false
     )
     SettingsCheckbox(
+      enabled = enabledState.value,
       state = preferenceDataStoreStorage,
       icon = {
         Icon(
