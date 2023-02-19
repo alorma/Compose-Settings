@@ -27,17 +27,17 @@ internal fun RowScope.SettingsTileSlider(
 ) {
     SettingsTileTexts(title = title, subtitle = {
         Slider(
-            value,
-            onValueChange,
+            value = value,
+            onValueChange = onValueChange,
             modifier = Modifier
                 .padding(end = 16.dp)
                 .then(modifier),
-            enabled,
-            valueRange,
-            steps,
-            onValueChangeFinished,
-            interactionSource,
-            colors
+            enabled = enabled,
+            valueRange = valueRange,
+            steps = steps,
+            onValueChangeFinished = onValueChangeFinished,
+            interactionSource = interactionSource,
+            colors = colors
         )
     })
 }

@@ -3,12 +3,12 @@ package com.alorma.compose.settings.example.ui.screens
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.SortByAlpha
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
+import androidx.compose.material.Checkbox
+import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.SnackbarHostState
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -67,10 +67,17 @@ private fun DefaultTiles(
     }
 
     Divider()
+
     SettingsMenuLink(
       enabled = enabled,
       title = { Text(text = "Menu 2") },
       subtitle = { Text(text = "Without icon") },
+      icon = {
+        Icon(
+          imageVector = Icons.Default.SortByAlpha,
+          contentDescription = "Menu 1"
+        )
+      },
       action = { enabled ->
         IconButton(
           enabled = enabled,

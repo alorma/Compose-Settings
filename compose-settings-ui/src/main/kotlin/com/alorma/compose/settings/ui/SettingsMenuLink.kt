@@ -26,74 +26,78 @@ import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.internal.SettingsTileAction
 import com.alorma.compose.settings.ui.internal.SettingsTileIcon
 import com.alorma.compose.settings.ui.internal.SettingsTileTexts
+import com.alorma.compose.settings.ui.internal.WrapContentColor
 
 @Composable
 fun SettingsMenuLink(
-    modifier: Modifier = Modifier,
-    icon: (@Composable () -> Unit)? = null,
-    title: @Composable () -> Unit,
-    subtitle: (@Composable () -> Unit)? = null,
-    action: (@Composable () -> Unit)? = null,
-    onClick: () -> Unit,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  icon: (@Composable () -> Unit)? = null,
+  title: @Composable () -> Unit,
+  subtitle: (@Composable () -> Unit)? = null,
+  action: (@Composable (Boolean) -> Unit)? = null,
+  onClick: () -> Unit,
 ) {
-    Surface {
+  Surface {
+    WrapContentColor(enabled = enabled) {
+      Row(
+        modifier = modifier.fillMaxWidth(),
+      ) {
         Row(
-            modifier = modifier.fillMaxWidth(),
+          modifier = Modifier
+            .weight(1f)
+            .clickable(onClick = onClick),
+          verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable(onClick = onClick),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                SettingsTileIcon(icon = icon)
-                SettingsTileTexts(title = title, subtitle = subtitle)
-            }
-            if (action != null) {
-                Divider(
-                    modifier = Modifier
-                        .padding(vertical = 4.dp)
-                        .height(56.dp)
-                        .width(1.dp),
-                )
-                SettingsTileAction {
-                    action.invoke()
-                }
-            }
+          SettingsTileIcon(icon = icon)
+          SettingsTileTexts(title = title, subtitle = subtitle)
         }
+        if (action != null) {
+          Divider(
+            modifier = Modifier
+              .padding(vertical = 4.dp)
+              .height(56.dp)
+              .width(1.dp),
+          )
+          SettingsTileAction {
+            action.invoke(enabled)
+          }
+        }
+      }
     }
+  }
 }
 
 @Preview
 @Composable
 internal fun SettingsMenuLinkPreview() {
-    MaterialTheme {
-        SettingsMenuLink(
-            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-            title = { Text(text = "Hello") },
-            subtitle = { Text(text = "This is a longer text") },
-        ) {
+  MaterialTheme {
+    SettingsMenuLink(
+      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
+      title = { Text(text = "Hello") },
+      subtitle = { Text(text = "This is a longer text") },
+    ) {
 
-        }
     }
+  }
 }
 
 @Preview
 @Composable
 internal fun SettingsMenuLinkActionPreview() {
-    var rememberCheckBoxState by remember { mutableStateOf(true) }
-    MaterialTheme {
-        SettingsMenuLink(
-            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-            title = { Text(text = "Hello") },
-            subtitle = { Text(text = "This is a longer text") },
-            action = {
-                Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
-                    rememberCheckBoxState = newState
-                })
-            },
-        ) {
+  var rememberCheckBoxState by remember { mutableStateOf(true) }
+  MaterialTheme {
+    SettingsMenuLink(
+      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
+      title = { Text(text = "Hello") },
+      subtitle = { Text(text = "This is a longer text") },
+      action = {
+        Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
+          rememberCheckBoxState = newState
+        })
+      },
+    ) {
 
-        }
     }
+  }
 }

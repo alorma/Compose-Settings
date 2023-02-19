@@ -6,22 +6,18 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.navigation.NavController
 import com.alorma.compose.settings.example.ui.Navigation
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 
 @OptIn(
-  ExperimentalMaterial3Api::class,
   ExperimentalLayoutApi::class,
 )
 @Composable
@@ -34,9 +30,7 @@ fun AppScaffold(
   snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
   content: @Composable (ColumnScope.() -> Unit),
 ) {
-  val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
   Scaffold(
-    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       if (title != null) {
         SettingsToolbar(
@@ -46,7 +40,6 @@ fun AppScaffold(
           showSettings = showSettings,
           onBack = onBack,
           onNavigateSettings = { navController.navigate(route = Navigation.NAV_SETTINGS.first) },
-          scrollBehavior = scrollBehavior
         )
       }
     },
