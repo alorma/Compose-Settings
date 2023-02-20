@@ -5,103 +5,32 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.floatPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.*
 import kotlinx.coroutines.CoroutineScope
 
-@Deprecated("Unclear Method Name", ReplaceWith("rememberPreferenceDataStoreBooleanSettingState(coroutineScope, dataStore, key, defaultValue)"))
 @Composable
-fun rememberDataStoreBooleanSettingState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
+fun <T> rememberComposeSettingsDataStore(
+  coroutineScope: CoroutineScope = rememberCoroutineScope(), key: String, defaultValue: T,
   dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
-  key: String,
-  defaultValue: Boolean = false,
-) = rememberPreferenceDataStoreBooleanSettingState(
-  coroutineScope = coroutineScope,
-  dataStore = dataStore,
-  key = key,
-  defaultValue = defaultValue
-)
-
-@Composable
-fun rememberPreferenceDataStoreBooleanSettingState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
-  key: String,
-  defaultValue: Boolean = false,
-): GenericPreferenceDataStoreSettingValueState<Boolean> {
+): PreferenceDataStoreValueState<T> {
   return remember {
-    GenericPreferenceDataStoreSettingValueState(
-      coroutineScope = coroutineScope,
-      dataStore = dataStore,
-      dataStoreKey = booleanPreferencesKey(key),
-      defaultValue = defaultValue,
+    PreferenceDataStoreValueState(
+      coroutineScope = coroutineScope, dataStore = dataStore,
+      dataStoreKey = makePreferenceKey(defaultValue, key), defaultValue = defaultValue
     )
   }
 }
 
-
-@Deprecated("Unclear Method Name", ReplaceWith("rememberPreferenceDataStoreFloatSettingState(coroutineScope, dataStore, key, defaultValue)"))
-@Composable
-fun rememberDataStoreFloatSettingState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
-  key: String,
-  defaultValue: Float = 0f,
-) = rememberPreferenceDataStoreFloatSettingState(
-  coroutineScope = coroutineScope,
-  dataStore = dataStore,
-  key = key,
-  defaultValue = defaultValue
-)
-
-@Composable
-fun rememberPreferenceDataStoreFloatSettingState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
-  key: String,
-  defaultValue: Float = 0F,
-): GenericPreferenceDataStoreSettingValueState<Float> {
-  return remember {
-    GenericPreferenceDataStoreSettingValueState(
-      coroutineScope = coroutineScope,
-      dataStore = dataStore,
-      dataStoreKey = floatPreferencesKey(key),
-      defaultValue = defaultValue,
-    )
-  }
-}
-
-
-@Deprecated("Unclear Method Name", ReplaceWith("rememberPreferenceDataStoreIntSettingState(coroutineScope, dataStore, key, defaultValue)"))
-@Composable
-fun rememberDataStoreIntSettingState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
-  key: String,
-  defaultValue: Int = -1,
-) = rememberPreferenceDataStoreIntSettingState(
-  coroutineScope = coroutineScope,
-  dataStore = dataStore,
-  key = key,
-  defaultValue = defaultValue
-)
-
-@Composable
-fun rememberPreferenceDataStoreIntSettingState(
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
-  key: String,
-  defaultValue: Int = -1,
-): GenericPreferenceDataStoreSettingValueState<Int> {
-  return remember {
-    GenericPreferenceDataStoreSettingValueState(
-      coroutineScope = coroutineScope,
-      dataStore = dataStore,
-      dataStoreKey = intPreferencesKey(key),
-      defaultValue = defaultValue,
-    )
-  }
+@Suppress("unchecked_cast")
+private fun <T> makePreferenceKey(valueType: T, key: String): Preferences.Key<T> {
+  // we need to check `javaObjectType` because valueType!!::class.java
+  // will not be java.lang.Float but float i.e. a primitive type, & similar for other primitives.
+  val checkableClass = valueType!!::class.java
+  return (when (checkableClass) {
+    Float::class.javaObjectType -> floatPreferencesKey(key)
+    Integer::class.javaObjectType -> intPreferencesKey(key)
+    String::class.javaObjectType -> stringPreferencesKey(key)
+    Boolean::class.javaObjectType -> booleanPreferencesKey(key)
+    else -> throw IllegalArgumentException("Type ${checkableClass.simpleName} is not supported")
+  }) as Preferences.Key<T>
 }
