@@ -41,6 +41,7 @@ fun SettingsList(
   subtitle: (@Composable () -> Unit)? = null,
   closeDialogDelay: Long = 200,
   action: (@Composable (Boolean) -> Unit)? = null,
+  onItemSelected: ((Int, String) -> Unit)? = null
 ) {
 
   if (state.value >= items.size) {
@@ -66,9 +67,9 @@ fun SettingsList(
   if (!showDialog) return
 
   val coroutineScope = rememberCoroutineScope()
-  val onSelected: (Int) -> Unit = { selectedIndex ->
+  val onSelected: (Int, Boolean) -> Unit = { selectedIndex, updateState ->
     coroutineScope.launch {
-      state.value = selectedIndex
+      if (updateState) state.value = selectedIndex
       delay(closeDialogDelay)
       showDialog = false
     }
@@ -88,7 +89,10 @@ fun SettingsList(
                 .selectable(
                     role = Role.RadioButton,
                     selected = isSelected,
-                    onClick = { if (!isSelected) onSelected(index) }
+                    onClick = {
+                      onSelected(index, !isSelected)
+                      onItemSelected?.invoke(index, items[index])
+                    }
                 )
                 .padding(
                     start = 33.dp,
@@ -100,7 +104,7 @@ fun SettingsList(
           ) {
             RadioButton(
               selected = isSelected,
-              onClick = { if (!isSelected) onSelected(index) }
+              onClick = null
             )
             Text(
               text = item,

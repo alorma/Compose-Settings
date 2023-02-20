@@ -36,6 +36,7 @@ fun SettingsListMultiSelect(
   confirmButton: String,
   useSelectedValuesAsSubtitle: Boolean = true,
   subtitle: @Composable (() -> Unit)? = null,
+  onItemsSelected: ((List<String>) -> Unit)? = null,
   action: @Composable ((Boolean) -> Unit)? = null,
 ) {
 
@@ -119,7 +120,10 @@ fun SettingsListMultiSelect(
     onDismissRequest = { showDialog = false },
     confirmButton = {
       TextButton(
-        onClick = { showDialog = false },
+        onClick = {
+          showDialog = false
+          onItemsSelected?.invoke(state.value.map { index -> items[index] })
+        },
       ) {
         Text(text = confirmButton)
       }
