@@ -41,6 +41,7 @@ fun SettingsList(
   subtitle: (@Composable () -> Unit)? = null,
   closeDialogDelay: Long = 200,
   action: (@Composable (Boolean) -> Unit)? = null,
+  onItemSelected: ((Int, String) -> Unit)? = null
 ) {
 
   if (state.value >= items.size) {
@@ -88,7 +89,10 @@ fun SettingsList(
                 .selectable(
                     role = Role.RadioButton,
                     selected = isSelected,
-                    onClick = { if (!isSelected) onSelected(index) }
+                    onClick = {
+                      if (!isSelected) onSelected(index)
+                      onItemSelected?.invoke(index, items[index])
+                    }
                 )
                 .padding(
                     start = 33.dp,

@@ -35,6 +35,7 @@ fun SettingsListDropdown(
   items: List<String>,
   icon: (@Composable () -> Unit)? = null,
   subtitle: (@Composable () -> Unit)? = null,
+  onItemSelected: ((Int, String) -> Unit)? = null,
   menuItem: (@Composable (index: Int, text: String) -> Unit)? = null,
 ) {
   if (state.value > items.size) {
@@ -86,6 +87,7 @@ fun SettingsListDropdown(
                 onClick = {
                   state.value = index
                   isDropdownExpanded = false
+                  onItemSelected?.invoke(index, text)
                 }
               ) {
                 if (menuItem != null) {

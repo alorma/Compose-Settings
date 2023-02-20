@@ -31,11 +31,12 @@ fun SettingsListMultiSelect(
   state: SettingValueState<Set<Int>> = rememberIntSetSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
-  icon: @Composable() (() -> Unit)? = null,
+  icon: @Composable (() -> Unit)? = null,
   confirmButton: String,
   useSelectedValuesAsSubtitle: Boolean = true,
-  subtitle: @Composable() (() -> Unit)? = null,
-  action: @Composable() ((Boolean) -> Unit)? = null,
+  subtitle: @Composable (() -> Unit)? = null,
+  onItemsSelected: ((List<String>) -> Unit)? = null,
+  action: @Composable ((Boolean) -> Unit)? = null,
 ) {
 
   if (state.value.any { index -> index >= items.size }) {
@@ -123,7 +124,10 @@ fun SettingsListMultiSelect(
     onDismissRequest = { showDialog = false },
     confirmButton = {
       TextButton(
-        onClick = { showDialog = false },
+        onClick = {
+          showDialog = false
+          onItemsSelected?.invoke(state.value.map { index -> items[index] })
+        },
       ) {
         ProvideTextStyle(
           value = MaterialTheme.typography.button.copy(fontFeatureSettings = "c2sc, smcp")
