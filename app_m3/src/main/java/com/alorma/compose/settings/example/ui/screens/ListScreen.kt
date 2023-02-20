@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.example.ui.screens
 
+import android.widget.Toast
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Divider
@@ -7,6 +8,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
@@ -23,6 +25,7 @@ fun ListScreen(
   navController: NavController = rememberNavController(),
 ) {
 
+  val localContext = LocalContext.current
   val enabledState = rememberBooleanSettingState(true)
 
   AppScaffold(
@@ -48,6 +51,9 @@ fun ListScreen(
           )
         }
       },
+      onItemSelected = { _, text ->
+        Toast.makeText(localContext, "Selected Item: $text", Toast.LENGTH_SHORT).show()
+      }
     )
     Divider()
     val multiChoiceState =
@@ -70,7 +76,13 @@ fun ListScreen(
           )
         }
       },
-      confirmButton = "Select"
+      confirmButton = "Select",
+      onItemsSelected = { items ->
+        Toast.makeText(
+          localContext,
+          "Selected Item: ${items.joinToString(", ")}", Toast.LENGTH_SHORT
+        ).show()
+      }
     )
     Divider()
     val dropdownChoiceState =
@@ -81,6 +93,9 @@ fun ListScreen(
       title = { Text(text = "Dropdown choice") },
       subtitle = { Text(text = "Select a single fruit") },
       items = listOf("Banana", "Kiwi", "Pineapple"),
+      onItemSelected = { _, text ->
+        Toast.makeText(localContext, "Selected Item: $text", Toast.LENGTH_SHORT).show()
+      }
     )
   }
 }
