@@ -73,9 +73,9 @@ fun SettingsList(
   if (!showDialog) return
 
   val coroutineScope = rememberCoroutineScope()
-  val onSelected: (Int) -> Unit = { selectedIndex ->
+  val onSelected: (Int, Boolean) -> Unit = { selectedIndex, updateState ->
     coroutineScope.launch {
-      state.value = selectedIndex
+      if (updateState) state.value = selectedIndex
       delay(closeDialogDelay)
       showDialog = false
     }
@@ -104,7 +104,7 @@ fun SettingsList(
                 role = Role.RadioButton,
                 selected = isSelected,
                 onClick = {
-                  if (!isSelected) onSelected(index)
+                  onSelected(index, !isSelected)
                   onItemSelected?.invoke(index, items[index])
                 }
               ),
