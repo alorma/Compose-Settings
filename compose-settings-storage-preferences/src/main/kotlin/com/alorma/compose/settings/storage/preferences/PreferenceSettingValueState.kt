@@ -8,7 +8,7 @@ import androidx.preference.PreferenceManager
 import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
-fun <T> rememberComposeSettingsPreference(
+fun <T> rememberSettingsPreferenceState(
   key: String,
   defaultValue: T,
   delimiter: String = "|",

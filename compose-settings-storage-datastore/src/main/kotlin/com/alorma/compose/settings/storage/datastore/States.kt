@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.*
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun <T> rememberComposeSettingsDataStore(
+fun <T> rememberSettingsDataStoreState(
   coroutineScope: CoroutineScope = rememberCoroutineScope(), key: String, defaultValue: T,
   dataStore: DataStore<Preferences> = LocalContext.current.composeSettingsDataStore,
 ): PreferenceDataStoreValueState<T> {
