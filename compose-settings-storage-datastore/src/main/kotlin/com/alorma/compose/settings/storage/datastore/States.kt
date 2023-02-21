@@ -23,14 +23,11 @@ fun <T> rememberSettingsDataStoreState(
 
 @Suppress("unchecked_cast")
 private fun <T> makePreferenceKey(valueType: T, key: String): Preferences.Key<T> {
-  // we need to check `javaObjectType` because valueType!!::class.java
-  // will not be java.lang.Float but float i.e. a primitive type, & similar for other primitives.
-  val checkableClass = valueType!!::class.java
-  return (when (checkableClass) {
-    Float::class.javaObjectType -> floatPreferencesKey(key)
-    Integer::class.javaObjectType -> intPreferencesKey(key)
-    String::class.javaObjectType -> stringPreferencesKey(key)
-    Boolean::class.javaObjectType -> booleanPreferencesKey(key)
-    else -> throw IllegalArgumentException("Type ${checkableClass.simpleName} is not supported")
+  return (when (valueType) {
+    is Int -> intPreferencesKey(key)
+    is Float -> floatPreferencesKey(key)
+    is String -> stringPreferencesKey(key)
+    is Boolean -> booleanPreferencesKey(key)
+    else -> throw IllegalArgumentException("Type ${valueType!!::class.java.simpleName} is not supported")
   }) as Preferences.Key<T>
 }
