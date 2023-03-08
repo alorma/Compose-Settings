@@ -66,6 +66,7 @@ fun SettingsSwitch(
             checked = storageValue,
             onCheckedChange = update,
             modifier = Modifier.padding(end = 8.dp),
+            enabled = enabled,
             colors = switchColors
           )
         }
