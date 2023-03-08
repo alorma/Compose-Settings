@@ -62,7 +62,8 @@ fun SettingsSwitch(
           Switch(
             checked = storageValue,
             onCheckedChange = update,
-            Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = 8.dp),
+            enabled = enabled,
           )
         }
       }
