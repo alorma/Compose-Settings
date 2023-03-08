@@ -9,6 +9,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
+import androidx.compose.material.SwitchColors
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -35,6 +37,7 @@ fun SettingsSwitch(
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
+  switchColors: SwitchColors = SwitchDefaults.colors(),
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
   var storageValue by state
@@ -62,7 +65,8 @@ fun SettingsSwitch(
           Switch(
             checked = storageValue,
             onCheckedChange = update,
-            Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = 8.dp),
+            colors = switchColors
           )
         }
       }
