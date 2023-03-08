@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxColors
+import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -35,6 +37,7 @@ fun SettingsCheckbox(
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
+  checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
   var storageValue by state
@@ -63,7 +66,8 @@ fun SettingsCheckbox(
             enabled = enabled,
             checked = storageValue,
             onCheckedChange = update,
-            modifier = Modifier.padding(end = 8.dp)
+            modifier = Modifier.padding(end = 8.dp),
+            colors = checkboxColors,
           )
         }
       }
