@@ -47,7 +47,7 @@ fun SettingsSwitch(
       modifier = modifier
           .fillMaxWidth()
           .toggleable(
-              enabled = true,
+              enabled = enabled,
               value = storageValue,
               role = Role.Switch,
               onValueChange = { update(!storageValue) }
