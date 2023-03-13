@@ -6,7 +6,7 @@ composeMaterial3 = "1.0.1"
 composeCompiler = "1.4.2"
 gradlePlugin = "7.4.2"
 kotlin = "1.8.10"
-dataStore = "1.1.0-alpha01"
+dataStore = "1.1.0-dev01"
 protobuf = "3.22.2"
 
 [libraries]
