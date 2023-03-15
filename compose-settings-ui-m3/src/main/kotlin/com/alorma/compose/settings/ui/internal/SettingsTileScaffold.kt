@@ -20,11 +20,11 @@ internal fun SettingsTileScaffold(
   action: (@Composable (Boolean) -> Unit)? = null,
   actionDivider: Boolean = false,
 ) {
-  val maxHeight = if (subtitle == null) 72.dp else 88.dp
+  val minHeight = if (subtitle == null) 72.dp else 88.dp
   ListItem(
     modifier = Modifier
       .height(IntrinsicSize.Min)
-      .heightIn(56.dp, maxHeight),
+      .defaultMinSize(minHeight = minHeight),
     headlineText = {
       WrapContentColor(enabled = enabled) {
         title()
