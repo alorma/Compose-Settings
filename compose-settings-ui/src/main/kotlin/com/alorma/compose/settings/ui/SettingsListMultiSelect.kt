@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Checkbox
 import androidx.compose.material.MaterialTheme
@@ -44,6 +46,7 @@ fun SettingsListMultiSelect(
   }
 
   var showDialog by remember { mutableStateOf(false) }
+  val scrollState = rememberScrollState()
 
   val safeSubtitle = if (state.value.size >= 0 && useSelectedValuesAsSubtitle) {
     {
@@ -78,7 +81,9 @@ fun SettingsListMultiSelect(
   AlertDialog(
     title = title,
     text = {
-      Column {
+      Column(
+        modifier = Modifier.verticalScroll(scrollState)
+      ) {
         subtitle?.invoke()
         items.forEachIndexed { index, item ->
           val isSelected by rememberUpdatedState(newValue = state.value.contains(index))
