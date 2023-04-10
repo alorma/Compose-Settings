@@ -21,93 +21,92 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CheckboxesScreen(navController: NavHostController) {
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val enabledState = rememberBooleanSettingState(true)
 
-  val coroutineScope = rememberCoroutineScope()
-  val snackbarHostState = remember { SnackbarHostState() }
-  val enabledState = rememberBooleanSettingState(true)
-
-  AppScaffold(
-    enabledState = enabledState,
-    navController = navController,
-    title = { Text(text = "Checkboxes") },
-    snackbarHostState = snackbarHostState,
-  ) {
-    val memoryStorage = rememberBooleanSettingState(defaultValue = false)
-    SettingsCheckbox(
-      enabled = enabledState.value,
-      state = memoryStorage,
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Memory switch 1"
+    AppScaffold(
+        enabledState = enabledState,
+        navController = navController,
+        title = { Text(text = "Checkboxes") },
+        snackbarHostState = snackbarHostState
+    ) {
+        val memoryStorage = rememberBooleanSettingState(defaultValue = false)
+        SettingsCheckbox(
+            enabled = enabledState.value,
+            state = memoryStorage,
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Memory switch 1"
+                )
+            },
+            title = { Text(text = "Memory") },
+            onCheckedChange = {
+                snackbarHostState.showChange(
+                    coroutineScope = coroutineScope,
+                    key = "Memory",
+                    state = memoryStorage
+                )
+            }
         )
-      },
-      title = { Text(text = "Memory") },
-      onCheckedChange = {
-        snackbarHostState.showChange(
-          coroutineScope = coroutineScope,
-          key = "Memory",
-          state = memoryStorage
+        Divider()
+        val preferenceStorage = rememberPreferenceBooleanSettingState(
+            key = "switch_2",
+            defaultValue = false
         )
-      },
-    )
-    Divider()
-    val preferenceStorage = rememberPreferenceBooleanSettingState(
-      key = "switch_2",
-      defaultValue = false,
-    )
-    SettingsCheckbox(
-      enabled = enabledState.value,
-      state = preferenceStorage,
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Preferences switch 1"
+        SettingsCheckbox(
+            enabled = enabledState.value,
+            state = preferenceStorage,
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Preferences switch 1"
+                )
+            },
+            title = { Text(text = "Preferences") },
+            onCheckedChange = {
+                snackbarHostState.showChange(
+                    coroutineScope = coroutineScope,
+                    key = "Preferences",
+                    state = preferenceStorage
+                )
+            }
         )
-      },
-      title = { Text(text = "Preferences") },
-      onCheckedChange = {
-        snackbarHostState.showChange(
-          coroutineScope = coroutineScope,
-          key = "Preferences",
-          state = preferenceStorage,
+        Divider()
+        val preferenceDataStoreStorage = rememberPreferenceDataStoreBooleanSettingState(
+            key = "checkbox_dataStore_preference",
+            defaultValue = false
         )
-      },
-    )
-    Divider()
-    val preferenceDataStoreStorage = rememberPreferenceDataStoreBooleanSettingState(
-      key = "checkbox_dataStore_preference",
-      defaultValue = false
-    )
-    SettingsCheckbox(
-      enabled = enabledState.value,
-      state = preferenceDataStoreStorage,
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Preferences switch 2"
+        SettingsCheckbox(
+            enabled = enabledState.value,
+            state = preferenceDataStoreStorage,
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Preferences switch 2"
+                )
+            },
+            title = { Text(text = "PreferenceDataStore") },
+            onCheckedChange = {
+                snackbarHostState.showChange(
+                    coroutineScope = coroutineScope,
+                    key = "PreferenceDataStore",
+                    state = preferenceDataStoreStorage
+                )
+            }
         )
-      },
-      title = { Text(text = "PreferenceDataStore") },
-      onCheckedChange = {
-        snackbarHostState.showChange(
-          coroutineScope = coroutineScope,
-          key = "PreferenceDataStore",
-          state = preferenceDataStoreStorage,
-        )
-      },
-    )
-    Divider()
-  }
+        Divider()
+    }
 }
 
 private fun SnackbarHostState.showChange(
-  coroutineScope: CoroutineScope,
-  key: String,
-  state: SettingValueState<Boolean>,
+    coroutineScope: CoroutineScope,
+    key: String,
+    state: SettingValueState<Boolean>
 ) {
-  coroutineScope.launch {
-    currentSnackbarData?.dismiss()
-    showSnackbar(message = "[$key]:  ${state.value}")
-  }
+    coroutineScope.launch {
+        currentSnackbarData?.dismiss()
+        showSnackbar(message = "[$key]:  ${state.value}")
+    }
 }

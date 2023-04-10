@@ -27,106 +27,109 @@ import com.alorma.compose.settings.storage.base.rememberIntSetSettingState
 
 @Composable
 fun SettingsListMultiSelect(
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  state: SettingValueState<Set<Int>> = rememberIntSetSettingState(),
-  title: @Composable () -> Unit,
-  items: List<String>,
-  icon: @Composable (() -> Unit)? = null,
-  confirmButton: String,
-  useSelectedValuesAsSubtitle: Boolean = true,
-  subtitle: @Composable (() -> Unit)? = null,
-  onItemsSelected: ((List<String>) -> Unit)? = null,
-  action: @Composable ((Boolean) -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    state: SettingValueState<Set<Int>> = rememberIntSetSettingState(),
+    title: @Composable () -> Unit,
+    items: List<String>,
+    icon: @Composable (() -> Unit)? = null,
+    confirmButton: String,
+    useSelectedValuesAsSubtitle: Boolean = true,
+    subtitle: @Composable (() -> Unit)? = null,
+    onItemsSelected: ((List<String>) -> Unit)? = null,
+    action: @Composable ((Boolean) -> Unit)? = null
 ) {
-
-  if (state.value.any { index -> index >= items.size }) {
-    throw IndexOutOfBoundsException("Current indexes for $title list setting cannot be grater than items size")
-  }
-
-  var showDialog by remember { mutableStateOf(false) }
-
-  val safeSubtitle = if (state.value.size >= 0 && useSelectedValuesAsSubtitle) {
-    {
-      Text(text = state.value.map { index -> items[index] }
-        .joinToString(separator = ", ") { it })
+    if (state.value.any { index -> index >= items.size }) {
+        throw IndexOutOfBoundsException("Current indexes for $title list setting cannot be grater than items size")
     }
-  } else subtitle
 
-  SettingsMenuLink(
-    modifier = modifier,
-    enabled = enabled,
-    icon = icon,
-    title = title,
-    subtitle = safeSubtitle,
-    action = action,
-    onClick = { showDialog = true },
-  )
+    var showDialog by remember { mutableStateOf(false) }
 
-  if (!showDialog) return
-
-  val onAdd: (Int) -> Unit = { selectedIndex ->
-    val mutable = state.value.toMutableSet()
-    mutable.add(selectedIndex)
-    state.value = mutable
-  }
-  val onRemove: (Int) -> Unit = { selectedIndex ->
-    val mutable = state.value.toMutableSet()
-    mutable.remove(selectedIndex)
-    state.value = mutable
-  }
-
-  AlertDialog(
-    title = title,
-    text = {
-      Column {
-        if (subtitle != null) {
-          subtitle()
-          Spacer(modifier = Modifier.size(8.dp))
-        }
-
-        items.forEachIndexed { index, item ->
-          val isSelected by rememberUpdatedState(newValue = state.value.contains(index))
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .height(56.dp)
-              .toggleable(
-                role = Role.Checkbox,
-                value = isSelected,
-                onValueChange = {
-                  if (isSelected) {
-                    onRemove(index)
-                  } else {
-                    onAdd(index)
-                  }
-                }
-              ),
-            verticalAlignment = Alignment.CenterVertically
-          ) {
+    val safeSubtitle = if (state.value.size >= 0 && useSelectedValuesAsSubtitle) {
+        {
             Text(
-              text = item,
-              style = MaterialTheme.typography.bodyMedium,
-              modifier = Modifier.weight(1f)
+                text = state.value.map { index -> items[index] }
+                    .joinToString(separator = ", ") { it }
             )
-            Checkbox(
-              checked = isSelected,
-              onCheckedChange = null
-            )
-          }
         }
-      }
-    },
-    onDismissRequest = { showDialog = false },
-    confirmButton = {
-      TextButton(
-        onClick = {
-          showDialog = false
-          onItemsSelected?.invoke(state.value.map { index -> items[index] })
-        },
-      ) {
-        Text(text = confirmButton)
-      }
+    } else {
+        subtitle
     }
-  )
+
+    SettingsMenuLink(
+        modifier = modifier,
+        enabled = enabled,
+        icon = icon,
+        title = title,
+        subtitle = safeSubtitle,
+        action = action,
+        onClick = { showDialog = true }
+    )
+
+    if (!showDialog) return
+
+    val onAdd: (Int) -> Unit = { selectedIndex ->
+        val mutable = state.value.toMutableSet()
+        mutable.add(selectedIndex)
+        state.value = mutable
+    }
+    val onRemove: (Int) -> Unit = { selectedIndex ->
+        val mutable = state.value.toMutableSet()
+        mutable.remove(selectedIndex)
+        state.value = mutable
+    }
+
+    AlertDialog(
+        title = title,
+        text = {
+            Column {
+                if (subtitle != null) {
+                    subtitle()
+                    Spacer(modifier = Modifier.size(8.dp))
+                }
+
+                items.forEachIndexed { index, item ->
+                    val isSelected by rememberUpdatedState(newValue = state.value.contains(index))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(56.dp)
+                            .toggleable(
+                                role = Role.Checkbox,
+                                value = isSelected,
+                                onValueChange = {
+                                    if (isSelected) {
+                                        onRemove(index)
+                                    } else {
+                                        onAdd(index)
+                                    }
+                                }
+                            ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = item,
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Checkbox(
+                            checked = isSelected,
+                            onCheckedChange = null
+                        )
+                    }
+                }
+            }
+        },
+        onDismissRequest = { showDialog = false },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    showDialog = false
+                    onItemsSelected?.invoke(state.value.map { index -> items[index] })
+                }
+            ) {
+                Text(text = confirmButton)
+            }
+        }
+    )
 }

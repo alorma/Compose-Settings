@@ -22,91 +22,91 @@ import com.alorma.compose.settings.ui.SettingsSlider
 
 @Composable
 fun SlidersScreen(navController: NavHostController) {
-  val settingBrightness = rememberPreferenceDataStoreFloatSettingState(key = "brightness", defaultValue = 0f)
-  val settingVolume = rememberPreferenceDataStoreFloatSettingState(key = "volume", defaultValue = 0f)
-  val settingColors = rememberPreferenceDataStoreFloatSettingState(key = "colors", defaultValue = 0f)
+    val settingBrightness = rememberPreferenceDataStoreFloatSettingState(key = "brightness", defaultValue = 0f)
+    val settingVolume = rememberPreferenceDataStoreFloatSettingState(key = "volume", defaultValue = 0f)
+    val settingColors = rememberPreferenceDataStoreFloatSettingState(key = "colors", defaultValue = 0f)
 
-  val enabledState = rememberBooleanSettingState(true)
+    val enabledState = rememberBooleanSettingState(true)
 
-  AppScaffold(
-    navController = navController,
-    enabledState = enabledState,
-    title = { Text(text = "Sliders") },
-  ) {
-    SettingsSlider(
-      enabled = enabledState.value,
-      state = settingBrightness,
-      icon = {
-        when {
-          settingBrightness.value < 0.1 -> {
-            Icon(
-              imageVector = Icons.Default.BrightnessLow,
-              contentDescription = "Brightness Low"
+    AppScaffold(
+        navController = navController,
+        enabledState = enabledState,
+        title = { Text(text = "Sliders") }
+    ) {
+        SettingsSlider(
+            enabled = enabledState.value,
+            state = settingBrightness,
+            icon = {
+                when {
+                    settingBrightness.value < 0.1 -> {
+                        Icon(
+                            imageVector = Icons.Default.BrightnessLow,
+                            contentDescription = "Brightness Low"
+                        )
+                    }
+                    settingBrightness.value in 0.1f..0.8f -> {
+                        Icon(
+                            imageVector = Icons.Default.BrightnessMedium,
+                            contentDescription = "Brightness Medium"
+                        )
+                    }
+                    else -> {
+                        Icon(
+                            imageVector = Icons.Default.BrightnessHigh,
+                            contentDescription = "Brightness High"
+                        )
+                    }
+                }
+            },
+            title = { Text(text = "Brightness") }
+        )
+        Divider()
+        SettingsSlider(
+            enabled = enabledState.value,
+            state = settingVolume,
+            icon = {
+                when {
+                    settingVolume.value < 0.1 -> {
+                        Icon(
+                            imageVector = Icons.Default.VolumeMute,
+                            contentDescription = "Volume Mute"
+                        )
+                    }
+                    settingVolume.value in 0.1f..0.8f -> {
+                        Icon(
+                            imageVector = Icons.Default.VolumeDown,
+                            contentDescription = "Volume Down"
+                        )
+                    }
+                    else -> {
+                        Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Volume Up")
+                    }
+                }
+            },
+            title = { Text(text = "Volume") },
+            steps = 3,
+            colors = SliderDefaults.colors(
+                activeTickColor = Color.Transparent,
+                disabledActiveTickColor = Color.Transparent,
+                disabledInactiveTickColor = Color.Transparent,
+                inactiveTickColor = Color.Transparent
             )
-          }
-          settingBrightness.value in 0.1f..0.8f -> {
-            Icon(
-              imageVector = Icons.Default.BrightnessMedium,
-              contentDescription = "Brightness Medium"
+        )
+        Divider()
+        SettingsSlider(
+            enabled = enabledState.value,
+            state = settingColors,
+            icon = {
+                Icon(imageVector = Icons.Default.Colorize, contentDescription = "Custom colors")
+            },
+            title = { Text(text = "Custom colors") },
+            steps = 4,
+            colors = SliderDefaults.colors(
+                thumbColor = Color.Green,
+                activeTrackColor = Color.Blue,
+                inactiveTrackColor = Color.Yellow,
+                activeTickColor = Color.Red
             )
-          }
-          else -> {
-            Icon(
-              imageVector = Icons.Default.BrightnessHigh,
-              contentDescription = "Brightness High"
-            )
-          }
-        }
-      },
-      title = { Text(text = "Brightness") },
-    )
-    Divider()
-    SettingsSlider(
-      enabled = enabledState.value,
-      state = settingVolume,
-      icon = {
-        when {
-          settingVolume.value < 0.1 -> {
-            Icon(
-              imageVector = Icons.Default.VolumeMute,
-              contentDescription = "Volume Mute"
-            )
-          }
-          settingVolume.value in 0.1f..0.8f -> {
-            Icon(
-              imageVector = Icons.Default.VolumeDown,
-              contentDescription = "Volume Down"
-            )
-          }
-          else -> {
-            Icon(imageVector = Icons.Default.VolumeUp, contentDescription = "Volume Up")
-          }
-        }
-      },
-      title = { Text(text = "Volume") },
-      steps = 3,
-      colors = SliderDefaults.colors(
-        activeTickColor = Color.Transparent,
-        disabledActiveTickColor = Color.Transparent,
-        disabledInactiveTickColor = Color.Transparent,
-        inactiveTickColor = Color.Transparent
-      )
-    )
-    Divider()
-    SettingsSlider(
-      enabled = enabledState.value,
-      state = settingColors,
-      icon = {
-        Icon(imageVector = Icons.Default.Colorize, contentDescription = "Custom colors")
-      },
-      title = { Text(text = "Custom colors") },
-      steps = 4,
-      colors = SliderDefaults.colors(
-        thumbColor = Color.Green,
-        activeTrackColor = Color.Blue,
-        inactiveTrackColor = Color.Yellow,
-        activeTickColor = Color.Red
-      )
-    )
-  }
+        )
+    }
 }

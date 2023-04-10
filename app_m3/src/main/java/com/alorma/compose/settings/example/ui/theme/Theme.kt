@@ -11,24 +11,24 @@ import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun ComposeSettingsTheme(
-  darkThemePreference: Boolean,
-  dynamicThemePreference: Boolean,
-  content: @Composable () -> Unit,
+    darkThemePreference: Boolean,
+    dynamicThemePreference: Boolean,
+    content: @Composable () -> Unit
 ) {
-  MaterialTheme(
-    colorScheme = if (Build.VERSION.SDK_INT >= 31 && dynamicThemePreference) {
-      if (darkThemePreference) {
-        dynamicDarkColorScheme(LocalContext.current)
-      } else {
-        dynamicLightColorScheme(LocalContext.current)
-      }
-    } else {
-      if (darkThemePreference) {
-        darkColorScheme()
-      } else {
-        lightColorScheme()
-      }
-    },
-    content = content
-  )
+    MaterialTheme(
+        colorScheme = if (Build.VERSION.SDK_INT >= 31 && dynamicThemePreference) {
+            if (darkThemePreference) {
+                dynamicDarkColorScheme(LocalContext.current)
+            } else {
+                dynamicLightColorScheme(LocalContext.current)
+            }
+        } else {
+            if (darkThemePreference) {
+                darkColorScheme()
+            } else {
+                lightColorScheme()
+            }
+        },
+        content = content
+    )
 }

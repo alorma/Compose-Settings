@@ -13,11 +13,11 @@ import androidx.compose.ui.unit.dp
 internal fun RowScope.SettingsTileTexts(
     modifier: Modifier = Modifier,
     title: @Composable () -> Unit,
-    subtitle: @Composable (() -> Unit)?,
+    subtitle: @Composable (() -> Unit)?
 ) {
     Column(
         modifier = Modifier,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Center
     ) {
         SettingsTileTitle(title)
         if (subtitle != null) {

@@ -25,109 +25,110 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MenuLinksScreen(
-  navController: NavController = rememberNavController(),
+    navController: NavController = rememberNavController()
 ) {
-  val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarHostState = remember { SnackbarHostState() }
 
-  val enabledState = rememberBooleanSettingState(true)
+    val enabledState = rememberBooleanSettingState(true)
 
-  AppScaffold(
-    navController = navController,
-    enabledState = enabledState,
-    title = { Text(text = "Menu links") },
-    snackbarHostState = snackbarHostState,
-  ) {
-    DefaultTiles(enabledState.value, snackbarHostState)
-  }
+    AppScaffold(
+        navController = navController,
+        enabledState = enabledState,
+        title = { Text(text = "Menu links") },
+        snackbarHostState = snackbarHostState
+    ) {
+        DefaultTiles(enabledState.value, snackbarHostState)
+    }
 }
 
 @Composable
 private fun DefaultTiles(
-  enabled: Boolean,
-  snackbarHostState: SnackbarHostState
+    enabled: Boolean,
+    snackbarHostState: SnackbarHostState
 ) {
-  val coroutineScope = rememberCoroutineScope()
-  SettingsGroup(
-    title = { Text(text = "Default tiles") }
-  ) {
-    SettingsMenuLink(
-      enabled = enabled,
-      title = { Text(text = "Menu 1") },
-      subtitle = { Text(text = "Subtitle of menu 1") },
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
-        )
-      }
+    val coroutineScope = rememberCoroutineScope()
+    SettingsGroup(
+        title = { Text(text = "Default tiles") }
     ) {
-      coroutineScope.launch {
-        snackbarHostState.showSnackbar(message = "Click on menu 1")
-      }
-    }
-
-    Divider()
-    SettingsMenuLink(
-      enabled = enabled,
-      title = { Text(text = "Menu 2") },
-      subtitle = { Text(text = "Without icon") },
-      action = { enabled ->
-        IconButton(
-          enabled = enabled,
-          onClick = {
-            coroutineScope.launch {
-              snackbarHostState.showSnackbar(message = "Action click")
+        SettingsMenuLink(
+            enabled = enabled,
+            title = { Text(text = "Menu 1") },
+            subtitle = { Text(text = "Subtitle of menu 1") },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Menu 1"
+                )
             }
-          }
         ) {
-          Icon(
-            imageVector = Icons.Default.ArrowForward,
-            contentDescription = null,
-          )
-        }
-      },
-    ) {
-      coroutineScope.launch {
-        snackbarHostState.showSnackbar(message = "Click on menu 2")
-      }
-    }
-    Divider()
-    SettingsMenuLink(
-      enabled = enabled,
-      title = { Text(text = "Menu 3") }, icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Menu 1"
-        )
-      }
-    ) {
-      coroutineScope.launch {
-        snackbarHostState.showSnackbar(message = "Click on menu 3")
-      }
-    }
-    Divider()
-    var rememberCheckBoxState by remember { mutableStateOf(true) }
-    SettingsMenuLink(
-      enabled = enabled,
-      title = { Text(text = "Menu 4") },
-      action = { enabled ->
-        Checkbox(
-          enabled = enabled,
-          checked = rememberCheckBoxState,
-          onCheckedChange = { newState ->
-            rememberCheckBoxState = newState
             coroutineScope.launch {
-              snackbarHostState.showSnackbar(
-                message = "Checkbox update to: $newState"
-              )
+                snackbarHostState.showSnackbar(message = "Click on menu 1")
             }
-          }
-        )
-      },
-    ) {
-      coroutineScope.launch {
-        snackbarHostState.showSnackbar(message = "Click on menu 4")
-      }
+        }
+
+        Divider()
+        SettingsMenuLink(
+            enabled = enabled,
+            title = { Text(text = "Menu 2") },
+            subtitle = { Text(text = "Without icon") },
+            action = { enabled ->
+                IconButton(
+                    enabled = enabled,
+                    onClick = {
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message = "Action click")
+                        }
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = null
+                    )
+                }
+            }
+        ) {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(message = "Click on menu 2")
+            }
+        }
+        Divider()
+        SettingsMenuLink(
+            enabled = enabled,
+            title = { Text(text = "Menu 3") },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Menu 1"
+                )
+            }
+        ) {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(message = "Click on menu 3")
+            }
+        }
+        Divider()
+        var rememberCheckBoxState by remember { mutableStateOf(true) }
+        SettingsMenuLink(
+            enabled = enabled,
+            title = { Text(text = "Menu 4") },
+            action = { enabled ->
+                Checkbox(
+                    enabled = enabled,
+                    checked = rememberCheckBoxState,
+                    onCheckedChange = { newState ->
+                        rememberCheckBoxState = newState
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "Checkbox update to: $newState"
+                            )
+                        }
+                    }
+                )
+            }
+        ) {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(message = "Click on menu 4")
+            }
+        }
     }
-  }
 }

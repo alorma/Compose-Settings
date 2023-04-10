@@ -22,80 +22,80 @@ import com.alorma.compose.settings.ui.SettingsListMultiSelect
 
 @Composable
 fun ListScreen(
-  navController: NavController = rememberNavController(),
+    navController: NavController = rememberNavController()
 ) {
+    val localContext = LocalContext.current
+    val enabledState = rememberBooleanSettingState(true)
 
-  val localContext = LocalContext.current
-  val enabledState = rememberBooleanSettingState(true)
+    AppScaffold(
+        enabledState = enabledState,
+        navController = navController,
+        title = { Text(text = "List") }
+    ) {
+        val singleChoiceState = rememberPreferenceDataStoreIntSettingState(key = "list_pref_1")
+        SettingsList(
+            enabled = enabledState.value,
+            state = singleChoiceState,
+            title = { Text(text = "Single choice") },
+            subtitle = { Text(text = "Select a fruit") },
+            items = listOf("Banana", "Kiwi", "Pineapple"),
+            action = { enabled ->
+                IconButton(
+                    enabled = enabled,
+                    onClick = { singleChoiceState.reset() }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = "Clear"
+                    )
+                }
+            },
+            onItemSelected = { _, text ->
+                Toast.makeText(localContext, "Selected Item: $text", Toast.LENGTH_SHORT).show()
+            }
+        )
+        Divider()
+        val multiChoiceState =
+            rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
+        SettingsListMultiSelect(
+            enabled = enabledState.value,
+            state = multiChoiceState,
+            title = { Text(text = "Multi choice") },
+            subtitle = { Text(text = "Select multiple fruits") },
+            items = listOf("Banana", "Kiwi", "Pineapple"),
+            action = { enabled ->
+                IconButton(
+                    enabled = enabled,
+                    onClick = { multiChoiceState.reset() }
 
-  AppScaffold(
-    enabledState = enabledState,
-    navController = navController,
-    title = { Text(text = "List") },
-  ) {
-    val singleChoiceState = rememberPreferenceDataStoreIntSettingState(key = "list_pref_1")
-    SettingsList(
-      enabled = enabledState.value,
-      state = singleChoiceState,
-      title = { Text(text = "Single choice") },
-      subtitle = { Text(text = "Select a fruit") },
-      items = listOf("Banana", "Kiwi", "Pineapple"),
-      action = { enabled ->
-        IconButton(
-          enabled = enabled,
-          onClick = { singleChoiceState.reset() }
-        ) {
-          Icon(
-            imageVector = Icons.Default.Clear,
-            contentDescription = "Clear",
-          )
-        }
-      },
-      onItemSelected = { _, text ->
-        Toast.makeText(localContext, "Selected Item: $text", Toast.LENGTH_SHORT).show()
-      }
-    )
-    Divider()
-    val multiChoiceState =
-      rememberPreferenceIntSetSettingState(key = "list_pref_2", defaultValue = setOf(1, 2))
-    SettingsListMultiSelect(
-      enabled = enabledState.value,
-      state = multiChoiceState,
-      title = { Text(text = "Multi choice") },
-      subtitle = { Text(text = "Select multiple fruits") },
-      items = listOf("Banana", "Kiwi", "Pineapple"),
-      action = { enabled ->
-        IconButton(
-          enabled = enabled,
-          onClick = { multiChoiceState.reset() },
-
-          ) {
-          Icon(
-            imageVector = Icons.Default.Clear,
-            contentDescription = "Clear",
-          )
-        }
-      },
-      confirmButton = "Select",
-      onItemsSelected = { items ->
-        Toast.makeText(
-          localContext,
-          "Selected Item: ${items.joinToString(", ")}", Toast.LENGTH_SHORT
-        ).show()
-      }
-    )
-    Divider()
-    val dropdownChoiceState =
-      rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
-    SettingsListDropdown(
-      enabled = enabledState.value,
-      state = dropdownChoiceState,
-      title = { Text(text = "Dropdown choice") },
-      subtitle = { Text(text = "Select a single fruit") },
-      items = listOf("Banana", "Kiwi", "Pineapple"),
-      onItemSelected = { _, text ->
-        Toast.makeText(localContext, "Selected Item: $text", Toast.LENGTH_SHORT).show()
-      }
-    )
-  }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = "Clear"
+                    )
+                }
+            },
+            confirmButton = "Select",
+            onItemsSelected = { items ->
+                Toast.makeText(
+                    localContext,
+                    "Selected Item: ${items.joinToString(", ")}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+        Divider()
+        val dropdownChoiceState =
+            rememberPreferenceIntSettingState(key = "dropdown_list_pref_1", defaultValue = 0)
+        SettingsListDropdown(
+            enabled = enabledState.value,
+            state = dropdownChoiceState,
+            title = { Text(text = "Dropdown choice") },
+            subtitle = { Text(text = "Select a single fruit") },
+            items = listOf("Banana", "Kiwi", "Pineapple"),
+            onItemSelected = { _, text ->
+                Toast.makeText(localContext, "Selected Item: $text", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
 }

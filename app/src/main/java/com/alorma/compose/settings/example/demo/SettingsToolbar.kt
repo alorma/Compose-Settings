@@ -14,48 +14,48 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun SettingsToolbar(
-  title: @Composable () -> Unit,
-  onBack: (() -> Unit)? = null,
-  showSettings: Boolean = true,
-  enabledState: Boolean = true,
-  onEnabledChange: (Boolean) -> Unit,
-  onNavigateSettings: () -> Unit,
+    title: @Composable () -> Unit,
+    onBack: (() -> Unit)? = null,
+    showSettings: Boolean = true,
+    enabledState: Boolean = true,
+    onEnabledChange: (Boolean) -> Unit,
+    onNavigateSettings: () -> Unit
 ) {
-  TopAppBar(
-    title = title,
-    navigationIcon = {
-      if (onBack != null) {
-        IconButton(onClick = { onBack.invoke() }) {
-          Icon(
-            imageVector = Icons.Default.ArrowBack,
-            contentDescription = null,
-          )
+    TopAppBar(
+        title = title,
+        navigationIcon = {
+            if (onBack != null) {
+                IconButton(onClick = { onBack.invoke() }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
+        actions = {
+            Switch(checked = enabledState, onCheckedChange = {
+                onEnabledChange(it)
+            })
+            if (showSettings) {
+                IconButton(onClick = onNavigateSettings) {
+                    Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
+                }
+            }
         }
-      }
-    },
-    actions = {
-      Switch(checked = enabledState, onCheckedChange = {
-        onEnabledChange(it)
-      })
-      if (showSettings) {
-        IconButton(onClick = onNavigateSettings) {
-          Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
-        }
-      }
-    },
-  )
+    )
 }
 
 @Preview
 @Composable
 fun SearchToolbarPreview() {
-  MaterialTheme {
-    SettingsToolbar(
-      title = { Text(text = "Title") },
-      onBack = {},
-      enabledState = true,
-      onNavigateSettings = {},
-      onEnabledChange = {},
-    )
-  }
+    MaterialTheme {
+        SettingsToolbar(
+            title = { Text(text = "Title") },
+            onBack = {},
+            enabledState = true,
+            onNavigateSettings = {},
+            onEnabledChange = {}
+        )
+    }
 }

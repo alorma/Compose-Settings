@@ -15,7 +15,7 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 fun rememberPreferenceBooleanSettingState(
     key: String,
     defaultValue: Boolean,
-    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
+    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current)
 ): BooleanPreferenceSettingValueState {
     return remember {
         BooleanPreferenceSettingValueState(
@@ -29,7 +29,7 @@ fun rememberPreferenceBooleanSettingState(
 class BooleanPreferenceSettingValueState(
     private val preferences: SharedPreferences,
     val key: String,
-    val defaultValue: Boolean = false,
+    val defaultValue: Boolean = false
 ) : SettingValueState<Boolean> {
 
     private var _value by mutableStateOf(preferences.getBoolean(key, defaultValue))
