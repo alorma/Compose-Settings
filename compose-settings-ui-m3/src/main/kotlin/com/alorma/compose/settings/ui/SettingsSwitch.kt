@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.compose.settings.storage.base.SettingValueState
@@ -33,6 +34,7 @@ fun SettingsSwitch(
   subtitle: @Composable (() -> Unit)? = null,
   switchColors: SwitchColors = SwitchDefaults.colors(),
   onCheckedChange: (Boolean) -> Unit = {},
+  containerColor: Color = MaterialTheme.colorScheme.surface
 ) {
   var storageValue by state
   val update: (Boolean) -> Unit = { boolean ->
@@ -64,6 +66,7 @@ fun SettingsSwitch(
             colors = switchColors,
           )
         },
+        containerColor = containerColor
       )
     }
   }

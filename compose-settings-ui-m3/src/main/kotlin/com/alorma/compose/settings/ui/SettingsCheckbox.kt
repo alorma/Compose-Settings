@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.compose.settings.storage.base.SettingValueState
@@ -34,6 +35,7 @@ fun SettingsCheckbox(
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
   onCheckedChange: (Boolean) -> Unit = {},
+  containerColor: Color = MaterialTheme.colorScheme.surface
 ) {
   var storageValue by state
   val update: (Boolean) -> Unit = { boolean ->
@@ -65,6 +67,7 @@ fun SettingsCheckbox(
             colors = checkboxColors
           )
         },
+        containerColor = containerColor
       )
     }
   }

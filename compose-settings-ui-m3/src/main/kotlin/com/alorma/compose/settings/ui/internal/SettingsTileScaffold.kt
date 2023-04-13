@@ -5,9 +5,12 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -19,6 +22,7 @@ internal fun SettingsTileScaffold(
   icon: (@Composable () -> Unit)? = null,
   action: (@Composable (Boolean) -> Unit)? = null,
   actionDivider: Boolean = false,
+  containerColor: Color = MaterialTheme.colorScheme.surface
 ) {
   val minHeight = if (subtitle == null) 72.dp else 88.dp
   ListItem(
@@ -77,6 +81,9 @@ internal fun SettingsTileScaffold(
         }
       }
     },
+    colors = ListItemDefaults.colors(
+      containerColor = containerColor
+    )
   )
 }
 

@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberIntSettingState
@@ -36,6 +38,7 @@ fun SettingsListDropdown(
   subtitle: (@Composable () -> Unit)? = null,
   onItemSelected: ((Int, String) -> Unit)? = null,
   menuItem: (@Composable (index: Int, text: String) -> Unit)? = null,
+  containerColor: Color = MaterialTheme.colorScheme.surface
 ) {
   if (state.value > items.size) {
     throw IndexOutOfBoundsException("Current value of state for list setting cannot be grater than items size")
@@ -45,7 +48,8 @@ fun SettingsListDropdown(
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
     Row(
-      modifier = modifier.fillMaxWidth()
+      modifier = modifier
+        .fillMaxWidth()
         .clickable(enabled = enabled) { isDropdownExpanded = true },
       verticalAlignment = Alignment.CenterVertically
     ) {
@@ -95,6 +99,7 @@ fun SettingsListDropdown(
             }
           }
         },
+        containerColor = containerColor
       )
     }
   }

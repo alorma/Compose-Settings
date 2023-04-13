@@ -4,12 +4,14 @@ import androidx.annotation.IntRange
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -24,7 +26,8 @@ internal fun SettingsTileSlider(
   @IntRange(from = 0) steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  colors: SliderColors = SliderDefaults.colors()
+  colors: SliderColors = SliderDefaults.colors(),
+  containerColor: Color = MaterialTheme.colorScheme.surface
 ) {
 
   SettingsTileScaffold(
@@ -52,5 +55,6 @@ internal fun SettingsTileSlider(
       }
     },
     icon = icon,
+    containerColor = containerColor
   )
 }

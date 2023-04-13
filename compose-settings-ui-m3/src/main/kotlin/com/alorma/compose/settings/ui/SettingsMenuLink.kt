@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
@@ -28,6 +29,7 @@ fun SettingsMenuLink(
   title: @Composable () -> Unit,
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable (Boolean) -> Unit)? = null,
+  containerColor: Color = MaterialTheme.colorScheme.surface,
   onClick: () -> Unit,
 ) {
   Surface {
@@ -46,6 +48,7 @@ fun SettingsMenuLink(
         icon = icon,
         action = action,
         actionDivider = true,
+        containerColor = containerColor
       )
     }
   }
