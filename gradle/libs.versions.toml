@@ -10,7 +10,7 @@ dataStore = "1.1.0-alpha04"
 protobuf = "3.22.3"
 
 [libraries]
-androidx-activity-compose = "androidx.activity:activity-compose:1.7.0"
+androidx-activity-compose = "androidx.activity:activity-compose:1.7.1"
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxnavigation" }
 androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidxpreference" }
