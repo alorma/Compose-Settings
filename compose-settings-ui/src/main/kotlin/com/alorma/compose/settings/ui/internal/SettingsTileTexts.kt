@@ -16,7 +16,7 @@ internal fun RowScope.SettingsTileTexts(
     subtitle: @Composable (() -> Unit)?,
 ) {
     Column(
-        modifier = Modifier,
+        modifier = modifier,
         verticalArrangement = Arrangement.Center,
     ) {
         SettingsTileTitle(title)

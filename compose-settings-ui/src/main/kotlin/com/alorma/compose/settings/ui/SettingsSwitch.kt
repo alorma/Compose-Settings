@@ -1,7 +1,6 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
@@ -59,8 +58,7 @@ fun SettingsSwitch(
     ) {
       WrapContentColor(enabled = enabled) {
         SettingsTileIcon(icon = icon)
-        SettingsTileTexts(title = title, subtitle = subtitle)
-        Spacer(modifier = Modifier.weight(1f))
+        SettingsTileTexts(modifier = Modifier.weight(1f), title = title, subtitle = subtitle)
         SettingsTileAction {
           Switch(
             checked = storageValue,
