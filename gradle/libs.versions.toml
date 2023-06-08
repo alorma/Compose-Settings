@@ -1,5 +1,5 @@
 [versions]
-androidxnavigation = "2.5.3"
+androidxnavigation = "2.6.0"
 androidxpreference = "1.2.0"
 compose = "2023.05.00"
 composeMaterial3 = "1.0.1"
