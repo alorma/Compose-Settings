@@ -1,9 +1,9 @@
 [versions]
-androidxnavigation = "2.5.3"
-androidxpreference = "1.2.0"
-compose = "2023.05.00"
+androidxnavigation = "2.7.0"
+androidxpreference = "1.2.1"
+compose = "2023.08.00"
 composeMaterial3 = "1.0.1"
-composeCompiler = "1.4.2"
+composeCompiler = "1.5.1"
 gradlePlugin = "7.4.2"
 kotlin = "1.8.10"
 dataStore = "1.1.0-alpha04"
