@@ -20,12 +20,12 @@ import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.ui.internal.SettingsTileSlider
 
 @Composable
-fun SettingsSlider(
+fun <T : Number> SettingsSlider(
   modifier: Modifier = Modifier,
-  state: SettingValueState<Float> = rememberFloatSettingState(),
+  state: SettingValueState<T>,
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
-  onValueChange: (Float) -> Unit = {},
+  onValueChange: (T) -> Unit = {},
   sliderModifier: Modifier = Modifier,
   enabled: Boolean = true,
   valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
