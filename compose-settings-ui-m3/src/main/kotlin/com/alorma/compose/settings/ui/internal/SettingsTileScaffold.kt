@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SettingsTileScaffold(
   enabled: Boolean = true,
@@ -25,12 +24,12 @@ internal fun SettingsTileScaffold(
     modifier = Modifier
       .height(IntrinsicSize.Min)
       .defaultMinSize(minHeight = minHeight),
-    headlineText = {
+    headlineContent = {
       WrapContentColor(enabled = enabled) {
         title()
       }
     },
-    supportingText = if (subtitle == null) {
+    supportingContent = if (subtitle == null) {
       null
     } else {
       {
