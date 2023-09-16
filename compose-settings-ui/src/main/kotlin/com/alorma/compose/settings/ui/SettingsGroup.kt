@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 fun SettingsGroup(
     modifier: Modifier = Modifier,
     title: @Composable (() -> Unit)? = null,
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Surface {
         Column(
-            modifier = modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth(),
         ) {
             if (title != null) {
                 SettingsGroupTitle(title)
@@ -60,7 +60,7 @@ internal fun SettingsGroupPreview() {
                 modifier = Modifier
                     .height(64.dp)
                     .fillMaxWidth(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Text(text = "Settings group")
             }

@@ -13,35 +13,35 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
 fun rememberPreferenceIntSettingState(
-    key: String,
-    defaultValue: Int = -1,
-    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current)
+  key: String,
+  defaultValue: Int = -1,
+  preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
 ): IntPreferenceSettingValueState {
-    return remember {
-        IntPreferenceSettingValueState(
-            key = key,
-            preferences = preferences,
-            defaultValue = defaultValue
-        )
-    }
+  return remember {
+    IntPreferenceSettingValueState(
+      key = key,
+      preferences = preferences,
+      defaultValue = defaultValue
+    )
+  }
 }
 
 class IntPreferenceSettingValueState(
-    private val preferences: SharedPreferences,
-    val key: String,
-    val defaultValue: Int = 0
+  private val preferences: SharedPreferences,
+  val key: String,
+  val defaultValue: Int = 0,
 ) : SettingValueState<Int> {
 
-    private var _value by mutableStateOf(preferences.getInt(key, defaultValue))
+  private var _value by mutableStateOf(preferences.getInt(key, defaultValue))
 
-    override var value: Int
-        set(value) {
-            _value = value
-            preferences.edit { putInt(key, value) }
-        }
-        get() = _value
-
-    override fun reset() {
-        value = defaultValue
+  override var value: Int
+    set(value) {
+      _value = value
+      preferences.edit { putInt(key, value) }
     }
+    get() = _value
+
+  override fun reset() {
+    value = defaultValue
+  }
 }

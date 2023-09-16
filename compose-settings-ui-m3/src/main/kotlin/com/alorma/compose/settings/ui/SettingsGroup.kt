@@ -18,52 +18,52 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SettingsGroup(
-    modifier: Modifier = Modifier,
-    title: @Composable (() -> Unit)? = null,
-    content: @Composable ColumnScope.() -> Unit
+  modifier: Modifier = Modifier,
+  title: @Composable (() -> Unit)? = null,
+  content: @Composable ColumnScope.() -> Unit,
 ) {
-    Surface {
-        Column(
-            modifier = modifier.fillMaxWidth()
-        ) {
-            if (title != null) {
-                SettingsGroupTitle(title)
-            }
-            content()
-        }
+  Surface {
+    Column(
+      modifier = modifier.fillMaxWidth(),
+    ) {
+      if (title != null) {
+        SettingsGroupTitle(title)
+      }
+      content()
     }
+  }
 }
 
 @Composable
 internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp)
-            .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.CenterStart
-    ) {
-        val primary = MaterialTheme.colorScheme.primary
-        val titleStyle = MaterialTheme.typography.headlineMedium.copy(color = primary)
-        ProvideTextStyle(value = titleStyle) { title() }
-    }
+  Box(
+    modifier = Modifier
+      .fillMaxWidth()
+      .height(64.dp)
+      .padding(horizontal = 16.dp),
+    contentAlignment = Alignment.CenterStart
+  ) {
+    val primary = MaterialTheme.colorScheme.primary
+    val titleStyle = MaterialTheme.typography.headlineMedium.copy(color = primary)
+    ProvideTextStyle(value = titleStyle) { title() }
+  }
 }
 
 @Preview
 @Composable
 internal fun SettingsGroupPreview() {
-    MaterialTheme {
-        SettingsGroup(
-            title = { Text(text = "Title") }
-        ) {
-            Box(
-                modifier = Modifier
-                    .height(64.dp)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = "Settings group")
-            }
-        }
+  MaterialTheme {
+    SettingsGroup(
+      title = { Text(text = "Title") }
+    ) {
+      Box(
+        modifier = Modifier
+          .height(64.dp)
+          .fillMaxWidth(),
+        contentAlignment = Alignment.Center,
+      ) {
+        Text(text = "Settings group")
+      }
     }
+  }
 }

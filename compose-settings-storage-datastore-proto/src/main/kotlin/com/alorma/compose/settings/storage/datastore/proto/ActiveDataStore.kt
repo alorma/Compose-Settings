@@ -12,14 +12,14 @@ object ActiveDataStore {
 
     @Deprecated(
         message = "This property is for Compose-Settings library.",
-        level = DeprecationLevel.WARNING
+        level = DeprecationLevel.WARNING,
     )
     @Synchronized
     fun getActiveDataStores() = lock.read { ACTIVE_DATASTORES }
 
     @Deprecated(
         message = "This property is for Compose-Settings library.",
-        level = DeprecationLevel.WARNING
+        level = DeprecationLevel.WARNING,
     )
     @Synchronized
     fun <T : Any> addActiveDataStore(dataStore: DataStore<T>, kClass: KClass<T>) {

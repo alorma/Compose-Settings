@@ -13,35 +13,35 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
 fun rememberPreferenceFloatSettingState(
-    key: String,
-    defaultValue: Float = 0f,
-    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current)
+  key: String,
+  defaultValue: Float = 0f,
+  preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
 ): FloatPreferenceSettingValueState {
-    return remember {
-        FloatPreferenceSettingValueState(
-            key = key,
-            preferences = preferences,
-            defaultValue = defaultValue
-        )
-    }
+  return remember {
+    FloatPreferenceSettingValueState(
+      key = key,
+      preferences = preferences,
+      defaultValue = defaultValue
+    )
+  }
 }
 
 class FloatPreferenceSettingValueState(
-    private val preferences: SharedPreferences,
-    val key: String,
-    val defaultValue: Float = 0f
+  private val preferences: SharedPreferences,
+  val key: String,
+  val defaultValue: Float = 0f,
 ) : SettingValueState<Float> {
 
-    private var _value by mutableStateOf(preferences.getFloat(key, defaultValue))
+  private var _value by mutableStateOf(preferences.getFloat(key, defaultValue))
 
-    override var value: Float
-        set(value) {
-            _value = value
-            preferences.edit { putFloat(key, value) }
-        }
-        get() = _value
-
-    override fun reset() {
-        value = defaultValue
+  override var value: Float
+    set(value) {
+      _value = value
+      preferences.edit { putFloat(key, value) }
     }
+    get() = _value
+
+  override fun reset() {
+    value = defaultValue
+  }
 }

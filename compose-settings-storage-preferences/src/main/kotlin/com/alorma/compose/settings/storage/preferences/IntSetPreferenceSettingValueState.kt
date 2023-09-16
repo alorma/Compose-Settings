@@ -13,50 +13,50 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
 fun rememberPreferenceIntSetSettingState(
-    key: String,
-    defaultValue: Set<Int> = emptySet(),
-    delimiter: String = "|",
-    preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current)
+  key: String,
+  defaultValue: Set<Int> = emptySet(),
+  delimiter: String = "|",
+  preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
 ): IntSetPreferenceSettingValueState {
-    return remember {
-        IntSetPreferenceSettingValueState(
-            key = key,
-            preferences = preferences,
-            defaultValue = defaultValue,
-            delimiter = delimiter
-        )
-    }
+  return remember {
+    IntSetPreferenceSettingValueState(
+      key = key,
+      preferences = preferences,
+      defaultValue = defaultValue,
+      delimiter = delimiter,
+    )
+  }
 }
 
 class IntSetPreferenceSettingValueState(
-    private val preferences: SharedPreferences,
-    val key: String,
-    val defaultValue: Set<Int> = emptySet(),
-    val delimiter: String = "|"
+  private val preferences: SharedPreferences,
+  val key: String,
+  val defaultValue: Set<Int> = emptySet(),
+  val delimiter: String = "|",
 ) : SettingValueState<Set<Int>> {
 
-    private var _value by mutableStateOf(
-        preferences.getString(key, defaultValue.toPrefString(delimiter))
-            .orEmpty()
-            .split(delimiter)
-            .filter { it.isNotEmpty() }
-            .map { it.toInt() }
-            .toMutableSet()
-    )
+  private var _value by mutableStateOf(
+    preferences.getString(key, defaultValue.toPrefString(delimiter))
+      .orEmpty()
+      .split(delimiter)
+      .filter { it.isNotEmpty() }
+      .map { it.toInt() }
+      .toMutableSet()
+  )
 
-    override var value: Set<Int>
-        set(value) {
-            _value = value.toSortedSet()
-            preferences.edit {
-                putString(key, value.toPrefString(delimiter))
-            }
-        }
-        get() = _value
-
-    private fun Set<Int>.toPrefString(delimiter: String) =
-        joinToString(separator = delimiter) { it.toString() }
-
-    override fun reset() {
-        value = defaultValue
+  override var value: Set<Int>
+    set(value) {
+      _value = value.toSortedSet()
+      preferences.edit {
+        putString(key, value.toPrefString(delimiter))
+      }
     }
+    get() = _value
+
+  private fun Set<Int>.toPrefString(delimiter: String) =
+    joinToString(separator = delimiter) { it.toString() }
+
+  override fun reset() {
+    value = defaultValue
+  }
 }
