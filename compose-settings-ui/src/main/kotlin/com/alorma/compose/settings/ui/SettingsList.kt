@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -67,6 +69,7 @@ fun SettingsList(
   if (!showDialog) return
 
   val coroutineScope = rememberCoroutineScope()
+  val scrollState = rememberScrollState()
   val onSelected: (Int, Boolean) -> Unit = { selectedIndex, updateState ->
     coroutineScope.launch {
       if (updateState) state.value = selectedIndex
@@ -80,7 +83,9 @@ fun SettingsList(
     text = subtitle,
     onDismissRequest = { showDialog = false },
     buttons = {
-      Column {
+      Column(
+        modifier = Modifier.verticalScroll(scrollState)
+      ) {
         items.forEachIndexed { index, item ->
           val isSelected by rememberUpdatedState(newValue = state.value == index)
           Row(

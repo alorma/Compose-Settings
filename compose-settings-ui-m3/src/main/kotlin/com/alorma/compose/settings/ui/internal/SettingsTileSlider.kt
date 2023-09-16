@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun SettingsTileSlider(
+internal fun <T : Number> SettingsTileSlider(
   title: @Composable () -> Unit,
-  value: Float,
-  onValueChange: (Float) -> Unit,
+  value: T,
+  onValueChange: (T) -> Unit,
   modifier: Modifier = Modifier,
   icon: (@Composable () -> Unit)? = null,
   enabled: Boolean = true,
@@ -37,8 +37,11 @@ internal fun SettingsTileSlider(
           .then(modifier)
       ) {
         Slider(
-          value = value,
-          onValueChange = onValueChange,
+          value = value.toFloat(),
+          onValueChange = { value ->
+            @Suppress("UNCHECKED_CAST")
+            onValueChange(value as T)
+          },
           modifier = Modifier
             .padding(end = 16.dp)
             .then(modifier),

@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun RowScope.SettingsTileSlider(
+internal fun <T: Number> RowScope.SettingsTileSlider(
     title: @Composable () -> Unit,
-    value: Float,
-    onValueChange: (Float) -> Unit,
+    value: T,
+    onValueChange: (T) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
@@ -27,8 +27,11 @@ internal fun RowScope.SettingsTileSlider(
 ) {
     SettingsTileTexts(title = title, subtitle = {
         Slider(
-            value = value,
-            onValueChange = onValueChange,
+            value = value.toFloat(),
+            onValueChange = { value ->
+                @Suppress("UNCHECKED_CAST")
+                onValueChange(value as T)
+            },
             modifier = Modifier
                 .padding(end = 16.dp)
                 .then(modifier),

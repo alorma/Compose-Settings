@@ -8,11 +8,11 @@ ext["PUBLISH_ARTIFACT_ID"] = "compose-settings-storage-datastore-proto"
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 android {
-  compileSdk = 33
+  compileSdk = 34
 
   defaultConfig {
     minSdk = 21
-    targetSdk = 33
+    targetSdk = 34
   }
 
   buildTypes {

@@ -18,13 +18,14 @@ import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreFloatSettingState
+import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreIntSettingState
 import com.alorma.compose.settings.ui.SettingsSlider
 
 @Composable
 fun SlidersScreen(navController: NavHostController) {
   val settingBrightness = rememberPreferenceDataStoreFloatSettingState(key = "brightness", defaultValue = 0f)
   val settingVolume = rememberPreferenceDataStoreFloatSettingState(key = "volume", defaultValue = 0f)
-  val settingColors = rememberPreferenceDataStoreFloatSettingState(key = "colors", defaultValue = 0f)
+  val settingColors = rememberPreferenceDataStoreIntSettingState(key = "colors", defaultValue = 0)
 
   val enabledState = rememberBooleanSettingState(true)
 

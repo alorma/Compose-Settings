@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -45,6 +47,7 @@ fun SettingsListMultiSelect(
   }
 
   var showDialog by remember { mutableStateOf(false) }
+  val scrollState = rememberScrollState()
 
   val safeSubtitle = if (state.value.size >= 0 && useSelectedValuesAsSubtitle) {
     {
@@ -79,7 +82,9 @@ fun SettingsListMultiSelect(
   AlertDialog(
     title = title,
     text = {
-      Column {
+      Column(
+        modifier = Modifier.verticalScroll(scrollState)
+      ) {
         if (subtitle != null) {
           subtitle()
           Spacer(modifier = Modifier.size(8.dp))

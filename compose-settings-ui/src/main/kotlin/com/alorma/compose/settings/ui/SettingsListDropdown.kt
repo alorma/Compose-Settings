@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
@@ -41,6 +43,7 @@ fun SettingsListDropdown(
   if (state.value > items.size) {
     throw IndexOutOfBoundsException("Current value of state for list setting cannot be grater than items size")
   }
+  val scrollState = rememberScrollState()
 
   Surface {
     WrapContentColor(enabled = enabled) {
@@ -64,6 +67,7 @@ fun SettingsListDropdown(
 
         Column(
           modifier = Modifier.padding(end = 8.dp)
+            .verticalScroll(scrollState)
         ) {
           Row(
             modifier = Modifier
