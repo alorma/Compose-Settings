@@ -22,7 +22,7 @@ jobs:
           java-version: 17
 
         # Builds the release artifacts of the library
-      - name: Release build
+      - name: Lint
         run: ./gradlew lintKotlin
   build:
     name: Build
