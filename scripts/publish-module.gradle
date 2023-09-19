@@ -1,19 +1,12 @@
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-tasks.register('androidSourcesJar', Jar) {
-    archiveClassifier.set('sources')
-    if (project.plugins.findPlugin("com.android.library")) {
-        from android.sourceSets.main.java.srcDirs
-        from android.sourceSets.main.kotlin.srcDirs
-    } else {
-        from sourceSets.main.java.srcDirs
-        from sourceSets.main.kotlin.srcDirs
-    }
-}
-
 tasks.register('javadocJar', Jar) {
     archiveClassifier.set('javadoc')
+}
+
+tasks.named("androidSourcesJar") {
+    dependsOn("generateMetadataFileForReleasePublication")
 }
 
 artifacts {
