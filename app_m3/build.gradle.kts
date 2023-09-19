@@ -49,8 +49,8 @@ dependencies {
 
   implementation(projects.composeSettingsStorageBase)
   implementation(projects.composeSettingsStoragePreferences)
-  implementation(projects.composeSettingsStorageDatastore)
-  implementation(projects.composeSettingsStorageDatastoreProto)
+  //implementation(projects.composeSettingsStorageDatastore)
+  //implementation(projects.composeSettingsStorageDatastoreProto)
 
   implementation(libs.androidx.datastore.preference.android)
   implementation(libs.androidx.datastore.proto.android)
