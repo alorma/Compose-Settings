@@ -9,7 +9,6 @@ android {
   defaultConfig {
     applicationId = "com.alorma.compose.settings.example"
     minSdk = 21
-    targetSdk = 34
     versionCode = 1
     versionName = "1.0"
   }
@@ -49,11 +48,6 @@ dependencies {
 
   implementation(projects.composeSettingsStorageBase)
   implementation(projects.composeSettingsStoragePreferences)
-  //implementation(projects.composeSettingsStorageDatastore)
-  //implementation(projects.composeSettingsStorageDatastoreProto)
-
-  implementation(libs.androidx.datastore.preference.android)
-  implementation(libs.androidx.datastore.proto.android)
 
   implementation(platform(libs.compose.bom))
   implementation(libs.androidx.activity.compose)
