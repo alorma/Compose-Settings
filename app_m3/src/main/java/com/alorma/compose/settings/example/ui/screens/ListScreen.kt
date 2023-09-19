@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreIntSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSettingState
 import com.alorma.compose.settings.ui.SettingsList
@@ -32,7 +31,7 @@ fun ListScreen(
         navController = navController,
         title = { Text(text = "List") },
     ) {
-        val singleChoiceState = rememberPreferenceDataStoreIntSettingState(key = "list_pref_1")
+        val singleChoiceState = rememberPreferenceIntSettingState(key = "list_pref_1")
         SettingsList(
             enabled = enabledState.value,
             state = singleChoiceState,

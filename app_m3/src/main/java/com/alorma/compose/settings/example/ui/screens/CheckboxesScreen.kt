@@ -13,7 +13,6 @@ import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.datastore.rememberPreferenceDataStoreBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import kotlinx.coroutines.CoroutineScope
@@ -74,7 +73,7 @@ fun CheckboxesScreen(navController: NavHostController) {
             },
         )
         Divider()
-        val preferenceDataStoreStorage = rememberPreferenceDataStoreBooleanSettingState(
+        val preferenceDataStoreStorage = rememberPreferenceBooleanSettingState(
             key = "checkbox_dataStore_preference",
             defaultValue = false,
         )
