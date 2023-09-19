@@ -34,32 +34,32 @@ fun AppScaffold(
   snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
   content: @Composable (ColumnScope.() -> Unit),
 ) {
-  val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-  Scaffold(
-    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-    topBar = {
-      if (title != null) {
-        SettingsToolbar(
-          title = title,
-          enabledState = enabledState.value,
-          onEnabledChange = { enabledState.value = it },
-          showSettings = showSettings,
-          onBack = onBack,
-          onNavigateSettings = { navController.navigate(route = Navigation.NAV_SETTINGS.first) },
-          scrollBehavior = scrollBehavior,
-        )
-      }
-    },
-    snackbarHost = {
-      SnackbarHost(hostState = snackbarHostState)
-    },
-  ) { innerPadding ->
-    Column(
-      modifier = Modifier
-          .consumeWindowInsets(innerPadding)
-          .fillMaxSize()
-          .padding(top = innerPadding.calculateTopPadding()),
-      content = content,
-    )
-  }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    Scaffold(
+      modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+      topBar = {
+        if (title != null) {
+          SettingsToolbar(
+            title = title,
+            enabledState = enabledState.value,
+            onEnabledChange = { enabledState.value = it },
+            showSettings = showSettings,
+            onBack = onBack,
+            onNavigateSettings = { navController.navigate(route = Navigation.NAV_SETTINGS.first) },
+            scrollBehavior = scrollBehavior,
+          )
+        }
+      },
+      snackbarHost = {
+        SnackbarHost(hostState = snackbarHostState)
+      },
+    ) { innerPadding ->
+      Column(
+        modifier = Modifier
+            .consumeWindowInsets(innerPadding)
+            .fillMaxSize()
+            .padding(top = innerPadding.calculateTopPadding()),
+        content = content,
+      )
+    }
 }
