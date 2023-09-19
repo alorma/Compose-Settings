@@ -2,74 +2,76 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 tasks.register('androidSourcesJar', Jar) {
-    archiveClassifier.set('sources')
-    if (project.plugins.findPlugin("com.android.library")) {
-        from android.sourceSets.main.java.srcDirs
-        from android.sourceSets.main.kotlin.srcDirs
-    } else {
-        from sourceSets.main.java.srcDirs
-        from sourceSets.main.kotlin.srcDirs
-    }
+  archiveClassifier.set('sources')
+  if (project.plugins.findPlugin("com.android.library")) {
+    from android.sourceSets.main.java.srcDirs
+    from android.sourceSets.main.kotlin.srcDirs
+  } else {
+    from sourceSets.main.java.srcDirs
+    from sourceSets.main.kotlin.srcDirs
+  }
 }
 
 tasks.register('javadocJar', Jar) {
-    archiveClassifier.set('javadoc')
+  archiveClassifier.set('javadoc')
 }
 
-tasks.named("androidSourcesJar") {
+afterEvaluate {
+  tasks.named("androidSourcesJar") {
     dependsOn("generateMetadataFileForReleasePublication")
+  }
 }
 
 artifacts {
-    archives androidSourcesJar
-    archives javadocJar
+  archives androidSourcesJar
+  archives javadocJar
 }
 
 group = project.property("libGroup")
 version = project.property("libVersion")
 
 afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId project.property("libGroup")
-                artifactId project.project.getName()
-                version project.property("libVersion")
-                if (project.plugins.findPlugin("com.android.library")) {
-                    from components.release
-                } else {
-                    artifact("$buildDir/libs/${project.getName()}-${version}.jar")
-                }
-
-                artifact androidSourcesJar
-                artifact javadocJar
-
-                pom {
-                    name = project.project.getName()
-                    description = 'Compose settings'
-                    url = 'https://github.com/alorma/Compose-Settings'
-                    licenses {
-                        license {
-                            name = 'Stream License'
-                            url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'alorma'
-                            name = 'Bernat Borrás'
-                            email = 'bernatbor15@gmail.com'
-                        }
-                    }
-                    scm {
-                        connection = 'scm:git:github.com/alorma/Compose-Settings.git'
-                        developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
-                        url = 'https://github.com/alorma/Compose-Settings/tree/main'
-                    }
-                }
-            }
+  publishing {
+    publications {
+      release(MavenPublication) {
+        groupId project.property("libGroup")
+        artifactId project.project.getName()
+        version project.property("libVersion")
+        if (project.plugins.findPlugin("com.android.library")) {
+          from components.release
+        } else {
+          artifact("$buildDir/libs/${project.getName()}-${version}.jar")
         }
+
+        artifact androidSourcesJar
+        artifact javadocJar
+
+        pom {
+          name = project.project.getName()
+          description = 'Compose settings'
+          url = 'https://github.com/alorma/Compose-Settings'
+          licenses {
+            license {
+              name = 'Stream License'
+              url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
+            }
+          }
+          developers {
+            developer {
+              id = 'alorma'
+              name = 'Bernat Borrás'
+              email = 'bernatbor15@gmail.com'
+            }
+          }
+          scm {
+            connection = 'scm:git:github.com/alorma/Compose-Settings.git'
+            developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
+            url = 'https://github.com/alorma/Compose-Settings/tree/main'
+          }
+        }
+      }
     }
+  }
 }
 
 ext["signing.keyId"] = rootProject.ext["signing.keyId"]
@@ -77,5 +79,5 @@ ext["signing.password"] = rootProject.ext["signing.password"]
 ext["signing.secretKeyRingFile"] = rootProject.ext["signing.secretKeyRingFile"]
 
 signing {
-    sign publishing.publications
+  sign publishing.publications
 }
