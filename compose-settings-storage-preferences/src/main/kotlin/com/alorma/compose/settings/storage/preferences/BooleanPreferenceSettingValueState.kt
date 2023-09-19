@@ -21,7 +21,7 @@ fun rememberPreferenceBooleanSettingState(
         BooleanPreferenceSettingValueState(
             preferences = preferences,
             key = key,
-            defaultValue = defaultValue
+            defaultValue = defaultValue,
         )
     }
 }

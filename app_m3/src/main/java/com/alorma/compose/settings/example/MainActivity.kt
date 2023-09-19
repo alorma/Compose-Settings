@@ -23,62 +23,61 @@ import com.alorma.compose.settings.example.ui.theme.ComposeSettingsTheme
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 
 class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val darkThemePreference = rememberPreferenceBooleanSettingState(
+                key = "darkThemePreference",
+                defaultValue = true,
+            )
 
-      val darkThemePreference = rememberPreferenceBooleanSettingState(
-        key = "darkThemePreference",
-        defaultValue = true,
-      )
+            val dynamicThemePreference = rememberPreferenceBooleanSettingState(
+                key = "dynamicThemePreference",
+                defaultValue = true,
+            )
 
-      val dynamicThemePreference = rememberPreferenceBooleanSettingState(
-        key = "dynamicThemePreference",
-        defaultValue = true,
-      )
-
-      val navController = rememberNavController()
-      ComposeSettingsTheme(
-        darkThemePreference = darkThemePreference.value,
-        dynamicThemePreference = dynamicThemePreference.value
-      ) {
-        Column(
-          modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
-        ) {
-          NavHost(
-            navController = navController,
-            startDestination = Navigation.NAV_TOP_SETTINGS.first,
-          ) {
-            composable(Navigation.NAV_TOP_SETTINGS.first) {
-              TopLevelScreen(navController = navController)
+            val navController = rememberNavController()
+            ComposeSettingsTheme(
+                darkThemePreference = darkThemePreference.value,
+                dynamicThemePreference = dynamicThemePreference.value,
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(color = MaterialTheme.colorScheme.background),
+                ) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = Navigation.NAV_TOP_SETTINGS.first,
+                    ) {
+                        composable(Navigation.NAV_TOP_SETTINGS.first) {
+                            TopLevelScreen(navController = navController)
+                        }
+                        composable(Navigation.NAV_MENU_LINKS.first) {
+                            MenuLinksScreen(navController = navController)
+                        }
+                        composable(Navigation.NAV_SWITCHES.first) {
+                            SwitchesScreen(navController = navController)
+                        }
+                        composable(Navigation.NAV_CHECKBOXES.first) {
+                            CheckboxesScreen(navController = navController)
+                        }
+                        composable(Navigation.NAV_SLIDERS.first) {
+                            SlidersScreen(navController = navController)
+                        }
+                        composable(Navigation.NAV_LIST.first) {
+                            ListScreen(navController = navController)
+                        }
+                        composable(Navigation.NAV_SETTINGS.first) {
+                            AppSettingsScreen(
+                                navController = navController,
+                                darkThemePreference = darkThemePreference,
+                                dynamicThemePreference = dynamicThemePreference,
+                            )
+                        }
+                    }
+                }
             }
-            composable(Navigation.NAV_MENU_LINKS.first) {
-              MenuLinksScreen(navController = navController)
-            }
-            composable(Navigation.NAV_SWITCHES.first) {
-              SwitchesScreen(navController = navController)
-            }
-            composable(Navigation.NAV_CHECKBOXES.first) {
-              CheckboxesScreen(navController = navController)
-            }
-            composable(Navigation.NAV_SLIDERS.first) {
-              SlidersScreen(navController = navController)
-            }
-            composable(Navigation.NAV_LIST.first) {
-              ListScreen(navController = navController)
-            }
-            composable(Navigation.NAV_SETTINGS.first) {
-              AppSettingsScreen(
-                navController = navController,
-                darkThemePreference = darkThemePreference,
-                dynamicThemePreference = dynamicThemePreference,
-              )
-            }
-          }
         }
-      }
     }
-  }
 }

@@ -20,70 +20,70 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SwitchesScreen(navController: NavHostController) {
-  val coroutineScope = rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
 
-  val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarHostState = remember { SnackbarHostState() }
 
-  val enabledState = rememberBooleanSettingState(true)
+    val enabledState = rememberBooleanSettingState(true)
 
-  AppScaffold(
-    enabledState = enabledState,
-    navController = navController,
-    title = { Text(text = "Switches") },
-    snackbarHostState = snackbarHostState,
-  ) {
-    val memoryStorage = rememberBooleanSettingState(defaultValue = false)
-    SettingsSwitch(
-      enabled = enabledState.value,
-      state = memoryStorage,
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Memory switch 1"
+    AppScaffold(
+        enabledState = enabledState,
+        navController = navController,
+        title = { Text(text = "Switches") },
+        snackbarHostState = snackbarHostState,
+    ) {
+        val memoryStorage = rememberBooleanSettingState(defaultValue = false)
+        SettingsSwitch(
+            enabled = enabledState.value,
+            state = memoryStorage,
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Memory switch 1",
+                )
+            },
+            title = { Text(text = "Memory") },
+            onCheckedChange = {
+                snackbarHostState.showChange(
+                    coroutineScope = coroutineScope,
+                    key = "Memory",
+                    state = memoryStorage,
+                )
+            },
         )
-      },
-      title = { Text(text = "Memory") },
-      onCheckedChange = {
-        snackbarHostState.showChange(
-          coroutineScope = coroutineScope,
-          key = "Memory",
-          state = memoryStorage
+        Divider()
+        val preferenceStorage = rememberPreferenceBooleanSettingState(
+            key = "switch_2",
+            defaultValue = false,
         )
-      },
-    )
-    Divider()
-    val preferenceStorage = rememberPreferenceBooleanSettingState(
-      key = "switch_2",
-      defaultValue = false,
-    )
-    SettingsSwitch(
-      enabled = enabledState.value,
-      state = preferenceStorage,
-      icon = {
-        Icon(
-          imageVector = Icons.Default.SortByAlpha,
-          contentDescription = "Preferences switch 1"
+        SettingsSwitch(
+            enabled = enabledState.value,
+            state = preferenceStorage,
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.SortByAlpha,
+                    contentDescription = "Preferences switch 1",
+                )
+            },
+            title = { Text(text = "Preferences") },
+            onCheckedChange = {
+                snackbarHostState.showChange(
+                    coroutineScope = coroutineScope,
+                    key = "Preferences",
+                    state = preferenceStorage,
+                )
+            },
         )
-      },
-      title = { Text(text = "Preferences") },
-      onCheckedChange = {
-        snackbarHostState.showChange(
-          coroutineScope = coroutineScope,
-          key = "Preferences",
-          state = preferenceStorage,
-        )
-      },
-    )
-  }
+    }
 }
 
 private fun SnackbarHostState.showChange(
-  coroutineScope: CoroutineScope,
-  key: String,
-  state: SettingValueState<Boolean>
+    coroutineScope: CoroutineScope,
+    key: String,
+    state: SettingValueState<Boolean>,
 ) {
-  coroutineScope.launch {
-    currentSnackbarData?.dismiss()
-    showSnackbar(message = "[$key]:  ${state.value}")
-  }
+    coroutineScope.launch {
+        currentSnackbarData?.dismiss()
+        showSnackbar(message = "[$key]:  ${state.value}")
+    }
 }

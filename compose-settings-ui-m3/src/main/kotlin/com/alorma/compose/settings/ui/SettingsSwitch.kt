@@ -25,61 +25,61 @@ import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsSwitch(
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  state: SettingValueState<Boolean> = rememberBooleanSettingState(),
-  icon: @Composable (() -> Unit)? = null,
-  title: @Composable () -> Unit,
-  subtitle: @Composable (() -> Unit)? = null,
-  switchColors: SwitchColors = SwitchDefaults.colors(),
-  onCheckedChange: (Boolean) -> Unit = {},
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    state: SettingValueState<Boolean> = rememberBooleanSettingState(),
+    icon: @Composable (() -> Unit)? = null,
+    title: @Composable () -> Unit,
+    subtitle: @Composable (() -> Unit)? = null,
+    switchColors: SwitchColors = SwitchDefaults.colors(),
+    onCheckedChange: (Boolean) -> Unit = {},
 ) {
-  var storageValue by state
-  val update: (Boolean) -> Unit = { boolean ->
-    storageValue = boolean
-    onCheckedChange(storageValue)
-  }
-  Surface {
-    Row(
-      modifier = modifier
-        .fillMaxWidth()
-        .toggleable(
-          enabled = enabled,
-          value = storageValue,
-          role = Role.Switch,
-          onValueChange = { update(!storageValue) }
-        ),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      SettingsTileScaffold(
-        enabled = enabled,
-        title = title,
-        subtitle = subtitle,
-        icon = icon,
-        action = {
-          Switch(
-            enabled = enabled,
-            checked = storageValue,
-            onCheckedChange = update,
-            colors = switchColors,
-          )
-        },
-      )
+    var storageValue by state
+    val update: (Boolean) -> Unit = { boolean ->
+        storageValue = boolean
+        onCheckedChange(storageValue)
     }
-  }
+    Surface {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .toggleable(
+                    enabled = enabled,
+                    value = storageValue,
+                    role = Role.Switch,
+                    onValueChange = { update(!storageValue) },
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            SettingsTileScaffold(
+                enabled = enabled,
+                title = title,
+                subtitle = subtitle,
+                icon = icon,
+                action = {
+                    Switch(
+                        enabled = enabled,
+                        checked = storageValue,
+                        onCheckedChange = update,
+                        colors = switchColors,
+                    )
+                },
+            )
+        }
+    }
 }
 
 @Preview
 @Composable
 internal fun SettingsSwitchPreview() {
-  MaterialTheme {
-    val storage = rememberBooleanSettingState(defaultValue = true)
-    SettingsSwitch(
-      state = storage,
-      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-      title = { Text(text = "Hello") },
-      subtitle = { Text(text = "This is a longer text") },
-      onCheckedChange = { }
-    )
-  }
+    MaterialTheme {
+        val storage = rememberBooleanSettingState(defaultValue = true)
+        SettingsSwitch(
+            state = storage,
+            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
+            title = { Text(text = "Hello") },
+            subtitle = { Text(text = "This is a longer text") },
+            onCheckedChange = { },
+        )
+    }
 }

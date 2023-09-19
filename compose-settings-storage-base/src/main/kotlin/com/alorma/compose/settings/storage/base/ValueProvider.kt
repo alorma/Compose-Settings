@@ -40,7 +40,7 @@ inline operator fun <T> SettingValueState<T>.getValue(thisObj: Any?, property: K
 inline operator fun <T> SettingValueState<T>.setValue(
     thisObj: Any?,
     property: KProperty<*>,
-    value: T
+    value: T,
 ) {
     this.value = value
 }

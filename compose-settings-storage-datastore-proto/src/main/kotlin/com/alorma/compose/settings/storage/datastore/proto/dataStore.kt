@@ -12,18 +12,20 @@ import com.alorma.compose.settings.storage.datastore.proto.ActiveDataStore.addAc
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-
 @Composable
 inline fun <reified T : Any> rememberProtoDataStoreState(
     context: Context = LocalContext.current,
     filename: String = "compose_settings_datastore_proto_" + T::class.java.`package`!!.name.replace('.', '_') + ".pb",
-    serializer: Serializer<T>
+    serializer: Serializer<T>,
 ): ProtoDataStoreState<T> {
-
     @Suppress("UNCHECKED_CAST")
     val dataStore: DataStore<T> = remember(context, filename, serializer) {
-        (((ActiveDataStore.getActiveDataStores()[T::class] as? DataStore<T>)
-            ?: ProtoDataStoreCreateSupporter(context, filename, serializer).dataStore)).also {
+        (
+            (
+                (ActiveDataStore.getActiveDataStores()[T::class] as? DataStore<T>)
+                    ?: ProtoDataStoreCreateSupporter(context, filename, serializer).dataStore
+                )
+            ).also {
             addActiveDataStore(it, T::class)
         }
     }
@@ -33,7 +35,7 @@ inline fun <reified T : Any> rememberProtoDataStoreState(
 @Composable
 inline fun <reified T : Any> rememberProtoDataStoreState(
     dataStore: DataStore<T>,
-    serializer: Serializer<T>
+    serializer: Serializer<T>,
 ): ProtoDataStoreState<T> {
     LaunchedEffect(dataStore) {
         if (ActiveDataStore.getActiveDataStores()[T::class] == null) {
@@ -47,19 +49,19 @@ inline fun <reified T : Any> rememberProtoDataStoreState(
 
 class ProtoDataStoreState<T>(
     val dataStore: DataStore<T>,
-    val serializer: Serializer<T>
-): ReadOnlyProperty<T?, DataStore<T>> {
+    val serializer: Serializer<T>,
+) : ReadOnlyProperty<T?, DataStore<T>> {
 
     override fun getValue(thisRef: T?, property: KProperty<*>) = dataStore
 }
 class ProtoDataStoreCreateSupporter<T>(
     context: Context,
     filename: String,
-    serializer: Serializer<T>
+    serializer: Serializer<T>,
 ) {
     private val Context.dataStore: DataStore<T> by dataStore(
         fileName = filename,
-        serializer = serializer
+        serializer = serializer,
     )
     val dataStore: DataStore<T> = context.applicationContext.dataStore
 }

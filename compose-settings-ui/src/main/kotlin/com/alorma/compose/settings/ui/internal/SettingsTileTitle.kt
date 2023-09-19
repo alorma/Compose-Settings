@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 internal fun SettingsTileTitle(title: @Composable () -> Unit) {
-  ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
-    title()
-  }
+    ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
+        title()
+    }
 }

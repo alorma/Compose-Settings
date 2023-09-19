@@ -37,111 +37,110 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsList(
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  state: SettingValueState<Int> = rememberIntSettingState(),
-  title: @Composable () -> Unit,
-  items: List<String>,
-  icon: (@Composable () -> Unit)? = null,
-  useSelectedValueAsSubtitle: Boolean = true,
-  subtitle: (@Composable () -> Unit)? = null,
-  closeDialogDelay: Long = 200,
-  action: (@Composable (Boolean) -> Unit)? = null,
-  onItemSelected: ((Int, String) -> Unit)? = null
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    state: SettingValueState<Int> = rememberIntSettingState(),
+    title: @Composable () -> Unit,
+    items: List<String>,
+    icon: (@Composable () -> Unit)? = null,
+    useSelectedValueAsSubtitle: Boolean = true,
+    subtitle: (@Composable () -> Unit)? = null,
+    closeDialogDelay: Long = 200,
+    action: (@Composable (Boolean) -> Unit)? = null,
+    onItemSelected: ((Int, String) -> Unit)? = null,
 ) {
-
-  if (state.value >= items.size) {
-    throw IndexOutOfBoundsException("Current value for $title list setting cannot be grater than items size")
-  }
-
-  var showDialog by remember { mutableStateOf(false) }
-
-  val safeSubtitle = if (state.value >= 0 && useSelectedValueAsSubtitle) {
-    { Text(text = items[state.value]) }
-  } else {
-    subtitle
-  }
-
-  SettingsMenuLink(
-    modifier = modifier,
-    enabled = enabled,
-    icon = icon,
-    title = title,
-    subtitle = safeSubtitle,
-    action = action,
-    onClick = { showDialog = true },
-  )
-
-  if (!showDialog) return
-
-  val coroutineScope = rememberCoroutineScope()
-  val scrollState = rememberScrollState()
-  val onSelected: (Int, Boolean) -> Unit = { selectedIndex, updateState ->
-    coroutineScope.launch {
-      if (updateState) state.value = selectedIndex
-      delay(closeDialogDelay)
-      showDialog = false
+    if (state.value >= items.size) {
+        throw IndexOutOfBoundsException("Current value for $title list setting cannot be grater than items size")
     }
-  }
 
-  AlertDialog(
-    title = title,
-    text = {
-      Column(
-        modifier = Modifier
-          .fillMaxWidth()
-          .verticalScroll(scrollState)
-          .selectableGroup(),
-      ) {
-        if (subtitle != null) {
-          subtitle()
-          Spacer(modifier = Modifier.size(8.dp))
+    var showDialog by remember { mutableStateOf(false) }
+
+    val safeSubtitle = if (state.value >= 0 && useSelectedValueAsSubtitle) {
+        { Text(text = items[state.value]) }
+    } else {
+        subtitle
+    }
+
+    SettingsMenuLink(
+        modifier = modifier,
+        enabled = enabled,
+        icon = icon,
+        title = title,
+        subtitle = safeSubtitle,
+        action = action,
+        onClick = { showDialog = true },
+    )
+
+    if (!showDialog) return
+
+    val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+    val onSelected: (Int, Boolean) -> Unit = { selectedIndex, updateState ->
+        coroutineScope.launch {
+            if (updateState) state.value = selectedIndex
+            delay(closeDialogDelay)
+            showDialog = false
         }
+    }
 
-        items.forEachIndexed { index, item ->
-          val isSelected by rememberUpdatedState(newValue = state.value == index)
-          Row(
-            modifier = Modifier
-              .fillMaxWidth()
-              .height(56.dp)
-              .selectable(
-                role = Role.RadioButton,
-                selected = isSelected,
-                onClick = {
-                  onSelected(index, !isSelected)
-                  onItemSelected?.invoke(index, items[index])
+    AlertDialog(
+        title = title,
+        text = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(scrollState)
+                    .selectableGroup(),
+            ) {
+                if (subtitle != null) {
+                    subtitle()
+                    Spacer(modifier = Modifier.size(8.dp))
                 }
-              ),
-            verticalAlignment = Alignment.CenterVertically
-          ) {
-            RadioButton(
-              selected = isSelected,
-              onClick = null
-            )
-            Text(
-              text = item,
-              style = MaterialTheme.typography.bodyLarge,
-              modifier = Modifier.padding(start = 16.dp)
-            )
-          }
-        }
-      }
-    },
-    onDismissRequest = { showDialog = false },
-    confirmButton = {},
-    dismissButton = {},
-  )
+
+                items.forEachIndexed { index, item ->
+                    val isSelected by rememberUpdatedState(newValue = state.value == index)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(56.dp)
+                            .selectable(
+                                role = Role.RadioButton,
+                                selected = isSelected,
+                                onClick = {
+                                    onSelected(index, !isSelected)
+                                    onItemSelected?.invoke(index, items[index])
+                                },
+                            ),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(
+                            selected = isSelected,
+                            onClick = null,
+                        )
+                        Text(
+                            text = item,
+                            style = MaterialTheme.typography.bodyLarge,
+                            modifier = Modifier.padding(start = 16.dp),
+                        )
+                    }
+                }
+            }
+        },
+        onDismissRequest = { showDialog = false },
+        confirmButton = {},
+        dismissButton = {},
+    )
 }
 
 @Preview
 @Composable
 internal fun ListLinkPreview() {
-  MaterialTheme {
-    SettingsList(
-      items = listOf("Banana", "Kiwi", "Pineapple"),
-      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-      title = { Text(text = "Hello") },
-      subtitle = { Text(text = "This is a longer text") },
-    )
-  }
+    MaterialTheme {
+        SettingsList(
+            items = listOf("Banana", "Kiwi", "Pineapple"),
+            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
+            title = { Text(text = "Hello") },
+            subtitle = { Text(text = "This is a longer text") },
+        )
+    }
 }

@@ -15,35 +15,35 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class GenericPreferenceDataStoreSettingValueState<T>(
-  private val coroutineScope: CoroutineScope,
-  private val dataStore: DataStore<Preferences>,
-  private val dataStoreKey: Preferences.Key<T>,
-  private val defaultValue: T,
+    private val coroutineScope: CoroutineScope,
+    private val dataStore: DataStore<Preferences>,
+    private val dataStoreKey: Preferences.Key<T>,
+    private val defaultValue: T,
 ) : SettingValueState<T> {
-  private var job: Job? = null
-  private val valueFlow = dataStore.data.map { it[dataStoreKey] ?: defaultValue }
+    private var job: Job? = null
+    private val valueFlow = dataStore.data.map { it[dataStoreKey] ?: defaultValue }
 
-  private var _value: T by mutableStateOf(runBlocking { valueFlow.first() })
+    private var _value: T by mutableStateOf(runBlocking { valueFlow.first() })
 
-  init {
-    coroutineScope.launch {
-      valueFlow.collect { _value = it }
-    }
-  }
-
-  override var value: T
-    get() = _value
-    set(value) {
-      _value = value
-      job?.cancel()
-      job = coroutineScope.launch {
-        dataStore.edit {
-          it[dataStoreKey] = value
+    init {
+        coroutineScope.launch {
+            valueFlow.collect { _value = it }
         }
-      }
     }
 
-  override fun reset() {
-    value = defaultValue
-  }
+    override var value: T
+        get() = _value
+        set(value) {
+            _value = value
+            job?.cancel()
+            job = coroutineScope.launch {
+                dataStore.edit {
+                    it[dataStoreKey] = value
+                }
+            }
+        }
+
+    override fun reset() {
+        value = defaultValue
+    }
 }

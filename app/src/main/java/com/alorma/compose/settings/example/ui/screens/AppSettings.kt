@@ -13,23 +13,23 @@ import com.alorma.compose.settings.ui.SettingsSwitch
 
 @Composable
 fun AppSettingsScreen(
-  navController: NavHostController,
-  darkThemePreference: SettingValueState<Boolean>
+    navController: NavHostController,
+    darkThemePreference: SettingValueState<Boolean>,
 ) {
-  AppScaffold(
-    navController = navController,
-    showSettings = false,
-    title = { Text(text = Navigation.NAV_TOP_SETTINGS.second) },
-  ) {
-    Column(
-      modifier = Modifier.fillMaxWidth(),
+    AppScaffold(
+        navController = navController,
+        showSettings = false,
+        title = { Text(text = Navigation.NAV_TOP_SETTINGS.second) },
     ) {
-      SettingsSwitch(
-        state = darkThemePreference,
-        title = { Text(text = "Dark theme") },
-        subtitle = { Text(text = "Change between dark and light") },
-        modifier = Modifier.fillMaxWidth(),
-      )
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            SettingsSwitch(
+                state = darkThemePreference,
+                title = { Text(text = "Dark theme") },
+                subtitle = { Text(text = "Change between dark and light") },
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
     }
-  }
 }

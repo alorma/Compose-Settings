@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun <T: Number> RowScope.SettingsTileSlider(
+internal fun <T : Number> RowScope.SettingsTileSlider(
     title: @Composable () -> Unit,
     value: T,
     onValueChange: (T) -> Unit,
@@ -23,7 +23,7 @@ internal fun <T: Number> RowScope.SettingsTileSlider(
     @IntRange(from = 0) steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    colors: SliderColors = SliderDefaults.colors()
+    colors: SliderColors = SliderDefaults.colors(),
 ) {
     SettingsTileTexts(title = title, subtitle = {
         Slider(
@@ -40,7 +40,7 @@ internal fun <T: Number> RowScope.SettingsTileSlider(
             steps = steps,
             onValueChangeFinished = onValueChangeFinished,
             interactionSource = interactionSource,
-            colors = colors
+            colors = colors,
         )
     })
 }

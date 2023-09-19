@@ -14,46 +14,45 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun <T : Number> SettingsTileSlider(
-  title: @Composable () -> Unit,
-  value: T,
-  onValueChange: (T) -> Unit,
-  modifier: Modifier = Modifier,
-  icon: (@Composable () -> Unit)? = null,
-  enabled: Boolean = true,
-  valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-  @IntRange(from = 0) steps: Int = 0,
-  onValueChangeFinished: (() -> Unit)? = null,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  colors: SliderColors = SliderDefaults.colors()
+    title: @Composable () -> Unit,
+    value: T,
+    onValueChange: (T) -> Unit,
+    modifier: Modifier = Modifier,
+    icon: (@Composable () -> Unit)? = null,
+    enabled: Boolean = true,
+    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+    @IntRange(from = 0) steps: Int = 0,
+    onValueChangeFinished: (() -> Unit)? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    colors: SliderColors = SliderDefaults.colors(),
 ) {
-
-  SettingsTileScaffold(
-    enabled = enabled,
-    title = title,
-    subtitle = {
-      Column(
-        modifier = Modifier
-          .padding(top = 8.dp, end = 16.dp)
-          .then(modifier)
-      ) {
-        Slider(
-          value = value.toFloat(),
-          onValueChange = { value ->
-            @Suppress("UNCHECKED_CAST")
-            onValueChange(value as T)
-          },
-          modifier = Modifier
-            .padding(end = 16.dp)
-            .then(modifier),
-          enabled = enabled,
-          valueRange = valueRange,
-          steps = steps,
-          onValueChangeFinished = onValueChangeFinished,
-          interactionSource = interactionSource,
-          colors = colors
-        )
-      }
-    },
-    icon = icon,
-  )
+    SettingsTileScaffold(
+        enabled = enabled,
+        title = title,
+        subtitle = {
+            Column(
+                modifier = Modifier
+                    .padding(top = 8.dp, end = 16.dp)
+                    .then(modifier),
+            ) {
+                Slider(
+                    value = value.toFloat(),
+                    onValueChange = { value ->
+                        @Suppress("UNCHECKED_CAST")
+                        onValueChange(value as T)
+                    },
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .then(modifier),
+                    enabled = enabled,
+                    valueRange = valueRange,
+                    steps = steps,
+                    onValueChangeFinished = onValueChangeFinished,
+                    interactionSource = interactionSource,
+                    colors = colors,
+                )
+            }
+        },
+        icon = icon,
+    )
 }

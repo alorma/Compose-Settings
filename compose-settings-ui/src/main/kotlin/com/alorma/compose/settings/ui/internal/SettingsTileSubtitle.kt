@@ -12,7 +12,7 @@ internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
     ProvideTextStyle(value = MaterialTheme.typography.caption) {
         CompositionLocalProvider(
             LocalContentAlpha provides ContentAlpha.medium,
-            content = subtitle
+            content = subtitle,
         )
     }
 }
