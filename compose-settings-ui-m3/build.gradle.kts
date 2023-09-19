@@ -3,8 +3,6 @@ plugins {
   kotlin("android")
 }
 
-ext["PUBLISH_ARTIFACT_ID"] = "compose-settings-ui"
-
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 android {
