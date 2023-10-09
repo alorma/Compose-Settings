@@ -1,7 +1,7 @@
 [versions]
 androidxnavigation = "2.7.2"
 androidxpreference = "1.2.1"
-compose = "2023.09.02"
+compose = "2023.10.00"
 composeMaterial3 = "1.0.1"
 composeCompiler = "1.5.3"
 gradleNexusStagingPlugin = "0.30.0"
