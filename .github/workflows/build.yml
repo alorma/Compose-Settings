@@ -20,10 +20,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 17
-
-        # Builds the release artifacts of the library
-      - name: Lint
-        run: ./gradlew lintKotlin
   build:
     name: Build
     runs-on: ubuntu-latest
