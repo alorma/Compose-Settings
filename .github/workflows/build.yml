@@ -9,17 +9,6 @@ on:
       - main
 
 jobs:
-  checks:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: adopt
-          java-version: 17
   build:
     name: Build
     runs-on: ubuntu-latest
