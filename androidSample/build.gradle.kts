@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "com.alorma.androidsample"
+  namespace = "com.alorma.compose.settings.sample"
   compileSdk = 34
 
   defaultConfig {
@@ -53,6 +53,8 @@ dependencies {
   implementation(libs.ui.graphics)
   implementation(libs.ui.tooling.preview)
   implementation(libs.material3)
+
+  implementation(projects.sampleCompose)
 
   debugImplementation(libs.ui.tooling)
   debugImplementation(libs.ui.test.manifest)

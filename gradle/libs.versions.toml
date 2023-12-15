@@ -16,7 +16,7 @@ agp = "8.2.0"
 compose-plugin = "1.5.11"
 kotlin = "1.9.21"
 
-android-minSdk = "24"
+android-minSdk = "26"
 android-compileSdk = "34"
 android-targetSdk = "34"
 
