@@ -23,8 +23,8 @@ kotlin {
     }
   }
 
+/*
   jvm("desktop")
-
   listOf(
     iosX64(),
     iosArm64(),
@@ -32,13 +32,20 @@ kotlin {
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
       baseName = "ComposeApp"
-      isStatic = true
-      binaryOption("bundleId", libs.versions.namespace.get() + ".storage")
+      binaryOption("bundleId", libs.versions.namespace.get() + ".disk")
     }
   }
-
+*/
   sourceSets {
+    androidMain.dependencies {
+      implementation(libs.androidx.preference.preference)
+      implementation(libs.androidx.preference.ktx)
+    }
+
+
     commonMain.dependencies {
+      api(projects.composeSettingsStorageBase)
+
       implementation(compose.runtime)
       implementation(compose.foundation)
     }
@@ -46,7 +53,7 @@ kotlin {
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".storage"
+  namespace = libs.versions.namespace.get() + ".disk"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -84,13 +91,15 @@ android {
     debugImplementation(libs.compose.ui.tooling)
   }
 }
-
+/*
 compose.desktop {
   application {
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".storage"
+      packageName = libs.versions.namespace.get() + ".disk"
       packageVersion = "1.0.0"
     }
   }
 }
+
+*/

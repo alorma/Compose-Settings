@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
-import base.SettingValueState
+import SettingValueState
 import base.getValue
 import base.rememberBooleanSettingState
 import base.setValue
@@ -27,7 +27,7 @@ import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 fun SettingsCheckbox(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  state: base.SettingValueState<Boolean> = base.rememberBooleanSettingState(),
+  state: SettingValueState<Boolean> = base.rememberBooleanSettingState(),
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,

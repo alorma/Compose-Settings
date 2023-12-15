@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.navigation.NavController
 import com.alorma.compose.settings.example.ui.Navigation
-import base.SettingValueState
+import SettingValueState
 import base.rememberBooleanSettingState
 
 @OptIn(
@@ -27,7 +27,7 @@ import base.rememberBooleanSettingState
 @Composable
 fun AppScaffold(
   navController: NavController,
-  enabledState: base.SettingValueState<Boolean> = base.rememberBooleanSettingState(true),
+  enabledState: SettingValueState<Boolean> = base.rememberBooleanSettingState(true),
   showSettings: Boolean = true,
   onBack: (() -> Unit)? = { navController.popBackStack() },
   title: @Composable (() -> Unit)? = null,

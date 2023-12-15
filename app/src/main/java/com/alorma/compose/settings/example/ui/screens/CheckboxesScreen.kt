@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
-import base.SettingValueState
+import SettingValueState
 import base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
@@ -102,7 +102,7 @@ fun CheckboxesScreen(navController: NavHostController) {
 private fun SnackbarHostState.showChange(
   coroutineScope: CoroutineScope,
   key: String,
-  state: base.SettingValueState<Boolean>,
+  state: SettingValueState<Boolean>,
 ) {
     coroutineScope.launch {
         currentSnackbarData?.dismiss()

@@ -22,7 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import base.SettingValueState
+import SettingValueState
 import base.rememberIntSettingState
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 import com.alorma.compose.settings.ui.internal.WrapContentColor
@@ -31,7 +31,7 @@ import com.alorma.compose.settings.ui.internal.WrapContentColor
 fun SettingsListDropdown(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  state: base.SettingValueState<Int> = base.rememberIntSettingState(),
+  state: SettingValueState<Int> = base.rememberIntSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
   icon: (@Composable () -> Unit)? = null,

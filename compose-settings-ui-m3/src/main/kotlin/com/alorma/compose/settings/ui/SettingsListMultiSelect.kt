@@ -24,14 +24,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import base.SettingValueState
+import SettingValueState
 import base.rememberIntSetSettingState
 
 @Composable
 fun SettingsListMultiSelect(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  state: base.SettingValueState<Set<Int>> = base.rememberIntSetSettingState(),
+  state: SettingValueState<Set<Int>> = base.rememberIntSetSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
   icon: @Composable (() -> Unit)? = null,

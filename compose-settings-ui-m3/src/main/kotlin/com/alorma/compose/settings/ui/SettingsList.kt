@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import base.SettingValueState
+import SettingValueState
 import base.rememberIntSettingState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 fun SettingsList(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  state: base.SettingValueState<Int> = base.rememberIntSettingState(),
+  state: SettingValueState<Int> = base.rememberIntSettingState(),
   title: @Composable () -> Unit,
   items: List<String>,
   icon: (@Composable () -> Unit)? = null,

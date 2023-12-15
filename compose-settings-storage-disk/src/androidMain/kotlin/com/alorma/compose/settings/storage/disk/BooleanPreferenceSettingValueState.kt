@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.storage.preferences
+package com.alorma.compose.settings.storage.disk
 
 import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
@@ -9,35 +9,35 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import base.SettingValueState
+import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
-fun rememberPreferenceIntSettingState(
+fun rememberPreferenceBooleanSettingState(
     key: String,
-    defaultValue: Int = -1,
+    defaultValue: Boolean,
     preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
-): IntPreferenceSettingValueState {
+): BooleanPreferenceSettingValueState {
     return remember {
-        IntPreferenceSettingValueState(
-            key = key,
+        BooleanPreferenceSettingValueState(
             preferences = preferences,
+            key = key,
             defaultValue = defaultValue,
         )
     }
 }
 
-class IntPreferenceSettingValueState(
+class BooleanPreferenceSettingValueState(
     private val preferences: SharedPreferences,
     val key: String,
-    val defaultValue: Int = 0,
-) : base.SettingValueState<Int> {
+    val defaultValue: Boolean = false,
+) : SettingValueState<Boolean> {
 
-    private var _value by mutableStateOf(preferences.getInt(key, defaultValue))
+    private var _value by mutableStateOf(preferences.getBoolean(key, defaultValue))
 
-    override var value: Int
+    override var value: Boolean
         set(value) {
             _value = value
-            preferences.edit { putInt(key, value) }
+            preferences.edit { putBoolean(key, value) }
         }
         get() = _value
 

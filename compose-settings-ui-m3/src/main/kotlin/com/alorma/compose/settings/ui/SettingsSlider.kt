@@ -13,7 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import base.SettingValueState
+import SettingValueState
 import base.getValue
 import base.setValue
 import com.alorma.compose.settings.ui.internal.SettingsTileSlider
@@ -21,7 +21,7 @@ import com.alorma.compose.settings.ui.internal.SettingsTileSlider
 @Composable
 fun <T : Number> SettingsSlider(
   modifier: Modifier = Modifier,
-  state: base.SettingValueState<T>,
+  state: SettingValueState<T>,
   icon: @Composable (() -> Unit)? = null,
   title: @Composable () -> Unit,
   onValueChange: (T) -> Unit = {},

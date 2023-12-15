@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.storage.preferences
+package com.alorma.compose.settings.storage.disk
 
 import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
@@ -9,16 +9,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import base.SettingValueState
+import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
-fun rememberPreferenceFloatSettingState(
+fun rememberPreferenceIntSettingState(
     key: String,
-    defaultValue: Float = 0f,
+    defaultValue: Int = -1,
     preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(LocalContext.current),
-): FloatPreferenceSettingValueState {
+): IntPreferenceSettingValueState {
     return remember {
-        FloatPreferenceSettingValueState(
+        IntPreferenceSettingValueState(
             key = key,
             preferences = preferences,
             defaultValue = defaultValue,
@@ -26,18 +26,18 @@ fun rememberPreferenceFloatSettingState(
     }
 }
 
-class FloatPreferenceSettingValueState(
+class IntPreferenceSettingValueState(
     private val preferences: SharedPreferences,
     val key: String,
-    val defaultValue: Float = 0f,
-) : base.SettingValueState<Float> {
+    val defaultValue: Int = 0,
+) : SettingValueState<Int> {
 
-    private var _value by mutableStateOf(preferences.getFloat(key, defaultValue))
+    private var _value by mutableStateOf(preferences.getInt(key, defaultValue))
 
-    override var value: Float
+    override var value: Int
         set(value) {
             _value = value
-            preferences.edit { putFloat(key, value) }
+            preferences.edit { putInt(key, value) }
         }
         get() = _value
 
