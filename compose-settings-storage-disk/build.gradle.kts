@@ -31,7 +31,6 @@ kotlin {
     iosSimulatorArm64()
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
-      baseName = "ComposeApp"
       binaryOption("bundleId", libs.versions.namespace.get() + ".disk")
     }
   }
