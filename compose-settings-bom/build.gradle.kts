@@ -6,7 +6,8 @@ plugins {
 dependencies {
   constraints {
     api(projects.composeSettingsStorageBase)
-    api(projects.composeSettingsStoragePreferences)
+    api(projects.composeSettingsStorageDisk)
+    api(projects.composeSettingsStorageMemory)
 
     api(projects.composeSettingsUiM3)
   }

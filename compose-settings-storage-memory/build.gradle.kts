@@ -32,7 +32,7 @@ kotlin {
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
       baseName = "ComposeApp"
-      binaryOption("bundleId", libs.versions.namespace.get() + ".disk")
+      binaryOption("bundleId", libs.versions.namespace.get() + ".memory")
     }
   }
 
@@ -45,9 +45,6 @@ kotlin {
     commonMain.dependencies {
       api(projects.composeSettingsStorageBase)
 
-      implementation(libs.multiplatform.settings)
-      implementation(libs.multiplatform.settings.noArg)
-
       implementation(compose.runtime)
       implementation(compose.foundation)
     }
@@ -55,7 +52,7 @@ kotlin {
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".disk"
+  namespace = libs.versions.namespace.get() + ".memory"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -98,7 +95,7 @@ compose.desktop {
   application {
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".disk"
+      packageName = libs.versions.namespace.get() + ".memory"
       packageVersion = "1.0.0"
     }
   }
