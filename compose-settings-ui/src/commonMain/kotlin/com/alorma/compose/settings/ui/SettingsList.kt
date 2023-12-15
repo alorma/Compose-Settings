@@ -126,18 +126,3 @@ fun SettingsList(
     dismissButton = {},
   )
 }
-
-/*
-@Preview
-@Composable
-internal fun ListLinkPreview() {
-    MaterialTheme {
-        SettingsList(
-            items = listOf("Banana", "Kiwi", "Pineapple"),
-            icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-            title = { Text(text = "Hello") },
-            subtitle = { Text(text = "This is a longer text") },
-        )
-    }
-}
-*/

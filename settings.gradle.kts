@@ -18,7 +18,8 @@ dependencyResolutionManagement {
   }
 }
 
-//include(":app")
+include(":sampleComposeApp")
+
 include(":compose-settings-ui")
 include(":compose-settings-storage-base")
 include(":compose-settings-storage-disk")

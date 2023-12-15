@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
-fun rememberStringSettingState(defaultValue: String? = null): SettingValueState<String?> {
+fun rememberMemoryStringSettingState(defaultValue: String? = null): SettingValueState<String?> {
   return remember { InMemoryStringSettingValueState(defaultValue) }
 }
 

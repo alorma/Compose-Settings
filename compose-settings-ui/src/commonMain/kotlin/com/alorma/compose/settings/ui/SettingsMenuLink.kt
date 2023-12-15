@@ -39,37 +39,3 @@ fun SettingsMenuLink(
     }
   }
 }
-
-/*
-@Preview
-@Composable
-internal fun SettingsMenuLinkPreview() {
-  MaterialTheme {
-    SettingsMenuLink(
-      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-      title = { Text(text = "Hello") },
-      subtitle = { Text(text = "This is a longer text") },
-    ) {
-    }
-  }
-}
-
-@Preview
-@Composable
-internal fun SettingsMenuLinkActionPreview() {
-  var rememberCheckBoxState by remember { mutableStateOf(true) }
-  MaterialTheme {
-    SettingsMenuLink(
-      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-      title = { Text(text = "Hello") },
-      subtitle = { Text(text = "This is a longer text") },
-      action = {
-        Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
-          rememberCheckBoxState = newState
-        })
-      },
-    ) {
-    }
-  }
-}
-*/

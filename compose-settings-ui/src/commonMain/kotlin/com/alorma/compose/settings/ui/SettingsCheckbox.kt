@@ -61,20 +61,3 @@ fun SettingsCheckbox(
     }
   }
 }
-
-/*
-@Preview
-@Composable
-internal fun SettingsCheckboxPreview() {
-  MaterialTheme {
-    val storage = base.rememberBooleanSettingState(defaultValue = true)
-    SettingsCheckbox(
-      state = storage,
-      icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },
-      title = { Text(text = "Hello") },
-      subtitle = { Text(text = "This is a longer text") },
-      onCheckedChange = { },
-    )
-  }
-}
-*/

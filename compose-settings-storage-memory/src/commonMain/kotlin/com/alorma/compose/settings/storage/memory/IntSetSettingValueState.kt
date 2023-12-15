@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
-fun rememberIntSetSettingState(defaultValue: Set<Int> = emptySet()): SettingValueState<Set<Int>> {
+fun rememberMemoryIntSetSettingState(defaultValue: Set<Int> = emptySet()): SettingValueState<Set<Int>> {
   return remember { InMemoryIntSetSettingValueState(defaultValue) }
 }
 

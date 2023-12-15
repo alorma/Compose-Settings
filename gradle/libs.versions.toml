@@ -30,15 +30,6 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidxpreference" }
 
-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
-compose-foundation-foundation = { module = "androidx.compose.foundation:foundation" }
-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
-compose-material-material3 = { module = "androidx.compose.material3:material3" }
-compose-material-iconsextended = { module = "androidx.compose.material:material-icons-extended" }
-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
-
 plugin-gradle-nexus-staging = { module = "io.codearte.gradle.nexus:gradle-nexus-staging-plugin", version.ref = "gradleNexusStagingPlugin" }
 plugin-gradle-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "publishPlugin" }
 

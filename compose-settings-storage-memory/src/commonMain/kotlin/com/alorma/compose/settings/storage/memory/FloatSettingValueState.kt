@@ -8,7 +8,7 @@ import androidx.compose.runtime.setValue
 import com.alorma.compose.settings.storage.base.SettingValueState
 
 @Composable
-fun rememberFloatSettingState(defaultValue: Float = 0f): SettingValueState<Float> {
+fun rememberMemoryFloatSettingState(defaultValue: Float = 0f): SettingValueState<Float> {
   return remember { InMemoryFloatSettingValueState(defaultValue) }
 }
 

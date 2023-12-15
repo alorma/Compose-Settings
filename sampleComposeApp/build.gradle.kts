@@ -6,15 +6,10 @@ plugins {
   alias(libs.plugins.jetbrainsCompose)
 }
 
-apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
-
 kotlin {
   applyDefaultHierarchyTemplate()
 
-  withSourcesJar()
-
   androidTarget {
-    publishLibraryVariants("release")
     compilations.all {
       kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
@@ -30,27 +25,38 @@ kotlin {
     iosSimulatorArm64()
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
-      binaryOption("bundleId", libs.versions.namespace.get() + ".memory")
+      baseName = "ComposeApp"
+      isStatic = true
+      binaryOption("bundleId", libs.versions.namespace.get() + ".sample")
     }
   }
 
   sourceSets {
     androidMain.dependencies {
-      implementation(libs.androidx.preference.preference)
-      implementation(libs.androidx.preference.ktx)
+      implementation(compose.ui)
+      implementation(libs.androidx.activity.compose)
     }
-
+    val desktopMain by getting {
+      dependencies {
+        implementation(compose.desktop.currentOs)
+      }
+    }
     commonMain.dependencies {
-      api(projects.composeSettingsStorageBase)
+      implementation(compose.material3)
 
       implementation(compose.runtime)
       implementation(compose.foundation)
+
+      implementation(projects.composeSettingsStorageBase)
+      implementation(projects.composeSettingsStorageMemory)
+      implementation(projects.composeSettingsStorageDisk)
+      implementation(projects.composeSettingsUi)
     }
   }
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".memory"
+  namespace = libs.versions.namespace.get() + ".sample"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -58,7 +64,11 @@ android {
   sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
   defaultConfig {
+    applicationId = libs.versions.namespace.get() + ".sample"
     minSdk = libs.versions.android.minSdk.get().toInt()
+    targetSdk = libs.versions.android.targetSdk.get().toInt()
+    versionCode = 1
+    versionName = "1.0"
   }
   buildFeatures {
     compose = true
@@ -70,10 +80,6 @@ android {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
-  }
-  lint {
-    checkReleaseBuilds = false
-    abortOnError = false
   }
   buildTypes {
     getByName("release") {
@@ -91,9 +97,11 @@ android {
 
 compose.desktop {
   application {
+    mainClass = "MainKt"
+
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".memory"
+      packageName = libs.versions.namespace.get() + ".sample"
       packageVersion = "1.0.0"
     }
   }

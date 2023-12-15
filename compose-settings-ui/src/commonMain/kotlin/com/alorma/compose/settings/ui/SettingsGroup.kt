@@ -46,24 +46,3 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
     ProvideTextStyle(value = titleStyle) { title() }
   }
 }
-
-/*
-@Preview
-@Composable
-internal fun SettingsGroupPreview() {
-    MaterialTheme {
-        SettingsGroup(
-            title = { Text(text = "Title") },
-        ) {
-            Box(
-                modifier = Modifier
-                    .height(64.dp)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(text = "Settings group")
-            }
-        }
-    }
-}
-*/

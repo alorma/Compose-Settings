@@ -78,7 +78,7 @@ android {
     targetCompatibility = JavaVersion.VERSION_17
   }
   dependencies {
-    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(compose.uiTooling)
   }
 }
 
