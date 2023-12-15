@@ -19,7 +19,7 @@ dependencyResolutionManagement {
 }
 
 //include(":app")
-//include(":compose-settings-ui-m3")
+include(":compose-settings-ui")
 include(":compose-settings-storage-base")
 include(":compose-settings-storage-disk")
 include(":compose-settings-storage-memory")

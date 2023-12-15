@@ -9,6 +9,6 @@ dependencies {
     api(projects.composeSettingsStorageDisk)
     api(projects.composeSettingsStorageMemory)
 
-    api(projects.composeSettingsUiM3)
+    api(projects.composeSettingsUi)
   }
 }

@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.navigation.NavController
 import com.alorma.compose.settings.example.ui.Navigation
-import SettingValueState
+import com.alorma.compose.settings.storage.base.SettingValueState
 import base.rememberBooleanSettingState
 
 @OptIn(

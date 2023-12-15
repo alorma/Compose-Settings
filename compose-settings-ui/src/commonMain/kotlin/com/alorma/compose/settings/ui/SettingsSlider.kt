@@ -13,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import SettingValueState
-import base.getValue
-import base.setValue
+import com.alorma.compose.settings.storage.base.SettingValueState
+import com.alorma.compose.settings.storage.base.getValue
+import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.ui.internal.SettingsTileSlider
 
 @Composable
@@ -33,30 +33,30 @@ fun <T : Number> SettingsSlider(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   colors: SliderColors = SliderDefaults.colors(),
 ) {
-    var settingValue by state
-    Surface {
-        Row(
-            modifier = modifier
-                .height(72.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            SettingsTileSlider(
-                title = title,
-                value = settingValue,
-                onValueChange = { value ->
-                    settingValue = value
-                    onValueChange(settingValue)
-                },
-                modifier = sliderModifier,
-                icon = icon,
-                enabled = enabled,
-                valueRange = valueRange,
-                steps = steps,
-                onValueChangeFinished = onValueChangeFinished,
-                interactionSource = interactionSource,
-                colors = colors,
-            )
-        }
+  var settingValue by state
+  Surface {
+    Row(
+      modifier = modifier
+        .height(72.dp)
+        .fillMaxWidth(),
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
+      SettingsTileSlider(
+        title = title,
+        value = settingValue,
+        onValueChange = { value ->
+          settingValue = value
+          onValueChange(settingValue)
+        },
+        modifier = sliderModifier,
+        icon = icon,
+        enabled = enabled,
+        valueRange = valueRange,
+        steps = steps,
+        onValueChangeFinished = onValueChangeFinished,
+        interactionSource = interactionSource,
+        colors = colors,
+      )
     }
+  }
 }

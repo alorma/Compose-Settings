@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
-import SettingValueState
+import com.alorma.compose.settings.storage.base.SettingValueState
 import base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox

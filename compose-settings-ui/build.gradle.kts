@@ -30,7 +30,7 @@ kotlin {
     iosSimulatorArm64()
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
-      binaryOption("bundleId", libs.versions.namespace.get() + ".memory")
+      binaryOption("bundleId", libs.versions.namespace.get() + ".ui")
     }
   }
 
@@ -43,14 +43,16 @@ kotlin {
     commonMain.dependencies {
       api(projects.composeSettingsStorageBase)
 
+      implementation(libs.androidx.annotation)
       implementation(compose.runtime)
       implementation(compose.foundation)
+      implementation(compose.material3)
     }
   }
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".memory"
+  namespace = libs.versions.namespace.get() + ".ui"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -93,7 +95,7 @@ compose.desktop {
   application {
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".memory"
+      packageName = libs.versions.namespace.get() + ".ui"
       packageVersion = "1.0.0"
     }
   }

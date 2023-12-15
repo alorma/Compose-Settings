@@ -44,10 +44,11 @@ android {
 }
 
 dependencies {
-  implementation(projects.composeSettingsUiM3)
+  implementation(projects.composeSettingsUi)
 
   implementation(projects.composeSettingsStorageBase)
-  implementation(projects.composeSettingsStoragePreferences)
+  implementation(projects.composeSettingsStorageDisk)
+  implementation(projects.composeSettingsStorageMemory)
 
   implementation(platform(libs.compose.bom))
   implementation(libs.androidx.activity.compose)
