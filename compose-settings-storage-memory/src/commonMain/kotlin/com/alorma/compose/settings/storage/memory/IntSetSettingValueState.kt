@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.storage.disk
+package com.alorma.compose.settings.storage.memory
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
