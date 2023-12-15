@@ -40,6 +40,7 @@ plugin-gradle-nexus-staging = { module = "io.codearte.gradle.nexus:gradle-nexus-
 plugin-gradle-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "publishPlugin" }
 
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+multiplatform-settings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

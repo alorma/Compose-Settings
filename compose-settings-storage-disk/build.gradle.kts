@@ -23,8 +23,8 @@ kotlin {
     }
   }
 
-/*
   jvm("desktop")
+
   listOf(
     iosX64(),
     iosArm64(),
@@ -35,16 +35,18 @@ kotlin {
       binaryOption("bundleId", libs.versions.namespace.get() + ".disk")
     }
   }
-*/
+
   sourceSets {
     androidMain.dependencies {
       implementation(libs.androidx.preference.preference)
       implementation(libs.androidx.preference.ktx)
     }
 
-
     commonMain.dependencies {
       api(projects.composeSettingsStorageBase)
+
+      implementation(libs.multiplatform.settings)
+      implementation(libs.multiplatform.settings.noArg)
 
       implementation(compose.runtime)
       implementation(compose.foundation)
