@@ -5,6 +5,13 @@ android {
   publishing {
     singleVariant("release") {
       withSourcesJar()
+      withJavadocJar()
+    }
+
+    multipleVariants {
+      withSourcesJar()
+      withJavadocJar()
+      allVariants()
     }
   }
 }
@@ -12,38 +19,38 @@ android {
 group = project.property("libGroup")
 version = project.property("libVersion")
 
-publishing {
-  publications {
-    release(MavenPublication) {
-      groupId project.property("libGroup")
-      artifactId project.project.getName()
-      version project.property("libVersion")
-
-      afterEvaluate {
+afterEvaluate {
+  publishing {
+    publications {
+      release(MavenPublication) {
         from components.release
-      }
 
-      pom {
-        name = project.project.getName()
-        description = 'Compose settings'
-        url = 'https://github.com/alorma/Compose-Settings'
-        licenses {
-          license {
-            name = 'Stream License'
-            url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
+        groupId project.property("libGroup")
+        artifactId project.project.getName()
+        version project.property("libVersion")
+
+        pom {
+          name = project.project.getName()
+          description = 'Compose settings'
+          url = 'https://github.com/alorma/Compose-Settings'
+          licenses {
+            license {
+              name = 'Stream License'
+              url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
+            }
           }
-        }
-        developers {
-          developer {
-            id = 'alorma'
-            name = 'Bernat Borrás'
-            email = 'bernatbor15@gmail.com'
+          developers {
+            developer {
+              id = 'alorma'
+              name = 'Bernat Borrás'
+              email = 'bernatbor15@gmail.com'
+            }
           }
-        }
-        scm {
-          connection = 'scm:git:github.com/alorma/Compose-Settings.git'
-          developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
-          url = 'https://github.com/alorma/Compose-Settings/tree/main'
+          scm {
+            connection = 'scm:git:github.com/alorma/Compose-Settings.git'
+            developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
+            url = 'https://github.com/alorma/Compose-Settings/tree/main'
+          }
         }
       }
     }

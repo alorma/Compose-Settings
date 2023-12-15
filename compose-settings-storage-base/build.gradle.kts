@@ -1,4 +1,5 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -22,21 +23,20 @@ kotlin {
     }
   }
 
-  /*
-    jvm("desktop")
+  jvm("desktop")
 
-    listOf(
-      iosX64(),
-      iosArm64(),
-      iosSimulatorArm64()
-    ).forEach { iosTarget ->
-      iosTarget.binaries.framework {
-        baseName = "ComposeApp"
-        isStatic = true
-        binaryOption("bundleId", libs.versions.namespace.get() + ".storage")
-      }
+  listOf(
+    iosX64(),
+    iosArm64(),
+    iosSimulatorArm64()
+  ).forEach { iosTarget ->
+    iosTarget.binaries.framework {
+      baseName = "ComposeApp"
+      isStatic = true
+      binaryOption("bundleId", libs.versions.namespace.get() + ".storage")
     }
-  */
+  }
+
   sourceSets {
     androidMain.dependencies {
       implementation(project.dependencies.platform(libs.compose.bom))
@@ -54,14 +54,11 @@ kotlin {
       implementation(compose.components.resources)
     }
 
-    /*
     val desktopMain by getting {
       dependencies {
         implementation(compose.desktop.currentOs)
       }
     }
-    */
-
   }
 }
 
@@ -104,7 +101,7 @@ android {
     debugImplementation(libs.compose.ui.tooling)
   }
 }
-/*
+
 compose.desktop {
   application {
     nativeDistributions {
@@ -114,4 +111,3 @@ compose.desktop {
     }
   }
 }
-*/
