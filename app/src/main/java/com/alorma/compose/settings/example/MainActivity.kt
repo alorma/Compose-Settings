@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,14 +31,20 @@ class MainActivity : ComponentActivity() {
                 defaultValue = true,
             )
 
+            val dynamicThemePreference = rememberPreferenceBooleanSettingState(
+                key = "dynamicThemePreference",
+                defaultValue = true,
+            )
+
             val navController = rememberNavController()
             ComposeSettingsTheme(
                 darkThemePreference = darkThemePreference.value,
+                dynamicThemePreference = dynamicThemePreference.value,
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = MaterialTheme.colors.background),
+                        .background(color = MaterialTheme.colorScheme.background),
                 ) {
                     NavHost(
                         navController = navController,
@@ -66,6 +72,7 @@ class MainActivity : ComponentActivity() {
                             AppSettingsScreen(
                                 navController = navController,
                                 darkThemePreference = darkThemePreference,
+                                dynamicThemePreference = dynamicThemePreference,
                             )
                         }
                     }

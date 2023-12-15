@@ -1,11 +1,11 @@
 package com.alorma.compose.settings.example.ui.screens
 
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SortByAlpha
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope

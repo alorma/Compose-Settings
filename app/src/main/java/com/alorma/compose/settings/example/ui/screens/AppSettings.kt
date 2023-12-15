@@ -1,20 +1,22 @@
 package com.alorma.compose.settings.example.ui.screens
 
+import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.example.ui.Navigation
-import com.alorma.compose.settings.storage.base.SettingValueState
+import com.alorma.compose.settings.storage.preferences.BooleanPreferenceSettingValueState
 import com.alorma.compose.settings.ui.SettingsSwitch
 
 @Composable
 fun AppSettingsScreen(
     navController: NavHostController,
-    darkThemePreference: SettingValueState<Boolean>,
+    darkThemePreference: BooleanPreferenceSettingValueState,
+    dynamicThemePreference: BooleanPreferenceSettingValueState,
 ) {
     AppScaffold(
         navController = navController,
@@ -30,6 +32,16 @@ fun AppSettingsScreen(
                 subtitle = { Text(text = "Change between dark and light") },
                 modifier = Modifier.fillMaxWidth(),
             )
+
+            // Dynamic theme is not supported on lower API levels.
+            if (Build.VERSION.SDK_INT >= 31) {
+                SettingsSwitch(
+                    state = dynamicThemePreference,
+                    title = { Text(text = "Dynamic theme") },
+                    subtitle = { Text(text = "Dynamic theme based on wallpaper") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
     }
 }
