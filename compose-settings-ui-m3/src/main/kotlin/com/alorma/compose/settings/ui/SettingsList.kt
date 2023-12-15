@@ -30,24 +30,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.rememberIntSettingState
+import base.SettingValueState
+import base.rememberIntSettingState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun SettingsList(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    state: SettingValueState<Int> = rememberIntSettingState(),
-    title: @Composable () -> Unit,
-    items: List<String>,
-    icon: (@Composable () -> Unit)? = null,
-    useSelectedValueAsSubtitle: Boolean = true,
-    subtitle: (@Composable () -> Unit)? = null,
-    closeDialogDelay: Long = 200,
-    action: (@Composable (Boolean) -> Unit)? = null,
-    onItemSelected: ((Int, String) -> Unit)? = null,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  state: base.SettingValueState<Int> = base.rememberIntSettingState(),
+  title: @Composable () -> Unit,
+  items: List<String>,
+  icon: (@Composable () -> Unit)? = null,
+  useSelectedValueAsSubtitle: Boolean = true,
+  subtitle: (@Composable () -> Unit)? = null,
+  closeDialogDelay: Long = 200,
+  action: (@Composable (Boolean) -> Unit)? = null,
+  onItemSelected: ((Int, String) -> Unit)? = null,
 ) {
     if (state.value >= items.size) {
         throw IndexOutOfBoundsException("Current value for $title list setting cannot be grater than items size")

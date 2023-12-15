@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSetSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceIntSettingState
 import com.alorma.compose.settings.ui.SettingsList
@@ -24,7 +24,7 @@ fun ListScreen(
     navController: NavController = rememberNavController(),
 ) {
     val localContext = LocalContext.current
-    val enabledState = rememberBooleanSettingState(true)
+    val enabledState = base.rememberBooleanSettingState(true)
 
     AppScaffold(
         enabledState = enabledState,

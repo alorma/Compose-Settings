@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
 import com.alorma.compose.settings.example.ui.Navigation
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import base.rememberBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsMenuLink
 
 @Composable
@@ -25,7 +25,7 @@ fun TopLevelScreen(
         Navigation.NAV_SLIDERS,
         Navigation.NAV_LIST,
     )
-    val enabledState = rememberBooleanSettingState(true)
+    val enabledState = base.rememberBooleanSettingState(true)
     AppScaffold(
         navController = navController,
         enabledState = enabledState,

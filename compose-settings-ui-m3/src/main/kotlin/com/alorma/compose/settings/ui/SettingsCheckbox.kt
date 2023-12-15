@@ -17,22 +17,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.getValue
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.base.setValue
+import base.SettingValueState
+import base.getValue
+import base.rememberBooleanSettingState
+import base.setValue
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsCheckbox(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    state: SettingValueState<Boolean> = rememberBooleanSettingState(),
-    icon: @Composable (() -> Unit)? = null,
-    title: @Composable () -> Unit,
-    subtitle: @Composable (() -> Unit)? = null,
-    checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
-    onCheckedChange: (Boolean) -> Unit = {},
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  state: base.SettingValueState<Boolean> = base.rememberBooleanSettingState(),
+  icon: @Composable (() -> Unit)? = null,
+  title: @Composable () -> Unit,
+  subtitle: @Composable (() -> Unit)? = null,
+  checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
+  onCheckedChange: (Boolean) -> Unit = {},
 ) {
     var storageValue by state
     val update: (Boolean) -> Unit = { boolean ->
@@ -73,7 +73,7 @@ fun SettingsCheckbox(
 @Composable
 internal fun SettingsCheckboxPreview() {
     MaterialTheme {
-        val storage = rememberBooleanSettingState(defaultValue = true)
+        val storage = base.rememberBooleanSettingState(defaultValue = true)
         SettingsCheckbox(
             state = storage,
             icon = { Icon(imageVector = Icons.Default.Clear, contentDescription = "Clear") },

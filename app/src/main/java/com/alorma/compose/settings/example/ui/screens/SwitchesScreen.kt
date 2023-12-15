@@ -11,8 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import com.alorma.compose.settings.example.demo.AppScaffold
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import base.SettingValueState
+import base.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.preferences.rememberPreferenceBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsSwitch
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +24,7 @@ fun SwitchesScreen(navController: NavHostController) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val enabledState = rememberBooleanSettingState(true)
+    val enabledState = base.rememberBooleanSettingState(true)
 
     AppScaffold(
         enabledState = enabledState,
@@ -32,7 +32,7 @@ fun SwitchesScreen(navController: NavHostController) {
         title = { Text(text = "Switches") },
         snackbarHostState = snackbarHostState,
     ) {
-        val memoryStorage = rememberBooleanSettingState(defaultValue = false)
+        val memoryStorage = base.rememberBooleanSettingState(defaultValue = false)
         SettingsSwitch(
             enabled = enabledState.value,
             state = memoryStorage,
@@ -78,9 +78,9 @@ fun SwitchesScreen(navController: NavHostController) {
 }
 
 private fun SnackbarHostState.showChange(
-    coroutineScope: CoroutineScope,
-    key: String,
-    state: SettingValueState<Boolean>,
+  coroutineScope: CoroutineScope,
+  key: String,
+  state: base.SettingValueState<Boolean>,
 ) {
     coroutineScope.launch {
         currentSnackbarData?.dismiss()

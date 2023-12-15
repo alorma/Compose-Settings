@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.navigation.NavController
 import com.alorma.compose.settings.example.ui.Navigation
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import base.SettingValueState
+import base.rememberBooleanSettingState
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -26,13 +26,13 @@ import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
 )
 @Composable
 fun AppScaffold(
-    navController: NavController,
-    enabledState: SettingValueState<Boolean> = rememberBooleanSettingState(true),
-    showSettings: Boolean = true,
-    onBack: (() -> Unit)? = { navController.popBackStack() },
-    title: @Composable (() -> Unit)? = null,
-    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
-    content: @Composable (ColumnScope.() -> Unit),
+  navController: NavController,
+  enabledState: base.SettingValueState<Boolean> = base.rememberBooleanSettingState(true),
+  showSettings: Boolean = true,
+  onBack: (() -> Unit)? = { navController.popBackStack() },
+  title: @Composable (() -> Unit)? = null,
+  snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
+  content: @Composable (ColumnScope.() -> Unit),
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(

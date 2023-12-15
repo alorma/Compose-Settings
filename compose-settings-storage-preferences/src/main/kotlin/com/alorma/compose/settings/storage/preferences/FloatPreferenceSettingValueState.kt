@@ -9,7 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.alorma.compose.settings.storage.base.SettingValueState
+import base.SettingValueState
 
 @Composable
 fun rememberPreferenceFloatSettingState(
@@ -30,7 +30,7 @@ class FloatPreferenceSettingValueState(
     private val preferences: SharedPreferences,
     val key: String,
     val defaultValue: Float = 0f,
-) : SettingValueState<Float> {
+) : base.SettingValueState<Float> {
 
     private var _value by mutableStateOf(preferences.getFloat(key, defaultValue))
 

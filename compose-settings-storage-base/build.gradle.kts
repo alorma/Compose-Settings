@@ -1,6 +1,4 @@
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -11,8 +9,7 @@ plugins {
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 kotlin {
-  @OptIn(ExperimentalKotlinGradlePluginApi::class)
-  targetHierarchy.default()
+  applyDefaultHierarchyTemplate()
 
   withSourcesJar()
 
@@ -25,45 +22,46 @@ kotlin {
     }
   }
 
-  jvm("desktop")
+  /*
+    jvm("desktop")
 
-  listOf(
-    iosX64(),
-    iosArm64(),
-    iosSimulatorArm64()
-  ).forEach { iosTarget ->
-    iosTarget.binaries.framework {
-      baseName = "ComposeApp"
-      isStatic = true
-      binaryOption("bundleId", libs.versions.namespace.get() + ".storage")
-    }
-  }
-
-  sourceSets {
-    val androidMain by getting {
-      dependencies {
-        implementation(project.dependencies.platform(libs.compose.bom))
-        implementation(libs.compose.ui.tooling.preview)
-        implementation(libs.androidx.activity.compose)
+    listOf(
+      iosX64(),
+      iosArm64(),
+      iosSimulatorArm64()
+    ).forEach { iosTarget ->
+      iosTarget.binaries.framework {
+        baseName = "ComposeApp"
+        isStatic = true
+        binaryOption("bundleId", libs.versions.namespace.get() + ".storage")
       }
     }
+  */
+  sourceSets {
+    androidMain.dependencies {
+      implementation(project.dependencies.platform(libs.compose.bom))
+      implementation(libs.androidx.activity.compose)
+    }
+
+    commonMain.dependencies {
+      implementation(compose.material3)
+
+      implementation(compose.ui)
+      implementation(compose.runtime)
+      implementation(compose.foundation)
+
+      @OptIn(ExperimentalComposeLibrary::class)
+      implementation(compose.components.resources)
+    }
+
+    /*
     val desktopMain by getting {
       dependencies {
         implementation(compose.desktop.currentOs)
       }
     }
-    val commonMain by getting {
-      dependencies {
-        implementation(compose.material3)
+    */
 
-        implementation(compose.ui)
-        implementation(compose.runtime)
-        implementation(compose.foundation)
-
-        @OptIn(ExperimentalComposeLibrary::class)
-        implementation(compose.components.resources)
-      }
-    }
   }
 }
 
@@ -106,7 +104,7 @@ android {
     debugImplementation(libs.compose.ui.tooling)
   }
 }
-
+/*
 compose.desktop {
   application {
     nativeDistributions {
@@ -116,3 +114,4 @@ compose.desktop {
     }
   }
 }
+*/

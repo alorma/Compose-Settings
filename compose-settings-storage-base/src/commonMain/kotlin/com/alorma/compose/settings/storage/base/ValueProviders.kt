@@ -52,7 +52,7 @@ interface SettingValueState<T> {
 }
 
 internal class InMemoryBooleanSettingValueState(private val defaultValue: Boolean) :
-    SettingValueState<Boolean> {
+  SettingValueState<Boolean> {
     override var value: Boolean by mutableStateOf(defaultValue)
     override fun reset() {
         value = defaultValue
@@ -60,7 +60,7 @@ internal class InMemoryBooleanSettingValueState(private val defaultValue: Boolea
 }
 
 internal class InMemoryFloatSettingValueState(private val defaultValue: Float) :
-    SettingValueState<Float> {
+  SettingValueState<Float> {
     override var value: Float by mutableStateOf(defaultValue)
     override fun reset() {
         value = defaultValue
@@ -68,7 +68,7 @@ internal class InMemoryFloatSettingValueState(private val defaultValue: Float) :
 }
 
 internal class InMemoryIntSettingValueState(private val defaultValue: Int) :
-    SettingValueState<Int> {
+  SettingValueState<Int> {
     override var value: Int by mutableStateOf(defaultValue)
     override fun reset() {
         value = defaultValue
@@ -76,7 +76,7 @@ internal class InMemoryIntSettingValueState(private val defaultValue: Int) :
 }
 
 internal class InMemoryStringSettingValueState(private val defaultValue: String?) :
-    SettingValueState<String?> {
+  SettingValueState<String?> {
     override var value: String? by mutableStateOf(defaultValue)
     override fun reset() {
         value = defaultValue
@@ -84,7 +84,7 @@ internal class InMemoryStringSettingValueState(private val defaultValue: String?
 }
 
 internal class InMemoryIntSetSettingValueState(private val defaultValue: Set<Int>) :
-    SettingValueState<Set<Int>> {
+  SettingValueState<Set<Int>> {
     override var value: Set<Int> by mutableStateOf(defaultValue)
     override fun reset() {
         value = defaultValue

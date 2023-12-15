@@ -22,22 +22,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.rememberIntSettingState
+import base.SettingValueState
+import base.rememberIntSettingState
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 import com.alorma.compose.settings.ui.internal.WrapContentColor
 
 @Composable
 fun SettingsListDropdown(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    state: SettingValueState<Int> = rememberIntSettingState(),
-    title: @Composable () -> Unit,
-    items: List<String>,
-    icon: (@Composable () -> Unit)? = null,
-    subtitle: (@Composable () -> Unit)? = null,
-    onItemSelected: ((Int, String) -> Unit)? = null,
-    menuItem: (@Composable (index: Int, text: String) -> Unit)? = null,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  state: base.SettingValueState<Int> = base.rememberIntSettingState(),
+  title: @Composable () -> Unit,
+  items: List<String>,
+  icon: (@Composable () -> Unit)? = null,
+  subtitle: (@Composable () -> Unit)? = null,
+  onItemSelected: ((Int, String) -> Unit)? = null,
+  menuItem: (@Composable (index: Int, text: String) -> Unit)? = null,
 ) {
     if (state.value > items.size) {
         throw IndexOutOfBoundsException("Current value of state for list setting cannot be grater than items size")

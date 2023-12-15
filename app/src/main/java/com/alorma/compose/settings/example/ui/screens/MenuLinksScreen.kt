@@ -18,7 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alorma.compose.settings.example.demo.AppScaffold
-import com.alorma.compose.settings.storage.base.rememberBooleanSettingState
+import base.rememberBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsGroup
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ fun MenuLinksScreen(
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val enabledState = rememberBooleanSettingState(true)
+    val enabledState = base.rememberBooleanSettingState(true)
 
     AppScaffold(
         navController = navController,

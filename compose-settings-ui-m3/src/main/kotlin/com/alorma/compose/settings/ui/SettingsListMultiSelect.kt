@@ -24,22 +24,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.rememberIntSetSettingState
+import base.SettingValueState
+import base.rememberIntSetSettingState
 
 @Composable
 fun SettingsListMultiSelect(
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    state: SettingValueState<Set<Int>> = rememberIntSetSettingState(),
-    title: @Composable () -> Unit,
-    items: List<String>,
-    icon: @Composable (() -> Unit)? = null,
-    confirmButton: String,
-    useSelectedValuesAsSubtitle: Boolean = true,
-    subtitle: @Composable (() -> Unit)? = null,
-    onItemsSelected: ((List<String>) -> Unit)? = null,
-    action: @Composable ((Boolean) -> Unit)? = null,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  state: base.SettingValueState<Set<Int>> = base.rememberIntSetSettingState(),
+  title: @Composable () -> Unit,
+  items: List<String>,
+  icon: @Composable (() -> Unit)? = null,
+  confirmButton: String,
+  useSelectedValuesAsSubtitle: Boolean = true,
+  subtitle: @Composable (() -> Unit)? = null,
+  onItemsSelected: ((List<String>) -> Unit)? = null,
+  action: @Composable ((Boolean) -> Unit)? = null,
 ) {
     if (state.value.any { index -> index >= items.size }) {
         throw IndexOutOfBoundsException("Current indexes for $title list setting cannot be grater than items size")

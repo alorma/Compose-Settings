@@ -28,7 +28,6 @@ androidx-preference-ktx = { module = "androidx.preference:preference-ktx", versi
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
 compose-foundation-foundation = { module = "androidx.compose.foundation:foundation" }
 compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
-compose-material-material = { module = "androidx.compose.material:material" }
 compose-material-material3 = { module = "androidx.compose.material3:material3" }
 compose-material-iconsextended = { module = "androidx.compose.material:material-icons-extended" }
 compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
@@ -41,9 +40,6 @@ plugin-gradle-publish = { module = "io.github.gradle-nexus:publish-plugin", vers
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-
-plugin-gradle-nexus-staging = { id = "io.codearte.gradle.nexus:gradle-nexus-staging-plugin", version.ref = "gradleNexusStagingPlugin" }
-plugin-gradle-publish = { id = "io.github.gradle-nexus:publish-plugin", version.ref = "publishPlugin" }
 
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
