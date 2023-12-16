@@ -36,11 +36,6 @@ kotlin {
       implementation(compose.ui)
       implementation(libs.androidx.activity.compose)
     }
-    val desktopMain by getting {
-      dependencies {
-        implementation(compose.desktop.currentOs)
-      }
-    }
     commonMain.dependencies {
       implementation(compose.material3)
 
@@ -65,7 +60,6 @@ android {
 
   defaultConfig {
     minSdk = libs.versions.android.minSdk.get().toInt()
-    targetSdk = libs.versions.android.targetSdk.get().toInt()
   }
   buildFeatures {
     compose = true

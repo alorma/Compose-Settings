@@ -56,6 +56,10 @@ dependencies {
 
   implementation(projects.sample.compose)
 
+  implementation(projects.composeSettingsStorageBase)
+  implementation(projects.composeSettingsStorageMemory)
+  implementation(projects.composeSettingsStorageDisk)
+
   debugImplementation(libs.ui.tooling)
   debugImplementation(libs.ui.test.manifest)
 }
