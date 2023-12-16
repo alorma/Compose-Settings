@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -20,7 +20,14 @@ jobs:
         with:
           distribution: adopt
           java-version: 17
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
         # Builds the release artifacts of the library
       - name: Release build
-        run: ./gradlew assembleRelease -x :app:assembleRelease -x :app_m3:assembleRelease
+        run: ./gradlew build
