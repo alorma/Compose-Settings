@@ -12,7 +12,6 @@
     <activity
         android:name="com.alorma.compose.settings.sample.MainActivity"
         android:exported="true"
-        android:theme="@style/Theme.ComposeSettings"
         >
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

@@ -54,11 +54,12 @@ dependencies {
   implementation(libs.ui.tooling.preview)
   implementation(libs.material3)
 
-  implementation(projects.sample.compose)
+  //implementation(projects.sample.compose)
 
   implementation(projects.composeSettingsStorageBase)
   implementation(projects.composeSettingsStorageMemory)
   implementation(projects.composeSettingsStorageDisk)
+  implementation(projects.composeSettingsUi)
 
   debugImplementation(libs.ui.tooling)
   debugImplementation(libs.ui.test.manifest)
