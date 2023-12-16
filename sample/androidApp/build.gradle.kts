@@ -54,7 +54,7 @@ dependencies {
   implementation(libs.ui.tooling.preview)
   implementation(libs.material3)
 
-  implementation(projects.sampleCompose)
+  implementation(projects.sample.compose)
 
   debugImplementation(libs.ui.tooling)
   debugImplementation(libs.ui.test.manifest)
