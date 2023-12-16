@@ -19,7 +19,7 @@ dependencyResolutionManagement {
 }
 
 include(":sample:androidApp")
-include(":sample:compose")
+include(":sample:shared")
 
 include(":compose-settings-ui")
 include(":compose-settings-storage-base")

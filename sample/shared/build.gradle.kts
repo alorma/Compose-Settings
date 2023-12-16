@@ -27,7 +27,7 @@ kotlin {
     iosTarget.binaries.framework {
       baseName = "ComposeApp"
       isStatic = true
-      binaryOption("bundleId", libs.versions.namespace.get() + ".sample")
+      binaryOption("bundleId", libs.versions.namespace.get() + ".sample.shared")
     }
   }
 
@@ -51,7 +51,7 @@ kotlin {
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".sample"
+  namespace = libs.versions.namespace.get() + ".sample.shared"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -92,7 +92,7 @@ compose.desktop {
 
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".sample"
+      packageName = libs.versions.namespace.get() + ".sample.shared"
       packageVersion = "1.0.0"
     }
   }
