@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.sample
+package com.alorma.compose.settings.sample.shared
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
