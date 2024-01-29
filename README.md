@@ -83,7 +83,7 @@ SettingsMenuLink(
 This can be used to enable or disable a feature
 
 ```kotlin
-SettingsCheckbox(
+SettingsSwitch(
   icon = { Icon(imageVector = Icons.Default.Wifi, contentDescription = "Wifi") },
   title = { Text(text = "Hello") },
   subtitle = { Text(text = "This is a longer text") },
