@@ -1,11 +1,8 @@
 package com.alorma.compose.settings.ui.internal
 
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
@@ -28,7 +25,6 @@ internal fun SettingsTileScaffold(
     val minHeight = if (subtitle == null) 72.dp else 88.dp
     ListItem(
         modifier = Modifier
-            .height(IntrinsicSize.Min)
             .defaultMinSize(minHeight = minHeight),
         headlineContent = {
             WrapContentColor(enabled = enabled) {
@@ -58,7 +54,6 @@ internal fun SettingsTileScaffold(
         } else {
             {
                 Row(
-                    modifier = Modifier.fillMaxHeight(),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     if (actionDivider) {
@@ -73,7 +68,6 @@ internal fun SettingsTileScaffold(
                             color = color,
                             modifier = Modifier
                                 .padding(vertical = 4.dp)
-                                .fillMaxHeight()
                                 .width(1.dp),
                         )
                         Spacer(modifier = Modifier.width(2.dp))
