@@ -39,7 +39,7 @@ jobs:
 
         # Builds the debug artifacts of the library
       - name: Release build
-        run: ./gradlew :app:bundleDebug
+        run: ./gradlew :sample:bundleDebug
 
   build-release:
     name: Build release
@@ -63,7 +63,7 @@ jobs:
 
         # Builds the release artifacts of the library
       - name: Release build
-        run: ./gradlew :app:bundleRelease
+        run: ./gradlew :sample:bundleRelease
 
   java-checks:
     needs: [ build-dev, build-release ]
@@ -134,7 +134,7 @@ jobs:
 
       - name: Lint
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
-        run: ./gradlew :app:lintRelease
+        run: ./gradlew :sample:lintRelease
 
   publish:
     needs: [ build-dev, build-release, java-checks, ktlint, lint ]

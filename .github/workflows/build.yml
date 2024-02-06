@@ -30,7 +30,7 @@ jobs:
 
         # Builds the debug artifacts of the library
       - name: Release build
-        run: ./gradlew :app:bundleDebug
+        run: ./gradlew :sample:bundleDebug
   build-release:
     name: Build release
     runs-on: macos-latest
@@ -52,7 +52,7 @@ jobs:
           
         # Builds the release artifacts of the library
       - name: Release build
-        run: ./gradlew :app:bundleRelease
+        run: ./gradlew :sample:bundleRelease
   java-checks:
     needs: [ build-dev, build-release ]
     runs-on: size/big
@@ -121,7 +121,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Lint
-        run: ./gradlew :app:lintRelease
+        run: ./gradlew :sample:lintRelease
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
   fake-publish:
     needs: [ build-dev, build-release, java-checks, ktlint, lint ]
