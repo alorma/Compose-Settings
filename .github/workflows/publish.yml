@@ -10,8 +10,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  prepare-env:
+    runs-on: size/small
+    steps:
+      - name: Prepare environment
+        env:
+          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
+          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
+        run: |
+          git fetch --unshallow
+          sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
+
   build-dev:
     name: Build debug
+    needs: [ build-dev, build-release ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -32,6 +44,7 @@ jobs:
         # Builds the debug artifacts of the library
       - name: Release build
         run: ./gradlew :app:bundleDebug
+
   build-release:
     name: Build release
     runs-on: macos-latest
@@ -54,6 +67,7 @@ jobs:
         # Builds the release artifacts of the library
       - name: Release build
         run: ./gradlew :app:bundleRelease
+
   java-checks:
     needs: [ build-dev, build-release ]
     runs-on: size/big
@@ -125,19 +139,8 @@ jobs:
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
         run: ./gradlew :app:lintRelease
 
-  prepare-env:
-    needs: [ build-release ]
-    runs-on: size/small
-    steps:
-      - name: Prepare environment
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
-        run: |
-          git fetch --unshallow
-          sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
   publish:
-    needs: [build-release]
+    needs: [ build-dev, build-release ]
     runs-on: size/big
     steps:
       # Runs upload, and then closes & releases the repository
