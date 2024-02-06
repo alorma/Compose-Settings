@@ -23,7 +23,7 @@ jobs:
 
   build-dev:
     name: Build debug
-    needs: [ build-dev, build-release ]
+    needs: [ prepare-env ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -47,6 +47,7 @@ jobs:
 
   build-release:
     name: Build release
+    needs: [ prepare-env ]
     runs-on: macos-latest
     steps:
       - name: Check out code
