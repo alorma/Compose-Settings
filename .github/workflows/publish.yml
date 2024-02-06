@@ -3,11 +3,15 @@ name: Publish
 on:
   release:
     # We'll run this workflow when a new GitHub release is created
-    types: [released]
+    types: [ released ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-${{github.job}}
+  cancel-in-progress: true
 
 jobs:
-  publish:
-    name: Release build and publish
+  build-dev:
+    name: Build debug
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -17,7 +21,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 17
-
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -26,7 +29,106 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-        # Base64 decodes and pipes the GPG key content into the secret file
+        # Builds the debug artifacts of the library
+      - name: Release build
+        run: ./gradlew :app:bundleDebug
+  build-release:
+    name: Build release
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: 17
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+        # Builds the release artifacts of the library
+      - name: Release build
+        run: ./gradlew :app:bundleRelease
+  java-checks:
+    needs: [ build-dev, build-release ]
+    runs-on: size/big
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: 17
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: Checkstyle
+        run: ./gradlew checkstyle
+
+      - name: Pmd
+        run: ./gradlew pmd
+
+  ktlint:
+    needs: [ build-dev, build-release ]
+    runs-on: size/big
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: 17
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: KtLint
+        run: ./gradlew ktlintCheck
+        # Run ktlintCheck on all modules is only executed on app
+
+  lint:
+    needs: [ build-dev, build-release ]
+    runs-on: size/big
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: adopt
+          java-version: 17
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: Lint
+        # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
+        run: ./gradlew :app:lintRelease
+
+  prepare-env:
+    needs: [ build-release ]
+    runs-on: size/small
+    steps:
       - name: Prepare environment
         env:
           GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
@@ -34,12 +136,11 @@ jobs:
         run: |
           git fetch --unshallow
           sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
-
-        # Builds the release artifacts of the library
-      - name: Release build
-        run: ./gradlew build
-
-        # Runs upload, and then closes & releases the repository
+  publish:
+    needs: [build-release]
+    runs-on: size/big
+    steps:
+      # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
         run: ./gradlew publishReleasePublicationToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
