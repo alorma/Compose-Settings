@@ -1,10 +1,9 @@
 # Compose Settings
 
 ### Versions
+[![Build](https://github.com/alorma/Compose-Settings/actions/workflows/build.yml/badge.svg)](https://github.com/alorma/Compose-Settings/actions/workflows/build.yml)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.alorma/compose-settings-ui.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.alorma%22%20AND%20a:%22compose-settings-ui%22)
-
-![Compatible with Compose](https://img.shields.io/badge/Compose-1.3.0-brightgreen)
 
 This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
 developers build complex settings screens without all the boilerplate
