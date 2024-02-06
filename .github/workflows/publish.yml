@@ -141,7 +141,7 @@ jobs:
         run: ./gradlew :app:lintRelease
 
   publish:
-    needs: [ build-dev, build-release ]
+    needs: [ build-dev, build-release, java-checks, ktlint, lint ]
     runs-on: size/big
     steps:
       # Runs upload, and then closes & releases the repository
