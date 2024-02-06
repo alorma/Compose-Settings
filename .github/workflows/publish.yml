@@ -18,7 +18,7 @@ jobs:
           sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
 
   build-dev:
-    name: Build debug
+    name: Build
     needs: [ prepare-env ]
     runs-on: macos-latest
     steps:
@@ -38,35 +38,11 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
         # Builds the debug artifacts of the library
-      - name: Release build
+      - name: Build
         run: ./gradlew :sample:bundleDebug
 
-  build-release:
-    name: Build release
-    needs: [ prepare-env ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-        # Builds the release artifacts of the library
-      - name: Release build
-        run: ./gradlew :sample:bundleRelease
-
   java-checks:
-    needs: [ build-dev, build-release ]
+    needs: [ build ]
     runs-on: size/big
     steps:
       - name: Check out code
@@ -91,7 +67,7 @@ jobs:
         run: ./gradlew pmd
 
   ktlint:
-    needs: [ build-dev, build-release ]
+    needs: [ build ]
     runs-on: size/big
     steps:
       - name: Check out code
@@ -114,7 +90,7 @@ jobs:
         # Run ktlintCheck on all modules is only executed on app
 
   lint:
-    needs: [ build-dev, build-release ]
+    needs: [ build ]
     runs-on: size/big
     steps:
       - name: Check out code

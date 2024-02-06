@@ -1,0 +1,246 @@
+Configuration on demand is an incubating feature.
+Type-safe project accessors is an incubating feature.
+
+> Task :tasks
+
+------------------------------------------------------------
+Tasks runnable from root project 'Compose-Settings'
+------------------------------------------------------------
+
+Android tasks
+-------------
+androidDependencies - Displays the Android dependencies of the project.
+signingReport - Displays the signing info for the base and test modules
+sourceSets - Prints out all the source sets defined in this project.
+
+Build tasks
+-----------
+allMetadataJar - Assembles a jar archive containing the metadata for all Kotlin source sets.
+androidDebugSourcesJar - Assembles a jar archive containing the sources of target 'androidDebug'.
+androidReleaseSourcesJar - Assembles a jar archive containing the sources of target 'androidRelease'.
+assemble - Assemble main outputs for all the variants.
+assembleAndroidTest - Assembles all the Test applications.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildKotlinToolingMetadata - Build metadata json file containing information about the used Kotlin tooling
+buildNeeded - Assembles and tests this project and all projects it depends on.
+bundle - Assemble bundles for all the variants.
+clean - Deletes the build directory.
+cleanAllTests - Deletes all the test results.
+compileAppleMainKotlinMetadata - Compiles a klibrary from the 'appleMain' compilation in target 'metadata'.
+compileDebugAndroidTestSources
+compileDebugSources
+compileDebugUnitTestSources
+compileIosMainKotlinMetadata - Compiles a klibrary from the 'iosMain' compilation in target 'metadata'.
+compileKotlinIosArm64 - Compiles a klibrary from the 'main' compilation in target 'iosArm64'.
+compileKotlinIosSimulatorArm64 - Compiles a klibrary from the 'main' compilation in target 'iosSimulatorArm64'.
+compileKotlinIosX64 - Compiles a klibrary from the 'main' compilation in target 'iosX64'.
+compileNativeMainKotlinMetadata - Compiles a klibrary from the 'nativeMain' compilation in target 'metadata'.
+compileReleaseSources
+compileReleaseUnitTestSources
+compileTestKotlinIosArm64 - Compiles a klibrary from the 'test' compilation in target 'iosArm64'.
+compileTestKotlinIosSimulatorArm64 - Compiles a klibrary from the 'test' compilation in target 'iosSimulatorArm64'.
+compileTestKotlinIosX64 - Compiles a klibrary from the 'test' compilation in target 'iosX64'.
+desktopJar - Assembles an archive containing the main classes.
+desktopMainClasses - Assembles outputs for compilation 'main' of target 'desktop'
+desktopSourcesJar - Assembles a jar archive containing the sources of target 'desktop'.
+desktopTestClasses - Assembles outputs for compilation 'test' of target 'desktop'
+embedAndSignAppleFrameworkForXcode - Embed and sign  framework as requested by Xcode's environment variables
+extractDebugAnnotations - Extracts Android annotations for the debug variant into the archive file
+extractReleaseAnnotations - Extracts Android annotations for the release variant into the archive file
+iosArm64Binaries - Assembles outputs for target 'iosArm64'.
+iosArm64MainBinaries - Links all binaries for compilation 'main' of target 'iosArm64'.
+iosArm64MainKlibrary - Assembles outputs for compilation 'main' of target 'iosArm64'
+iosArm64MetadataJar - Assembles Kotlin metadata of target 'iosArm64'.
+iosArm64SourcesJar - Assembles a jar archive containing the sources of target 'iosArm64'.
+iosArm64TestBinaries - Links all binaries for compilation 'test' of target 'iosArm64'.
+iosArm64TestKlibrary - Assembles outputs for compilation 'test' of target 'iosArm64'
+iosSimulatorArm64Binaries - Assembles outputs for target 'iosSimulatorArm64'.
+iosSimulatorArm64MainBinaries - Links all binaries for compilation 'main' of target 'iosSimulatorArm64'.
+iosSimulatorArm64MainKlibrary - Assembles outputs for compilation 'main' of target 'iosSimulatorArm64'
+iosSimulatorArm64MetadataJar - Assembles Kotlin metadata of target 'iosSimulatorArm64'.
+iosSimulatorArm64SourcesJar - Assembles a jar archive containing the sources of target 'iosSimulatorArm64'.
+iosSimulatorArm64TestBinaries - Links all binaries for compilation 'test' of target 'iosSimulatorArm64'.
+iosSimulatorArm64TestKlibrary - Assembles outputs for compilation 'test' of target 'iosSimulatorArm64'
+iosX64Binaries - Assembles outputs for target 'iosX64'.
+iosX64MainBinaries - Links all binaries for compilation 'main' of target 'iosX64'.
+iosX64MainKlibrary - Assembles outputs for compilation 'main' of target 'iosX64'
+iosX64MetadataJar - Assembles Kotlin metadata of target 'iosX64'.
+iosX64SourcesJar - Assembles a jar archive containing the sources of target 'iosX64'.
+iosX64TestBinaries - Links all binaries for compilation 'test' of target 'iosX64'.
+iosX64TestKlibrary - Assembles outputs for compilation 'test' of target 'iosX64'
+linkDebugFrameworkIosArm64 - Links a framework 'debugFramework' for a target 'iosArm64'.
+linkDebugFrameworkIosSimulatorArm64 - Links a framework 'debugFramework' for a target 'iosSimulatorArm64'.
+linkDebugFrameworkIosX64 - Links a framework 'debugFramework' for a target 'iosX64'.
+linkDebugTestIosArm64 - Links a test executable 'debugTest' for a target 'iosArm64'.
+linkDebugTestIosSimulatorArm64 - Links a test executable 'debugTest' for a target 'iosSimulatorArm64'.
+linkDebugTestIosX64 - Links a test executable 'debugTest' for a target 'iosX64'.
+linkIosArm64 - Links all binaries for target 'iosArm64'.
+linkIosSimulatorArm64 - Links all binaries for target 'iosSimulatorArm64'.
+linkIosX64 - Links all binaries for target 'iosX64'.
+linkReleaseFrameworkIosArm64 - Links a framework 'releaseFramework' for a target 'iosArm64'.
+linkReleaseFrameworkIosSimulatorArm64 - Links a framework 'releaseFramework' for a target 'iosSimulatorArm64'.
+linkReleaseFrameworkIosX64 - Links a framework 'releaseFramework' for a target 'iosX64'.
+metadataAppleMainClasses - Assembles outputs for compilation 'appleMain' of target 'metadata'
+metadataCommonMainClasses - Assembles outputs for compilation 'commonMain' of target 'metadata'
+metadataIosMainClasses - Assembles outputs for compilation 'iosMain' of target 'metadata'
+metadataMainClasses - Assembles outputs for compilation 'main' of target 'metadata'
+metadataNativeMainClasses - Assembles outputs for compilation 'nativeMain' of target 'metadata'
+metadataSourcesJar - Assembles a jar archive containing the sources of target 'metadata'.
+sourcesJar - Assembles a jar archive containing the sources of target 'kotlin'.
+
+Build Setup tasks
+-----------------
+init - Initializes a new Gradle build.
+wrapper - Generates Gradle wrapper files.
+
+Compose desktop tasks
+---------------------
+checkRuntime
+createDistributable
+createReleaseDistributable
+createRuntimeImage
+notarizeDmg
+notarizeReleaseDmg
+package
+packageDeb
+packageDistributionForCurrentOS
+packageDmg
+packageMsi
+packageReleaseDeb
+packageReleaseDistributionForCurrentOS
+packageReleaseDmg
+packageReleaseMsi
+packageReleaseUberJarForCurrentOS
+packageUberJarForCurrentOS
+prepareAppResources
+proguardReleaseJars
+run
+runDistributable
+runRelease
+runReleaseDistributable
+suggestRuntimeModules
+unpackDefaultComposeDesktopJvmApplicationResources
+
+Help tasks
+----------
+buildEnvironment - Displays all buildscript dependencies declared in root project 'Compose-Settings'.
+dependencies - Displays all dependencies declared in root project 'Compose-Settings'.
+dependencyInsight - Displays the insight into a specific dependency in root project 'Compose-Settings'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+kotlinDslAccessorsReport - Prints the Kotlin code for accessing the currently available project extensions and conventions.
+outgoingVariants - Displays the outgoing variants of root project 'Compose-Settings'.
+projects - Displays the sub-projects of root project 'Compose-Settings'.
+properties - Displays the properties of root project 'Compose-Settings'.
+resolvableConfigurations - Displays the configurations that can be resolved in root project 'Compose-Settings'.
+tasks - Displays the tasks runnable from root project 'Compose-Settings' (some of the displayed tasks may belong to subprojects).
+
+Ide tasks
+---------
+resolveIdeDependencies - Debugging/Diagnosing task that will resolve dependencies for the IDE
+
+Install tasks
+-------------
+installDebug - Installs the Debug build.
+installDebugAndroidTest - Installs the android (on device) tests for the Debug build.
+uninstallAll - Uninstall all applications.
+uninstallDebug - Uninstalls the Debug build.
+uninstallDebugAndroidTest - Uninstalls the android (on device) tests for the Debug build.
+uninstallRelease - Uninstalls the Release build.
+
+Interop tasks
+-------------
+cleanNativeDistributionCommonization - Deletes all previously commonized klib's from the Kotlin/Native distribution
+commonize - Aggregator task for all c-interop & Native distribution commonizer tasks
+commonizeCInterop - Invokes the commonizer on c-interop bindings of the project
+commonizeNativeDistribution - Invokes the commonizer on platform libraries provided by the Kotlin/Native distribution
+runCommonizer - [Deprecated: Use 'commonize' instead]
+
+Publishing tasks
+----------------
+closeAndReleaseSonatypeStagingRepository - Closes and releases open staging repository in 'sonatype' Nexus instance.
+closeAndReleaseStagingRepository - Closes and releases open staging repositories in the following Nexus instance: 'sonatype'
+closeSonatypeStagingRepository - Closes open staging repository in 'sonatype' Nexus instance.
+generateMetadataFileForAndroidReleasePublication - Generates the Gradle metadata file for publication 'androidRelease'.
+generateMetadataFileForDesktopPublication - Generates the Gradle metadata file for publication 'desktop'.
+generateMetadataFileForIosArm64Publication - Generates the Gradle metadata file for publication 'iosArm64'.
+generateMetadataFileForIosSimulatorArm64Publication - Generates the Gradle metadata file for publication 'iosSimulatorArm64'.
+generateMetadataFileForIosX64Publication - Generates the Gradle metadata file for publication 'iosX64'.
+generateMetadataFileForKotlinMultiplatformPublication - Generates the Gradle metadata file for publication 'kotlinMultiplatform'.
+generateMetadataFileForReleasePublication - Generates the Gradle metadata file for publication 'release'.
+generatePomFileForAndroidReleasePublication - Generates the Maven POM file for publication 'androidRelease'.
+generatePomFileForDesktopPublication - Generates the Maven POM file for publication 'desktop'.
+generatePomFileForIosArm64Publication - Generates the Maven POM file for publication 'iosArm64'.
+generatePomFileForIosSimulatorArm64Publication - Generates the Maven POM file for publication 'iosSimulatorArm64'.
+generatePomFileForIosX64Publication - Generates the Maven POM file for publication 'iosX64'.
+generatePomFileForKotlinMultiplatformPublication - Generates the Maven POM file for publication 'kotlinMultiplatform'.
+generatePomFileForReleasePublication - Generates the Maven POM file for publication 'release'.
+publish - Publishes all publications produced by this project.
+publishAllPublicationsToSonatypeRepository - Publishes all Maven publications produced by this project to the sonatype repository.
+publishAndroidReleasePublicationToMavenLocal - Publishes Maven publication 'androidRelease' to the local Maven repository.
+publishAndroidReleasePublicationToSonatypeRepository - Publishes Maven publication 'androidRelease' to Maven repository 'sonatype'.
+publishDesktopPublicationToMavenLocal - Publishes Maven publication 'desktop' to the local Maven repository.
+publishDesktopPublicationToSonatypeRepository - Publishes Maven publication 'desktop' to Maven repository 'sonatype'.
+publishIosArm64PublicationToMavenLocal - Publishes Maven publication 'iosArm64' to the local Maven repository.
+publishIosArm64PublicationToSonatypeRepository - Publishes Maven publication 'iosArm64' to Maven repository 'sonatype'.
+publishIosSimulatorArm64PublicationToMavenLocal - Publishes Maven publication 'iosSimulatorArm64' to the local Maven repository.
+publishIosSimulatorArm64PublicationToSonatypeRepository - Publishes Maven publication 'iosSimulatorArm64' to Maven repository 'sonatype'.
+publishIosX64PublicationToMavenLocal - Publishes Maven publication 'iosX64' to the local Maven repository.
+publishIosX64PublicationToSonatypeRepository - Publishes Maven publication 'iosX64' to Maven repository 'sonatype'.
+publishKotlinMultiplatformPublicationToMavenLocal - Publishes Maven publication 'kotlinMultiplatform' to the local Maven repository.
+publishKotlinMultiplatformPublicationToSonatypeRepository - Publishes Maven publication 'kotlinMultiplatform' to Maven repository 'sonatype'.
+publishReleasePublicationToMavenLocal - Publishes Maven publication 'release' to the local Maven repository.
+publishReleasePublicationToSonatypeRepository - Publishes Maven publication 'release' to Maven repository 'sonatype'.
+publishToMavenLocal - Publishes all Maven publications produced by this project to the local Maven cache.
+publishToSonatype - Publishes all Maven publications produced by this project to the 'sonatype' Nexus repository.
+releaseSonatypeStagingRepository - Releases closed staging repository in 'sonatype' Nexus instance.
+
+Release tasks
+-------------
+closeAndReleaseRepository - Closes and releases an artifacts repository in Nexus
+closeRepository - Closes an open artifacts repository in Nexus
+createRepository - Internal task. Should not be used directly. Explicitly creates a staging repository in Nexus
+getStagingProfile - Gets a staging profile id in Nexus - a diagnostic task
+releaseRepository - Releases a closed artifacts repository in Nexus
+
+Run tasks
+---------
+desktopRun - Jvm Run task for target 'desktop' and compilation 'main'. This task can act as carrier for the IDE to execute jvm based code
+
+Verification tasks
+------------------
+allTests - Runs the tests for all targets and create aggregated report
+check - Runs all checks.
+checkJetifier - Checks whether Jetifier is needed for the current project
+checkKotlinGradlePluginConfigurationErrors - Checks that Kotlin Gradle Plugin hasn't reported project configuration errors, failing otherwise. This task always runs before compileKotlin* or similar tasks.
+connectedAndroidTest - Installs and runs instrumentation tests for all flavors on connected devices.
+connectedCheck - Runs all device checks on currently connected devices.
+connectedDebugAndroidTest - Installs and runs the tests for debug on connected devices.
+desktopTest - Runs the tests of the test test run.
+deviceAndroidTest - Installs and runs instrumentation tests using all Device Providers.
+deviceCheck - Runs all device checks using Device Providers and Test Servers.
+iosSimulatorArm64Test - Executes Kotlin/Native unit tests for target iosSimulatorArm64.
+iosX64Test - Executes Kotlin/Native unit tests for target iosX64.
+lint - Runs lint on the default variant.
+lintDebug - Print text output from the corresponding lint report task
+lintFix - Runs lint on the default variant and applies any safe suggestions to the source code.
+lintRelease - Print text output from the corresponding lint report task
+lintVitalRelease - Print text output from the corresponding lint report task
+test - Run unit tests for all variants.
+testDebugUnitTest - Run unit tests for the debug build.
+testReleaseUnitTest - Run unit tests for the release build.
+updateLintBaseline - Updates the lint baseline using the default variant.
+
+To see all tasks and more detail, run gradlew tasks --all
+
+To see more detail about a task, run gradlew help --task <task>
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
