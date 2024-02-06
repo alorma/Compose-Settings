@@ -17,7 +17,7 @@ jobs:
           git fetch --unshallow
           sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
 
-  build-dev:
+  build:
     name: Build
     needs: [ prepare-env ]
     runs-on: macos-latest
@@ -113,7 +113,7 @@ jobs:
         run: ./gradlew :sample:lintRelease
 
   publish:
-    needs: [ build-dev, build-release, java-checks, ktlint, lint ]
+    needs: [ build, java-checks, ktlint, lint ]
     runs-on: size/big
     steps:
       # Runs upload, and then closes & releases the repository

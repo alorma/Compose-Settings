@@ -21,7 +21,7 @@ jobs:
           sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
 
   build:
-    name: Build debug
+    name: Build
     needs: [ prepare-env ]
     runs-on: macos-latest
     steps:
@@ -115,7 +115,7 @@ jobs:
         run: ./gradlew :sample:lintRelease
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
   fake-publish:
-    needs: [ build-dev, build-release, java-checks, ktlint, lint ]
+    needs: [ build, java-checks, ktlint, lint ]
     runs-on: size/big
     steps:
       # Runs upload, and then closes & releases the repository
