@@ -10,7 +10,7 @@ on:
 
 jobs:
   prepare-env:
-    runs-on: macos-latest
+    runs-on: size-small
     steps:
       - name: Prepare environment
         env:
