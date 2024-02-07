@@ -23,7 +23,7 @@ jobs:
   build:
     name: Build
     needs: [ prepare-env ]
-    runs-on: macos-latest
+    runs-on: size-big
     steps:
       - name: Check out code
         uses: actions/checkout@v4
