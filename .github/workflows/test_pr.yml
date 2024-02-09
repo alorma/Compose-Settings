@@ -54,3 +54,17 @@ jobs:
       - name: Lint
         run: ./gradlew lintRelease
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
+  fake-publish:
+    needs: [ build, lint ]
+    runs-on: macos-latest
+    steps:
+      # Runs upload, and then closes & releases the repository
+      - name: Publish to MavenLocal
+        run: ./gradlew publishReleasePublicationToMavenLocal --max-workers 1
+        env:
+          OSSRH_USERNAME: ${{ vars.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          GPG_KEY_NAME: ${{ vars.GPG_KEY_NAME }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
+          SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
