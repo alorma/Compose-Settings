@@ -74,5 +74,5 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Lint
-        run: ./gradlew :sample:lintRelease
+        run: ./gradlew lintRelease
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
