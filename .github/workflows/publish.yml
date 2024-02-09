@@ -7,7 +7,7 @@ on:
 
 jobs:
   prepare-env:
-    runs-on: size/small
+    runs-on: ubuntu-latest
     steps:
       - name: Prepare environment
         env:
@@ -20,7 +20,7 @@ jobs:
   build:
     name: Build
     needs: [ prepare-env ]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -43,7 +43,7 @@ jobs:
 
   java-checks:
     needs: [ build ]
-    runs-on: size/big
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -68,7 +68,7 @@ jobs:
 
   ktlint:
     needs: [ build ]
-    runs-on: size/big
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -91,7 +91,7 @@ jobs:
 
   lint:
     needs: [ build ]
-    runs-on: size/big
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -114,7 +114,7 @@ jobs:
 
   publish:
     needs: [ build, java-checks, ktlint, lint ]
-    runs-on: size/big
+    runs-on: ubuntu-latest
     steps:
       # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
