@@ -6,21 +6,9 @@ on:
     types: [ released ]
 
 jobs:
-  prepare-env:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Prepare environment
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
-        run: |
-          git fetch --unshallow
-          sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
-
   build:
     name: Build
-    needs: [ prepare-env ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -43,7 +31,7 @@ jobs:
 
   java-checks:
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -68,7 +56,7 @@ jobs:
 
   ktlint:
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -91,7 +79,7 @@ jobs:
 
   lint:
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -114,8 +102,15 @@ jobs:
 
   publish:
     needs: [ build, java-checks, ktlint, lint ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
+      - name: Prepare environment
+        env:
+          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
+          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
+        run: |
+          git fetch --unshallow
+          sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
       # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
         run: ./gradlew publishReleasePublicationToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
