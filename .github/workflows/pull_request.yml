@@ -1,12 +1,12 @@
 name: Build
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [ "test" ]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-${{github.job}}
-  cancel-in-progress: true
+    branches:
+      - main
 
 jobs:
   build:
@@ -28,65 +28,9 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      - name: Prepare environment
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-        run: |
-          git fetch --unshallow
-          sudo bash -c "echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'"
-
-        # Builds the debug artifacts of the library
+        # Builds the release artifacts of the library
       - name: Build
-        run: ./gradlew :sample:bundle
-
-  java-checks:
-    needs: [ build ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Checkstyle
-        run: ./gradlew checkstyle
-
-      - name: Pmd
-        run: ./gradlew pmd
-
-  ktlint:
-    needs: [ build ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: KtLint
-        run: ./gradlew ktlintCheck
-        # Run ktlintCheck on all modules is only executed on app
+        run: ./gradlew build
 
   lint:
     needs: [ build ]
@@ -108,10 +52,11 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Lint
-        run: ./gradlew :sample:lintRelease
+        run: ./gradlew lintRelease
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
+
   fake-publish:
-    needs: [ build, java-checks, ktlint, lint ]
+    needs: [ build, lint ]
     runs-on: macos-latest
     steps:
       # Runs upload, and then closes & releases the repository
