@@ -53,7 +53,7 @@ jobs:
         # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
 
   fake-publish:
-    needs: [ build, lint ]
+    needs: [ build ]
     runs-on: macos-latest
     steps:
       - name: Check out code
