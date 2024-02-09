@@ -29,8 +29,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
         # Builds the release artifacts of the library
-      - name: Release build
-        run: ./gradlew tasks
+      - name: Build
+        run: ./gradlew build
 
   lint:
     needs: [ build ]
