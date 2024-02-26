@@ -6,22 +6,8 @@ on:
       - main
 
 jobs:
-  pre-work:
-    runs-on: macos-latest
-    steps:
-      - name: Prepare environment
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
-        run: |
-          echo "SIGNING_SECRET_KEY_RING_FILE:"
-          echo "$SIGNING_SECRET_KEY_RING_FILE"
-          echo "GPG_KEY_CONTENTS:"
-          echo "$GPG_KEY_CONTENTS"
-
   build:
     name: Build
-    needs: [ pre-work ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -84,13 +70,6 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Prepare environment
-        env:
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
-        run: |
-          echo '$GPG_KEY_CONTENTS' | base64 -d > '$SIGNING_SECRET_KEY_RING_FILE'
 
       # Runs upload, and then closes & releases the repository
       - name: Publish to MavenLocal
