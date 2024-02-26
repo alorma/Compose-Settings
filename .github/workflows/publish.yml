@@ -27,33 +27,10 @@ jobs:
 
         # Builds the debug artifacts of the library
       - name: Build - Publish
-        run: ./gradlew :sample:bundleDebug
-
-  lint:
-    needs: [ build ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Lint
-        # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
-        run: ./gradlew :sample:lintRelease
+        run: ./gradlew build
 
   publish:
-    needs: [ build, lint ]
+    needs: [ build ]
     runs-on: macos-latest
     steps:
       # Runs upload, and then closes & releases the repository
