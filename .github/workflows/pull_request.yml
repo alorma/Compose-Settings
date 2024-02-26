@@ -14,7 +14,9 @@ jobs:
           GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
           SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
         run: |
+          echo "SIGNING_SECRET_KEY_RING_FILE:"
           echo "$SIGNING_SECRET_KEY_RING_FILE"
+          echo "GPG_KEY_CONTENTS:"
           echo "$GPG_KEY_CONTENTS"
 
   build:
