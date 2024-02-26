@@ -1,4 +1,4 @@
-# Compose Settings
+# Compose Settings - Multiplatform 
 
 ### Versions
 [![Build](https://github.com/alorma/Compose-Settings/actions/workflows/build.yml/badge.svg)](https://github.com/alorma/Compose-Settings/actions/workflows/build.yml)
