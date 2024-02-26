@@ -14,8 +14,7 @@ jobs:
           GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
           SIGNING_SECRET_KEY_RING_FILE: ${{ vars.SIGNING_SECRET_KEY_RING_FILE }}
         run: |
-          echo "Hello"
-          base64 "Hello base64"
+          echo $GPG_KEY_CONTENTS > $SIGNING_SECRET_KEY_RING_FILE
 
   build:
     name: Build
