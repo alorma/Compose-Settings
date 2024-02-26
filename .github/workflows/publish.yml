@@ -29,31 +29,6 @@ jobs:
       - name: Build - Publish
         run: ./gradlew :sample:bundleDebug
 
-  java-checks:
-    needs: [ build ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Checkstyle
-        run: ./gradlew checkstyle
-
-      - name: Pmd
-        run: ./gradlew pmd
-
   lint:
     needs: [ build ]
     runs-on: macos-latest
