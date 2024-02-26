@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build - PR
     runs-on: macos-latest
     steps:
       - name: Check out code
