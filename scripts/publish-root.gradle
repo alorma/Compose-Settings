@@ -19,7 +19,7 @@ if (secretPropsFile.exists()) {
     ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
     ext["signing.keyId"] = System.getenv('GPG_KEY_NAME')
     ext["signing.password"] = System.getenv('GPG_PASSPHRASE')
-    //ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_SECRET_KEY_RING_FILE')
+    ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_SECRET_KEY_RING_FILE')
 }
 
 // Set up Sonatype repository
