@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build - PR
+    name: Build - Release
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -29,30 +29,8 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-  lint:
-    needs: [ build ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Lint
-        run: ./gradlew lintRelease
-        # Run lint on app (runs on all modules) in order to generate a single report instead of a report per module
-
   fake-publish:
+    name: Fake publish - Release
     needs: [ build ]
     runs-on: macos-latest
     steps:
@@ -83,6 +61,7 @@ jobs:
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
 
   publish:
+    name: Publish - Release
     needs: [ build ]
     runs-on: macos-latest
     steps:
