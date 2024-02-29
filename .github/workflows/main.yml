@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-sign:
-    name: Fake publish - Main
+    name: Check signature - Main
     runs-on: macos-latest
     steps:
       - name: Check out code
