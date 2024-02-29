@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-sign:
-    name: Check signature - Main
+    name: Check signature
     runs-on: macos-latest
     steps:
       - name: Check out code
