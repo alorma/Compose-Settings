@@ -10,8 +10,7 @@ group = project.property("libGroup")
 version = project.property("libVersion")
 
 mavenPublishing {
-  //publishToMavenCentral(SonatypeHost.S01, true)
-  publishToMavenCentral()
+  publishToMavenCentral
   signAllPublications()
 
   pom {
