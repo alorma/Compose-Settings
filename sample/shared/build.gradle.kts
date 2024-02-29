@@ -19,9 +19,17 @@ kotlin {
 
   jvm("desktop")
 
-  iosX64()
-  iosArm64()
-  iosSimulatorArm64()
+  listOf(
+    iosX64(),
+    iosArm64(),
+    iosSimulatorArm64()
+  ).forEach { iosTarget ->
+    iosTarget.binaries.framework {
+      baseName = "ComposeApp"
+      isStatic = true
+      binaryOption("bundleId", libs.versions.namespace.get() + ".sample.shared")
+    }
+  }
 
   sourceSets {
     androidMain.dependencies {
