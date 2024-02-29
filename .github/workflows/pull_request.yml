@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-sign:
-    name: Check signature - Main
+    name: Check signature - PR
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -28,15 +28,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Sign release
-        run: ./gradlew signReleasePublication
-        env:
-          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
-          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
-          SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
+        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   build:
     name: Build - PR
@@ -61,12 +53,32 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-      - name: Sign release
-        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+  fake-publish:
+    name: Fake publish - Main
+    needs: [ check-sign, build ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: Publish to MavenLocal
+        run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   publish-dry:
-    name: Dry run publish - Main
-    needs: [ check-sign ]
+    name: Dry run publish - PR
+    needs: [ check-sign, build ]
     runs-on: macos-latest
     steps:
       - name: Check out code
