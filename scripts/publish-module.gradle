@@ -10,7 +10,7 @@ group = project.property("libGroup")
 version = project.property("libVersion")
 
 mavenPublishing {
-  publishToMavenCentral
+  publishToMavenCentral()
   signAllPublications()
 
   pom {
