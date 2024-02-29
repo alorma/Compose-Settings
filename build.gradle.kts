@@ -25,9 +25,4 @@ allprojects {
   }
 }
 
-tasks.withType<AbstractPublishToMaven>().configureEach {
-  val signingTasks = tasks.withType<Sign>()
-  mustRunAfter(signingTasks)
-}
-
 apply(from = "${rootDir}/scripts/publish-root.gradle")

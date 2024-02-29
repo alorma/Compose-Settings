@@ -88,6 +88,12 @@ compose.desktop {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
       packageName = libs.versions.namespace.get() + ".storage"
       packageVersion = "1.0.0"
+      //packageVersion = rootProject.findProperty("libVersion").toString()
     }
   }
+}
+
+tasks.withType<AbstractPublishToMaven>().configureEach {
+  val signingTasks = tasks.withType<Sign>()
+  mustRunAfter(signingTasks)
 }
