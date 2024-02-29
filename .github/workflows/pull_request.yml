@@ -19,14 +19,6 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
       - name: Sign release
         run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
@@ -42,13 +34,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Build
         run: ./gradlew build
@@ -65,13 +50,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Publish to MavenLocal
         run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
@@ -88,13 +66,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Publish to MavenCentral
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }} --dry-run
