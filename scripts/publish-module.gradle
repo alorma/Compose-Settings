@@ -30,6 +30,10 @@ afterEvaluate {
         version project.property("libVersion")
 
         pom {
+          signing {
+            sign publishing.publications.release
+            sign configurations.archives
+          }
           name = project.project.getName()
           description = 'Compose settings'
           url = 'https://github.com/alorma/Compose-Settings'
@@ -55,13 +59,4 @@ afterEvaluate {
       }
     }
   }
-}
-
-signing {
-  def signingKeyId = rootProject.ext["signing.keyId"]
-  def signingKey = rootProject.ext["signing.key"]
-  def signingPassword = rootProject.ext["signing.password"]
-  useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
-
-  sign publishing.publications
 }
