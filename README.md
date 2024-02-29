@@ -1,7 +1,7 @@
 # Compose Settings - Multiplatform 
 
 ### Versions
-[![Build](https://github.com/alorma/Compose-Settings/actions/workflows/build.yml/badge.svg)](https://github.com/alorma/Compose-Settings/actions/workflows/build.yml)
+[![Build](https://github.com/alorma/Compose-Settings/actions/workflows/main.yml/badge.svg)](https://github.com/alorma/Compose-Settings/actions/workflows/main.yml)
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.alorma/compose-settings-ui.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.alorma%22%20AND%20a:%22compose-settings-ui%22)
 
