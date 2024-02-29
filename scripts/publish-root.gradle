@@ -4,7 +4,6 @@ ext["ossrhPassword"] = ''
 ext["sonatypeStagingProfileId"] = ''
 ext["signing.keyId"] = '0C762F0D'
 ext["signing.password"] = 'dsLCfZhaoHbgqgNeRHuAY'
-ext["signing.secretKeyRingFile"] = '../secret.gpg'
 
 File secretPropsFile = project.rootProject.file('local.properties')
 if (secretPropsFile.exists()) {
@@ -19,7 +18,6 @@ if (secretPropsFile.exists()) {
     ext["sonatypeStagingProfileId"] = System.getenv('SONATYPE_STAGING_PROFILE_ID')
     ext["signing.keyId"] = System.getenv('GPG_KEY_NAME')
     ext["signing.password"] = System.getenv('GPG_PASSPHRASE')
-    ext["signing.secretKeyRingFile"] = "../secret.gpg"
 }
 
 // Set up Sonatype repository
