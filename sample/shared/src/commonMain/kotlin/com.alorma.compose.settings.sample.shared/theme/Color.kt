@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.sample.theme
+package com.alorma.compose.settings.sample.shared.theme
 
 import androidx.compose.ui.graphics.Color
 
