@@ -19,6 +19,7 @@ dependencyResolutionManagement {
 }
 
 include(":sample:androidApp")
+include(":sample:iosApp")
 include(":sample:shared")
 
 include(":compose-settings-ui")
