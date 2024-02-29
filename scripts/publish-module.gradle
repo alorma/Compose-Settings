@@ -1,6 +1,11 @@
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
+tasks.withType(AbstractPublishToMaven).configureEach {
+  def signingTasks = tasks.withType(Sign)
+  mustRunAfter(signingTasks)
+}
+
 android {
   publishing {
     singleVariant("release") {

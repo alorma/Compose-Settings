@@ -100,7 +100,3 @@ compose.desktop {
     }
   }
 }
-tasks.withType<AbstractPublishToMaven>().configureEach {
-  val signingTasks = tasks.withType<Sign>()
-  mustRunAfter(signingTasks)
-}
