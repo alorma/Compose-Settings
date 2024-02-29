@@ -3,7 +3,7 @@ name: Main
 on:
   push:
     branches:
-      - PR
+      - main
 
 jobs:
   check-sign:
