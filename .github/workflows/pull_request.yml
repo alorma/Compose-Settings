@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-sign:
-    name: Check signature - PR
+    name: Check signature - Main
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -76,8 +76,8 @@ jobs:
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
 
   fake-publish:
-    name: Fake publish - PR
-    needs: [ check-sign, build ]
+    name: Fake publish - Main
+    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -108,8 +108,8 @@ jobs:
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
 
   publish-dry:
-    name: Dry run publish - PR
-    needs: [ check-sign, build ]
+    name: Dry run publish - Main
+    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -129,7 +129,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
-        run: ./gradlew publishReleasePublicationToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository --dry-run
+        run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository --dry-run
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
