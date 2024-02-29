@@ -66,6 +66,7 @@ jobs:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
+          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
@@ -97,6 +98,7 @@ jobs:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
+          GPG_KEY_CONTENTS: ${{ secrets.GPG_KEY_CONTENTS }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           SIGNING_SECRET_KEY_RING_FILE: ${{ secrets.SIGNING_SECRET_KEY_RING_FILE }}
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
