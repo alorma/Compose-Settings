@@ -54,7 +54,7 @@ jobs:
         run: ./gradlew build
 
   fake-publish:
-    name: Fake publish - Main
+    name: Fake publish - PR
     needs: [ check-sign, build ]
     runs-on: macos-latest
     steps:
