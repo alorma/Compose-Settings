@@ -24,15 +24,9 @@ kotlin {
 
   jvm("desktop")
 
-  listOf(
-    iosX64(),
-    iosArm64(),
-    iosSimulatorArm64()
-  ).forEach { iosTarget ->
-    iosTarget.binaries.framework {
-      binaryOption("bundleId", libs.versions.namespace.get() + ".disk")
-    }
-  }
+  iosX64()
+  iosArm64()
+  iosSimulatorArm64()
 
   sourceSets {
     androidMain.dependencies {
