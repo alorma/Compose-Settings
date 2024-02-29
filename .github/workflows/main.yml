@@ -28,7 +28,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Sign release
-        run: ./gradlew signReleasePublication
+        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -82,7 +82,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Publish to MavenCentral
-        run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository --dry-run  -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+        run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository --dry-run -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
