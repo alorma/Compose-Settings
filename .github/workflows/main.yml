@@ -29,7 +29,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Sign release
-        run: ./gradlew signReleasePublication
+        run: ./gradlew signAllPublications
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
