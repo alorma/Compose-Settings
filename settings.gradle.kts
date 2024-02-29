@@ -18,7 +18,7 @@ dependencyResolutionManagement {
   }
 }
 
-include(":sample:shared")
+include(":composeApp")
 
 include(":compose-settings-ui")
 include(":compose-settings-storage-base")
