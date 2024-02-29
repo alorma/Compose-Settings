@@ -27,7 +27,6 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      # Runs upload, and then closes & releases the repository
       - name: Sign release
         run: ./gradlew signReleasePublication
         env:
@@ -59,11 +58,9 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-        # Builds the release artifacts of the library
       - name: Build
         run: ./gradlew build
 
-      # Runs upload, and then closes & releases the repository
       - name: Sign release
         run: ./gradlew signReleasePublication
         env:
@@ -95,7 +92,6 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      # Runs upload, and then closes & releases the repository
       - name: Publish to MavenLocal
         run: ./gradlew publishReleasePublicationToMavenLocal --max-workers 1
         env:
@@ -127,7 +123,6 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
         run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository --dry-run
         env:

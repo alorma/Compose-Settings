@@ -2,12 +2,11 @@ name: Publish
 
 on:
   release:
-    # We'll run this workflow when a new GitHub release is created
     types: [ released ]
 
 jobs:
   check-sign:
-    name: Check signature
+    name: Check signature - Release
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -27,7 +26,6 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      # Runs upload, and then closes & releases the repository
       - name: Sign release
         run: ./gradlew signReleasePublication
         env:
@@ -59,7 +57,6 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      # Runs upload, and then closes & releases the repository
       - name: Publish to MavenLocal
         run: ./gradlew publishReleasePublicationToMavenLocal --max-workers 1
         env:
@@ -91,9 +88,8 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
-        run: ./gradlew publishReleasePublicationToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
