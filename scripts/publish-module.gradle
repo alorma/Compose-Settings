@@ -1,67 +1,41 @@
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+apply plugin: "signing"
+apply plugin: "com.vanniktech.maven.publish"
 
 tasks.withType(AbstractPublishToMaven).configureEach {
   def signingTasks = tasks.withType(Sign)
   mustRunAfter(signingTasks)
 }
 
-android {
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-      withJavadocJar()
-    }
-
-    multipleVariants {
-      withSourcesJar()
-      withJavadocJar()
-      allVariants()
-    }
-  }
-}
-
 group = project.property("libGroup")
 version = project.property("libVersion")
 
-afterEvaluate {
-  publishing {
-    publications {
-      release(MavenPublication) {
-        from components.release
+mavenPublishing {
+  //publishToMavenCentral(SonatypeHost.S01, true)
+  publishToMavenCentral()
+  signAllPublications()
 
-        groupId project.property("libGroup")
-        artifactId project.project.getName()
-        version project.property("libVersion")
+  pom {
+    name = project.project.getName()
 
-        pom {
-          signing {
-            sign publishing.publications.release
-            sign configurations.archives
-          }
-          name = project.project.getName()
-          description = 'Compose settings'
-          url = 'https://github.com/alorma/Compose-Settings'
-          licenses {
-            license {
-              name = 'Stream License'
-              url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
-            }
-          }
-          developers {
-            developer {
-              id = 'alorma'
-              name = 'Bernat Borrás'
-              email = 'bernatbor15@gmail.com'
-            }
-          }
-          scm {
-            connection = 'scm:git:github.com/alorma/Compose-Settings.git'
-            developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
-            url = 'https://github.com/alorma/Compose-Settings/tree/main'
-          }
-        }
+    description = 'Compose settings'
+    url = 'https://github.com/alorma/Compose-Settings'
+    licenses {
+      license {
+        name = 'MIT License'
+        url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
       }
+    }
+    developers {
+      developer {
+        id = 'alorma'
+        name = 'Bernat Borrás'
+        email = 'bernatbor15@gmail.com'
+      }
+    }
+    scm {
+      connection = 'scm:git:github.com/alorma/Compose-Settings.git'
+      developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
+      url = 'https://github.com/alorma/Compose-Settings/tree/main'
     }
   }
 }

@@ -10,6 +10,7 @@ compose-compiler = "1.5.8"
 
 gradleNexusStagingPlugin = "0.30.0"
 publishPlugin = "1.3.0"
+mavenPlugin = "0.27.0"
 
 agp = "8.2.2"
 compose-plugin = "1.5.12"
@@ -31,6 +32,7 @@ androidx-preference-ktx = { module = "androidx.preference:preference-ktx", versi
 
 plugin-gradle-nexus-staging = { module = "io.codearte.gradle.nexus:gradle-nexus-staging-plugin", version.ref = "gradleNexusStagingPlugin" }
 plugin-gradle-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "publishPlugin" }
+plugin-gradle-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPlugin" }
 
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
 multiplatform-settings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }

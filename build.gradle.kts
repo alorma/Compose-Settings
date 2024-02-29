@@ -11,6 +11,7 @@ buildscript {
     dependencies {
       classpath(libs.plugin.gradle.publish)
       classpath(libs.plugin.gradle.nexus.staging)
+      classpath(libs.plugin.gradle.maven.publish)
     }
   }
 }
