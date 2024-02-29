@@ -59,8 +59,9 @@ afterEvaluate {
 
 signing {
   def signingKeyId = rootProject.ext["signing.keyId"]
+  def signingKey = rootProject.ext["signing.key"]
   def signingPassword = rootProject.ext["signing.password"]
-  useInMemoryPgpKeys(signingKeyId, signingPassword)
+  useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
 
   sign publishing.publications
 }
