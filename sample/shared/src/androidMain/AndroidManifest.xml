@@ -10,7 +10,7 @@
       android:theme="@style/Theme.ComposeSettings"
       >
     <activity
-        android:name="com.alorma.compose.settings.sample.MainActivity"
+        android:name="com.alorma.compose.settings.sample.shared.MainActivity"
         android:exported="true"
         >
       <intent-filter>

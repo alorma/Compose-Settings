@@ -2,7 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
-  alias(libs.plugins.androidLibrary)
+  alias(libs.plugins.androidApplication)
   alias(libs.plugins.jetbrainsCompose)
 }
 
@@ -59,6 +59,8 @@ android {
 
   defaultConfig {
     minSdk = libs.versions.android.minSdk.get().toInt()
+    versionCode = 1
+    versionName = "1.0"
   }
   buildFeatures {
     compose = true
