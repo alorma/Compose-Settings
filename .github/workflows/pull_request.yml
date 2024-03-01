@@ -18,7 +18,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build
+      - name: Build storage base - PR
         run: ./gradlew :compose-settings-storage-base:build
 
   build-ui:
@@ -33,7 +33,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build
+      - name: Build ui - PR
         run: ./gradlew :compose-settings-ui:build
 
   build-storage-memory:
@@ -50,7 +50,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build
+      - name: Build storage memory - PR
         run: ./gradlew :compose-settings-storage-memory:build
 
   build-storage-disk:
@@ -83,7 +83,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Sign release
+      - name: Check signature - PR
         run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   fake-publish:
@@ -117,5 +117,5 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Publish to MavenCentral
+      - name: Publish to MavenCentral (dry)
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }} --dry-run
