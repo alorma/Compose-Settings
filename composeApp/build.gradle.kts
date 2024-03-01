@@ -46,6 +46,11 @@ kotlin {
       implementation(projects.composeSettingsStorageDisk)
       implementation(projects.composeSettingsUi)
     }
+    val desktopMain by getting
+
+    desktopMain.dependencies {
+      implementation(compose.desktop.currentOs)
+    }
   }
 }
 
