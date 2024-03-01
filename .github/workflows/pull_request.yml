@@ -24,6 +24,7 @@ jobs:
 
   build-storage-base:
     name: Build storage base - PR
+    if: ${{ success() }}
     needs: [ check-sign ]
     runs-on: macos-latest
     steps:
@@ -40,6 +41,7 @@ jobs:
 
   build-ui:
     name: Build ui - PR
+    if: ${{ success() }}
     needs: [ check-sign ]
     runs-on: macos-latest
     steps:
@@ -52,10 +54,11 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :compose-settings-storage-ui:build
+        run: ./gradlew :compose-settings-ui:build
 
   build-storage-memory:
     name: Build storage memory - PR
+    if: ${{ success() }}
     needs: [ build-storage-base ]
     runs-on: macos-latest
     steps:
@@ -72,6 +75,7 @@ jobs:
 
   build-storage-disk:
     name: Build storage disk - PR
+    if: ${{ success() }}
     needs: [ build-storage-base ]
     runs-on: macos-latest
     steps:
@@ -88,6 +92,7 @@ jobs:
 
   fake-publish:
     name: Fake publish - PR
+    if: ${{ success() }}
     needs: [ check-sign, build-storage-memory, build-storage-disk, build-ui ]
     runs-on: macos-latest
     steps:
@@ -104,6 +109,7 @@ jobs:
 
   publish-dry:
     name: Dry run publish - PR
+    if: ${{ success() }}
     needs: [ check-sign, build-storage-memory, build-storage-disk, build-ui ]
     runs-on: macos-latest
     steps:
