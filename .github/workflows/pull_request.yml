@@ -38,6 +38,22 @@ jobs:
       - name: Build
         run: ./gradlew :compose-settings-storage-base:build
 
+  build-ui:
+    name: Build ui - PR
+    needs: [ check-sign ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        run: ./gradlew :compose-settings-storage-ui:build
+
   build-storage-memory:
     name: Build storage memory - PR
     needs: [ build-storage-base ]
@@ -57,22 +73,6 @@ jobs:
   build-storage-disk:
     name: Build storage disk - PR
     needs: [ build-storage-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build
-        run: ./gradlew :compose-settings-storage-disk:build
-
-  build-ui:
-    name: Build ui - PR
-    needs: [ build-storage-memory, build-storage-disk ]
     runs-on: macos-latest
     steps:
       - name: Check out code
