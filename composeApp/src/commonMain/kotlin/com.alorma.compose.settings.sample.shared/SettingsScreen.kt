@@ -12,7 +12,7 @@ import com.alorma.compose.settings.storage.base.getValue
 import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
-import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
+import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsSwitch
@@ -77,11 +77,7 @@ fun SettingsScreen(
 
       HorizontalDivider()
 
-      var checkTriState by rememberTriStateSetting(
-        key = "checkboxTriState",
-        defaultValue = true,
-        settings = settings,
-      )
+      var checkTriState by rememberMemoryTriStateSettingState(defaultValue = null)
       SettingsTriStateCheckbox(
         state = checkTriState,
         title = { Text(text = "Online status") },
