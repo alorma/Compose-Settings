@@ -1,7 +1,6 @@
 package com.alorma.compose.settings.sample.shared
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
@@ -11,12 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.alorma.compose.settings.storage.base.getValue
 import com.alorma.compose.settings.storage.base.setValue
+import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
+import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.russhwolf.settings.Settings
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SettingsScreen(
   settings: Settings,
@@ -34,6 +34,7 @@ fun SettingsScreen(
         title = { Text(text = "Dark mode") },
         onCheckedChange = onDarkThemeChange,
       )
+
       HorizontalDivider()
 
       var intState by rememberIntSettingState(
@@ -50,6 +51,26 @@ fun SettingsScreen(
           }
         },
         onClick = { intState += 1 }
+      )
+
+      HorizontalDivider()
+
+      var checkState by rememberBooleanSettingState(
+        key = "checkbox",
+        defaultValue = true,
+        settings = settings,
+      )
+      SettingsCheckbox(
+        state = checkState,
+        title = { Text(text = "Logger enabled") },
+        onCheckedChange = { newState -> checkState = newState },
+        subtitle = {
+          if (checkState) {
+            Text(text = "All your data belongs to us!")
+          } else {
+            Text(text = "Don't worry, we won't track you")
+          }
+        },
       )
     }
   }
