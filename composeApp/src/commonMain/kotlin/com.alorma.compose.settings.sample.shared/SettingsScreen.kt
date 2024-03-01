@@ -14,10 +14,12 @@ import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsSwitch
+import com.russhwolf.settings.Settings
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun SettingsScreen(
+  settings: Settings,
   darkTheme: Boolean,
   onDarkThemeChange: (Boolean) -> Unit,
 ) {
@@ -34,7 +36,11 @@ fun SettingsScreen(
       )
       HorizontalDivider()
 
-      var intState by rememberIntSettingState(key = "clicked", defaultValue = 0)
+      var intState by rememberIntSettingState(
+        key = "clicked",
+        defaultValue = 0,
+        settings = settings,
+      )
       SettingsMenuLink(
         title = {
           if (intState == 0) {
