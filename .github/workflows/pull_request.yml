@@ -78,8 +78,8 @@ jobs:
       - name: Build
         run: ./gradlew :compose-settings-storage-disk:build
 
-  build-sample:
-    name: Build sample - PR
+  build-sample-android:
+    name: Build sample Android- PR
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui ]
     runs-on: macos-latest
@@ -93,13 +93,49 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample - PR
-        run: ./gradlew :composeApp:build
+      - name: Build sample Android - PR
+        run: ./gradlew :composeApp:assembleDebug :composeApp:assembleRelease
+
+  build-sample-desktop:
+    name: Build sample Desktop - PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample Desktop - PR
+        run: ./gradlew :composeApp:compileKotlinDesktop
+
+  build-sample-iOS:
+    name: Build sample iOS - PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample iOS - PR
+        run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
 
   check-sign:
     name: Check signature - PR
     if: ${{ success() }}
-    needs: [build-sample ]
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -117,7 +153,7 @@ jobs:
   fake-publish:
     name: Fake publish - PR
     if: ${{ success() }}
-    needs: [ build-sample ]
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -135,7 +171,7 @@ jobs:
   publish-dry:
     name: Dry run publish - PR
     if: ${{ success() }}
-    needs: [ check-sign, build-sample ]
+    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
