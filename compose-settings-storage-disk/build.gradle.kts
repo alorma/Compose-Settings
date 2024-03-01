@@ -37,8 +37,8 @@ kotlin {
     commonMain.dependencies {
       api(projects.composeSettingsStorageBase)
 
-      implementation(libs.multiplatform.settings)
-      implementation(libs.multiplatform.settings.noArg)
+      api(libs.multiplatform.settings)
+      api(libs.multiplatform.settings.noArg)
 
       implementation(compose.runtime)
       implementation(compose.foundation)
