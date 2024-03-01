@@ -11,36 +11,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.base.getValue
-import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsCheckbox(
+  state: Boolean,
+  title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  state: SettingValueState<Boolean>,
   icon: @Composable (() -> Unit)? = null,
-  title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
-  var storageValue by state
-  val update: (Boolean) -> Unit = { boolean ->
-    storageValue = boolean
-    onCheckedChange(storageValue)
-  }
+  val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
   Surface {
     Row(
       modifier = modifier
         .fillMaxWidth()
         .toggleable(
           enabled = enabled,
-          value = storageValue,
-          role = Role.Checkbox,
-          onValueChange = { update(!storageValue) },
+          value = state,
+          role = Role.Switch,
+          onValueChange = { update(!state) },
         ),
       verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -52,7 +45,7 @@ fun SettingsCheckbox(
         action = {
           Checkbox(
             enabled = enabled,
-            checked = storageValue,
+            checked = state,
             onCheckedChange = update,
             colors = checkboxColors,
           )
