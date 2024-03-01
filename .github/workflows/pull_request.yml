@@ -6,26 +6,8 @@ on:
       - main
 
 jobs:
-  check-sign:
-    name: Check signature - PR
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Sign release
-        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
-
   build-storage-base:
     name: Build storage base - PR
-    if: ${{ success() }}
-    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -41,8 +23,6 @@ jobs:
 
   build-ui:
     name: Build ui - PR
-    if: ${{ success() }}
-    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -89,6 +69,22 @@ jobs:
 
       - name: Build
         run: ./gradlew :compose-settings-storage-disk:build
+
+  check-sign:
+    name: Check signature - PR
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Sign release
+        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   fake-publish:
     name: Fake publish - PR
