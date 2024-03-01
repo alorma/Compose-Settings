@@ -12,9 +12,11 @@ import com.alorma.compose.settings.storage.base.getValue
 import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
+import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsSwitch
+import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import com.russhwolf.settings.Settings
 
 @Composable
@@ -69,6 +71,26 @@ fun SettingsScreen(
             Text(text = "All your data belongs to us!")
           } else {
             Text(text = "Don't worry, we won't track you")
+          }
+        },
+      )
+
+      HorizontalDivider()
+
+      var checkTriState by rememberTriStateSetting(
+        key = "checkboxTriState",
+        defaultValue = true,
+        settings = settings,
+      )
+      SettingsTriStateCheckbox(
+        state = checkTriState,
+        title = { Text(text = "Online status") },
+        onCheckedChange = { newState -> checkTriState = newState },
+        subtitle = {
+          when (checkTriState) {
+            true -> Text(text = "You are connected!")
+            false -> Text(text = "Probably out of the office")
+            null -> Text(text = "I'm confused")
           }
         },
       )
