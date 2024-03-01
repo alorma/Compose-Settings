@@ -8,6 +8,12 @@
 This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
 developers build complex settings screens without all the boilerplate
 
+## Current status
+
+This library is under development.
+
+Moving to Kotlin MulotiPlatform... Some content of this readme may not be accurate. Please, wait until v2 (soon...) for a full README.md and instructions on how to use it
+
 ## Install
 
 ```groovy
