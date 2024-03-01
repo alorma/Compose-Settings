@@ -4,9 +4,137 @@ on:
   release:
     types: [ released ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  build-storage-base:
+    name: Build storage base - Release
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build storage base - Release
+        run: ./gradlew :compose-settings-storage-base:build
+
+  build-ui:
+    name: Build ui - Release
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui - Release
+        run: ./gradlew :compose-settings-ui:build
+
+  build-storage-memory:
+    name: Build storage memory - Release
+    if: ${{ success() }}
+    needs: [ build-storage-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build storage memory - Release
+        run: ./gradlew :compose-settings-storage-memory:build
+
+  build-storage-disk:
+    name: Build storage disk - Release
+    if: ${{ success() }}
+    needs: [ build-storage-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        run: ./gradlew :compose-settings-storage-disk:build
+
+  build-sample-android:
+    name: Build sample Android- PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample Android - Release
+        run: ./gradlew :composeApp:assembleDebug :composeApp:assembleRelease
+
+  build-sample-desktop:
+    name: Build sample Desktop - Release
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample Desktop - Release
+        run: ./gradlew :composeApp:compileKotlinDesktop
+
+  build-sample-iOS:
+    name: Build sample iOS - Release
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample iOS - Release
+        run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
+
   check-sign:
     name: Check signature - Release
+    if: ${{ success() }}
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -18,36 +146,41 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-
-      - name: Sign release
+      - name: Check signature - Release
         run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
-  publish:
-    name: Publish - Release
-    needs: [ check-sign ]
+  fake-publish:
+    name: Fake publish - Release
+    if: ${{ success() }}
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: adopt
           java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      - name: Publish to MavenCentral
+      - name: Publish to MavenLocal
+        run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+
+  publish-dry:
+    name: Publish - Release
+    if: ${{ success() }}
+    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Publish to MavenCentral (dry)
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }}
