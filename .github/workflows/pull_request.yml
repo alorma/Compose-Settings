@@ -5,9 +5,13 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  check-sign:
-    name: Check signature - PR
+  build-storage-base:
+    name: Build storage base - PR
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -19,16 +23,52 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Sign release
-        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+      - name: Build storage base - PR
+        run: ./gradlew :compose-settings-storage-base:build
 
-  build:
-    name: Build - PR
-    needs: [ check-sign ]
+  build-ui:
+    name: Build ui - PR
     runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui - PR
+        run: ./gradlew :compose-settings-ui:build
+
+  build-storage-memory:
+    name: Build storage memory - PR
+    if: ${{ success() }}
+    needs: [ build-storage-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build storage memory - PR
+        run: ./gradlew :compose-settings-storage-memory:build
+
+  build-storage-disk:
+    name: Build storage disk - PR
+    if: ${{ success() }}
+    needs: [ build-storage-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -36,15 +76,53 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew build
+        run: ./gradlew :compose-settings-storage-disk:build
 
-  fake-publish:
-    name: Fake publish - PR
-    needs: [ check-sign, build ]
+  build-sample:
+    name: Build sample - PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
     runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample - PR
+        run: ./gradlew :composeApp:build
+
+  check-sign:
+    name: Check signature - PR
+    if: ${{ success() }}
+    needs: [build-sample ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Check signature - PR
+        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+
+  fake-publish:
+    name: Fake publish - PR
+    if: ${{ success() }}
+    needs: [ build-sample ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -56,16 +134,18 @@ jobs:
 
   publish-dry:
     name: Dry run publish - PR
-    needs: [ check-sign, build ]
+    if: ${{ success() }}
+    needs: [ check-sign, build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: adopt
           java-version: 17
 
-      - name: Publish to MavenCentral
+      - name: Publish to MavenCentral (dry)
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }} --dry-run
