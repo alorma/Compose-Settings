@@ -99,7 +99,7 @@ jobs:
   check-sign:
     name: Check signature - PR
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-sample ]
+    needs: [build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
