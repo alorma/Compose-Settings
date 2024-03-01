@@ -3,7 +3,11 @@ package com.alorma.compose.settings.sample.shared
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +35,23 @@ fun SettingsScreen(
         .consumeWindowInsets(padding)
         .padding(top = padding.calculateTopPadding()),
     ) {
+      SettingsMenuLink(
+        title = { Text(text = "Generic settings") },
+        action = {
+          IconButton(
+            onClick = {},
+          ) {
+            Icon(
+              imageVector = Icons.Default.Settings,
+              contentDescription = null,
+            )
+          }
+        },
+        onClick = {},
+      )
+
+      HorizontalDivider()
+
       SettingsSwitch(
         state = darkTheme,
         title = { Text(text = "Dark mode") },
