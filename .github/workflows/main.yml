@@ -5,9 +5,13 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  check-sign:
-    name: Check signature - Main
+  build-storage-base:
+    name: Build storage base - Main
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -19,59 +23,165 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+      - name: Build storage base - Main
+        run: ./gradlew :compose-settings-storage-base:build
 
-      - name: Sign release
+  build-ui:
+    name: Build ui - Main
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui - Main
+        run: ./gradlew :compose-settings-ui:build
+
+  build-storage-memory:
+    name: Build storage memory - Main
+    if: ${{ success() }}
+    needs: [ build-storage-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build storage memory - Main
+        run: ./gradlew :compose-settings-storage-memory:build
+
+  build-storage-disk:
+    name: Build storage disk - Main
+    if: ${{ success() }}
+    needs: [ build-storage-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        run: ./gradlew :compose-settings-storage-disk:build
+
+  build-sample-android:
+    name: Build sample Android- PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample Android - Main
+        run: ./gradlew :composeApp:assembleDebug :composeApp:assembleRelease
+
+  build-sample-desktop:
+    name: Build sample Desktop - Main
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample Desktop - Main
+        run: ./gradlew :composeApp:compileKotlinDesktop
+
+  build-sample-iOS:
+    name: Build sample iOS - Main
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample iOS - Main
+        run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
+
+  check-sign:
+    name: Check signature - Main
+    if: ${{ success() }}
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Check signature - Main
         run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   fake-publish:
     name: Fake publish - Main
-    needs: [ check-sign ]
+    if: ${{ success() }}
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: adopt
           java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Publish to MavenLocal
         run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   publish-dry:
     name: Dry run publish - Main
-    needs: [ check-sign ]
+    if: ${{ success() }}
+    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop ]
     runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: adopt
           java-version: 17
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-      - name: Publish to MavenCentral
+      - name: Publish to MavenCentral (dry)
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }} --dry-run
