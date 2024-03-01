@@ -70,8 +70,27 @@ jobs:
       - name: Build
         run: ./gradlew :compose-settings-storage-disk:build
 
+  build-sample:
+    name: Build sample - PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample - PR
+        run: ./gradlew :composeApp:build
+
   check-sign:
     name: Check signature - PR
+    if: ${{ success() }}
+    needs: [ build-storage-memory, build-storage-disk, build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -89,7 +108,7 @@ jobs:
   fake-publish:
     name: Fake publish - PR
     if: ${{ success() }}
-    needs: [ check-sign, build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ check-sign, build-sample, build-ui ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -106,7 +125,7 @@ jobs:
   publish-dry:
     name: Dry run publish - PR
     if: ${{ success() }}
-    needs: [ check-sign, build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ check-sign, build-sample, build-ui ]
     runs-on: macos-latest
     steps:
       - name: Check out code
