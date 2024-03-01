@@ -9,13 +9,13 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.russhwolf.settings.Settings
 
 @Composable
-fun rememberBooleanSettingState(
+fun rememberTriStateSetting(
   key: String,
-  defaultValue: Boolean,
+  defaultValue: Boolean?,
   settings: Settings = Settings()
-): BooleanSettingValueState {
+): TriStateSettingValueState {
   return remember {
-    BooleanSettingValueState(
+    TriStateSettingValueState(
       settings = settings,
       key = key,
       defaultValue = defaultValue,
@@ -23,18 +23,22 @@ fun rememberBooleanSettingState(
   }
 }
 
-class BooleanSettingValueState(
+class TriStateSettingValueState(
   private val settings: Settings,
   val key: String,
-  val defaultValue: Boolean = false,
-) : SettingValueState<Boolean> {
+  val defaultValue: Boolean? = null,
+) : SettingValueState<Boolean?> {
 
-  private var _value by mutableStateOf(settings.getBoolean(key, defaultValue))
+  private var _value by mutableStateOf(settings.getBooleanOrNull(key))
 
-  override var value: Boolean
+  override var value: Boolean?
     set(value) {
       _value = value
-      settings.putBoolean(key, value)
+      if (value == null) {
+        settings.remove(key)
+      } else {
+        settings.putBoolean(key, value)
+      }
     }
     get() = _value
 
