@@ -29,12 +29,11 @@ fun SettingsMenuLink(
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(
-        title = title,
         enabled = enabled,
+        title = title,
         subtitle = subtitle,
         icon = icon,
         action = action,
-        actionDivider = true,
       )
     }
   }

@@ -42,15 +42,14 @@ fun SettingsCheckbox(
         title = title,
         subtitle = subtitle,
         icon = icon,
-        action = {
-          Checkbox(
-            enabled = enabled,
-            checked = state,
-            onCheckedChange = update,
-            colors = checkboxColors,
-          )
-        },
-      )
+      ) {
+        Checkbox(
+          enabled = enabled,
+          checked = state,
+          onCheckedChange = update,
+          colors = checkboxColors,
+        )
+      }
     }
   }
 }

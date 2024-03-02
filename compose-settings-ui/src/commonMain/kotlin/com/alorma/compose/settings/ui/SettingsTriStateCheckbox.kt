@@ -43,15 +43,14 @@ fun SettingsTriStateCheckbox(
         title = title,
         subtitle = subtitle,
         icon = icon,
-        action = {
-          TriStateCheckbox(
-            enabled = enabled,
-            state = mapNullableBooleanToToggleableState(state),
-            onClick = update,
-            colors = checkboxColors,
-          )
-        },
-      )
+      ) {
+        TriStateCheckbox(
+          enabled = enabled,
+          state = mapNullableBooleanToToggleableState(state),
+          onClick = update,
+          colors = checkboxColors,
+        )
+      }
     }
   }
 }

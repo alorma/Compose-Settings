@@ -42,15 +42,14 @@ fun SettingsSwitch(
         title = title,
         subtitle = subtitle,
         icon = icon,
-        action = {
-          Switch(
-            enabled = enabled,
-            checked = state,
-            onCheckedChange = update,
-            colors = switchColors,
-          )
-        },
-      )
+      ) {
+        Switch(
+          enabled = enabled,
+          checked = state,
+          onCheckedChange = update,
+          colors = switchColors,
+        )
+      }
     }
   }
 }
