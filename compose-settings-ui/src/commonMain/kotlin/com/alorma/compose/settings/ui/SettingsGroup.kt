@@ -3,6 +3,7 @@ package com.alorma.compose.settings.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,12 +18,16 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SettingsGroup(
   modifier: Modifier = Modifier,
+  contentPadding: PaddingValues = PaddingValues(0.dp),
   title: @Composable (() -> Unit)? = null,
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Surface {
     Column(
-      modifier = Modifier.fillMaxWidth().then(modifier),
+      modifier = Modifier
+        .fillMaxWidth()
+        .then(modifier)
+        .padding(contentPadding),
     ) {
       if (title != null) {
         SettingsGroupTitle(title)

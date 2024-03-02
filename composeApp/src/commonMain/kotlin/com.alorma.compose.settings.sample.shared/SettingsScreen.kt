@@ -1,6 +1,7 @@
 package com.alorma.compose.settings.sample.shared
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -38,6 +39,7 @@ fun SettingsScreen(settings: Settings) {
         .padding(top = padding.calculateTopPadding()),
     ) {
       SettingsGroup(
+        contentPadding = PaddingValues(16.dp),
         title = { Text(text = "SettingsSwitch Tile") }
       ) {
         val switchMemoryState = rememberMemoryBooleanSettingState()
@@ -60,6 +62,7 @@ fun SettingsScreen(settings: Settings) {
       }
 
       SettingsGroup(
+        contentPadding = PaddingValues(16.dp),
         title = { Text(text = "SettingsCheckbox Tile") }
       ) {
         val checkboxMemoryState = rememberMemoryBooleanSettingState()
@@ -82,6 +85,7 @@ fun SettingsScreen(settings: Settings) {
       }
 
       SettingsGroup(
+        contentPadding = PaddingValues(16.dp),
         title = { Text(text = "SettingsTriStateCheckbox Tile") },
       ) {
         val triStateCheckboxMemoryState = rememberMemoryTriStateSettingState()
@@ -156,6 +160,7 @@ fun SettingsScreen(settings: Settings) {
       }
 
       SettingsGroup(
+        contentPadding = PaddingValues(16.dp),
         title = { Text(text = "SettingsMenuLink") },
       ) {
         val iconState = rememberMemoryBooleanSettingState()
