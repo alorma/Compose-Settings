@@ -5,11 +5,6 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +13,7 @@ import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
+import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsGroup
 import com.alorma.compose.settings.ui.SettingsMenuLink
@@ -104,7 +100,7 @@ fun SettingsScreen(
         val checkboxMemoryState = rememberMemoryBooleanSettingState()
         SettingsCheckbox(
           state = checkboxMemoryState.value,
-          title = { Text(text = "Chechbox") },
+          title = { Text(text = "Checkbox") },
           subtitle = { Text(text = "Memory state") },
           onCheckedChange = { checkboxMemoryState.value = it },
         )
@@ -114,7 +110,7 @@ fun SettingsScreen(
         )
         SettingsCheckbox(
           state = checkboxDiskState.value,
-          title = { Text(text = "Chechbox") },
+          title = { Text(text = "Checkbox") },
           subtitle = { Text(text = "Disk state") },
           onCheckedChange = { checkboxDiskState.value = it },
         )
@@ -123,17 +119,22 @@ fun SettingsScreen(
       SettingsGroup(
         title = { Text(text = "SettingsTriStateCheckbox Tile") },
       ) {
+        val triStateCheckboxMemoryState = rememberMemoryTriStateSettingState()
         SettingsTriStateCheckbox(
-          state = onlineStatusState.value,
-          title = { Text(text = "Online status") },
-          onCheckedChange = { newState -> onlineStatusState.value = newState },
-          subtitle = {
-            when (onlineStatusState.value) {
-              true -> Text(text = "You are connected!")
-              false -> Text(text = "Probably out of the office")
-              null -> Text(text = "I'm confused")
-            }
-          },
+          state = triStateCheckboxMemoryState.value,
+          title = { Text(text = "TriStateCheckbox") },
+          subtitle = { Text(text = "Memory") },
+          onCheckedChange = { newState -> triStateCheckboxMemoryState.value = newState },
+        )
+        val triStateCheckboxDiskState = rememberTriStateSetting(
+          key = "triStateCheckbox",
+          settings = settings,
+        )
+        SettingsTriStateCheckbox(
+          state = triStateCheckboxDiskState.value,
+          title = { Text(text = "TriStateCheckbox") },
+          subtitle = { Text(text = "Disk") },
+          onCheckedChange = { newState -> triStateCheckboxDiskState.value = newState },
         )
       }
 
@@ -146,60 +147,6 @@ fun SettingsScreen(
         },
         onClick = { clicksCounterState.value += 1 }
       )
-
-
-      SettingsGroup(
-        title = { Text(text = "Reset") },
-      ) {
-        SettingsMenuLink(
-          title = { Text(text = "Reset theme") },
-          onClick = { onDarkModeReset() },
-          action = {
-            IconButton(
-              onClick = { onDarkModeReset() },
-            ) {
-              Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-              )
-            }
-          },
-        )
-
-        HorizontalDivider()
-
-        SettingsMenuLink(
-          title = { Text(text = "Reset clicks") },
-          onClick = { clicksCounterState.reset() },
-          action = {
-            IconButton(
-              onClick = { clicksCounterState.reset() },
-            ) {
-              Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-              )
-            }
-          },
-        )
-
-        HorizontalDivider()
-
-        SettingsMenuLink(
-          title = { Text(text = "Reset online status") },
-          onClick = { onlineStatusState.reset() },
-          action = {
-            IconButton(
-              onClick = { onlineStatusState.reset() },
-            ) {
-              Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-              )
-            }
-          },
-        )
-      }
     }
   }
 }

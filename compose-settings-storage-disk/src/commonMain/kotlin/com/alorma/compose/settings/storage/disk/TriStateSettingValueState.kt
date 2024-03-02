@@ -11,7 +11,7 @@ import com.russhwolf.settings.Settings
 @Composable
 fun rememberTriStateSetting(
   key: String,
-  defaultValue: Boolean?,
+  defaultValue: Boolean? = null,
   settings: Settings = Settings()
 ): TriStateSettingValueState {
   return remember {
