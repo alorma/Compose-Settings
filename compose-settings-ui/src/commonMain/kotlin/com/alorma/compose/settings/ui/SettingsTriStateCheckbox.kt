@@ -28,14 +28,14 @@ fun SettingsTriStateCheckbox(
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
   Surface {
     Row(
-      modifier = modifier
+      modifier = Modifier
         .fillMaxWidth()
         .triStateToggleable(
           state = mapNullableBooleanToToggleableState(state),
           onClick = update,
           enabled = enabled,
           role = Role.Checkbox,
-        ),
+        ).then(modifier),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(

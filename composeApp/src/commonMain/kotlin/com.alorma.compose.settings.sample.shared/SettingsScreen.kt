@@ -7,7 +7,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,6 +17,7 @@ import androidx.compose.ui.Modifier
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
+import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsGroup
 import com.alorma.compose.settings.ui.SettingsMenuLink
@@ -59,30 +59,83 @@ fun SettingsScreen(
         settings = settings,
       )
 
-      SettingsMenuLink(
-        title = { Text(text = "Generic settings") },
-        action = {
-          IconButton(
-            onClick = {},
-          ) {
-            Icon(
-              imageVector = Icons.Default.Settings,
-              contentDescription = null,
-            )
-          }
-        },
-        onClick = {},
-      )
+      SettingsGroup(
+        title = { Text(text = "SettingsSwitch Tile") }
+      ) {
+        SettingsSwitch(
+          state = darkTheme,
+          title = { Text(text = "Dark mode") },
+          onCheckedChange = onDarkThemeChange,
+        )
+        val switchMemoryState = rememberMemoryBooleanSettingState()
+        SettingsSwitch(
+          state = switchMemoryState.value,
+          title = { Text(text = "Switch") },
+          subtitle = { Text(text = "Memory state") },
+          onCheckedChange = { switchMemoryState.value = it },
+        )
+        val switchDiskState = rememberBooleanSettingState(
+          key = "switchDiskState",
+          settings = settings,
+        )
+        SettingsSwitch(
+          state = switchDiskState.value,
+          title = { Text(text = "Switch") },
+          subtitle = { Text(text = "Disk state") },
+          onCheckedChange = { switchDiskState.value = it },
+        )
+      }
 
-      HorizontalDivider()
+      SettingsGroup(
+        title = { Text(text = "SettingsCheckbox Tile") }
+      ) {
+        SettingsCheckbox(
+          state = checkState.value,
+          title = { Text(text = "Logger enabled") },
+          onCheckedChange = { newState -> checkState.value = newState },
+          subtitle = {
+            if (checkState.value) {
+              Text(text = "All your data belongs to us!")
+            } else {
+              Text(text = "Don't worry, we won't track you")
+            }
+          },
+        )
+        val checkboxMemoryState = rememberMemoryBooleanSettingState()
+        SettingsCheckbox(
+          state = checkboxMemoryState.value,
+          title = { Text(text = "Chechbox") },
+          subtitle = { Text(text = "Memory state") },
+          onCheckedChange = { checkboxMemoryState.value = it },
+        )
+        val checkboxDiskState = rememberBooleanSettingState(
+          key = "checkboxDiskState",
+          settings = settings,
+        )
+        SettingsCheckbox(
+          state = checkboxDiskState.value,
+          title = { Text(text = "Chechbox") },
+          subtitle = { Text(text = "Disk state") },
+          onCheckedChange = { checkboxDiskState.value = it },
+        )
+      }
 
-      SettingsSwitch(
-        state = darkTheme,
-        title = { Text(text = "Dark mode") },
-        onCheckedChange = onDarkThemeChange,
-      )
-
-      HorizontalDivider()
+      SettingsGroup(
+        title = { Text(text = "SettingsTriStateCheckbox Tile") },
+      ) {
+        SettingsTriStateCheckbox(
+          state = onlineStatusState.value,
+          title = { Text(text = "Online status") },
+          onCheckedChange = { newState -> onlineStatusState.value = newState },
+          subtitle = {
+            when (onlineStatusState.value) {
+              true -> Text(text = "You are connected!")
+              false -> Text(text = "Probably out of the office")
+              null -> Text(text = "I'm confused")
+            }
+          },
+        )
+      }
 
       SettingsMenuLink(
         title = { Text(text = "Click me") },
@@ -94,45 +147,16 @@ fun SettingsScreen(
         onClick = { clicksCounterState.value += 1 }
       )
 
-      HorizontalDivider()
-
-      SettingsCheckbox(
-        state = checkState.value,
-        title = { Text(text = "Logger enabled") },
-        onCheckedChange = { newState -> checkState.value = newState },
-        subtitle = {
-          if (checkState.value) {
-            Text(text = "All your data belongs to us!")
-          } else {
-            Text(text = "Don't worry, we won't track you")
-          }
-        },
-      )
-
-      HorizontalDivider()
-
-      SettingsTriStateCheckbox(
-        state = onlineStatusState.value,
-        title = { Text(text = "Online status") },
-        onCheckedChange = { newState -> onlineStatusState.value = newState },
-        subtitle = {
-          when (onlineStatusState.value) {
-            true -> Text(text = "You are connected!")
-            false -> Text(text = "Probably out of the office")
-            null -> Text(text = "I'm confused")
-          }
-        },
-      )
 
       SettingsGroup(
         title = { Text(text = "Reset") },
       ) {
         SettingsMenuLink(
-          title = { Text(text = "Reset clicks") },
-          onClick = { clicksCounterState.reset() },
+          title = { Text(text = "Reset theme") },
+          onClick = { onDarkModeReset() },
           action = {
             IconButton(
-              onClick = { clicksCounterState.reset() },
+              onClick = { onDarkModeReset() },
             ) {
               Icon(
                 imageVector = Icons.Default.Delete,
@@ -145,11 +169,11 @@ fun SettingsScreen(
         HorizontalDivider()
 
         SettingsMenuLink(
-          title = { Text(text = "Reset theme") },
-          onClick = { onDarkModeReset() },
-            action = {
+          title = { Text(text = "Reset clicks") },
+          onClick = { clicksCounterState.reset() },
+          action = {
             IconButton(
-              onClick = { onDarkModeReset() },
+              onClick = { clicksCounterState.reset() },
             ) {
               Icon(
                 imageVector = Icons.Default.Delete,

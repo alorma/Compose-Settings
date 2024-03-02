@@ -11,7 +11,7 @@ import com.russhwolf.settings.Settings
 @Composable
 fun rememberBooleanSettingState(
   key: String,
-  defaultValue: Boolean,
+  defaultValue: Boolean = false,
   settings: Settings = Settings()
 ): BooleanSettingValueState {
   return remember {
