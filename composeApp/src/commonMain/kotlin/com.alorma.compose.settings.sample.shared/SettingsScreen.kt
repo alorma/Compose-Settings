@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -51,6 +52,7 @@ fun SettingsScreen(
         defaultValue = true,
         settings = settings,
       )
+
       val onlineStatusState = rememberTriStateSetting(
         key = "triStateCheck",
         defaultValue = null,
@@ -122,22 +124,56 @@ fun SettingsScreen(
         },
       )
 
-      HorizontalDivider()
-
       SettingsGroup(
         title = { Text(text = "Reset") },
       ) {
         SettingsMenuLink(
           title = { Text(text = "Reset clicks") },
-          onClick = { clicksCounterState.reset() }
+          onClick = { clicksCounterState.reset() },
+          action = {
+            IconButton(
+              onClick = { clicksCounterState.reset() },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
+          },
         )
+
+        HorizontalDivider()
+
         SettingsMenuLink(
           title = { Text(text = "Reset theme") },
-          onClick = { onDarkModeReset() }
+          onClick = { onDarkModeReset() },
+            action = {
+            IconButton(
+              onClick = { onDarkModeReset() },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
+          },
         )
+
+        HorizontalDivider()
+
         SettingsMenuLink(
           title = { Text(text = "Reset online status") },
-          onClick = { onlineStatusState.reset() }
+          onClick = { onlineStatusState.reset() },
+          action = {
+            IconButton(
+              onClick = { onlineStatusState.reset() },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
+          },
         )
       }
     }
