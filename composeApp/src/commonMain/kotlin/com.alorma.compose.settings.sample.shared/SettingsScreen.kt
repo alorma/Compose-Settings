@@ -41,16 +41,23 @@ fun SettingsScreen(settings: Settings) {
         .verticalScroll(scrollState)
         .padding(top = padding.calculateTopPadding()),
     ) {
-      SettingsSwitchSampleSection(settings)
-      SettingsCheckboxSampleSection(settings)
-      SettingsTriStateCheckboxSampleSection(settings)
-      SettingsMenuLinkSectionSample()
+      val iconState = rememberMemoryBooleanSettingState()
+      SettingsSwitch(
+        state = iconState.value,
+        title = { Text(text = "Show icon") },
+        onCheckedChange = { iconState.value = it },
+      )
+
+      SettingsSwitchSampleSection(settings, iconState.value)
+      SettingsCheckboxSampleSection(settings, iconState.value)
+      SettingsTriStateCheckboxSampleSection(settings, iconState.value)
+      SettingsMenuLinkSectionSample(iconState.value)
     }
   }
 }
 
 @Composable
-private fun SettingsSwitchSampleSection(settings: Settings) {
+private fun SettingsSwitchSampleSection(settings: Settings, showIcon: Boolean) {
   SampleSection(title = "SettingsSwitch Tile") {
     val switchMemoryState = rememberMemoryBooleanSettingState()
     SettingsSwitch(
@@ -73,13 +80,14 @@ private fun SettingsSwitchSampleSection(settings: Settings) {
 }
 
 @Composable
-private fun SettingsCheckboxSampleSection(settings: Settings) {
+private fun SettingsCheckboxSampleSection(settings: Settings, showIcon: Boolean) {
   SampleSection(title = "SettingsCheckbox Tile") {
     val checkboxMemoryState = rememberMemoryBooleanSettingState()
     SettingsCheckbox(
       state = checkboxMemoryState.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Memory state") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { checkboxMemoryState.value = it },
     )
     val checkboxDiskState = rememberBooleanSettingState(
@@ -90,19 +98,21 @@ private fun SettingsCheckboxSampleSection(settings: Settings) {
       state = checkboxDiskState.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Disk state") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { checkboxDiskState.value = it },
     )
   }
 }
 
 @Composable
-private fun SettingsTriStateCheckboxSampleSection(settings: Settings) {
+private fun SettingsTriStateCheckboxSampleSection(settings: Settings, showIcon: Boolean) {
   SampleSection(title = "SettingsTriStateCheckbox Tile") {
     val triStateCheckboxMemoryState = rememberMemoryTriStateSettingState()
     SettingsTriStateCheckbox(
       state = triStateCheckboxMemoryState.value,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "Memory") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { newState -> triStateCheckboxMemoryState.value = newState },
     )
     val triStateCheckboxDiskState = rememberTriStateSetting(
@@ -113,6 +123,7 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings) {
       state = triStateCheckboxDiskState.value,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "Disk") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { newState -> triStateCheckboxDiskState.value = newState },
     )
 
@@ -143,6 +154,7 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings) {
       state = triStateWithChildState,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { newState ->
         child1State.value = newState
         child2State.value = newState
@@ -156,18 +168,21 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings) {
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child1State.value,
         title = { Text(text = "Child #1") },
+        icon = iconSampleOrNull(showIcon),
         onCheckedChange = { child1State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child2State.value,
         title = { Text(text = "Child #2") },
+        icon = iconSampleOrNull(showIcon),
         onCheckedChange = { child2State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child3State.value,
         title = { Text(text = "Child #3") },
+        icon = iconSampleOrNull(showIcon),
         onCheckedChange = { child3State.value = it },
       )
     }
@@ -175,16 +190,12 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings) {
 }
 
 @Composable
-private fun SettingsMenuLinkSectionSample() {
+private fun SettingsMenuLinkSectionSample(
+  showIcon: Boolean,
+) {
   SampleSection(title = "SettingsSwitch Tile") {
-    val iconState = rememberMemoryBooleanSettingState()
     val actionState = rememberMemoryBooleanSettingState()
 
-    SettingsSwitch(
-      state = iconState.value,
-      title = { Text(text = "Show icon") },
-      onCheckedChange = { iconState.value = it },
-    )
     SettingsSwitch(
       state = actionState.value,
       title = { Text(text = "Show action") },
@@ -194,16 +205,7 @@ private fun SettingsMenuLinkSectionSample() {
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       onClick = { },
-      icon = if (!iconState.value) {
-        null
-      } else {
-        {
-          Icon(
-            imageVector = Icons.Default.ThumbUp,
-            contentDescription = null,
-          )
-        }
-      },
+      icon = iconSampleOrNull(showIcon),
       action = if (!actionState.value) {
         null
       } else {
@@ -223,16 +225,7 @@ private fun SettingsMenuLinkSectionSample() {
       title = { Text(text = "Menu") },
       subtitle = { Text(text = "With subtitle") },
       onClick = { },
-      icon = if (!iconState.value) {
-        null
-      } else {
-        {
-          Icon(
-            imageVector = Icons.Default.ThumbUp,
-            contentDescription = null,
-          )
-        }
-      },
+      icon = iconSampleOrNull(showIcon),
       action = if (!actionState.value) {
         null
       } else {
@@ -247,6 +240,17 @@ private fun SettingsMenuLinkSectionSample() {
           }
         }
       },
+    )
+  }
+}
+
+private fun iconSampleOrNull(iconState: Boolean): (@Composable () -> Unit)? = if (!iconState) {
+  null
+} else {
+  {
+    Icon(
+      imageVector = Icons.Default.ThumbUp,
+      contentDescription = null,
     )
   }
 }
