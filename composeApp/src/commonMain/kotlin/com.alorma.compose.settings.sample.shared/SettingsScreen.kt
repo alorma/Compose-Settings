@@ -5,6 +5,11 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,7 +17,6 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
 import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
@@ -24,12 +28,7 @@ import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import com.russhwolf.settings.Settings
 
 @Composable
-fun SettingsScreen(
-  settings: Settings,
-  darkTheme: Boolean,
-  onDarkThemeChange: (Boolean) -> Unit,
-  onDarkModeReset: () -> Unit,
-) {
+fun SettingsScreen(settings: Settings) {
   Scaffold { padding ->
     val scrollState = rememberScrollState()
     Column(
@@ -38,33 +37,9 @@ fun SettingsScreen(
         .verticalScroll(scrollState)
         .padding(top = padding.calculateTopPadding()),
     ) {
-
-      val clicksCounterState = rememberIntSettingState(
-        key = "clicked",
-        defaultValue = 0,
-        settings = settings,
-      )
-
-      val checkState = rememberBooleanSettingState(
-        key = "checkbox",
-        defaultValue = true,
-        settings = settings,
-      )
-
-      val onlineStatusState = rememberTriStateSetting(
-        key = "triStateCheck",
-        defaultValue = null,
-        settings = settings,
-      )
-
       SettingsGroup(
         title = { Text(text = "SettingsSwitch Tile") }
       ) {
-        SettingsSwitch(
-          state = darkTheme,
-          title = { Text(text = "Dark mode") },
-          onCheckedChange = onDarkThemeChange,
-        )
         val switchMemoryState = rememberMemoryBooleanSettingState()
         SettingsSwitch(
           state = switchMemoryState.value,
@@ -87,18 +62,6 @@ fun SettingsScreen(
       SettingsGroup(
         title = { Text(text = "SettingsCheckbox Tile") }
       ) {
-        SettingsCheckbox(
-          state = checkState.value,
-          title = { Text(text = "Logger enabled") },
-          onCheckedChange = { newState -> checkState.value = newState },
-          subtitle = {
-            if (checkState.value) {
-              Text(text = "All your data belongs to us!")
-            } else {
-              Text(text = "Don't worry, we won't track you")
-            }
-          },
-        )
         val checkboxMemoryState = rememberMemoryBooleanSettingState()
         SettingsCheckbox(
           state = checkboxMemoryState.value,
@@ -192,15 +155,81 @@ fun SettingsScreen(
         )
       }
 
-      SettingsMenuLink(
-        title = { Text(text = "Click me") },
-        subtitle = if (clicksCounterState.value == 0) {
-          null
-        } else {
-          { Text(text = "Clicked ${clicksCounterState.value} times") }
-        },
-        onClick = { clicksCounterState.value += 1 }
-      )
+      SettingsGroup(
+        title = { Text(text = "SettingsMenuLink") },
+      ) {
+        val iconState = rememberMemoryBooleanSettingState()
+        val actionState = rememberMemoryBooleanSettingState()
+
+        SettingsSwitch(
+          state = iconState.value,
+          title = { Text(text = "Show icon") },
+          onCheckedChange = { iconState.value = it },
+        )
+        SettingsSwitch(
+          state = actionState.value,
+          title = { Text(text = "Show action") },
+          onCheckedChange = { actionState.value = it },
+        )
+
+        SettingsMenuLink(
+          title = { Text(text = "Menu") },
+          onClick = { },
+          icon = if (!iconState.value) {
+            null
+          } else {
+            {
+              Icon(
+                imageVector = Icons.Default.ThumbUp,
+                contentDescription = null,
+              )
+            }
+          },
+          action = if (!actionState.value) {
+            null
+          } else {
+            {
+              IconButton(
+                onClick = {},
+              ) {
+                Icon(
+                  imageVector = Icons.Default.Build,
+                  contentDescription = null,
+                )
+              }
+            }
+          },
+        )
+        SettingsMenuLink(
+          title = { Text(text = "Menu") },
+          subtitle = { Text(text = "With subtitle") },
+          onClick = { },
+          icon = if (!iconState.value) {
+            null
+          } else {
+            {
+              Icon(
+                imageVector = Icons.Default.ThumbUp,
+                contentDescription = null,
+              )
+            }
+          },
+          action = if (!actionState.value) {
+            null
+          } else {
+            {
+              IconButton(
+                onClick = {},
+              ) {
+                Icon(
+                  imageVector = Icons.Default.Build,
+                  contentDescription = null,
+                )
+              }
+            }
+          },
+        )
+      }
     }
   }
 }
