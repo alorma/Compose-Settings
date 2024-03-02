@@ -8,7 +8,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
@@ -135,6 +137,58 @@ fun SettingsScreen(
           title = { Text(text = "TriStateCheckbox") },
           subtitle = { Text(text = "Disk") },
           onCheckedChange = { newState -> triStateCheckboxDiskState.value = newState },
+        )
+
+        val child1State = rememberMemoryBooleanSettingState(defaultValue = false)
+        val child2State = rememberMemoryBooleanSettingState(defaultValue = true)
+        val child3State = rememberMemoryBooleanSettingState(defaultValue = false)
+
+        val allChildStates = derivedStateOf {
+          listOf(
+            child1State.value,
+            child2State.value,
+            child3State.value,
+          )
+        }
+
+        val areAllChildEnabled = allChildStates.value.all { it }
+        val areNoneChildEnabled = allChildStates.value.none { it }
+
+        val areSomeChildEnabled = !areAllChildEnabled && !areNoneChildEnabled
+
+        val triStateWithChildState = if (areSomeChildEnabled) {
+          null
+        } else {
+          areAllChildEnabled || !areNoneChildEnabled
+        }
+
+        SettingsTriStateCheckbox(
+          state = triStateWithChildState,
+          title = { Text(text = "TriStateCheckbox") },
+          subtitle = { Text(text = "With child checkboxes") },
+          onCheckedChange = { newState ->
+            child1State.value = newState
+            child2State.value = newState
+            child3State.value = newState
+          },
+        )
+        SettingsCheckbox(
+          modifier = Modifier.padding(start = 16.dp, end = 32.dp),
+          state = child1State.value,
+          title = { Text(text = "Child #1") },
+          onCheckedChange = { child1State.value = it },
+        )
+        SettingsCheckbox(
+          modifier = Modifier.padding(start = 16.dp, end = 32.dp),
+          state = child2State.value,
+          title = { Text(text = "Child #2") },
+          onCheckedChange = { child2State.value = it },
+        )
+        SettingsCheckbox(
+          modifier = Modifier.padding(start = 16.dp, end = 32.dp),
+          state = child3State.value,
+          title = { Text(text = "Child #3") },
+          onCheckedChange = { child3State.value = it },
         )
       }
 

@@ -22,19 +22,19 @@ fun SettingsCheckbox(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
-  onCheckedChange: (Boolean) -> Unit = {},
+  onCheckedChange: (Boolean) -> Unit,
 ) {
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
   Surface {
     Row(
-      modifier = modifier
+      modifier = Modifier
         .fillMaxWidth()
         .toggleable(
           enabled = enabled,
           value = state,
           role = Role.Switch,
           onValueChange = { update(!state) },
-        ),
+        ).then(modifier),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(

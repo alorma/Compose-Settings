@@ -23,7 +23,7 @@ fun SettingsTriStateCheckbox(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
-  onCheckedChange: (Boolean?) -> Unit = {},
+  onCheckedChange: (Boolean) -> Unit = {},
 ) {
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
   Surface {

@@ -21,11 +21,11 @@ fun SettingsMenuLink(
 ) {
   Surface {
     Row(
-      modifier = modifier.fillMaxWidth()
+      modifier = Modifier.fillMaxWidth()
         .clickable(
           enabled = enabled,
           onClick = onClick,
-        ),
+        ).then(modifier),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(

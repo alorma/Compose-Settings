@@ -22,7 +22,7 @@ fun SettingsGroup(
 ) {
   Surface {
     Column(
-      modifier = modifier.fillMaxWidth(),
+      modifier = Modifier.fillMaxWidth().then(modifier),
     ) {
       if (title != null) {
         SettingsGroupTitle(title)
