@@ -23,19 +23,19 @@ fun SettingsTriStateCheckbox(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
-  onCheckedChange: (Boolean?) -> Unit = {},
+  onCheckedChange: (Boolean) -> Unit = {},
 ) {
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
   Surface {
     Row(
-      modifier = modifier
+      modifier = Modifier
         .fillMaxWidth()
         .triStateToggleable(
           state = mapNullableBooleanToToggleableState(state),
           onClick = update,
           enabled = enabled,
           role = Role.Checkbox,
-        ),
+        ).then(modifier),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(

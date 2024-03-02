@@ -17,6 +17,7 @@ compose-plugin = "1.6.0"
 kotlin = "1.9.22"
 
 android-minSdk = "21"
+android-minSdkSample = "26"
 android-compileSdk = "34"
 android-targetSdk = "34"
 

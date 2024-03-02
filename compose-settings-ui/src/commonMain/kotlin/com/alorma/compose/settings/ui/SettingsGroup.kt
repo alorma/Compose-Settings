@@ -3,8 +3,8 @@ package com.alorma.compose.settings.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
@@ -17,12 +17,16 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SettingsGroup(
   modifier: Modifier = Modifier,
+  contentPadding: PaddingValues = PaddingValues(0.dp),
   title: @Composable (() -> Unit)? = null,
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Surface {
     Column(
-      modifier = modifier.fillMaxWidth(),
+      modifier = Modifier
+        .fillMaxWidth()
+        .then(modifier)
+        .padding(contentPadding),
     ) {
       if (title != null) {
         SettingsGroupTitle(title)
@@ -37,8 +41,7 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
   Box(
     modifier = Modifier
       .fillMaxWidth()
-      .height(64.dp)
-      .padding(horizontal = 16.dp),
+      .padding(vertical = 8.dp, horizontal = 16.dp),
     contentAlignment = Alignment.CenterStart,
   ) {
     val primary = MaterialTheme.colorScheme.primary
