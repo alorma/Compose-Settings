@@ -18,7 +18,8 @@ fun App() {
     SettingsScreen(
       settings = settings,
       darkTheme = darkModeState.value,
-      onDarkThemeChange = { darkModeState.value = it }
+      onDarkThemeChange = { darkModeState.value = it },
+      onDarkModeReset = { darkModeState.reset() },
     )
   }
 }
