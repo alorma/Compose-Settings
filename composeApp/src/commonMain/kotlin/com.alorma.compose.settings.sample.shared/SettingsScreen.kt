@@ -12,11 +12,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.alorma.compose.settings.storage.base.getValue
-import com.alorma.compose.settings.storage.base.setValue
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
-import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
+import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsSwitch
@@ -35,6 +33,24 @@ fun SettingsScreen(
         .consumeWindowInsets(padding)
         .padding(top = padding.calculateTopPadding()),
     ) {
+
+      val intState = rememberIntSettingState(
+        key = "clicked",
+        defaultValue = 0,
+        settings = settings,
+      )
+
+      val checkState = rememberBooleanSettingState(
+        key = "checkbox",
+        defaultValue = true,
+        settings = settings,
+      )
+      val checkTriState = rememberTriStateSetting(
+        key = "triStateCheck",
+        defaultValue = null,
+        settings = settings,
+      )
+
       SettingsMenuLink(
         title = { Text(text = "Generic settings") },
         action = {
@@ -60,35 +76,24 @@ fun SettingsScreen(
 
       HorizontalDivider()
 
-      var intState by rememberIntSettingState(
-        key = "clicked",
-        defaultValue = 0,
-        settings = settings,
-      )
       SettingsMenuLink(
-        title = {
-          if (intState == 0) {
-            Text(text = "Click me")
-          } else {
-            Text(text = "Clicked $intState times")
-          }
+        title = { Text(text = "Click me") },
+        subtitle = if (intState.value == 0) {
+          null
+        } else {
+          { Text(text = "Clicked ${intState.value} times") }
         },
-        onClick = { intState += 1 }
+        onClick = { intState.value += 1 }
       )
 
       HorizontalDivider()
 
-      var checkState by rememberBooleanSettingState(
-        key = "checkbox",
-        defaultValue = true,
-        settings = settings,
-      )
       SettingsCheckbox(
-        state = checkState,
+        state = checkState.value,
         title = { Text(text = "Logger enabled") },
-        onCheckedChange = { newState -> checkState = newState },
+        onCheckedChange = { newState -> checkState.value = newState },
         subtitle = {
-          if (checkState) {
+          if (checkState.value) {
             Text(text = "All your data belongs to us!")
           } else {
             Text(text = "Don't worry, we won't track you")
@@ -98,18 +103,27 @@ fun SettingsScreen(
 
       HorizontalDivider()
 
-      var checkTriState by rememberMemoryTriStateSettingState(defaultValue = null)
       SettingsTriStateCheckbox(
-        state = checkTriState,
+        state = checkTriState.value,
         title = { Text(text = "Online status") },
-        onCheckedChange = { newState -> checkTriState = newState },
+        onCheckedChange = { newState -> checkTriState.value = newState },
         subtitle = {
-          when (checkTriState) {
+          when (checkTriState.value) {
             true -> Text(text = "You are connected!")
             false -> Text(text = "Probably out of the office")
             null -> Text(text = "I'm confused")
           }
         },
+      )
+
+      HorizontalDivider()
+
+      SettingsMenuLink(
+        title = { Text(text = "Reset click") },
+        onClick = {
+          intState.reset()
+          checkTriState.reset()
+        }
       )
     }
   }
