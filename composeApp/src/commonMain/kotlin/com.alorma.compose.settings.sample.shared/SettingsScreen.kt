@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -68,6 +69,7 @@ private fun SettingsSwitchSampleSection(settings: Settings, showIcon: Boolean) {
       state = switchMemoryState.value,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Memory state") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { switchMemoryState.value = it },
     )
     val switchDiskState = rememberBooleanSettingState(
@@ -78,6 +80,7 @@ private fun SettingsSwitchSampleSection(settings: Settings, showIcon: Boolean) {
       state = switchDiskState.value,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Disk state") },
+      icon = iconSampleOrNull(showIcon),
       onCheckedChange = { switchDiskState.value = it },
     )
   }
@@ -258,7 +261,6 @@ private fun SettingsSelectorsSample(
   SampleSection(title = "Selectors") {
     val selectSingleChoiceDisk = rememberStringSettingState(
       key = "singleChoice",
-      defaultValue = items.last().key,
       settings = settings,
     )
 
@@ -276,6 +278,20 @@ private fun SettingsSelectorsSample(
       },
       onClick = { showSingleChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
+      action = if (selectSingleChoiceDisk.value == null) {
+        null
+      } else {
+        {
+          IconButton(
+            onClick = { selectSingleChoiceDisk.value = null },
+          ) {
+            Icon(
+              imageVector = Icons.Default.Delete,
+              contentDescription = null,
+            )
+          }
+        }
+      },
     )
 
     if (showSingleChoiceDialog.value) {
