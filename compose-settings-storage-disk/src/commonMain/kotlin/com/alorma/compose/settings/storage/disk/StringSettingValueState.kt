@@ -29,14 +29,24 @@ class StringSettingValueState(
   val defaultValue: String?,
 ) : SettingValueState<String?> {
 
-  private var _value by mutableStateOf(settings.getStringOrNull(key))
+  private var _value by mutableStateOf(
+    if (defaultValue == null) {
+      settings.getStringOrNull(key)
+    } else {
+      settings.getString(key, defaultValue)
+    }
+  )
 
   override var value: String?
     set(value) {
       _value = value
-      settings.putString(key, value.orEmpty())
+      if (value == null) {
+        settings.remove(key)
+      } else {
+        settings.putString(key, value)
+      }
     }
-    get() = _value
+    get() = _value ?: defaultValue
 
   override fun reset() {
     value = defaultValue
