@@ -1,38 +1,34 @@
 package com.alorma.compose.settings.sample.shared
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.sample.shared.internal.LabelRadioButton
 import com.alorma.compose.settings.sample.shared.internal.SampleData
+import com.alorma.compose.settings.sample.shared.internal.SampleSection
+import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
+import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberStringSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
 import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
-import com.alorma.compose.settings.ui.SettingsGroup
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
@@ -283,59 +279,14 @@ private fun SettingsSelectorsSample(
     )
 
     if (showSingleChoiceDialog.value) {
-      val selectedItem = remember { mutableStateOf(selectSingleChoiceDisk.value) }
-
-      AlertDialog(
-        onDismissRequest = { showSingleChoiceDialog.value = false },
-        title = { Text(text = "Single choice") },
-        text = {
-          Column {
-            items.forEach { sampleItem ->
-              val isSelected = sampleItem.key == selectedItem.value
-              LabelRadioButton(
-                item = sampleItem,
-                isSelected = isSelected,
-                onClick = { selectedItem.value = sampleItem.key },
-              )
-            }
-          }
-        },
-        confirmButton = {
-          TextButton(
-            enabled = selectedItem.value != null,
-            onClick = {
-              selectSingleChoiceDisk.value = selectedItem.value
-              showSingleChoiceDialog.value = false
-            },
-          ) {
-            Text(text = "Select")
-          }
+      SingleChoiceAlertDialog(
+        items = items,
+        selectedItemKey = selectSingleChoiceDisk.value,
+        onItemSelected = { selectedItemKey ->
+          selectSingleChoiceDisk.value = selectedItemKey
+          showSingleChoiceDialog.value = false
         },
       )
     }
-  }
-}
-
-private fun iconSampleOrNull(iconState: Boolean): (@Composable () -> Unit)? = if (!iconState) {
-  null
-} else {
-  {
-    Icon(
-      imageVector = Icons.Default.ThumbUp,
-      contentDescription = null,
-    )
-  }
-}
-
-@Composable
-private fun SampleSection(
-  title: String,
-  content: @Composable ColumnScope.() -> Unit,
-) {
-  SettingsGroup(
-    contentPadding = PaddingValues(16.dp),
-    title = { Text(text = title) },
-  ) {
-    ElevatedCard { content() }
   }
 }
