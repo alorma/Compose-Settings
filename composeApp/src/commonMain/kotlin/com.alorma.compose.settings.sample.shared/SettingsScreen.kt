@@ -267,7 +267,7 @@ private fun SettingsSelectorsSample(
     val showSingleChoiceDialog = remember { mutableStateOf(false) }
 
     SettingsMenuLink(
-      title = { Text(text = "Single choice (memory)") },
+      title = { Text(text = "Single choice (Disk)") },
       subtitle = {
         val item = items.find { it.key == selectSingleChoiceDisk.value }
         if (item == null) {
