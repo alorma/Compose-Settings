@@ -31,12 +31,35 @@ internal fun SingleChoiceAlertDialog(
         }
       }
     },
-    confirmButton = {
-      TextButton(
-        enabled = userSelectedItem.value != null,
-        onClick = { onItemSelected(userSelectedItem.value) },
-      ) {
-        Text(text = "Select")
+    confirmButton = if (userSelectedItem.value == null) {
+      {
+        TextButton(
+          enabled = userSelectedItem.value == null,
+          onClick = { onItemSelected(null) },
+        ) {
+          Text(text = "Cancel")
+        }
+      }
+    } else {
+      {
+        TextButton(
+          enabled = userSelectedItem.value != null,
+          onClick = { onItemSelected(userSelectedItem.value) },
+        ) {
+          Text(text = "Select")
+        }
+      }
+    },
+    dismissButton = if (userSelectedItem.value == null) {
+      null
+    } else {
+      {
+        TextButton(
+          enabled = userSelectedItem.value != null,
+          onClick = { onItemSelected(null) },
+        ) {
+          Text(text = "Clear")
+        }
       }
     },
   )
