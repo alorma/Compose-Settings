@@ -20,7 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alorma.compose.settings.sample.shared.internal.SampleData
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
+import com.alorma.compose.settings.storage.disk.rememberStringSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
 import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
@@ -52,6 +54,7 @@ fun SettingsScreen(settings: Settings) {
       SettingsCheckboxSampleSection(settings, iconState.value)
       SettingsTriStateCheckboxSampleSection(settings, iconState.value)
       SettingsMenuLinkSectionSample(iconState.value)
+      SettingsSelectorsSample(settings, iconState.value)
     }
   }
 }
@@ -240,6 +243,34 @@ private fun SettingsMenuLinkSectionSample(
           }
         }
       },
+    )
+  }
+}
+
+@Composable
+private fun SettingsSelectorsSample(
+  settings: Settings,
+  showIcon: Boolean,
+) {
+  val items = SampleData.items
+
+  SampleSection(title = "Selectors") {
+    val selectSingleChoiceDisk = rememberStringSettingState(
+      key = "singleChoice",
+      settings = settings,
+    )
+    SettingsMenuLink(
+      title = { Text(text = "Single choice (memory)") },
+      subtitle = {
+        val item = items.find { it.key == selectSingleChoiceDisk.value }
+        if (item == null) {
+          Text(text = "No item selected")
+        } else {
+          Text(text = "Item selected: ${item.title}")
+        }
+      },
+      onClick = { },
+      icon = iconSampleOrNull(showIcon),
     )
   }
 }
