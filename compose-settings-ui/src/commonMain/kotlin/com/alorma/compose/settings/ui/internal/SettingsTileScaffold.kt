@@ -1,13 +1,16 @@
 package com.alorma.compose.settings.ui.internal
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 
 @Composable
 internal fun SettingsTileScaffold(
+  modifier: Modifier = Modifier,
   enabled: Boolean = true,
   title: @Composable () -> Unit,
   subtitle: @Composable (() -> Unit)? = null,
@@ -18,6 +21,7 @@ internal fun SettingsTileScaffold(
   action: @Composable ((Boolean) -> Unit)? = null,
 ) {
   ListItem(
+    modifier = Modifier.fillMaxWidth().then(modifier),
     headlineContent = { title() },
     supportingContent = if (subtitle == null) {
       null
