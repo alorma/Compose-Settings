@@ -55,12 +55,12 @@ fun SettingsScreen(settings: Settings) {
         title = { Text(text = "Show icon") },
         onCheckedChange = { iconState.value = it },
       )
-      SettingsSelectorsSample(settings, iconState.value)
       SettingsSwitchSampleSection(settings, iconState.value)
       SettingsCheckboxSampleSection(settings, iconState.value)
       SettingsTriStateCheckboxSampleSection(settings, iconState.value)
       SettingsMenuLinkSectionSample(iconState.value)
       SettingsSliderSectionSample(settings, iconState.value)
+      SettingsSelectorsSample(settings, iconState.value)
     }
   }
 }
