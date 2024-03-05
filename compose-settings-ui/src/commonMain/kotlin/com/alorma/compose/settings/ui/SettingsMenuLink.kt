@@ -15,7 +15,7 @@ fun SettingsMenuLink(
   icon: (@Composable () -> Unit)? = null,
   title: @Composable () -> Unit,
   subtitle: (@Composable () -> Unit)? = null,
-  action: (@Composable (Boolean) -> Unit)? = null,
+  action: (@Composable () -> Unit)? = null,
   colors: ListItemColors = ListItemDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,

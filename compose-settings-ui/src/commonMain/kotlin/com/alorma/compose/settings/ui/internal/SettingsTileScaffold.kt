@@ -18,26 +18,14 @@ internal fun SettingsTileScaffold(
   colors: ListItemColors = ListItemDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
-  action: @Composable ((Boolean) -> Unit)? = null,
+  action: @Composable (() -> Unit)? = null,
 ) {
   ListItem(
     modifier = Modifier.fillMaxWidth().then(modifier),
     headlineContent = { title() },
-    supportingContent = if (subtitle == null) {
-      null
-    } else {
-      { subtitle() }
-    },
-    leadingContent = if (icon == null) {
-      null
-    } else {
-      { icon() }
-    },
-    trailingContent = if (action == null) {
-      null
-    } else {
-      { action(enabled) }
-    },
+    supportingContent = subtitle,
+    leadingContent = icon,
+    trailingContent = action,
     colors = colors,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

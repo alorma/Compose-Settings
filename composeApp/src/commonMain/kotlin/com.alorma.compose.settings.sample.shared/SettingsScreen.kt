@@ -25,12 +25,15 @@ import com.alorma.compose.settings.sample.shared.internal.SampleSection
 import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
 import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
+import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.storage.disk.rememberStringSettingState
 import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
 import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
+import com.alorma.compose.settings.storage.memory.rememberMemoryIntSettingState
 import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
+import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import com.russhwolf.settings.Settings
@@ -51,11 +54,11 @@ fun SettingsScreen(settings: Settings) {
         title = { Text(text = "Show icon") },
         onCheckedChange = { iconState.value = it },
       )
-
       SettingsSwitchSampleSection(settings, iconState.value)
       SettingsCheckboxSampleSection(settings, iconState.value)
       SettingsTriStateCheckboxSampleSection(settings, iconState.value)
       SettingsMenuLinkSectionSample(iconState.value)
+      SettingsSliderSectionSample(settings, iconState.value)
       SettingsSelectorsSample(settings, iconState.value)
     }
   }
@@ -193,6 +196,44 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings, showIcon: 
         onCheckedChange = { child3State.value = it },
       )
     }
+  }
+}
+
+@Composable
+private fun SettingsSliderSectionSample(
+  settings: Settings,
+  showIcon: Boolean,
+) {
+  SampleSection(title = "SettingsSlider Tile") {
+    val sliderMemoryState = rememberMemoryIntSettingState(
+      defaultValue = 5,
+    )
+
+    SettingsSlider(
+      title = { Text(text = "Slider") },
+      value = sliderMemoryState.value.toFloat(),
+      onValueChange = { sliderMemoryState.value = it.toInt() },
+      subtitle = { Text(text = "Selected value: ${sliderMemoryState.value}") },
+      icon = iconSampleOrNull(showIcon),
+      valueRange = 0f..20f,
+      steps = 20,
+    )
+
+    val sliderDiskState = rememberIntSettingState(
+      key = "sliderDiskState",
+      defaultValue = 5,
+      settings = settings,
+    )
+
+    SettingsSlider(
+      title = { Text(text = "Slider") },
+      value = sliderDiskState.value.toFloat(),
+      onValueChange = { sliderDiskState.value = it.toInt() },
+      subtitle = { Text(text = "Selected value: ${sliderDiskState.value}") },
+      icon = iconSampleOrNull(showIcon),
+      valueRange = 0f..20f,
+      steps = 20,
+    )
   }
 }
 
