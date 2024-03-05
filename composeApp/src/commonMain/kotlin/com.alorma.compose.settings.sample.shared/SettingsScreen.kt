@@ -34,6 +34,7 @@ import com.alorma.compose.settings.storage.memory.rememberMemoryIntSettingState
 import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
+import com.alorma.compose.settings.ui.SettingsRadioButton
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
@@ -58,6 +59,7 @@ fun SettingsScreen(settings: Settings) {
       SettingsSwitchSampleSection(settings, iconState.value)
       SettingsCheckboxSampleSection(settings, iconState.value)
       SettingsTriStateCheckboxSampleSection(settings, iconState.value)
+      SettingsRadioButtonSampleSection(settings, iconState.value)
       SettingsMenuLinkSectionSample(iconState.value)
       SettingsSliderSectionSample(settings, iconState.value)
       SettingsSelectorsSample(settings, iconState.value)
@@ -112,6 +114,25 @@ private fun SettingsCheckboxSampleSection(settings: Settings, showIcon: Boolean)
       icon = iconSampleOrNull(showIcon),
       onCheckedChange = { checkboxDiskState.value = it },
     )
+  }
+}
+
+@Composable
+private fun SettingsRadioButtonSampleSection(settings: Settings, showIcon: Boolean) {
+  SampleSection(title = "SettingsRadioButton Tile") {
+    val radioButtonDiskState = rememberStringSettingState(
+      key = "radioButtonDiskState",
+      settings = settings,
+    )
+    SampleData.items.forEach { sampleItem ->
+      SettingsRadioButton(
+        state = radioButtonDiskState.value == sampleItem.key,
+        title = { Text(text = sampleItem.title) },
+        subtitle = { Text(text = sampleItem.description) },
+        icon = iconSampleOrNull(showIcon),
+        onClick = { radioButtonDiskState.value = sampleItem.key },
+      )
+    }
   }
 }
 
