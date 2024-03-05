@@ -4,12 +4,15 @@ import androidx.annotation.IntRange
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -24,7 +27,10 @@ internal fun <T : Number> SettingsTileSlider(
   @IntRange(from = 0) steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  colors: SliderColors = SliderDefaults.colors(),
+  sliderColors: SliderColors = SliderDefaults.colors(),
+  colors: ListItemColors = ListItemDefaults.colors(),
+  tonalElevation: Dp = ListItemDefaults.Elevation,
+  shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {
   SettingsTileScaffold(
     enabled = enabled,
@@ -49,10 +55,13 @@ internal fun <T : Number> SettingsTileSlider(
           steps = steps,
           onValueChangeFinished = onValueChangeFinished,
           interactionSource = interactionSource,
-          colors = colors,
+          colors = sliderColors,
         )
       }
     },
     icon = icon,
+    colors = colors,
+    tonalElevation = tonalElevation,
+    shadowElevation = shadowElevation,
   )
 }
