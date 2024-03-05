@@ -12,37 +12,21 @@ internal fun SettingsTileScaffold(
   action: @Composable() ((Boolean) -> Unit)? = null,
 ) {
   ListItem(
-    headlineContent = {
-      WrapContentColor(enabled = enabled) {
-        title()
-      }
-    },
+    headlineContent = { title() },
     supportingContent = if (subtitle == null) {
       null
     } else {
-      {
-        WrapContentColor(enabled = enabled) {
-          subtitle()
-        }
-      }
+      { subtitle() }
     },
     leadingContent = if (icon == null) {
       null
     } else {
-      {
-        WrapContentColor(enabled = enabled) {
-          icon()
-        }
-      }
+      { icon() }
     },
     trailingContent = if (action == null) {
       null
     } else {
-      {
-        WrapContentColor(enabled = enabled) {
-          action(enabled)
-        }
-      }
+      { action(enabled) }
     },
   )
 }
