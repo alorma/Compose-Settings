@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
 import com.alorma.compose.settings.sample.shared.internal.SampleData
 import com.alorma.compose.settings.sample.shared.internal.SampleSection
 import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
@@ -54,12 +55,12 @@ fun SettingsScreen(settings: Settings) {
         title = { Text(text = "Show icon") },
         onCheckedChange = { iconState.value = it },
       )
+      SettingsSelectorsSample(settings, iconState.value)
       SettingsSwitchSampleSection(settings, iconState.value)
       SettingsCheckboxSampleSection(settings, iconState.value)
       SettingsTriStateCheckboxSampleSection(settings, iconState.value)
       SettingsMenuLinkSectionSample(iconState.value)
       SettingsSliderSectionSample(settings, iconState.value)
-      SettingsSelectorsSample(settings, iconState.value)
     }
   }
 }
@@ -342,6 +343,54 @@ private fun SettingsSelectorsSample(
         onItemSelected = { selectedItemKey ->
           selectSingleChoiceDisk.value = selectedItemKey
           showSingleChoiceDialog.value = false
+        },
+      )
+    }
+
+    val selectMultipleChoiceDisk = rememberStringSettingState(
+      key = "multiChoice",
+      settings = settings,
+    )
+
+    val showMultiChoiceDialog = remember { mutableStateOf(false) }
+
+    SettingsMenuLink(
+      title = { Text(text = "Multi choice (Disk)") },
+      subtitle = {
+        val selectedItems = items.filter { selectMultipleChoiceDisk.value?.contains(it.key) ?: false }
+        if (selectedItems.isEmpty()) {
+          Text(text = "No item selected")
+        } else if (selectedItems.size == 1) {
+          Text(text = "Item selected: ${selectedItems.first().title}")
+        } else {
+          Text(text = "Items selected: ${selectedItems.joinToString(", ") { it.title }}")
+        }
+      },
+      onClick = { showMultiChoiceDialog.value = true },
+      icon = iconSampleOrNull(showIcon),
+      action = if (selectMultipleChoiceDisk.value == null) {
+        null
+      } else {
+        {
+          IconButton(
+            onClick = { selectMultipleChoiceDisk.value = null },
+          ) {
+            Icon(
+              imageVector = Icons.Default.Delete,
+              contentDescription = null,
+            )
+          }
+        }
+      },
+    )
+
+    if (showMultiChoiceDialog.value) {
+      MultiChoiceAlertDialog(
+        items = items,
+        selectedItemKeys = selectMultipleChoiceDisk.value?.split("|").orEmpty(),
+        onItemsSelected = { selectedItemKey ->
+          selectMultipleChoiceDisk.value = selectedItemKey.joinToString("|")
+          showMultiChoiceDialog.value = false
         },
       )
     }

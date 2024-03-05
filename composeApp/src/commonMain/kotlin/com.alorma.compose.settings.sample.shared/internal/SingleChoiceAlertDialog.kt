@@ -34,7 +34,6 @@ internal fun SingleChoiceAlertDialog(
     confirmButton = if (userSelectedItem.value == null) {
       {
         TextButton(
-          enabled = userSelectedItem.value == null,
           onClick = { onItemSelected(null) },
         ) {
           Text(text = "Cancel")
@@ -43,7 +42,6 @@ internal fun SingleChoiceAlertDialog(
     } else {
       {
         TextButton(
-          enabled = userSelectedItem.value != null,
           onClick = { onItemSelected(userSelectedItem.value) },
         ) {
           Text(text = "Select")
@@ -55,7 +53,6 @@ internal fun SingleChoiceAlertDialog(
     } else {
       {
         TextButton(
-          enabled = userSelectedItem.value != null,
           onClick = { onItemSelected(null) },
         ) {
           Text(text = "Clear")
