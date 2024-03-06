@@ -28,8 +28,10 @@ namespace = "com.alorma.compose.settings"
 detekt = "1.23.0"
 compose-detekt-rules = "0.0.26"
 
+kotlinx-immutable = "0.3.7"
+
 [libraries]
-androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxannotations"}
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxannotations" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
 androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidxpreference" }
@@ -51,6 +53,8 @@ ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 
 compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", version.ref = "compose-detekt-rules" }
+
+kotlinx-immutable= { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutable" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

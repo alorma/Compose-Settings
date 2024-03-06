@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.sample.shared.theme
+package theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

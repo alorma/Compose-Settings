@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.sample.shared.internal
+package internal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
@@ -7,19 +7,20 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
+@Suppress("SpreadOperator")
 internal fun MultiChoiceAlertDialog(
-  selectedItemKeys: List<String> = emptyList(),
-  onItemsSelected: (List<String>) -> Unit,
-  items: List<SampleItem>
+  items: ImmutableList<SampleItem>,
+  selectedItemKeys: ImmutableList<String> = emptyList<String>().toImmutableList(),
+  onItemsSelected: (ImmutableList<String>) -> Unit,
 ) {
-  val userSelectedItems = remember {
-    mutableStateListOf(*selectedItemKeys.toTypedArray())
-  }
+  val userSelectedItems = remember { mutableStateListOf(*selectedItemKeys.toTypedArray()) }
 
   AlertDialog(
-    onDismissRequest = { onItemsSelected(selectedItemKeys.toSet().toList()) },
+    onDismissRequest = { onItemsSelected(selectedItemKeys.toSet().toImmutableList()) },
     title = { Text(text = "Multi choice") },
     text = {
       Column {
@@ -42,7 +43,7 @@ internal fun MultiChoiceAlertDialog(
     confirmButton = if (userSelectedItems.isEmpty()) {
       {
         TextButton(
-          onClick = { onItemsSelected(emptyList()) },
+          onClick = { onItemsSelected(emptyList<String>().toImmutableList()) },
         ) {
           Text(text = "Cancel")
         }
@@ -50,7 +51,7 @@ internal fun MultiChoiceAlertDialog(
     } else {
       {
         TextButton(
-          onClick = { onItemsSelected(userSelectedItems.toSet().toList()) },
+          onClick = { onItemsSelected(userSelectedItems.toSet().toImmutableList()) },
         ) {
           Text(text = "Select")
         }
@@ -61,7 +62,7 @@ internal fun MultiChoiceAlertDialog(
     } else {
       {
         TextButton(
-          onClick = { onItemsSelected(emptyList()) },
+          onClick = { onItemsSelected(emptyList<String>().toImmutableList()) },
         ) {
           Text(text = "Clear")
         }

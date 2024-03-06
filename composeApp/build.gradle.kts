@@ -60,6 +60,8 @@ kotlin {
       implementation(projects.composeSettingsStorageMemory)
       implementation(projects.composeSettingsStorageDisk)
       implementation(projects.composeSettingsUi)
+
+      implementation(libs.kotlinx.immutable)
     }
 
     val desktopMain by getting

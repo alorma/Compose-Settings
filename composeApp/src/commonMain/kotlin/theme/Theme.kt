@@ -1,7 +1,6 @@
-package com.alorma.compose.settings.sample.shared.theme
+package theme
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
