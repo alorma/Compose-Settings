@@ -23,7 +23,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build storage base - PR
+      - name: Yarn update - PR
         run: ./gradlew kotlinUpgradeYarnLock
 
   build-storage-base:
