@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -28,6 +29,15 @@ kotlin {
   iosArm64()
   iosSimulatorArm64()
 
+  js(IR) {
+    browser()
+  }
+
+  @OptIn(ExperimentalWasmDsl::class)
+  wasmJs {
+    browser()
+  }
+
   sourceSets {
     androidMain.dependencies {
       implementation(libs.androidx.preference.preference)
@@ -37,7 +47,6 @@ kotlin {
     commonMain.dependencies {
       api(projects.composeSettingsStorageBase)
 
-      implementation(libs.androidx.annotation)
       implementation(compose.runtime)
       implementation(compose.foundation)
       implementation(compose.material3)

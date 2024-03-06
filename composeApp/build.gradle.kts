@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -19,6 +20,17 @@ kotlin {
 
   jvm("desktop")
 
+  js(IR) {
+    browser()
+    binaries.executable()
+  }
+
+  @OptIn(ExperimentalWasmDsl::class)
+  wasmJs {
+    browser()
+    binaries.executable()
+  }
+
   listOf(
     iosX64(),
     iosArm64(),
@@ -36,6 +48,7 @@ kotlin {
       implementation(compose.ui)
       implementation(libs.androidx.activity.compose)
     }
+
     commonMain.dependencies {
       implementation(compose.material3)
 
@@ -47,12 +60,18 @@ kotlin {
       implementation(projects.composeSettingsStorageDisk)
       implementation(projects.composeSettingsUi)
     }
-    val desktopMain by getting
 
+    val desktopMain by getting
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
     }
+
+    val jsMain by getting
   }
+}
+
+compose.experimental {
+  web.application {}
 }
 
 android {

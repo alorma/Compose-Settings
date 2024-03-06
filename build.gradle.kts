@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+
 plugins {
   alias(libs.plugins.jetbrainsCompose) apply false
   alias(libs.plugins.androidApplication) apply false
@@ -24,6 +27,13 @@ allprojects {
     google()
     mavenCentral()
   }
+}
+
+
+rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
+  rootProject.the<YarnRootExtension>().yarnLockMismatchReport = YarnLockMismatchReport.NONE
+  rootProject.the<YarnRootExtension>().reportNewYarnLock = false // true
+  rootProject.the<YarnRootExtension>().yarnLockAutoReplace = false // true
 }
 
 apply(from = "${rootDir}/scripts/publish-root.gradle")
