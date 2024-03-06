@@ -1,6 +1,5 @@
 package com.alorma.compose.settings.ui
 
-import androidx.annotation.IntRange
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ListItemColors
@@ -24,7 +23,7 @@ fun SettingsSlider(
   icon: @Composable (() -> Unit)? = null,
   enabled: Boolean = true,
   valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-  @IntRange(from = 0) steps: Int = 0,
+  steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   sliderColors: SliderColors = SliderDefaults.colors(),
   colors: ListItemColors = ListItemDefaults.colors(),
