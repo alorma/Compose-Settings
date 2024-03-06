@@ -25,6 +25,9 @@ multiplatformSettings = "1.1.1"
 
 namespace = "com.alorma.compose.settings"
 
+detekt = "1.23.0"
+compose-detekt-rules = "0.0.26"
+
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxannotations"}
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
@@ -47,6 +50,8 @@ ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 
+compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", version.ref = "compose-detekt-rules" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -54,3 +59,5 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
