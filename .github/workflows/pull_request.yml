@@ -10,8 +10,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  yarn:
+    name: Yarn - PR
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build storage base - PR
+        run: ./gradlew kotlinUpgradeYarnLock
+
   build-storage-base:
     name: Build storage base - PR
+    if: ${{ success() }}
+    needs: [ yarn ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -28,6 +46,8 @@ jobs:
 
   build-ui:
     name: Build ui - PR
+    if: ${{ success() }}
+    needs: [ yarn ]
     runs-on: macos-latest
     steps:
       - name: Check out code
