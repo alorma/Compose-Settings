@@ -34,7 +34,6 @@ fun SettingsCheckbox(
       role = Role.Switch,
       onValueChange = { update(!state) },
     ).then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,

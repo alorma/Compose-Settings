@@ -32,7 +32,6 @@ fun SettingsSlider(
 ) {
   SettingsTileScaffold(
     modifier = modifier,
-    enabled = enabled,
     title = title,
     subtitle = {
       Column {

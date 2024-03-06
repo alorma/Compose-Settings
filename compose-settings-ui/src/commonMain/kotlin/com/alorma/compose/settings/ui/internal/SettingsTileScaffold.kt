@@ -10,9 +10,8 @@ import androidx.compose.ui.unit.Dp
 
 @Composable
 internal fun SettingsTileScaffold(
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
   title: @Composable () -> Unit,
+  modifier: Modifier = Modifier,
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   colors: ListItemColors = ListItemDefaults.colors(),
