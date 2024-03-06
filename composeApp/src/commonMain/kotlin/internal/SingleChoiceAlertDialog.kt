@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.sample.shared.internal
+package internal
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
@@ -7,12 +7,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 internal fun SingleChoiceAlertDialog(
   selectedItemKey: String?,
   onItemSelected: (String?) -> Unit,
-  items: List<SampleItem>
+  items: ImmutableList<SampleItem>
 ) {
   val userSelectedItem = remember { mutableStateOf(selectedItemKey) }
 

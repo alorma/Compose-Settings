@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidLibrary)
   alias(libs.plugins.jetbrainsCompose)
+  alias(libs.plugins.detekt)
 }
 
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
@@ -95,4 +96,8 @@ compose.desktop {
       //packageVersion = rootProject.findProperty("libVersion").toString()
     }
   }
+}
+
+dependencies {
+  detektPlugins(libs.compose.detekt.rules)
 }

@@ -45,7 +45,6 @@ fun SettingsTriStateCheckbox(
       verticalAlignment = Alignment.CenterVertically,
     ) {
       SettingsTileScaffold(
-        enabled = enabled,
         title = title,
         subtitle = subtitle,
         icon = icon,

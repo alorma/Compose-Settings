@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
+import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
   alias(libs.plugins.jetbrainsCompose) apply false
@@ -7,6 +8,7 @@ plugins {
   alias(libs.plugins.androidLibrary) apply false
   alias(libs.plugins.kotlinMultiplatform) apply false
   alias(libs.plugins.kotlinAndroid) apply false
+  alias(libs.plugins.detekt).apply(false)
 }
 
 buildscript {
@@ -29,6 +31,11 @@ allprojects {
   }
 }
 
+tasks.register("detektAll") {
+  allprojects {
+    this@register.dependsOn(tasks.withType<Detekt>())
+  }
+}
 
 rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
   rootProject.the<YarnRootExtension>().yarnLockMismatchReport = YarnLockMismatchReport.NONE

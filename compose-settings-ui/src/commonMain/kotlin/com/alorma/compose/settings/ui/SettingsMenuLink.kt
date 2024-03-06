@@ -10,10 +10,10 @@ import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsMenuLink(
+  title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   icon: (@Composable () -> Unit)? = null,
-  title: @Composable () -> Unit,
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
   colors: ListItemColors = ListItemDefaults.colors(),
@@ -26,13 +26,12 @@ fun SettingsMenuLink(
       enabled = enabled,
       onClick = onClick,
     ).then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,
-    action = action,
     colors = colors,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
+    action = action,
   )
 }

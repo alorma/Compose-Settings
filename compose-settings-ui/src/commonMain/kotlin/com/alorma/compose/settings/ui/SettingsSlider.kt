@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
 
 @Composable
+@Suppress("LongParameterList")
 fun SettingsSlider(
   title: @Composable () -> Unit,
   value: Float,
@@ -32,7 +33,6 @@ fun SettingsSlider(
 ) {
   SettingsTileScaffold(
     modifier = modifier,
-    enabled = enabled,
     title = title,
     subtitle = {
       Column {

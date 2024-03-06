@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.sample.shared.internal
+package internal
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ThumbUp

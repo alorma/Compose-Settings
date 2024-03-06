@@ -33,7 +33,6 @@ fun SettingsRadioButton(
       role = Role.RadioButton,
       onValueChange = { onClick() },
     ).then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,

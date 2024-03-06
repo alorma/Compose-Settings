@@ -1,5 +1,3 @@
-package com.alorma.compose.settings.sample.shared
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
@@ -20,11 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
-import com.alorma.compose.settings.sample.shared.internal.SampleData
-import com.alorma.compose.settings.sample.shared.internal.SampleSection
-import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
-import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import com.alorma.compose.settings.storage.disk.rememberIntSettingState
 import com.alorma.compose.settings.storage.disk.rememberStringSettingState
@@ -39,10 +32,21 @@ import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import com.russhwolf.settings.Settings
+import internal.MultiChoiceAlertDialog
+import internal.SampleData
+import internal.SampleSection
+import internal.SingleChoiceAlertDialog
+import internal.iconSampleOrNull
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun SettingsScreen(settings: Settings) {
-  Scaffold { padding ->
+fun SettingsScreen(
+  settings: Settings,
+  modifier: Modifier = Modifier,
+) {
+  Scaffold(
+    modifier = modifier,
+  ) { padding ->
     val scrollState = rememberScrollState()
     Column(
       modifier = Modifier
@@ -163,12 +167,14 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings, showIcon: 
     val child2State = rememberMemoryBooleanSettingState(defaultValue = true)
     val child3State = rememberMemoryBooleanSettingState(defaultValue = false)
 
-    val allChildStates = derivedStateOf {
-      listOf(
-        child1State.value,
-        child2State.value,
-        child3State.value,
-      )
+    val allChildStates = remember {
+      derivedStateOf {
+        listOf(
+          child1State.value,
+          child2State.value,
+          child3State.value,
+        )
+      }
     }
 
     val areAllChildEnabled = allChildStates.value.all { it }
@@ -359,7 +365,7 @@ private fun SettingsSelectorsSample(
 
     if (showSingleChoiceDialog.value) {
       SingleChoiceAlertDialog(
-        items = items,
+        items = items.toImmutableList(),
         selectedItemKey = selectSingleChoiceDisk.value,
         onItemSelected = { selectedItemKey ->
           selectSingleChoiceDisk.value = selectedItemKey
@@ -407,8 +413,8 @@ private fun SettingsSelectorsSample(
 
     if (showMultiChoiceDialog.value) {
       MultiChoiceAlertDialog(
-        items = items,
-        selectedItemKeys = selectMultipleChoiceDisk.value?.split("|").orEmpty(),
+        items = items.toImmutableList(),
+        selectedItemKeys = selectMultipleChoiceDisk.value?.split("|").orEmpty().toImmutableList(),
         onItemsSelected = { selectedItemKey ->
           selectMultipleChoiceDisk.value = selectedItemKey.joinToString("|")
           showMultiChoiceDialog.value = false
