@@ -10,8 +10,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  detekt:
+    name: Detekt - PR
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Detekt - PR
+        run: ./gradlew detektAll
+
   build-storage-base:
     name: Build storage base - PR
+    if: ${{ success() }}
+    needs: [ detekt ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -28,6 +46,8 @@ jobs:
 
   build-ui:
     name: Build ui - PR
+    if: ${{ success() }}
+    needs: [ detekt ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -149,24 +169,6 @@ jobs:
 
       - name: Build sample Wasm - PR
         run: ./gradlew :composeApp:compileKotlinWasmJs
-
-  detekt:
-    name: Detekt - PR
-    if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Detekt - PR
-        run: ./gradlew detektAll
 
   check-sign:
     name: Check signature - PR
