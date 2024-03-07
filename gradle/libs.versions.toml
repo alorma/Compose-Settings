@@ -4,7 +4,7 @@ androidxannotations = "1.7.1"
 androidxactivity = "1.8.2"
 androidxpreference = "1.2.1"
 
-compose = "2024.02.01"
+compose = "2024.02.02"
 composeMaterial3 = "1.2.0-rc01"
 compose-compiler = "1.5.8"
 
