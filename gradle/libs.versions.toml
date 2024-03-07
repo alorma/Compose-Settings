@@ -25,7 +25,7 @@ multiplatformSettings = "1.1.1"
 
 namespace = "com.alorma.compose.settings"
 
-detekt = "1.23.0"
+detekt = "1.23.5"
 compose-detekt-rules = "0.0.26"
 
 kotlinx-immutable = "0.3.7"
