@@ -22,13 +22,21 @@ kotlin {
   jvm("desktop")
 
   js(IR) {
-    browser()
+    browser {
+      commonWebpackConfig {
+        outputFileName = "sample.js"
+      }
+    }
     binaries.executable()
   }
 
   @OptIn(ExperimentalWasmDsl::class)
   wasmJs {
-    browser()
+    browser {
+      commonWebpackConfig {
+        outputFileName = "sample.js"
+      }
+    }
     binaries.executable()
   }
 
@@ -52,6 +60,7 @@ kotlin {
 
     commonMain.dependencies {
       implementation(compose.material3)
+      implementation(libs.windowSizeClass)
 
       implementation(compose.runtime)
       implementation(compose.foundation)
@@ -70,6 +79,7 @@ kotlin {
     }
 
     val jsMain by getting
+    val wasmJsMain by getting
   }
 }
 

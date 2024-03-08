@@ -30,6 +30,8 @@ compose-detekt-rules = "0.0.26"
 
 kotlinx-immutable = "0.3.7"
 
+windowSizeClass = "0.5.0"
+
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxannotations" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
@@ -55,6 +57,8 @@ material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", version.ref = "compose-detekt-rules" }
 
 kotlinx-immutable= { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutable" }
+
+windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
