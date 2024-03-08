@@ -32,7 +32,9 @@ import theme.ComposeSettingsTheme
   ExperimentalMaterial3WindowSizeClassApi::class,
 )
 @Composable
-fun App() {
+fun App(
+  modifier: Modifier = Modifier,
+) {
   val windowSizeClass = calculateWindowSizeClass()
 
   val settings = Settings()
@@ -45,7 +47,7 @@ fun App() {
 
   ComposeSettingsTheme(isSystemDark = darkMode.value) {
     Scaffold(
-      modifier = Modifier.fillMaxSize(),
+      modifier = Modifier.fillMaxSize().then(modifier),
       topBar = {
         SampleTopBar(
           darkMode = darkMode.value,
