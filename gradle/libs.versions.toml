@@ -13,7 +13,7 @@ publishPlugin = "1.3.0"
 mavenPlugin = "0.28.0"
 
 agp = "8.3.0"
-compose-plugin = "1.6.0"
+compose-plugin = "1.6.1"
 kotlin = "1.9.22"
 
 android-minSdk = "21"
