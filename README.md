@@ -8,6 +8,8 @@
 This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
 developers build complex settings screens without all the boilerplate.
 
+**Ui tiles**
+
 | Component                | Screenshot                                                                       |
 |--------------------------|----------------------------------------------------------------------------------|
 | SettingsMenuLink         | <img width="200" alt="menu.png" src="docs/art/menu.png" />                       |
@@ -15,6 +17,13 @@ developers build complex settings screens without all the boilerplate.
 | SettingsTriStateCheckbox | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
 | SettingsRadioButton      | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
 | SettingsSwitch           | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
+
+
+**Ui tiles expanded**
+
+| Component                | Screenshot                                                                       |
+|--------------------------|----------------------------------------------------------------------------------|
+| SettingsSlider           | <img width="200" alt="switch.png" src="docs/art/slider.png" />                   |
 
 ## Install
 
