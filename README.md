@@ -10,19 +10,19 @@ developers build complex settings screens without all the boilerplate.
 
 **Ui tiles**
 
-| Component                             | Screenshot                                                                       |
-|---------------------------------------|----------------------------------------------------------------------------------|
-| [SettingsMenuLink](#SettingsMenuLink) | <img width="200" alt="menu.png" src="docs/art/menu-link.png" />                  |
-| SettingsCheckbox                      | <img width="200" alt="checkbox.png" src="docs/art/checkbox.png" />               |
-| SettingsTriStateCheckbox              | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
-| SettingsRadioButton                   | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
-| SettingsSwitch                        | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
+| Component                                             | Screenshot                                                                       |
+|-------------------------------------------------------|----------------------------------------------------------------------------------|
+| [SettingsMenuLink](#SettingsMenuLink)                 | <img width="200" alt="menu.png" src="docs/art/menu-link.png" />                  |
+| [SettingsCheckbox](#SettingsCheckbox)                 | <img width="200" alt="checkbox.png" src="docs/art/checkbox.png" />               |
+| [SettingsTriStateCheckbox](#SettingsTriStateCheckbox) | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
+| [SettingsRadioButton](#SettingsRadioButton)           | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
+| [SettingsSwitch](#SettingsSwitch)                     | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
 
 **Ui tiles expanded**
 
-| Component      | Screenshot                                                     |
-|----------------|----------------------------------------------------------------|
-| SettingsSlider | <img width="200" alt="switch.png" src="docs/art/slider.png" /> |
+| Component                         | Screenshot                                                     |
+|-----------------------------------|----------------------------------------------------------------|
+| [SettingsSlider](#SettingsSlider) | <img width="200" alt="switch.png" src="docs/art/slider.png" /> |
 
 ## Install
 
@@ -67,6 +67,88 @@ SettingsMenuLink(
 ```
 
 <img width="300" alt="menu.png" src="docs/art/menu-link.png" />
+
+##### SettingsCheckbox:
+
+```kotlin
+SettingsCheckbox(
+  state = false / true,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  onCheckedChange = { newState: Boolean -> },
+)
+```
+
+<img width="300" alt="menu.png" src="docs/art/checkbox.png" />
+
+##### SettingsTriStateCheckbox:
+
+```kotlin
+SettingsTriStateCheckbox(
+  state = false / true / null,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  onCheckedChange = { newState: Boolean -> },
+)
+```
+
+<img width="300" alt="menu.png" src="docs/art/triState-checkbox.png" />
+
+##### SettingsRadioButton:
+
+```kotlin
+SettingsRadioButton(
+  state = false / true,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  onClick = { },
+)
+```
+
+<img width="300" alt="menu.png" src="docs/art/radiobutton.png" />
+
+##### SettingsSwitch:
+
+```kotlin
+SettingsSwitch(
+  state = false / true,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  onCheckedChange = { newState: Boolean -> },
+)
+```
+
+<img width="300" alt="menu.png" src="docs/art/switch.png" />
+
+##### SettingsSlider:
+
+```kotlin
+SettingsSlider(
+  value = x.xf,
+  valueRange = X.f..Y.f,
+  steps = X,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  onValueChange = { newValue: Float -> },
+)
+```
+
+<img width="300" alt="menu.png" src="docs/art/slider.png" />
 
 ## Install - Storage
 
