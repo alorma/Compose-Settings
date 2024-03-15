@@ -20,7 +20,9 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 
-include(":ui-tiles-tiles")
+include(":ui-base")
+include(":ui-tiles")
+
 include(":storage-base")
 include(":storage-disk")
 include(":storage-memory")

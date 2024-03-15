@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.ui.internal
+package com.alorma.compose.settings.ui.base.internal
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ListItem
@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 
 @Composable
-internal fun SettingsTileScaffold(
+fun SettingsTileScaffold(
   title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   subtitle: @Composable (() -> Unit)? = null,

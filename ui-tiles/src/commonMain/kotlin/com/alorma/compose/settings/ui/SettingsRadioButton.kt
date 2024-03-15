@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
-import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
 fun SettingsRadioButton(
