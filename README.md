@@ -43,7 +43,7 @@ implementation("com.github.alorma.compose-settings:ui-tiles-extended:$version")
 // Catalog versions:
 
 [versions]
-compose-settings = "2.1.0"
+compose-settings = "{{libVersion}}"
 
 [libraries]
 composeSettings-ui = { group = "com.github.alorma.compose-settings", name = "ui-tiles", version.ref = "compose-settings" }
@@ -87,7 +87,7 @@ implementation("com.github.alorma.compose-settings:storage-disk:$version")
 // Catalog versions:
 
 [versions]
-compose-settings = "2.1.0"
+compose-settings = "{{libVersion}}"
 [libraries]
 composeSettings-storage-memory = { group = "com.github.alorma.compose-settings", name = "storage-memory", version.ref = "compose-settings" }
 composeSettings-storage-disk = { group = "com.github.alorma.compose-settings", name = "storage-disk", version.ref = "compose-settings" }
