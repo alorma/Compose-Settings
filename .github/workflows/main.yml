@@ -3,7 +3,7 @@ name: Pull request
 on:
   pull_request:
     branches:
-       - Main
+      - Main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -59,11 +59,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - Main
+      - name: Build ui base - Main
         run: ./gradlew :ui-base:build
 
   build-ui-tiles:
-    name: Build ui - Main
+    name: Build ui tiles - Main
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
@@ -77,11 +77,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - Main
+      - name: Build ui tiles - Main
         run: ./gradlew :ui-tiles:build
 
   build-ui-tiles-extended:
-    name: Build ui - Main
+    name: Build ui tiles extended- PR
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
@@ -95,7 +95,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui extended - Main
+      - name: Build ui tiles extended - Main
         run: ./gradlew :ui-tiles-extended:build
 
   build-storage-memory:

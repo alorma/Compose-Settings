@@ -3,7 +3,7 @@ name: Pull request
 on:
   pull_request:
     branches:
-       - Release
+      - Main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   detekt:
-    name: Detekt - Release
+    name: Detekt - Main
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -23,11 +23,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Detekt - Release
+      - name: Detekt - Main
         run: ./gradlew detektAll
 
   build-storage-base:
-    name: Build storage base - Release
+    name: Build storage base - Main
     if: ${{ success() }}
     needs: [ detekt ]
     runs-on: macos-latest
@@ -41,11 +41,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build storage base - Release
+      - name: Build storage base - Main
         run: ./gradlew :storage-base:build
 
   build-ui-base:
-    name: Build ui base - Release
+    name: Build ui base - Main
     if: ${{ success() }}
     needs: [ detekt ]
     runs-on: macos-latest
@@ -59,11 +59,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - Release
+      - name: Build ui base - Main
         run: ./gradlew :ui-base:build
 
   build-ui-tiles:
-    name: Build ui - Release
+    name: Build ui tiles - Main
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
@@ -77,11 +77,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - Release
+      - name: Build ui tiles - Main
         run: ./gradlew :ui-tiles:build
 
   build-ui-tiles-extended:
-    name: Build ui - Release
+    name: Build ui tiles extended- PR
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
@@ -95,11 +95,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui extended - Release
+      - name: Build ui tiles extended - Main
         run: ./gradlew :ui-tiles-extended:build
 
   build-storage-memory:
-    name: Build storage memory - Release
+    name: Build storage memory - Main
     if: ${{ success() }}
     needs: [ build-storage-base ]
     runs-on: macos-latest
@@ -113,11 +113,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build storage memory - Release
+      - name: Build storage memory - Main
         run: ./gradlew :storage-memory:build
 
   build-storage-disk:
-    name: Build storage disk - Release
+    name: Build storage disk - Main
     if: ${{ success() }}
     needs: [ build-storage-base ]
     runs-on: macos-latest
@@ -149,11 +149,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Android - Release
+      - name: Build sample Android - Main
         run: ./gradlew :composeApp:assembleDebug :composeApp:assembleRelease
 
   build-sample-desktop:
-    name: Build sample Desktop - Release
+    name: Build sample Desktop - Main
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
@@ -167,11 +167,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Desktop - Release
+      - name: Build sample Desktop - Main
         run: ./gradlew :composeApp:compileKotlinDesktop
 
   build-sample-iOS:
-    name: Build sample iOS - Release
+    name: Build sample iOS - Main
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
@@ -185,11 +185,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample iOS - Release
+      - name: Build sample iOS - Main
         run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
 
   build-sample-wasm:
-    name: Build sample Wasm - Release
+    name: Build sample Wasm - Main
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
@@ -203,11 +203,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Wasm - Release
+      - name: Build sample Wasm - Main
         run: ./gradlew :composeApp:compileKotlinWasmJs
 
   check-sign:
-    name: Check signature - Release
+    name: Check signature - Main
     if: ${{ success() }}
     needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
     runs-on: macos-latest
@@ -221,11 +221,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Check signature - Release
+      - name: Check signature - Main
         run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   fake-publish:
-    name: Fake publish - Release
+    name: Fake publish - Main
     if: ${{ success() }}
     needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
     runs-on: macos-latest
@@ -243,7 +243,7 @@ jobs:
         run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   publish-dry:
-    name: Run publish - Release
+    name: Run publish - Main
     if: ${{ success() }}
     needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
     runs-on: macos-latest
@@ -257,5 +257,5 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Publish to MavenCentral
+      - name: Publish to MavenCentral (dry)
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }}

@@ -59,11 +59,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - PR
+      - name: Build ui base - PR
         run: ./gradlew :ui-base:build
 
   build-ui-tiles:
-    name: Build ui - PR
+    name: Build ui tiles - PR
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
@@ -77,11 +77,11 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - PR
+      - name: Build ui tiles - PR
         run: ./gradlew :ui-tiles:build
 
   build-ui-tiles-extended:
-    name: Build ui - PR
+    name: Build ui tiles extended- PR
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
@@ -95,7 +95,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui extended - PR
+      - name: Build ui tiles extended - PR
         run: ./gradlew :ui-tiles-extended:build
 
   build-storage-memory:
