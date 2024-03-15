@@ -149,28 +149,3 @@ SettingsSlider(
 ```
 
 <img width="300" alt="menu.png" src="docs/art/slider.png" />
-
-## Install - Storage
-
-```
-##// groovy
-implementation 'com.github.alorma.compose-settings:storage-memory:$version'
-implementation 'com.github.alorma.compose-settings:storage-disk:$version'
-
-[...]
-
-// kotlin DSL
-
-implementation("com.github.alorma.compose-settings:storage-memory:$version")
-implementation("com.github.alorma.compose-settings:storage-disk:$version")
-
-[...]
-
-// Catalog versions:
-
-[versions]
-compose-settings = "{{libVersion}}"
-[libraries]
-composeSettings-storage-memory = { group = "com.github.alorma.compose-settings", name = "storage-memory", version.ref = "compose-settings" }
-composeSettings-storage-disk = { group = "com.github.alorma.compose-settings", name = "storage-disk", version.ref = "compose-settings" }
-```
