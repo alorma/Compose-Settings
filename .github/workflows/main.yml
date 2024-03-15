@@ -81,7 +81,7 @@ jobs:
         run: ./gradlew :ui-tiles:build
 
   build-ui-tiles-extended:
-    name: Build ui tiles extended- PR
+    name: Build ui tiles extended - Main
     if: ${{ success() }}
     needs: [ build-ui-base ]
     runs-on: macos-latest
