@@ -23,7 +23,7 @@ jobs:
           java-version: 17
 
       - name: Build storage base - Release
-        run: ./gradlew :compose-settings-storage-base:build
+        run: ./gradlew :storage-base:build
 
   build-ui:
     name: Build ui - Release
@@ -39,7 +39,7 @@ jobs:
           java-version: 17
 
       - name: Build ui - Release
-        run: ./gradlew :compose-settings-ui:build
+        run: ./gradlew :ui-tiles:build
 
   build-storage-memory:
     name: Build storage memory - Release
@@ -57,7 +57,7 @@ jobs:
           java-version: 17
 
       - name: Build storage memory - Release
-        run: ./gradlew :compose-settings-storage-memory:build
+        run: ./gradlew :storage-memory:build
 
   build-storage-disk:
     name: Build storage disk - Release
@@ -75,7 +75,7 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :compose-settings-storage-disk:build
+        run: ./gradlew :storage-disk:build
 
   build-sample-android:
     name: Build sample Android - Main

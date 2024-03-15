@@ -29,10 +29,10 @@ Add dependencies:
 
 ```groovy
 Material 2 version
-implementation 'com.github.alorma:compose-settings-ui:$version'
+implementation 'com.github.alorma:ui-tiles:$version'
 
 Material 3 version
-implementation 'com.github.alorma:compose-settings-ui-m3:$version'
+implementation 'com.github.alorma:ui-tiles-m3:$version'
 ```
 
 ## Demo
@@ -112,7 +112,7 @@ In order to provide a default value for the setting and recompose when state cha
 #### Installation
 
 ```groovy
-implementation 'com.github.alorma:compose-settings-storage-preferences:$version'
+implementation 'com.github.alorma:storage-preferences:$version'
 ```
 
 ```kotlin
@@ -166,10 +166,10 @@ Add dependencies:
 
 ```groovy
 PreferenceDataStore version
-implementation 'com.github.alorma:compose-settings-storage-datastore:$version'
+implementation 'com.github.alorma:storage-datastore:$version'
 
 ProtoDatastore version
-implementation 'com.github.alorma:compose-settings-storage-datastore-proto:$version'
+implementation 'com.github.alorma:storage-datastore-proto:$version'
 
 And you have to add ProtoBuf dependencies in addition.
 ```
