@@ -193,7 +193,8 @@ private fun SettingsSliderSectionSample(showIcon: Boolean) {
 private fun SettingsMenuLinkSectionSample(
   showIcon: Boolean,
 ) {
-  SampleSection(title = "SettingsSwitch") {
+
+  SampleSection(title = "SettingsMenuLink") {
     val actionState = remember { mutableStateOf(false) }
 
     SettingsSwitch(
