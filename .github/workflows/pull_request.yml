@@ -3,7 +3,7 @@ name: Pull request
 on:
   pull_request:
     branches:
-      - Main
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

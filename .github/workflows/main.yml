@@ -1,9 +1,9 @@
-name: Pull request
+name: Main
 
 on:
-  pull_request:
+  push:
     branches:
-      - Main
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

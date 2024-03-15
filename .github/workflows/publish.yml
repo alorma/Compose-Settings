@@ -1,9 +1,8 @@
-name: Pull request
+name: Publish
 
 on:
-  pull_request:
-    branches:
-      - Main
+  release:
+    types: [ released ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
