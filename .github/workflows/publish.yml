@@ -78,7 +78,7 @@ jobs:
         run: ./gradlew :compose-settings-storage-disk:build
 
   build-sample-android:
-    name: Build sample Android- PR
+    name: Build sample Android - Main
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui ]
     runs-on: macos-latest
