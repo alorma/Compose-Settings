@@ -29,18 +29,12 @@ developers build complex settings screens without all the boilerplate.
 
 ```
 ##// groovy
-implementation 'com.github.alorma.compose-settings:storage-memory:$version'
-implementation 'com.github.alorma.compose-settings:storage-disk:$version'
-
 implementation 'com.github.alorma.compose-settings:ui-tiles:$version'
 implementation 'com.github.alorma.compose-settings:ui-tiles-extended:$version'
 
 [...]
 
 // kotlin DSL
-
-implementation("com.github.alorma.compose-settings:storage-memory:$version")
-implementation("com.github.alorma.compose-settings:storage-disk:$version")
 
 implementation("com.github.alorma.compose-settings:ui-tiles:$version")
 implementation("com.github.alorma.compose-settings:ui-tiles-extended:$version")
@@ -51,13 +45,29 @@ implementation("com.github.alorma.compose-settings:ui-tiles-extended:$version")
 
 [versions]
 compose-settings = "2.1.0"
-[libraries]
-composeSettings-storage-memory = { group = "com.github.alorma.compose-settings", name = "storage-memory", version.ref = "compose-settings" }
-composeSettings-storage-disk = { group = "com.github.alorma.compose-settings", name = "storage-disk", version.ref = "compose-settings" }
 
+[libraries]
 composeSettings-ui = { group = "com.github.alorma.compose-settings", name = "ui-tiles", version.ref = "compose-settings" }
 composeSettings-ui-extended = { group = "com.github.alorma.compose-settings", name = "ui-tiles-extended", version.ref = "compose-settings" }
 ```
+
+## Usage
+
+**SettingsMenuLink:**
+
+```kotlin
+SettingsMenuLink(
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false/true,
+  icon = { Icon(...) },
+  action = { IconButton() },
+  onClick = { ... },
+)
+```
+
+<img width="300" alt="menu.png" src="docs/art/menu.png" />
 
 ## Install - Storage
 
