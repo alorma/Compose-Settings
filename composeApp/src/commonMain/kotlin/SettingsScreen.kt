@@ -269,7 +269,7 @@ private fun SettingsSliderSectionSample(
 private fun SettingsMenuLinkSectionSample(
   showIcon: Boolean,
 ) {
-  SampleSection(title = "SettingsSwitch Tile") {
+  SampleSection(title = "SettingsMenuLink Tile") {
     val actionState = rememberMemoryBooleanSettingState()
 
     SettingsSwitch(

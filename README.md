@@ -10,20 +10,19 @@ developers build complex settings screens without all the boilerplate.
 
 **Ui tiles**
 
-| Component                | Screenshot                                                                       |
-|--------------------------|----------------------------------------------------------------------------------|
-| SettingsMenuLink         | <img width="200" alt="menu.png" src="docs/art/menu.png" />                       |
-| SettingsCheckbox         | <img width="200" alt="checkbox.png" src="docs/art/checkbox.png" />               |
-| SettingsTriStateCheckbox | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
-| SettingsRadioButton      | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
-| SettingsSwitch           | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
-
+| Component                             | Screenshot                                                                       |
+|---------------------------------------|----------------------------------------------------------------------------------|
+| [SettingsMenuLink](#SettingsMenuLink) | <img width="200" alt="menu.png" src="docs/art/menu-link.png" />                  |
+| SettingsCheckbox                      | <img width="200" alt="checkbox.png" src="docs/art/checkbox.png" />               |
+| SettingsTriStateCheckbox              | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
+| SettingsRadioButton                   | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
+| SettingsSwitch                        | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
 
 **Ui tiles expanded**
 
-| Component                | Screenshot                                                                       |
-|--------------------------|----------------------------------------------------------------------------------|
-| SettingsSlider           | <img width="200" alt="switch.png" src="docs/art/slider.png" />                   |
+| Component      | Screenshot                                                     |
+|----------------|----------------------------------------------------------------|
+| SettingsSlider | <img width="200" alt="switch.png" src="docs/art/slider.png" /> |
 
 ## Install
 
@@ -53,21 +52,21 @@ composeSettings-ui-extended = { group = "com.github.alorma.compose-settings", na
 
 ## Usage
 
-**SettingsMenuLink:**
+##### SettingsMenuLink:
 
 ```kotlin
 SettingsMenuLink(
   title = { Text(text = "Setting title") },
   subtitle = { Text(text = "Setting subtitle") },
   modifier = Modifier,
-  enabled = false/true,
+  enabled = false / true,
   icon = { Icon(...) },
   action = { IconButton() },
   onClick = { ... },
 )
 ```
 
-<img width="300" alt="menu.png" src="docs/art/menu.png" />
+<img width="300" alt="menu.png" src="docs/art/menu-link.png" />
 
 ## Install - Storage
 
