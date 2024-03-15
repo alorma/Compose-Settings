@@ -65,9 +65,6 @@ kotlin {
       implementation(compose.runtime)
       implementation(compose.foundation)
 
-      implementation(projects.storageBase)
-      implementation(projects.storageMemory)
-      implementation(projects.storageDisk)
       implementation(projects.uiTiles)
       implementation(projects.uiTilesExtended)
 
