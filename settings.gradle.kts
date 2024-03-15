@@ -22,6 +22,7 @@ include(":composeApp")
 
 include(":ui-base")
 include(":ui-tiles")
+include(":ui-tiles-extended")
 
 include(":storage-base")
 include(":storage-disk")
