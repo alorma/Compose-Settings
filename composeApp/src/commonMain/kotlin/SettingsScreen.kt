@@ -24,7 +24,6 @@ import com.alorma.compose.settings.ui.SettingsRadioButton
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
-import com.russhwolf.settings.Settings
 import internal.MultiChoiceAlertDialog
 import internal.SampleData
 import internal.SampleSection
@@ -33,10 +32,7 @@ import internal.iconSampleOrNull
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun SettingsScreen(
-  settings: Settings,
-  modifier: Modifier = Modifier,
-) {
+fun SettingsScreen(modifier: Modifier = Modifier) {
   Scaffold(
     modifier = modifier,
   ) { padding ->
@@ -53,19 +49,19 @@ fun SettingsScreen(
         title = { Text(text = "Show icon") },
         onCheckedChange = { iconState.value = it },
       )
-      SettingsSwitchSampleSection(settings, iconState.value)
-      SettingsCheckboxSampleSection(settings, iconState.value)
-      SettingsTriStateCheckboxSampleSection(settings, iconState.value)
-      SettingsRadioButtonSampleSection(settings, iconState.value)
+      SettingsSwitchSampleSection(iconState.value)
+      SettingsCheckboxSampleSection(iconState.value)
+      SettingsTriStateCheckboxSampleSection(iconState.value)
+      SettingsRadioButtonSampleSection(iconState.value)
       SettingsMenuLinkSectionSample(iconState.value)
-      SettingsSliderSectionSample(settings, iconState.value)
-      SettingsSelectorsSample(settings, iconState.value)
+      SettingsSliderSectionSample(iconState.value)
+      SettingsSelectorsSample(iconState.value)
     }
   }
 }
 
 @Composable
-private fun SettingsSwitchSampleSection(settings: Settings, showIcon: Boolean) {
+private fun SettingsSwitchSampleSection(showIcon: Boolean) {
   SampleSection(title = "SettingsSwitch") {
     val state = remember { mutableStateOf(false) }
     SettingsSwitch(
@@ -79,7 +75,7 @@ private fun SettingsSwitchSampleSection(settings: Settings, showIcon: Boolean) {
 }
 
 @Composable
-private fun SettingsCheckboxSampleSection(settings: Settings, showIcon: Boolean) {
+private fun SettingsCheckboxSampleSection(showIcon: Boolean) {
   SampleSection(title = "SettingsCheckbox") {
     val state = remember { mutableStateOf(false) }
     SettingsCheckbox(
@@ -93,7 +89,7 @@ private fun SettingsCheckboxSampleSection(settings: Settings, showIcon: Boolean)
 }
 
 @Composable
-private fun SettingsRadioButtonSampleSection(settings: Settings, showIcon: Boolean) {
+private fun SettingsRadioButtonSampleSection(showIcon: Boolean) {
   SampleSection(title = "SettingsRadioButton") {
     val state = remember { mutableStateOf<String?>(null) }
 
@@ -110,7 +106,7 @@ private fun SettingsRadioButtonSampleSection(settings: Settings, showIcon: Boole
 }
 
 @Composable
-private fun SettingsTriStateCheckboxSampleSection(settings: Settings, showIcon: Boolean) {
+private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
   SampleSection(title = "SettingsTriStateCheckbox") {
     val child1State = remember { mutableStateOf(false) }
     val child2State = remember { mutableStateOf(true) }
@@ -177,10 +173,7 @@ private fun SettingsTriStateCheckboxSampleSection(settings: Settings, showIcon: 
 }
 
 @Composable
-private fun SettingsSliderSectionSample(
-  settings: Settings,
-  showIcon: Boolean,
-) {
+private fun SettingsSliderSectionSample(showIcon: Boolean) {
   SampleSection(title = "SettingsSlider") {
     val state = remember { mutableStateOf(5) }
 
@@ -252,10 +245,7 @@ private fun SettingsMenuLinkSectionSample(
 }
 
 @Composable
-private fun SettingsSelectorsSample(
-  settings: Settings,
-  showIcon: Boolean,
-) {
+private fun SettingsSelectorsSample(showIcon: Boolean) {
   val items = SampleData.items
 
   SampleSection(title = "Selectors") {

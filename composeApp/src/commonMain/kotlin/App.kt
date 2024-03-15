@@ -19,12 +19,12 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
-import com.russhwolf.settings.Settings
 import kotlinx.coroutines.launch
 import theme.ComposeSettingsTheme
 
@@ -34,16 +34,11 @@ import theme.ComposeSettingsTheme
 @Composable
 fun App(
   modifier: Modifier = Modifier,
+  isSystemInDark: Boolean = false,
 ) {
   val windowSizeClass = calculateWindowSizeClass()
 
-  val settings = Settings()
-
-  val darkMode = rememberBooleanSettingState(
-    key = "darkMode",
-    defaultValue = false,
-    settings = settings,
-  )
+  val darkMode = remember { mutableStateOf(isSystemInDark) }
 
   ComposeSettingsTheme(isSystemDark = darkMode.value) {
     Scaffold(
@@ -57,7 +52,7 @@ fun App(
     ) {
       when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> {
-          SettingsScreen(settings = settings)
+          SettingsScreen()
         }
 
         else -> {
@@ -67,9 +62,7 @@ fun App(
           DismissibleNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-              DismissibleDrawerSheet {
-                SettingsScreen(settings = settings)
-              }
+              DismissibleDrawerSheet { SettingsScreen() }
             },
             content = {
               Surface {
