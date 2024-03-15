@@ -18,13 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
-import com.alorma.compose.settings.storage.disk.rememberIntSettingState
-import com.alorma.compose.settings.storage.disk.rememberStringSettingState
-import com.alorma.compose.settings.storage.disk.rememberTriStateSetting
-import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
-import com.alorma.compose.settings.storage.memory.rememberMemoryIntSettingState
-import com.alorma.compose.settings.storage.memory.rememberMemoryTriStateSettingState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
@@ -54,7 +47,7 @@ fun SettingsScreen(
         .verticalScroll(scrollState)
         .padding(top = padding.calculateTopPadding()),
     ) {
-      val iconState = rememberMemoryBooleanSettingState()
+      val iconState = remember { mutableStateOf(false) }
       SettingsSwitch(
         state = iconState.value,
         title = { Text(text = "Show icon") },
@@ -73,68 +66,44 @@ fun SettingsScreen(
 
 @Composable
 private fun SettingsSwitchSampleSection(settings: Settings, showIcon: Boolean) {
-  SampleSection(title = "SettingsSwitch Tile") {
-    val switchMemoryState = rememberMemoryBooleanSettingState()
+  SampleSection(title = "SettingsSwitch") {
+    val state = remember { mutableStateOf(false) }
     SettingsSwitch(
-      state = switchMemoryState.value,
+      state = state.value,
       title = { Text(text = "Switch") },
-      subtitle = { Text(text = "Memory state") },
+      subtitle = { Text(text = "Switch subtitle") },
       icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { switchMemoryState.value = it },
-    )
-    val switchDiskState = rememberBooleanSettingState(
-      key = "switchDiskState",
-      settings = settings,
-    )
-    SettingsSwitch(
-      state = switchDiskState.value,
-      title = { Text(text = "Switch") },
-      subtitle = { Text(text = "Disk state") },
-      icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { switchDiskState.value = it },
+      onCheckedChange = { state.value = it },
     )
   }
 }
 
 @Composable
 private fun SettingsCheckboxSampleSection(settings: Settings, showIcon: Boolean) {
-  SampleSection(title = "SettingsCheckbox Tile") {
-    val checkboxMemoryState = rememberMemoryBooleanSettingState()
+  SampleSection(title = "SettingsCheckbox") {
+    val state = remember { mutableStateOf(false) }
     SettingsCheckbox(
-      state = checkboxMemoryState.value,
+      state = state.value,
       title = { Text(text = "Checkbox") },
-      subtitle = { Text(text = "Memory state") },
+      subtitle = { Text(text = "Checkbox subtitle") },
       icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { checkboxMemoryState.value = it },
-    )
-    val checkboxDiskState = rememberBooleanSettingState(
-      key = "checkboxDiskState",
-      settings = settings,
-    )
-    SettingsCheckbox(
-      state = checkboxDiskState.value,
-      title = { Text(text = "Checkbox") },
-      subtitle = { Text(text = "Disk state") },
-      icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { checkboxDiskState.value = it },
+      onCheckedChange = { state.value = it },
     )
   }
 }
 
 @Composable
 private fun SettingsRadioButtonSampleSection(settings: Settings, showIcon: Boolean) {
-  SampleSection(title = "SettingsRadioButton Tile") {
-    val radioButtonDiskState = rememberStringSettingState(
-      key = "radioButtonDiskState",
-      settings = settings,
-    )
+  SampleSection(title = "SettingsRadioButton") {
+    val state = remember { mutableStateOf<String?>(null) }
+
     SampleData.items.forEach { sampleItem ->
       SettingsRadioButton(
-        state = radioButtonDiskState.value == sampleItem.key,
+        state = state.value == sampleItem.key,
         title = { Text(text = sampleItem.title) },
         subtitle = { Text(text = sampleItem.description) },
         icon = iconSampleOrNull(showIcon),
-        onClick = { radioButtonDiskState.value = sampleItem.key },
+        onClick = { state.value = sampleItem.key },
       )
     }
   }
@@ -142,30 +111,10 @@ private fun SettingsRadioButtonSampleSection(settings: Settings, showIcon: Boole
 
 @Composable
 private fun SettingsTriStateCheckboxSampleSection(settings: Settings, showIcon: Boolean) {
-  SampleSection(title = "SettingsTriStateCheckbox Tile") {
-    val triStateCheckboxMemoryState = rememberMemoryTriStateSettingState()
-    SettingsTriStateCheckbox(
-      state = triStateCheckboxMemoryState.value,
-      title = { Text(text = "TriStateCheckbox") },
-      subtitle = { Text(text = "Memory") },
-      icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { newState -> triStateCheckboxMemoryState.value = newState },
-    )
-    val triStateCheckboxDiskState = rememberTriStateSetting(
-      key = "triStateCheckbox",
-      settings = settings,
-    )
-    SettingsTriStateCheckbox(
-      state = triStateCheckboxDiskState.value,
-      title = { Text(text = "TriStateCheckbox") },
-      subtitle = { Text(text = "Disk") },
-      icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { newState -> triStateCheckboxDiskState.value = newState },
-    )
-
-    val child1State = rememberMemoryBooleanSettingState(defaultValue = false)
-    val child2State = rememberMemoryBooleanSettingState(defaultValue = true)
-    val child3State = rememberMemoryBooleanSettingState(defaultValue = false)
+  SampleSection(title = "SettingsTriStateCheckbox") {
+    val child1State = remember { mutableStateOf(false) }
+    val child2State = remember { mutableStateOf(true) }
+    val child3State = remember { mutableStateOf(false) }
 
     val allChildStates = remember {
       derivedStateOf {
@@ -232,32 +181,14 @@ private fun SettingsSliderSectionSample(
   settings: Settings,
   showIcon: Boolean,
 ) {
-  SampleSection(title = "SettingsSlider Tile") {
-    val sliderMemoryState = rememberMemoryIntSettingState(
-      defaultValue = 5,
-    )
+  SampleSection(title = "SettingsSlider") {
+    val state = remember { mutableStateOf(5) }
 
     SettingsSlider(
       title = { Text(text = "Slider") },
-      value = sliderMemoryState.value.toFloat(),
-      onValueChange = { sliderMemoryState.value = it.toInt() },
-      subtitle = { Text(text = "Selected value: ${sliderMemoryState.value}") },
-      icon = iconSampleOrNull(showIcon),
-      valueRange = 0f..20f,
-      steps = 20,
-    )
-
-    val sliderDiskState = rememberIntSettingState(
-      key = "sliderDiskState",
-      defaultValue = 5,
-      settings = settings,
-    )
-
-    SettingsSlider(
-      title = { Text(text = "Slider") },
-      value = sliderDiskState.value.toFloat(),
-      onValueChange = { sliderDiskState.value = it.toInt() },
-      subtitle = { Text(text = "Selected value: ${sliderDiskState.value}") },
+      value = state.value.toFloat(),
+      onValueChange = { state.value = it.toInt() },
+      subtitle = { Text(text = "Selected value: ${state.value}") },
       icon = iconSampleOrNull(showIcon),
       valueRange = 0f..20f,
       steps = 20,
@@ -269,8 +200,8 @@ private fun SettingsSliderSectionSample(
 private fun SettingsMenuLinkSectionSample(
   showIcon: Boolean,
 ) {
-  SampleSection(title = "SettingsSwitch Tile") {
-    val actionState = rememberMemoryBooleanSettingState()
+  SampleSection(title = "SettingsSwitch") {
+    val actionState = remember { mutableStateOf(false) }
 
     SettingsSwitch(
       state = actionState.value,
@@ -328,17 +259,14 @@ private fun SettingsSelectorsSample(
   val items = SampleData.items
 
   SampleSection(title = "Selectors") {
-    val selectSingleChoiceDisk = rememberStringSettingState(
-      key = "singleChoice",
-      settings = settings,
-    )
+    val singleSelectionState = remember { mutableStateOf<String?>(null) }
 
     val showSingleChoiceDialog = remember { mutableStateOf(false) }
 
     SettingsMenuLink(
-      title = { Text(text = "Single choice (Disk)") },
+      title = { Text(text = "Single choice") },
       subtitle = {
-        val item = items.find { it.key == selectSingleChoiceDisk.value }
+        val item = items.find { it.key == singleSelectionState.value }
         if (item == null) {
           Text(text = "No item selected")
         } else {
@@ -347,12 +275,12 @@ private fun SettingsSelectorsSample(
       },
       onClick = { showSingleChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
-      action = if (selectSingleChoiceDisk.value == null) {
+      action = if (singleSelectionState.value == null) {
         null
       } else {
         {
           IconButton(
-            onClick = { selectSingleChoiceDisk.value = null },
+            onClick = { singleSelectionState.value = null },
           ) {
             Icon(
               imageVector = Icons.Default.Delete,
@@ -366,25 +294,22 @@ private fun SettingsSelectorsSample(
     if (showSingleChoiceDialog.value) {
       SingleChoiceAlertDialog(
         items = items.toImmutableList(),
-        selectedItemKey = selectSingleChoiceDisk.value,
+        selectedItemKey = singleSelectionState.value,
         onItemSelected = { selectedItemKey ->
-          selectSingleChoiceDisk.value = selectedItemKey
+          singleSelectionState.value = selectedItemKey
           showSingleChoiceDialog.value = false
         },
       )
     }
 
-    val selectMultipleChoiceDisk = rememberStringSettingState(
-      key = "multiChoice",
-      settings = settings,
-    )
+    val multipleSelectionState = remember { mutableStateOf<String?>(null) }
 
     val showMultiChoiceDialog = remember { mutableStateOf(false) }
 
     SettingsMenuLink(
-      title = { Text(text = "Multi choice (Disk)") },
+      title = { Text(text = "Multi choice") },
       subtitle = {
-        val selectedItems = items.filter { selectMultipleChoiceDisk.value?.contains(it.key) ?: false }
+        val selectedItems = items.filter { multipleSelectionState.value?.contains(it.key) ?: false }
         if (selectedItems.isEmpty()) {
           Text(text = "No item selected")
         } else if (selectedItems.size == 1) {
@@ -395,12 +320,12 @@ private fun SettingsSelectorsSample(
       },
       onClick = { showMultiChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
-      action = if (selectMultipleChoiceDisk.value == null) {
+      action = if (multipleSelectionState.value == null) {
         null
       } else {
         {
           IconButton(
-            onClick = { selectMultipleChoiceDisk.value = null },
+            onClick = { multipleSelectionState.value = null },
           ) {
             Icon(
               imageVector = Icons.Default.Delete,
@@ -414,9 +339,9 @@ private fun SettingsSelectorsSample(
     if (showMultiChoiceDialog.value) {
       MultiChoiceAlertDialog(
         items = items.toImmutableList(),
-        selectedItemKeys = selectMultipleChoiceDisk.value?.split("|").orEmpty().toImmutableList(),
+        selectedItemKeys = multipleSelectionState.value?.split("|").orEmpty().toImmutableList(),
         onItemsSelected = { selectedItemKey ->
-          selectMultipleChoiceDisk.value = selectedItemKey.joinToString("|")
+          multipleSelectionState.value = selectedItemKey.joinToString("|")
           showMultiChoiceDialog.value = false
         },
       )
