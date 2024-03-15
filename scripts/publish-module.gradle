@@ -14,7 +14,7 @@ mavenPublishing {
   signAllPublications()
 
   pom {
-    name = project.project.getName()
+    name = project.project.getName().substring("compose-settings".length())
 
     description = 'Compose settings'
     url = 'https://github.com/alorma/Compose-Settings'
