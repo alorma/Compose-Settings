@@ -46,17 +46,19 @@ kotlin {
     }
 
     commonMain.dependencies {
-      api(projects.composeSettingsStorageBase)
+      api(projects.storageBase)
+
+      api(libs.multiplatform.settings)
+      api(libs.multiplatform.settings.noArg)
 
       implementation(compose.runtime)
       implementation(compose.foundation)
-      implementation(compose.material3)
     }
   }
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".ui"
+  namespace = libs.versions.namespace.get() + ".disk"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -99,7 +101,7 @@ compose.desktop {
   application {
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".ui"
+      packageName = libs.versions.namespace.get() + ".disk"
       packageVersion = "1.0.0"
     }
   }
