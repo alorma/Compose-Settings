@@ -5,7 +5,7 @@ import androidx.compose.ui.window.application
 fun main() = application {
   Window(
     onCloseRequest = ::exitApplication,
-    title = "Compose settings - sample",
+    title = "Compose Settings - sample",
   ) {
     App(isSystemInDark = isSystemInDarkTheme())
   }
