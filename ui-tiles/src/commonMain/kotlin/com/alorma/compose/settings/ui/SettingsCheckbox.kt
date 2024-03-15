@@ -1,33 +1,32 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxColors
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
-import com.alorma.compose.settings.ui.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
-fun SettingsSwitch(
+fun SettingsCheckbox(
   state: Boolean,
   title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  switchColors: SwitchColors = SwitchDefaults.colors(),
+  checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
   colors: ListItemColors = ListItemDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,
 ) {
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
-
   SettingsTileScaffold(
     modifier = Modifier.toggleable(
       enabled = enabled,
@@ -42,11 +41,11 @@ fun SettingsSwitch(
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   ) {
-    Switch(
+    Checkbox(
       enabled = enabled,
       checked = state,
       onCheckedChange = update,
-      colors = switchColors,
+      colors = checkboxColors,
     )
   }
 }

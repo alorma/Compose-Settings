@@ -42,10 +42,10 @@ jobs:
           java-version: 17
 
       - name: Build storage base - PR
-        run: ./gradlew :compose-settings-storage-base:build
+        run: ./gradlew :storage-base:build
 
-  build-ui:
-    name: Build ui - PR
+  build-ui-base:
+    name: Build ui base - PR
     if: ${{ success() }}
     needs: [ detekt ]
     runs-on: macos-latest
@@ -59,8 +59,44 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - PR
-        run: ./gradlew :compose-settings-ui:build
+      - name: Build ui base - PR
+        run: ./gradlew :ui-base:build
+
+  build-ui-tiles:
+    name: Build ui tiles - PR
+    if: ${{ success() }}
+    needs: [ build-ui-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui tiles - PR
+        run: ./gradlew :ui-tiles:build
+
+  build-ui-tiles-extended:
+    name: Build ui tiles extended - PR
+    if: ${{ success() }}
+    needs: [ build-ui-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui tiles extended - PR
+        run: ./gradlew :ui-tiles-extended:build
 
   build-storage-memory:
     name: Build storage memory - PR
@@ -78,7 +114,7 @@ jobs:
           java-version: 17
 
       - name: Build storage memory - PR
-        run: ./gradlew :compose-settings-storage-memory:build
+        run: ./gradlew :storage-memory:build
 
   build-storage-disk:
     name: Build storage disk - PR
@@ -96,12 +132,12 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :compose-settings-storage-disk:build
+        run: ./gradlew :storage-disk:build
 
   build-sample-android:
     name: Build sample Android- PR
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -119,7 +155,7 @@ jobs:
   build-sample-desktop:
     name: Build sample Desktop - PR
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -137,7 +173,7 @@ jobs:
   build-sample-iOS:
     name: Build sample iOS - PR
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -155,7 +191,7 @@ jobs:
   build-sample-wasm:
     name: Build sample Wasm - PR
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code

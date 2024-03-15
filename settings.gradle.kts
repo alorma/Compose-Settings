@@ -20,7 +20,10 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 
-include(":compose-settings-ui")
-include(":compose-settings-storage-base")
-include(":compose-settings-storage-disk")
-include(":compose-settings-storage-memory")
+include(":ui-base")
+include(":ui-tiles")
+include(":ui-tiles-extended")
+
+include(":storage-base")
+include(":storage-disk")
+include(":storage-memory")

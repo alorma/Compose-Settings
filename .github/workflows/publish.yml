@@ -9,8 +9,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  detekt:
+    name: Detekt - Release
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Detekt - Release
+        run: ./gradlew detektAll
+
   build-storage-base:
     name: Build storage base - Release
+    if: ${{ success() }}
+    needs: [ detekt ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -23,10 +41,12 @@ jobs:
           java-version: 17
 
       - name: Build storage base - Release
-        run: ./gradlew :compose-settings-storage-base:build
+        run: ./gradlew :storage-base:build
 
-  build-ui:
-    name: Build ui - Release
+  build-ui-base:
+    name: Build ui base - Release
+    if: ${{ success() }}
+    needs: [ detekt ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -38,8 +58,44 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build ui - Release
-        run: ./gradlew :compose-settings-ui:build
+      - name: Build ui base - Release
+        run: ./gradlew :ui-base:build
+
+  build-ui-tiles:
+    name: Build ui tiles - Release
+    if: ${{ success() }}
+    needs: [ build-ui-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui tiles - Release
+        run: ./gradlew :ui-tiles:build
+
+  build-ui-tiles-extended:
+    name: Build ui tiles extended - Release
+    if: ${{ success() }}
+    needs: [ build-ui-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build ui tiles extended - Release
+        run: ./gradlew :ui-tiles-extended:build
 
   build-storage-memory:
     name: Build storage memory - Release
@@ -57,7 +113,7 @@ jobs:
           java-version: 17
 
       - name: Build storage memory - Release
-        run: ./gradlew :compose-settings-storage-memory:build
+        run: ./gradlew :storage-memory:build
 
   build-storage-disk:
     name: Build storage disk - Release
@@ -75,12 +131,12 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :compose-settings-storage-disk:build
+        run: ./gradlew :storage-disk:build
 
   build-sample-android:
-    name: Build sample Android - Main
+    name: Build sample Android - Release
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -98,7 +154,7 @@ jobs:
   build-sample-desktop:
     name: Build sample Desktop - Release
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -116,7 +172,7 @@ jobs:
   build-sample-iOS:
     name: Build sample iOS - Release
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -134,7 +190,7 @@ jobs:
   build-sample-wasm:
     name: Build sample Wasm - Release
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui ]
+    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -186,7 +242,7 @@ jobs:
         run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   publish-dry:
-    name: Publish - Release
+    name: Run publish - Release
     if: ${{ success() }}
     needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
     runs-on: macos-latest

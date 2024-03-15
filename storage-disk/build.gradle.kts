@@ -46,7 +46,7 @@ kotlin {
     }
 
     commonMain.dependencies {
-      api(projects.composeSettingsStorageBase)
+      api(projects.storageBase)
 
       api(libs.multiplatform.settings)
       api(libs.multiplatform.settings.noArg)
