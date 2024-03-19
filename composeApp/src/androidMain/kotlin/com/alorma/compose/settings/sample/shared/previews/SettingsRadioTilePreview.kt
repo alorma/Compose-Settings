@@ -9,14 +9,14 @@ import theme.ComposeSettingsTheme
 
 @SuperPreview
 @Composable
-private fun SettingsCheckboxTilePreview(
+private fun SettingsRadioButtonTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {
     Surface {
       SettingsRadioButton(
         state = state,
-        title = { Text(text = "Checkbox tile") },
+        title = { Text(text = "RadioButton tile") },
         onClick = {},
       )
     }

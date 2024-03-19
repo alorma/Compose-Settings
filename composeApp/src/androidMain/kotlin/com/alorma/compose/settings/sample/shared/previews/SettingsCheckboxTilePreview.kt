@@ -1,3 +1,5 @@
+@file:JvmName("SettingsTriStateCheckboxTilePreviewKt")
+
 package com.alorma.compose.settings.sample.shared.previews
 
 import androidx.compose.material3.Surface
@@ -9,7 +11,7 @@ import theme.ComposeSettingsTheme
 
 @SuperPreview
 @Composable
-private fun SettingsCheckboxTilePreview(
+private fun SettingsTriStateCheckboxTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {
