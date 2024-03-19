@@ -1,6 +1,7 @@
 package com.alorma.compose.settings.sample.shared.previews
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -83,7 +84,7 @@ private fun SettingsSwitchTileWithIconAndActionPreview() {
         action = {
           IconButton(onClick = { /*TODO*/ }) {
             Icon(
-              imageVector = Icons.Default.Settings,
+              imageVector = Icons.Default.Check,
               contentDescription = null,
             )
           }
