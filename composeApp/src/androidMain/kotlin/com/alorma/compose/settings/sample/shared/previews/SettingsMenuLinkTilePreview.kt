@@ -7,15 +7,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import theme.ComposeSettingsTheme
 
 @SuperPreview
 @Composable
-private fun SettingsSwitchTilePreview(
-  @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
-) {
+private fun SettingsSwitchTilePreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
@@ -29,9 +26,7 @@ private fun SettingsSwitchTilePreview(
 
 @SuperPreview
 @Composable
-private fun SettingsSwitchTileWithActionPreview(
-  @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
-) {
+private fun SettingsSwitchTileWithActionPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
