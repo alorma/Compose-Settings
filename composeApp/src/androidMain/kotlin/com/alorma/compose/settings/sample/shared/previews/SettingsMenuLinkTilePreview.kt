@@ -45,3 +45,23 @@ private fun SettingsSwitchTileWithActionPreview() {
     }
   }
 }
+
+@SuperPreview
+@Composable
+private fun SettingsSwitchTileWithIconPreview() {
+  ComposeSettingsTheme {
+    Surface {
+      SettingsMenuLink(
+        title = { Text(text = "Menu link tile") },
+        subtitle = { Text(text = "Some extra text") },
+        icon = {
+          Icon(
+            imageVector = Icons.Default.Settings,
+            contentDescription = null,
+          )
+        },
+        onClick = {},
+      )
+    }
+  }
+}
