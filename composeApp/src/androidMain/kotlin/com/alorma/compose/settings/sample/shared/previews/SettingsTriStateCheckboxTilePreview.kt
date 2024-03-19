@@ -7,9 +7,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import theme.ComposeSettingsTheme
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsTriStateCheckboxTilePreview(
+internal fun SettingsTriStateCheckboxTilePreview(
   @PreviewParameter(provider = NullableBooleanStateProvider::class) state: Boolean?,
 ) {
   ComposeSettingsTheme {

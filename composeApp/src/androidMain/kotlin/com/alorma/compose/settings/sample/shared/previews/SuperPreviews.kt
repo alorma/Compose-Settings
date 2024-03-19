@@ -64,4 +64,4 @@ import androidx.compose.ui.tooling.preview.Wallpapers
   wallpaper = Wallpapers.YELLOW_DOMINATED_EXAMPLE,
   uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
 )
-annotation class SuperPreview
+annotation class SuperPreviews

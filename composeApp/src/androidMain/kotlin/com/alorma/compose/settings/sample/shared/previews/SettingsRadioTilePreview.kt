@@ -7,9 +7,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.alorma.compose.settings.ui.SettingsRadioButton
 import theme.ComposeSettingsTheme
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsRadioButtonTilePreview(
+internal fun SettingsRadioButtonTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {

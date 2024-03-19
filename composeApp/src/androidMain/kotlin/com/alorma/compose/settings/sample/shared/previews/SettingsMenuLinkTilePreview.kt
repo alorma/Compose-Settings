@@ -11,9 +11,9 @@ import androidx.compose.runtime.Composable
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import theme.ComposeSettingsTheme
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsSwitchTilePreview() {
+internal fun SettingsSwitchTilePreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
@@ -25,9 +25,9 @@ private fun SettingsSwitchTilePreview() {
   }
 }
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsSwitchTileWithActionPreview() {
+internal fun SettingsSwitchTileWithActionPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
@@ -47,9 +47,9 @@ private fun SettingsSwitchTileWithActionPreview() {
   }
 }
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsSwitchTileWithIconPreview() {
+internal fun SettingsSwitchTileWithIconPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
@@ -67,9 +67,9 @@ private fun SettingsSwitchTileWithIconPreview() {
   }
 }
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsSwitchTileWithIconAndActionPreview() {
+internal fun SettingsSwitchTileWithIconAndActionPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(

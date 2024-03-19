@@ -7,9 +7,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import theme.ComposeSettingsTheme
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsCheckboxTilePreview(
+internal fun SettingsCheckboxTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {

@@ -7,9 +7,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.alorma.compose.settings.ui.SettingsSwitch
 import theme.ComposeSettingsTheme
 
-@SuperPreview
+@SuperPreviews
 @Composable
-private fun SettingsSwitchTilePreview(
+internal fun SettingsSwitchTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {
