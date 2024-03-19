@@ -19,6 +19,7 @@ private fun SettingsCheckboxTilePreview(
       SettingsCheckbox(
         state = state,
         title = { Text(text = "Checkbox tile") },
+        subtitle = { Text(text = "Some extra text") },
         onCheckedChange = {},
       )
     }

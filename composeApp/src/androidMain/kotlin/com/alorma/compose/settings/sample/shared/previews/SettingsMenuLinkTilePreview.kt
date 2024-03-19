@@ -4,19 +4,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.alorma.compose.settings.ui.SettingsRadioButton
+import com.alorma.compose.settings.ui.SettingsMenuLink
 import theme.ComposeSettingsTheme
 
 @SuperPreview
 @Composable
-private fun SettingsRadioButtonTilePreview(
+private fun SettingsSwitchTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {
     Surface {
-      SettingsRadioButton(
-        state = state,
-        title = { Text(text = "RadioButton tile") },
+      SettingsMenuLink(
+        title = { Text(text = "Menu link tile") },
         subtitle = { Text(text = "Some extra text") },
         onClick = {},
       )

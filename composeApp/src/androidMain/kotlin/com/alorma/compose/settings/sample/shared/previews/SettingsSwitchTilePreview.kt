@@ -17,6 +17,7 @@ private fun SettingsSwitchTilePreview(
       SettingsSwitch(
         state = state,
         title = { Text(text = "Switch tile") },
+        subtitle = { Text(text = "Some extra text") },
         onCheckedChange = {},
       )
     }

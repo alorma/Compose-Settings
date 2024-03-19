@@ -17,6 +17,7 @@ private fun SettingsTriStateCheckboxTilePreview(
       SettingsTriStateCheckbox(
         state = state,
         title = { Text(text = "TriStateCheckbox tile") },
+        subtitle = { Text(text = "Some extra text") },
         onCheckedChange = {},
       )
     }
