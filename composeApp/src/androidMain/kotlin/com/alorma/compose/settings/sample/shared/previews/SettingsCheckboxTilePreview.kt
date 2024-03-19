@@ -1,5 +1,3 @@
-@file:JvmName("SettingsTriStateCheckboxTilePreviewKt")
-
 package com.alorma.compose.settings.sample.shared.previews
 
 import androidx.compose.material3.Surface
