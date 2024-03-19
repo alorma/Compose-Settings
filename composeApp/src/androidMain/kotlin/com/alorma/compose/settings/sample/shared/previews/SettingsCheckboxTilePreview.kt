@@ -11,7 +11,7 @@ import theme.ComposeSettingsTheme
 
 @SuperPreview
 @Composable
-private fun SettingsTriStateCheckboxTilePreview(
+private fun SettingsCheckboxTilePreview(
   @PreviewParameter(provider = BooleanStateProvider::class) state: Boolean,
 ) {
   ComposeSettingsTheme {
