@@ -40,7 +40,7 @@ fun App(
 
   val darkMode = remember { mutableStateOf(isSystemInDark) }
 
-  ComposeSettingsTheme(isSystemDark = darkMode.value) {
+  ComposeSettingsTheme() {
     Scaffold(
       modifier = Modifier.fillMaxSize().then(modifier),
       topBar = {

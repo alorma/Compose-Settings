@@ -56,6 +56,8 @@ kotlin {
     androidMain.dependencies {
       implementation(compose.ui)
       implementation(libs.androidx.activity.compose)
+
+      implementation(compose.uiTooling)
     }
 
     commonMain.dependencies {
