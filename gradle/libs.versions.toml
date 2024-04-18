@@ -1,7 +1,7 @@
 [versions]
 core-ktx = "1.12.0"
 androidxannotations = "1.7.1"
-androidxactivity = "1.8.2"
+androidxactivity = "1.9.0"
 androidxpreference = "1.2.1"
 
 compose = "2024.02.02"
