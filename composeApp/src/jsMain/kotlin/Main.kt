@@ -1,12 +1,15 @@
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
+import org.jetbrains.skiko.wasm.onWasmReady
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-  CanvasBasedWindow(
-    title = "Compose Settings - sample",
-    canvasElementId = "ComposeTarget",
-  ) {
-    App()
+  onWasmReady {
+    CanvasBasedWindow(
+      title = "Compose Settings - sample",
+      canvasElementId = "ComposeTarget",
+    ) {
+      App()
+    }
   }
 }

@@ -23,21 +23,7 @@ kotlin {
   jvm("desktop")
 
   js(IR) {
-    browser {
-      commonWebpackConfig {
-        outputFileName = "sample.js"
-      }
-    }
-    binaries.executable()
-  }
-
-  @OptIn(ExperimentalWasmDsl::class)
-  wasmJs {
-    browser {
-      commonWebpackConfig {
-        outputFileName = "sample.js"
-      }
-    }
+    browser()
     binaries.executable()
   }
 
@@ -80,7 +66,6 @@ kotlin {
     }
 
     val jsMain by getting
-    val wasmJsMain by getting
   }
 }
 
