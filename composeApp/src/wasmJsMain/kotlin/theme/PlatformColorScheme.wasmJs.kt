@@ -5,9 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 actual fun createColorScheme(systemInDarkTheme: Boolean): ColorScheme {
-  return if (systemInDarkTheme) {
-    DarkColorScheme
-  } else {
-    LightColorScheme
-  }
+  return LightColorScheme
 }

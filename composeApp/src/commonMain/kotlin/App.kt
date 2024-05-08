@@ -10,7 +10,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -19,8 +18,6 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,21 +31,13 @@ import theme.ComposeSettingsTheme
 @Composable
 fun App(
   modifier: Modifier = Modifier,
-  isSystemInDark: Boolean = false,
 ) {
   val windowSizeClass = calculateWindowSizeClass()
 
-  val darkMode = remember { mutableStateOf(isSystemInDark) }
-
-  ComposeSettingsTheme() {
+  ComposeSettingsTheme {
     Scaffold(
       modifier = Modifier.fillMaxSize().then(modifier),
-      topBar = {
-        SampleTopBar(
-          darkMode = darkMode.value,
-          onDarkModeChange = { newState -> darkMode.value = newState },
-        )
-      },
+      topBar = { SampleTopBar() },
     ) {
       when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> {
@@ -95,12 +84,9 @@ fun App(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SampleTopBar(
-  darkMode: Boolean,
-  onDarkModeChange: (Boolean) -> Unit,
 ) {
   TopAppBar(
     title = { Text(text = "Compose settings - Sample") },
-    actions = { Switch(checked = darkMode, onCheckedChange = { newState -> onDarkModeChange(newState) }) },
     colors = TopAppBarDefaults.topAppBarColors(
       containerColor = MaterialTheme.colorScheme.secondaryContainer,
     ),

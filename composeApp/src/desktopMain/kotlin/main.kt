@@ -7,6 +7,6 @@ fun main() = application {
     onCloseRequest = ::exitApplication,
     title = "Compose Settings - sample",
   ) {
-    App(isSystemInDark = isSystemInDarkTheme())
+    App()
   }
 }
