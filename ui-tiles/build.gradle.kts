@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidLibrary)
   alias(libs.plugins.jetbrainsCompose)
+  alias(libs.plugins.composeCompiler)
   alias(libs.plugins.detekt)
 }
 
@@ -66,12 +67,6 @@ android {
   defaultConfig {
     minSdk = libs.versions.android.minSdk.get().toInt()
   }
-  buildFeatures {
-    compose = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-  }
   packaging {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -103,6 +98,10 @@ compose.desktop {
       packageVersion = "1.0.0"
     }
   }
+}
+
+compose {
+  kotlinCompilerPlugin = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:${libs.versions.kotlin.get()}"
 }
 
 dependencies {
