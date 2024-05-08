@@ -93,6 +93,10 @@ compose.desktop {
   }
 }
 
+compose {
+  kotlinCompilerPlugin = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable:${libs.versions.kotlin.get()}"
+}
+
 dependencies {
   detektPlugins(libs.compose.detekt.rules)
 }
