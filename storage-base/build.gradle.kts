@@ -5,6 +5,7 @@ plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidLibrary)
   alias(libs.plugins.jetbrainsCompose)
+  alias(libs.plugins.composeCompiler)
   alias(libs.plugins.detekt)
 }
 
@@ -57,12 +58,6 @@ android {
 
   defaultConfig {
     minSdk = libs.versions.android.minSdk.get().toInt()
-  }
-  buildFeatures {
-    compose = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
   packaging {
     resources {

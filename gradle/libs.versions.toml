@@ -6,7 +6,6 @@ androidxpreference = "1.2.1"
 
 compose = "2024.02.02"
 composeMaterial3 = "1.2.0-rc01"
-compose-compiler = "1.5.8"
 
 gradleNexusStagingPlugin = "0.30.0"
 publishPlugin = "1.3.0"
@@ -14,7 +13,8 @@ mavenPlugin = "0.28.0"
 
 agp = "8.4.0"
 compose-plugin = "1.6.2"
-kotlin = "1.9.22"
+
+kotlin = "2.0.0-RC2"
 
 android-minSdk = "21"
 android-minSdkSample = "26"
@@ -53,6 +53,8 @@ windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-cla
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
