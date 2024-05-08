@@ -188,8 +188,8 @@ jobs:
       - name: Build sample iOS - Main
         run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
 
-  build-sample-wasm:
-    name: Build sample Wasm - Main
+  build-sample-js:
+    name: Build sample JS - Main
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
@@ -203,7 +203,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Wasm - Main
+      - name: Build sample JS - Main
         run: ./gradlew jsBrowserDistribution
 
       - name: Upload your page as github pages artifact
@@ -214,7 +214,7 @@ jobs:
   check-sign:
     name: Check signature - Main
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -232,7 +232,7 @@ jobs:
   fake-publish:
     name: Fake publish - Main
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -250,7 +250,7 @@ jobs:
   publish-dry:
     name: Dry run publish - Main
     if: ${{ success() }}
-    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -273,7 +273,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ build-sample-js ]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

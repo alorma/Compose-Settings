@@ -187,8 +187,8 @@ jobs:
       - name: Build sample iOS - Release
         run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
 
-  build-sample-wasm:
-    name: Build sample Wasm - Release
+  build-sample-js:
+    name: Build sample JS - Release
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
     runs-on: macos-latest
@@ -202,13 +202,13 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Wasm - Release
-        run: ./gradlew :composeApp:compileKotlinWasmJs
+      - name: Build sample JS - Release
+        run: ./gradlew jsBrowserDistribution
 
   check-sign:
     name: Check signature - Release
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -226,7 +226,7 @@ jobs:
   fake-publish:
     name: Fake publish - Release
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -244,7 +244,7 @@ jobs:
   publish:
     name: Run publish - Release
     if: ${{ success() }}
-    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-wasm ]
+    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
     runs-on: macos-latest
     steps:
       - name: Check out code
