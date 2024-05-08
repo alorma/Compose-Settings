@@ -267,6 +267,7 @@ jobs:
 
   # Deployment job
   deploy:
+    name: Deploy to Github pages
     if: ${{ success() }}
     environment:
       name: github-pages
