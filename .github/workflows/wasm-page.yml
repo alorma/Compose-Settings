@@ -35,6 +35,11 @@ jobs:
       - name: Build sample Wasm - Main
         run: ./gradlew wasmJsBrowserDistribution
 
+      - name: Upload your page as github pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: composeApp/build/dist/wasmJs/productionExecutable/
+
   # Deployment job
   deploy:
     environment:
