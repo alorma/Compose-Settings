@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -12,18 +13,15 @@ plugins {
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 kotlin {
+
   applyDefaultHierarchyTemplate()
 
   withSourcesJar()
 
   androidTarget {
     publishLibraryVariants("release")
-    compilations.all {
-      kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-      }
-    }
   }
+
 
   jvm("desktop")
 
