@@ -30,8 +30,8 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: storage-base, module: storage-base, task: build, continueOnError: false },
-          { target: ui-base, module: ui-base, tasks: build, continueOnError: false },
+          { target: storage, module: storage-base, task: build, continueOnError: false },
+          { target: ui, module: ui-base, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
@@ -49,14 +49,14 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
   build-lib-storage:
     strategy:
       matrix:
         config: [
-          { target: storage-memory, module: storage-memory, task: build, continueOnError: false },
-          { target: storage-disk, module: storage-disk, task: build, continueOnError: false },
+          { target: memory, module: storage-memory, task: build, continueOnError: false },
+          { target: disk, module: storage-disk, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
@@ -74,14 +74,14 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
   build-lib-ui:
     strategy:
       matrix:
         config: [
-          { target: ui-tiles, module: ui-tiles, tasks: build, continueOnError: false },
-          { target: ui-tiles expanded, module: ui-tiles-extended, tasks: build, continueOnError: false },
+          { target: tiles, module: ui-tiles, task: build, continueOnError: false },
+          { target: tiles expanded, module: ui-tiles-extended, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
@@ -99,7 +99,7 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
   build-sample:
     strategy:
