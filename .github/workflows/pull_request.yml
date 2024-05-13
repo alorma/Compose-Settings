@@ -44,80 +44,17 @@ jobs:
       - name: Build storage base - PR
         run: ./gradlew :storage-base:build
 
-  build-ui-base:
-    name: Build ui base - PR
-    if: ${{ success() }}
-    needs: [ detekt ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build ui base - PR
-        run: ./gradlew :ui-base:build
-
-  build-ui-tiles:
-    name: Build ui tiles - PR
-    if: ${{ success() }}
-    needs: [ build-ui-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build ui tiles - PR
-        run: ./gradlew :ui-tiles:build
-
-  build-ui-tiles-extended:
-    name: Build ui tiles extended - PR
-    if: ${{ success() }}
-    needs: [ build-ui-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build ui tiles extended - PR
-        run: ./gradlew :ui-tiles-extended:build
-
-  build-storage-memory:
-    name: Build storage memory - PR
-    if: ${{ success() }}
-    needs: [ build-storage-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build storage memory - PR
-        run: ./gradlew :storage-memory:build
-
-  build-storage-disk:
-    name: Build storage disk - PR
+  build-lib:
+    strategy:
+      matrix:
+        config: [
+          { target: ui base, tasks: :ui-base:build, continueOnError: false },
+          { target: ui tiles, tasks: :ui-tiles:build, continueOnError: false },
+          { target: ui tiles expanded, tasks: :ui-tiles-extended:build, continueOnError: false },
+          { target: storage memory, tasks: :storage-memory:build, continueOnError: false },
+          { target: storage disk, tasks: :storage-disk:build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
     needs: [ build-storage-base ]
     runs-on: macos-latest
@@ -132,9 +69,10 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :storage-disk:build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew ${{ matrix.config.tasks }}
 
-  build:
+  build-sample:
     strategy:
       matrix:
         config: [
@@ -144,7 +82,7 @@ jobs:
           { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
         ]
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
+    needs: [ build-lib ]
     runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code
@@ -163,7 +101,7 @@ jobs:
   check-sign:
     name: Check signature - PR
     if: ${{ success() }}
-    needs: [ build ]
+    needs: [ build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -181,7 +119,7 @@ jobs:
   fake-publish:
     name: Fake publish - PR
     if: ${{ success() }}
-    needs: [ build ]
+    needs: [ build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -199,7 +137,7 @@ jobs:
   publish-dry:
     name: Dry run publish - PR
     if: ${{ success() }}
-    needs: [ check-sign, build ]
+    needs: [ check-sign, build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
