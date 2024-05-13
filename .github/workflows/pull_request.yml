@@ -134,11 +134,18 @@ jobs:
       - name: Build
         run: ./gradlew :storage-disk:build
 
-  build-sample-android:
-    name: Build sample Android- PR
+  build:
+    strategy:
+      matrix:
+        config: [
+          { target: android, os: ubuntu-latest, tasks: :composeApp:assembleDebug, continueOnError: false },
+          { target: iOS, os: macos-latest, tasks: :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64, continueOnError: false },
+          { target: js, os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
+          { target: desktop, os: ubuntu-latest, tasks: :composeApp:compileKotlinDesktop, continueOnError: false },
+        ]
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
-    runs-on: macos-latest
+    runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -149,67 +156,14 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Android - PR
-        run: ./gradlew :composeApp:assembleDebug :composeApp:assembleRelease
-
-  build-sample-desktop:
-    name: Build sample Desktop - PR
-    if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build sample Desktop - PR
-        run: ./gradlew :composeApp:compileKotlinDesktop
-
-  build-sample-iOS:
-    name: Build sample iOS - PR
-    if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build sample iOS - PR
-        run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
-
-  build-sample-js:
-    name: Build sample JS - PR
-    if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build sample JS - PR
-        run: ./gradlew jsBrowserDistribution
+      - name: Build sample ${{ matrix.config.target }} - PR
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew ${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - PR
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
+    needs: [ build ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -227,7 +181,7 @@ jobs:
   fake-publish:
     name: Fake publish - PR
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
+    needs: [ build ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -245,7 +199,7 @@ jobs:
   publish-dry:
     name: Dry run publish - PR
     if: ${{ success() }}
-    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
+    needs: [ check-sign, build ]
     runs-on: macos-latest
     steps:
       - name: Check out code
