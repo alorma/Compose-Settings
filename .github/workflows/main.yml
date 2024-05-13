@@ -197,6 +197,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build-sample ]
     steps:
+      - name: Build sample JS - Main
+        run: ./gradlew jsBrowserDistribution
+
+      - name: Upload your page as github pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: composeApp/build/dist/js/productionExecutable/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
