@@ -138,10 +138,10 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: android, os: ubuntu-latest, tasks: :composeApp:assembleDebug, continueOnError: false },
-          { target: iOS, os: macos-latest, tasks: :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64, continueOnError: false },
+          { target: android, os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
+          { target: iOS, os: macos-latest, tasks: compileKotlinIosArm64 compileKotlinIosX64 compileKotlinIosSimulatorArm64, continueOnError: false },
           { target: js, os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
-          { target: desktop, os: ubuntu-latest, tasks: :composeApp:compileKotlinDesktop, continueOnError: false },
+          { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
         ]
     if: ${{ success() }}
     needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
@@ -158,7 +158,7 @@ jobs:
 
       - name: Build sample ${{ matrix.config.target }} - PR
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew ${{ matrix.config.tasks }}
+        run: ./gradlew :composeApp:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - PR
