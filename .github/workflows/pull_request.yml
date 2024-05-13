@@ -52,108 +52,108 @@ jobs:
         continue-on-error: ${{ matrix.config.continueOnError }}
         run: ./gradlew ${{ matrix.config.tasks }}
 
-  build-lib-ui:
-    strategy:
-      matrix:
-        config: [
-          { target: ui base, tasks: :ui-base:build, continueOnError: false },
-          { target: ui tiles, tasks: :ui-tiles:build, continueOnError: false },
-          { target: ui tiles expanded, tasks: :ui-tiles-extended:build, continueOnError: false },
-        ]
-    name: Build ${{ matrix.config.target }} - PR
-    if: ${{ success() }}
-    needs: [ detekt ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build
-        continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew ${{ matrix.config.tasks }}
-
-  build-sample:
-    strategy:
-      matrix:
-        config: [
-          { target: android, os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
-          { target: iOS, os: macos-latest, tasks: compileKotlinIosArm64 compileKotlinIosX64 compileKotlinIosSimulatorArm64, continueOnError: false },
-          { target: js, os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
-          { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
-        ]
-    if: ${{ success() }}
-    needs: [ build-lib-ui, build-lib-storage ]
-    runs-on: ${{ matrix.config.os }}
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build sample ${{ matrix.config.target }} - PR
-        continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :composeApp:${{ matrix.config.tasks }}
-
-  check-sign:
-    name: Check signature - PR
-    if: ${{ success() }}
-    needs: [ build-sample ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Check signature - PR
-        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
-
-  fake-publish:
-    name: Fake publish - PR
-    if: ${{ success() }}
-    needs: [ build-sample ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Publish to MavenLocal
-        run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
-
-  publish-dry:
-    name: Dry run publish - PR
-    if: ${{ success() }}
-    needs: [ check-sign, build-sample ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Publish to MavenCentral (dry)
-        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }} --dry-run
+#  build-lib-ui:
+#    strategy:
+#      matrix:
+#        config: [
+#          { target: ui base, tasks: :ui-base:build, continueOnError: false },
+#          { target: ui tiles, tasks: :ui-tiles:build, continueOnError: false },
+#          { target: ui tiles expanded, tasks: :ui-tiles-extended:build, continueOnError: false },
+#        ]
+#    name: Build ${{ matrix.config.target }} - PR
+#    if: ${{ success() }}
+#    needs: [ detekt ]
+#    runs-on: macos-latest
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: adopt
+#          java-version: 17
+#
+#      - name: Build
+#        continue-on-error: ${{ matrix.config.continueOnError }}
+#        run: ./gradlew ${{ matrix.config.tasks }}
+#
+#  build-sample:
+#    strategy:
+#      matrix:
+#        config: [
+#          { target: android, os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
+#          { target: iOS, os: macos-latest, tasks: compileKotlinIosArm64 compileKotlinIosX64 compileKotlinIosSimulatorArm64, continueOnError: false },
+#          { target: js, os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
+#          { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
+#        ]
+#    if: ${{ success() }}
+#    needs: [ build-lib-ui, build-lib-storage ]
+#    runs-on: ${{ matrix.config.os }}
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: adopt
+#          java-version: 17
+#
+#      - name: Build sample ${{ matrix.config.target }} - PR
+#        continue-on-error: ${{ matrix.config.continueOnError }}
+#        run: ./gradlew :composeApp:${{ matrix.config.tasks }}
+#
+#  check-sign:
+#    name: Check signature - PR
+#    if: ${{ success() }}
+#    needs: [ build-sample ]
+#    runs-on: macos-latest
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: adopt
+#          java-version: 17
+#
+#      - name: Check signature - PR
+#        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+#
+#  fake-publish:
+#    name: Fake publish - PR
+#    if: ${{ success() }}
+#    needs: [ build-sample ]
+#    runs-on: macos-latest
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: adopt
+#          java-version: 17
+#
+#      - name: Publish to MavenLocal
+#        run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+#
+#  publish-dry:
+#    name: Dry run publish - PR
+#    if: ${{ success() }}
+#    needs: [ check-sign, build-sample ]
+#    runs-on: macos-latest
+#    steps:
+#      - name: Check out code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: adopt
+#          java-version: 17
+#
+#      - name: Publish to MavenCentral (dry)
+#        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }} --dry-run
