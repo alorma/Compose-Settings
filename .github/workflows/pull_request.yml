@@ -30,9 +30,9 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: storage-base, tasks: storage-base:build, continueOnError: false },
-          { target: storage-memory, tasks: storage-memory:build, continueOnError: false },
-          { target: storage-disk, tasks: storage-disk:build, continueOnError: false },
+          { target: storage-base, module: storage-base, task: build, continueOnError: false },
+          { target: storage-memory, module: storage-memory, task: build, continueOnError: false },
+          { target: storage-disk, module: storage-disk, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
@@ -50,7 +50,7 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.tasks }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
 #  build-lib-ui:
 #    strategy:
