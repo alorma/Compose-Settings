@@ -197,6 +197,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build-sample ]
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
       - name: Build sample JS - Main
         run: ./gradlew jsBrowserDistribution
 
