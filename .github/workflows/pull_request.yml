@@ -57,7 +57,7 @@ jobs:
       matrix:
         config: [
           { target: ui-base, module: ui-base, tasks: build, continueOnError: false },
-          { target: ui-tiles, module: ui-tiles, tasks: :build, continueOnError: false },
+          { target: ui-tiles, module: ui-tiles, tasks: build, continueOnError: false },
           { target: ui-tiles expanded, module: ui-tiles-extended, tasks: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
