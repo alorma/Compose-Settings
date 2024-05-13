@@ -26,8 +26,15 @@ jobs:
       - name: Detekt - PR
         run: ./gradlew detektAll
 
-  build-storage-base:
-    name: Build storage base - PR
+  build-lib-storage:
+    strategy:
+      matrix:
+        config: [
+          { target: storage base, tasks: :storage-base:build, continueOnError: false },
+          { target: storage memory, tasks: :storage-memory:build, continueOnError: false },
+          { target: storage disk, tasks: :storage-disk:build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
     needs: [ detekt ]
     runs-on: macos-latest
@@ -41,22 +48,21 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build storage base - PR
-        run: ./gradlew :storage-base:build
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew ${{ matrix.config.tasks }}
 
-  build-lib:
+  build-lib-ui:
     strategy:
       matrix:
         config: [
           { target: ui base, tasks: :ui-base:build, continueOnError: false },
           { target: ui tiles, tasks: :ui-tiles:build, continueOnError: false },
           { target: ui tiles expanded, tasks: :ui-tiles-extended:build, continueOnError: false },
-          { target: storage memory, tasks: :storage-memory:build, continueOnError: false },
-          { target: storage disk, tasks: :storage-disk:build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
-    needs: [ build-storage-base ]
+    needs: [ detekt ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -82,7 +88,7 @@ jobs:
           { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
         ]
     if: ${{ success() }}
-    needs: [ build-lib ]
+    needs: [ build-lib-ui, build-lib-storage ]
     runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code
