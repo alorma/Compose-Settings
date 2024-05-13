@@ -52,32 +52,32 @@ jobs:
         continue-on-error: ${{ matrix.config.continueOnError }}
         run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
-#  build-lib-ui:
-#    strategy:
-#      matrix:
-#        config: [
-#          { target: ui base, tasks: :ui-base:build, continueOnError: false },
-#          { target: ui tiles, tasks: :ui-tiles:build, continueOnError: false },
-#          { target: ui tiles expanded, tasks: :ui-tiles-extended:build, continueOnError: false },
-#        ]
-#    name: Build ${{ matrix.config.target }} - PR
-#    if: ${{ success() }}
-#    needs: [ detekt ]
-#    runs-on: macos-latest
-#    steps:
-#      - name: Check out code
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v4
-#        with:
-#          distribution: adopt
-#          java-version: 17
-#
-#      - name: Build
-#        continue-on-error: ${{ matrix.config.continueOnError }}
-#        run: ./gradlew ${{ matrix.config.tasks }}
-#
+  build-lib-ui:
+    strategy:
+      matrix:
+        config: [
+          { target: ui base, module: ui-base, tasks: build, continueOnError: false },
+          { target: ui tiles, module: ui-tiles, tasks: :build, continueOnError: false },
+          { target: ui tiles expanded, module: ui-tiles-extended, tasks: build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - PR
+    if: ${{ success() }}
+    needs: [ detekt ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
+
 #  build-sample:
 #    strategy:
 #      matrix:
