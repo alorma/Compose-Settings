@@ -26,13 +26,12 @@ jobs:
       - name: Detekt - PR
         run: ./gradlew detektAll
 
-  build-lib-storage:
+  build-lib-base:
     strategy:
       matrix:
         config: [
           { target: storage-base, module: storage-base, task: build, continueOnError: false },
-          { target: storage-memory, module: storage-memory, task: build, continueOnError: false },
-          { target: storage-disk, module: storage-disk, task: build, continueOnError: false },
+          { target: ui-base, module: ui-base, tasks: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
@@ -52,17 +51,41 @@ jobs:
         continue-on-error: ${{ matrix.config.continueOnError }}
         run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
+  build-lib-storage:
+    strategy:
+      matrix:
+        config: [
+          { target: storage-memory, module: storage-memory, task: build, continueOnError: false },
+          { target: storage-disk, module: storage-disk, task: build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - PR
+    if: ${{ success() }}
+    needs: [ detekt, build-lib-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.tasks }}
+
   build-lib-ui:
     strategy:
       matrix:
         config: [
-          { target: ui-base, module: ui-base, tasks: build, continueOnError: false },
           { target: ui-tiles, module: ui-tiles, tasks: build, continueOnError: false },
           { target: ui-tiles expanded, module: ui-tiles-extended, tasks: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
-    needs: [ detekt ]
+    needs: [ detekt, build-lib-base ]
     runs-on: macos-latest
     steps:
       - name: Check out code
