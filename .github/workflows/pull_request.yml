@@ -50,7 +50,7 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew ${{ matrix.config.tasks }}
+        run: ./gradlew :${{ matrix.config.tasks }}
 
 #  build-lib-ui:
 #    strategy:
