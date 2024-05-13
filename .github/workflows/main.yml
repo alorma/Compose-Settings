@@ -32,100 +32,16 @@ jobs:
       - name: Detekt - Main
         run: ./gradlew detektAll
 
-  build-storage-base:
-    name: Build storage base - Main
+  build-lib-base:
+    strategy:
+      matrix:
+        config: [
+          { target: storage, module: storage-base, task: build, continueOnError: false },
+          { target: ui, module: ui-base, task: build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - Main
     if: ${{ success() }}
     needs: [ detekt ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build storage base - Main
-        run: ./gradlew :storage-base:build
-
-  build-ui-base:
-    name: Build ui base - Main
-    if: ${{ success() }}
-    needs: [ detekt ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build ui base - Main
-        run: ./gradlew :ui-base:build
-
-  build-ui-tiles:
-    name: Build ui tiles - Main
-    if: ${{ success() }}
-    needs: [ build-ui-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build ui tiles - Main
-        run: ./gradlew :ui-tiles:build
-
-  build-ui-tiles-extended:
-    name: Build ui tiles extended - Main
-    if: ${{ success() }}
-    needs: [ build-ui-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build ui tiles extended - Main
-        run: ./gradlew :ui-tiles-extended:build
-
-  build-storage-memory:
-    name: Build storage memory - Main
-    if: ${{ success() }}
-    needs: [ build-storage-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build storage memory - Main
-        run: ./gradlew :storage-memory:build
-
-  build-storage-disk:
-    name: Build storage disk - Main
-    if: ${{ success() }}
-    needs: [ build-storage-base ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -138,12 +54,19 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :storage-disk:build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
-  build-sample-android:
-    name: Build sample Android- PR
+  build-lib-storage:
+    strategy:
+      matrix:
+        config: [
+          { target: memory, module: storage-memory, task: build, continueOnError: false },
+          { target: disk, module: storage-disk, task: build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - Main
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
+    needs: [ detekt, build-lib-base ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -155,13 +78,20 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Android - Main
-        run: ./gradlew :composeApp:assembleDebug :composeApp:assembleRelease
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
-  build-sample-desktop:
-    name: Build sample Desktop - Main
+  build-lib-ui:
+    strategy:
+      matrix:
+        config: [
+          { target: tiles, module: ui-tiles, task: build, continueOnError: false },
+          { target: tiles expanded, module: ui-tiles-extended, task: build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - Main
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
+    needs: [ detekt, build-lib-base ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -173,14 +103,22 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample Desktop - Main
-        run: ./gradlew :composeApp:compileKotlinDesktop
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
-  build-sample-iOS:
-    name: Build sample iOS - Main
+  build-sample:
+    strategy:
+      matrix:
+        config: [
+          { target: android, os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
+          { target: iOS, os: macos-latest, tasks: compileKotlinIosArm64 compileKotlinIosX64 compileKotlinIosSimulatorArm64, continueOnError: false },
+          { target: js, os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
+          { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
+        ]
     if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
-    runs-on: macos-latest
+    needs: [ build-lib-ui, build-lib-storage ]
+    runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -191,36 +129,14 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Build sample iOS - Main
-        run: ./gradlew :composeApp:compileKotlinIosArm64 :composeApp:compileKotlinIosX64 :composeApp:compileKotlinIosSimulatorArm64
-
-  build-sample-js:
-    name: Build sample JS - Main
-    if: ${{ success() }}
-    needs: [ build-storage-memory, build-storage-disk, build-ui-tiles, build-ui-tiles-extended ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build sample JS - Main
-        run: ./gradlew jsBrowserDistribution
-
-      - name: Upload your page as github pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: composeApp/build/dist/js/productionExecutable/
+      - name: Build sample ${{ matrix.config.target }} - Main
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :composeApp:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - Main
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
+    needs: [ build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -238,7 +154,7 @@ jobs:
   fake-publish:
     name: Fake publish - Main
     if: ${{ success() }}
-    needs: [ build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
+    needs: [ build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -256,7 +172,7 @@ jobs:
   publish-dry:
     name: Dry run publish - Main
     if: ${{ success() }}
-    needs: [ check-sign, build-sample-android, build-sample-iOS, build-sample-desktop, build-sample-js ]
+    needs: [ check-sign, build-sample ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -279,7 +195,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [ build-sample-js ]
+    needs: [ build-sample ]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
