@@ -1,9 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script>
+        window.addEventListener("load", function(){ onLoad() } );
+        // Sets the viewport to the correct size for mobile devices
+        function onLoad() {
+           window.setTimeout(function() {
+             // Replace the default viewport for mobile with one that uses the devicePixelRatio
+             let meta = document.querySelector('meta[name="viewport"]')
+             meta.content = calcMetaViewportContent(innerWidth);
+             document.head.appendChild(meta);
+           }, 5);
+        }
+        
+        screen.orientation.addEventListener("change", (event) => {
+          const type = event.target.type;
+          const angle = event.target.angle;
+          var calcWidth;
 
+          // Reset to default viewport for mobile
+          let meta = document.querySelector('meta[name="viewport"]')
+          meta.content = "width=device-width, initial-scale=1";
+
+          // Adjust the viewport for mobile after orientation change.
+          setTimeout(() => {
+             meta.content = calcMetaViewportContent();
+          }, 50);
+        });
+        
+        function calcMetaViewportContent(actualWidth) {
+           var calcWidth;
+
+           if(actualWidth != undefined) {
+              calcWidth = actualWidth;
+           } else {
+              if (screen.orientation.type.includes("landscape")) {
+                 calcWidth = screen.height;
+              } else {
+                 calcWidth = screen.width;
+              }
+           }
+
+           return "width=" + ((calcWidth * window.devicePixelRatio)/2) + ", initial-scale=1.0";
+        }
+    </script>
     <script src="skiko.js"></script>
     <title>Compose Settings</title>
 
@@ -15,3 +55,6 @@
 <script src="composeApp.js"></script>
 </body>
 </html>
+
+
+
