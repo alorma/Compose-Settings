@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <script>
-        window.addEventListener("load", function(){ onLoad() } );
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compose Settings</title>
+
+    <script type="application/javascript" src="skiko.js"></script>
+    <script type="application/javascript" src="composeApp.js"></script>
+
+    <script>
+        let isLoaded = false;
+
         // Sets the viewport to the correct size for mobile devices
+        window.addEventListener("load", function(){ onLoad() } );
         function onLoad() {
            window.setTimeout(function() {
              // Replace the default viewport for mobile with one that uses the devicePixelRatio
@@ -12,7 +21,7 @@
              document.head.appendChild(meta);
            }, 5);
         }
-        
+
         screen.orientation.addEventListener("change", (event) => {
           const type = event.target.type;
           const angle = event.target.angle;
@@ -27,7 +36,7 @@
              meta.content = calcMetaViewportContent();
           }, 50);
         });
-        
+
         function calcMetaViewportContent(actualWidth) {
            var calcWidth;
 
@@ -43,18 +52,21 @@
 
            return "width=" + ((calcWidth * window.devicePixelRatio)/2) + ", initial-scale=1.0";
         }
+
+        function onLoadFinished() {
+            isLoaded = true;
+            document.getElementById("loading-indicator").style.display = "none";
+        }
     </script>
-    <script src="skiko.js"></script>
-    <title>Compose Settings</title>
 
 </head>
 <body>
+<div id="loading-indicator">
+    <div class="spinner"></div>
+</div>
 <div>
     <canvas id="ComposeTarget"></canvas>
 </div>
 <script src="composeApp.js"></script>
 </body>
 </html>
-
-
-
