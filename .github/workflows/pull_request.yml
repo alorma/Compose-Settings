@@ -127,6 +127,24 @@ jobs:
         continue-on-error: ${{ matrix.config.continueOnError }}
         run: ./gradlew :composeApp:${{ matrix.config.tasks }}
 
+  verify-screenshots:
+    name: Validate screenshots - PR
+    if: ${{ success() }}
+    needs: [ build-sample ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Validate screenshots - PR
+        run: ./gradlew validateScreenshotTest
+
   check-sign:
     name: Check signature - PR
     if: ${{ success() }}
