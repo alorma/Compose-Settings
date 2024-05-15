@@ -1,6 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +6,7 @@ plugins {
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.detekt)
+  alias(libs.plugins.screenshot)
 }
 
 kotlin {
@@ -96,8 +95,12 @@ android {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
   }
+  composeOptions {
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
+  }
   dependencies {
     debugImplementation(compose.uiTooling)
+    screenshotTestImplementation(compose.uiTooling)
   }
 }
 
