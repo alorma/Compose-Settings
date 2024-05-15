@@ -86,6 +86,9 @@ android {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
   }
+  buildFeatures {
+    compose = true
+  }
   buildTypes {
     getByName("release") {
       isMinifyEnabled = false
@@ -100,6 +103,13 @@ android {
   }
   dependencies {
     debugImplementation(compose.uiTooling)
+
+    implementation(compose.ui)
+    implementation(compose.foundation)
+    implementation(compose.material3)
+    implementation(projects.uiTiles)
+    implementation(projects.uiTilesExtended)
+
     screenshotTestImplementation(compose.uiTooling)
   }
 }
