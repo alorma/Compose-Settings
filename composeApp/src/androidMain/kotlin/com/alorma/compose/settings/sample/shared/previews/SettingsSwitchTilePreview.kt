@@ -16,7 +16,7 @@ internal fun SettingsSwitchTilePreview(
     Surface {
       SettingsSwitch(
         state = state,
-        title = { Text(text = "Switch tile") },
+        title = { Text(text = "A - Switch tile") },
         subtitle = { Text(text = "Some extra text") },
         onCheckedChange = {},
       )
