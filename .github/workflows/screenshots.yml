@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+          token: ${{ secrets.PAT_GRADLE_WRAPPER }}
 
       - name: Test push
         run: echo "Hello" > hello.txt
