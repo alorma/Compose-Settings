@@ -17,7 +17,7 @@ internal fun SettingsSwitchTilePreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
-        title = { Text(text = "Menu link tile") },
+        title = { Text(text = "A - Menu link tile") },
         subtitle = { Text(text = "Some extra text") },
         onClick = {},
       )
@@ -31,7 +31,7 @@ internal fun SettingsSwitchTileWithActionPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
-        title = { Text(text = "Menu link tile") },
+        title = { Text(text = "A - Menu link tile") },
         subtitle = { Text(text = "Some extra text") },
         action = {
           IconButton(onClick = { /*TODO*/ }) {
@@ -53,7 +53,7 @@ internal fun SettingsSwitchTileWithIconPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
-        title = { Text(text = "Menu link tile") },
+        title = { Text(text = "A - Menu link tile") },
         subtitle = { Text(text = "Some extra text") },
         icon = {
           Icon(
@@ -73,7 +73,7 @@ internal fun SettingsSwitchTileWithIconAndActionPreview() {
   ComposeSettingsTheme {
     Surface {
       SettingsMenuLink(
-        title = { Text(text = "Menu link tile") },
+        title = { Text(text = "A - Menu link tile") },
         subtitle = { Text(text = "Some extra text") },
         icon = {
           Icon(
