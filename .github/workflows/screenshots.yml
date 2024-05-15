@@ -21,17 +21,26 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Generate screenshots
-        run: ./gradlew updateScreenshotTest
+      - name: Test push
+        run: echo "Hello" > hello.txt
 
       - name: Commit & Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: New @Preview screenshots!
+          commit_message: Test push
           push_options: --force
+
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: adopt
+#          java-version: 17
+#
+#      - name: Generate screenshots
+#        run: ./gradlew updateScreenshotTest
+#
+#      - name: Commit & Push changes
+#        uses: stefanzweifel/git-auto-commit-action@v5
+#        with:
+#          commit_message: New @Preview screenshots!
+#          push_options: --force
