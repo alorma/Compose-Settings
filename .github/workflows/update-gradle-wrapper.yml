@@ -1,0 +1,24 @@
+name: Update Gradle Wrapper
+
+on:
+  schedule:
+    - cron: "0 10 * * WED"
+  workflow_dispatch:
+
+jobs:
+  update-gradle-wrapper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - uses: gradle-update/update-gradle-wrapper-action@v1
+        with:
+          repo-token: ${{ secrets.PAT_GRADLE_WRAPPER }}
+
