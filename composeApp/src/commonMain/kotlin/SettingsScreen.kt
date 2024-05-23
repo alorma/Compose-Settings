@@ -18,12 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.ui.SettingsCheckbox
-import com.alorma.compose.settings.ui.SettingsMenuLink
-import com.alorma.compose.settings.ui.SettingsRadioButton
-import com.alorma.compose.settings.ui.SettingsSlider
-import com.alorma.compose.settings.ui.SettingsSwitch
-import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
+import com.alorma.compose.settings.ui.*
 import internal.MultiChoiceAlertDialog
 import internal.SampleData
 import internal.SampleSection
@@ -56,6 +51,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
       SettingsMenuLinkSectionSample(iconState.value)
       SettingsSliderSectionSample(iconState.value)
       SettingsSelectorsSample(iconState.value)
+      SettingsGroupSectionSample(iconState.value)
     }
   }
 }
@@ -332,9 +328,45 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
         items = items.toImmutableList(),
         selectedItemKeys = multipleSelectionState.value?.split("|").orEmpty().toImmutableList(),
         onItemsSelected = { selectedItemKey ->
-          multipleSelectionState.value = selectedItemKey.joinToString("|")
+          if (selectedItemKey.isNotEmpty()) {
+            multipleSelectionState.value = selectedItemKey.joinToString("|")
+          }
           showMultiChoiceDialog.value = false
         },
+      )
+    }
+  }
+}
+
+@Composable
+private fun SettingsGroupSectionSample(showIcon: Boolean) {
+  SampleSection(title = "SettingsGroup") {
+    val groupEnabled = remember { mutableStateOf(true) }
+    SettingsGroup(
+      title = { Text("Group title") },
+      enabled = groupEnabled.value
+    ) {
+      SettingsSwitch(
+        state = groupEnabled.value,
+        title = { Text(text = "Group Enabled") },
+        subtitle = { Text(text = "This Switch is always enabled") },
+        icon = iconSampleOrNull(showIcon),
+        enabled = true,
+        onCheckedChange = { groupEnabled.value = it },
+      )
+      SettingsMenuLink(
+        title = { Text(text = "Menu") },
+        onClick = { },
+        icon = iconSampleOrNull(showIcon),
+      )
+
+      val state = remember { mutableStateOf(false) }
+      SettingsCheckbox(
+        state = state.value,
+        title = { Text(text = "Checkbox") },
+        subtitle = { Text(text = "Checkbox subtitle") },
+        icon = iconSampleOrNull(showIcon),
+        onCheckedChange = { state.value = it },
       )
     }
   }

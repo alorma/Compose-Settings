@@ -41,7 +41,7 @@ fun App(
     ) {
       when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> {
-          SettingsScreen()
+          SettingsScreen(modifier = Modifier.padding(it))
         }
 
         else -> {
@@ -49,6 +49,7 @@ fun App(
           val scope = rememberCoroutineScope()
 
           DismissibleNavigationDrawer(
+            modifier = Modifier.padding(it),
             drawerState = drawerState,
             drawerContent = {
               DismissibleDrawerSheet { SettingsScreen() }

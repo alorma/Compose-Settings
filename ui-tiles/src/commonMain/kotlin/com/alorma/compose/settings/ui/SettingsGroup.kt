@@ -10,13 +10,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 
 @Composable
 fun SettingsGroup(
   modifier: Modifier = Modifier,
+  enabled: Boolean = true,
   contentPadding: PaddingValues = PaddingValues(0.dp),
   title: @Composable (() -> Unit)? = null,
   content: @Composable ColumnScope.() -> Unit,
@@ -31,7 +34,9 @@ fun SettingsGroup(
       if (title != null) {
         SettingsGroupTitle(title)
       }
-      content()
+      CompositionLocalProvider(LocalSettingsGroupEnabled provides enabled) {
+        content()
+      }
     }
   }
 }
