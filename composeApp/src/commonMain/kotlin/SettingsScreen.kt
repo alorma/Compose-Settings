@@ -18,7 +18,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.ui.*
+import com.alorma.compose.settings.ui.SettingsCheckbox
+import com.alorma.compose.settings.ui.SettingsGroup
+import com.alorma.compose.settings.ui.SettingsMenuLink
+import com.alorma.compose.settings.ui.SettingsRadioButton
+import com.alorma.compose.settings.ui.SettingsSlider
+import com.alorma.compose.settings.ui.SettingsSwitch
+import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import internal.MultiChoiceAlertDialog
 import internal.SampleData
 import internal.SampleSection
