@@ -156,7 +156,7 @@ SettingsSlider(
 
 ##### SettingsGroup
 
-> Updates on `enabled` will be reflected o it's internal components unless you change their `enabled` state manually.
+> Updates on `enabled` will be reflected on it's internal components unless you change their `enabled` state manually.
 
 ```kotlin
 SettingsGroup(
