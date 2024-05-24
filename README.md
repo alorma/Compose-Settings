@@ -20,12 +20,13 @@ developers build complex settings screens without all the boilerplate.
 | [SettingsTriStateCheckbox](#SettingsTriStateCheckbox) | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
 | [SettingsRadioButton](#SettingsRadioButton)           | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
 | [SettingsSwitch](#SettingsSwitch)                     | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
+| [SettingsGroup](#SettingsGroup)                      | <img width="200" alt="group.png" src="docs/art/group.png" />                     |
 
 **Ui tiles expanded**
 
 | Component                         | Screenshot                                                     |
 |-----------------------------------|----------------------------------------------------------------|
-| [SettingsSlider](#SettingsSlider) | <img width="200" alt="switch.png" src="docs/art/slider.png" /> |
+| [SettingsSlider](#SettingsSlider) | <img width="200" alt="slider.png" src="docs/art/slider.png" /> |
 
 ## Install
 
@@ -85,7 +86,7 @@ SettingsCheckbox(
 )
 ```
 
-<img width="300" alt="menu.png" src="docs/art/checkbox.png" />
+<img width="300" alt="checkbox.png" src="docs/art/checkbox.png" />
 
 ##### SettingsTriStateCheckbox:
 
@@ -101,7 +102,7 @@ SettingsTriStateCheckbox(
 )
 ```
 
-<img width="300" alt="menu.png" src="docs/art/triState-checkbox.png" />
+<img width="300" alt="triState-checkbox.png" src="docs/art/triState-checkbox.png" />
 
 ##### SettingsRadioButton:
 
@@ -117,7 +118,7 @@ SettingsRadioButton(
 )
 ```
 
-<img width="300" alt="menu.png" src="docs/art/radiobutton.png" />
+<img width="300" alt="radiobutton.png" src="docs/art/radiobutton.png" />
 
 ##### SettingsSwitch:
 
@@ -133,7 +134,7 @@ SettingsSwitch(
 )
 ```
 
-<img width="300" alt="menu.png" src="docs/art/switch.png" />
+<img width="300" alt="switch.png" src="docs/art/switch.png" />
 
 ##### SettingsSlider:
 
@@ -151,4 +152,22 @@ SettingsSlider(
 )
 ```
 
-<img width="300" alt="menu.png" src="docs/art/slider.png" />
+<img width="300" alt="slider.png" src="docs/art/slider.png" />
+
+##### SettingsGroup
+
+```kotlin
+SettingsGroup(
+  modifier = Modifier,
+  enabled = false / true,
+  title = { Text(text = "SettingsGroup") },
+  contentPadding = PaddingValues(16.dp),
+) {
+    SettingsMenuLink(...)
+    SettingsCheckbox(...)
+    SettingsSwitch(...)
+    ...
+}
+```
+
+<img width="300" alt="group.png" src="docs/art/group.png" />
