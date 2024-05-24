@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -19,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.SettingsCheckbox
-import com.alorma.compose.settings.ui.SettingsGroup
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
 import com.alorma.compose.settings.ui.SettingsSlider
@@ -346,34 +346,74 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
 
 @Composable
 private fun SettingsGroupSectionSample(showIcon: Boolean) {
-  SampleSection(title = "SettingsGroup") {
-    val groupEnabled = remember { mutableStateOf(true) }
-    SettingsGroup(
-      title = { Text("Group title") },
-      enabled = groupEnabled.value
-    ) {
-      SettingsSwitch(
-        state = groupEnabled.value,
-        title = { Text(text = "Group Enabled") },
-        subtitle = { Text(text = "This Switch is always enabled") },
-        icon = iconSampleOrNull(showIcon),
-        enabled = true,
-        onCheckedChange = { groupEnabled.value = it },
-      )
-      SettingsMenuLink(
-        title = { Text(text = "Menu") },
-        onClick = { },
-        icon = iconSampleOrNull(showIcon),
-      )
+  val groupEnabled = remember { mutableStateOf(true) }
+  SampleSection(
+    title = "SettingsGroup",
+    enabled = groupEnabled.value,
+  ) {
+    SettingsSwitch(
+      state = groupEnabled.value,
+      title = { Text(text = "Group Enabled") },
+      subtitle = { Text(text = "This Switch is always enabled") },
+      icon = iconSampleOrNull(showIcon),
+      enabled = true,
+      onCheckedChange = { groupEnabled.value = it },
+    )
 
-      val state = remember { mutableStateOf(false) }
-      SettingsCheckbox(
-        state = state.value,
-        title = { Text(text = "Checkbox") },
-        subtitle = { Text(text = "Checkbox subtitle") },
-        icon = iconSampleOrNull(showIcon),
-        onCheckedChange = { state.value = it },
-      )
-    }
+    HorizontalDivider()
+
+    SettingsMenuLink(
+      title = { Text(text = "Menu") },
+      onClick = { },
+      icon = iconSampleOrNull(showIcon),
+    )
+
+    val switchState = remember { mutableStateOf(false) }
+    SettingsSwitch(
+      state = switchState.value,
+      title = { Text(text = "Switch") },
+      subtitle = { Text(text = "Switch subtitle") },
+      icon = iconSampleOrNull(showIcon),
+      onCheckedChange = { switchState.value = it },
+    )
+
+    val checkboxState = remember { mutableStateOf(false) }
+    SettingsCheckbox(
+      state = checkboxState.value,
+      title = { Text(text = "Checkbox") },
+      subtitle = { Text(text = "Checkbox subtitle") },
+      icon = iconSampleOrNull(showIcon),
+      onCheckedChange = { checkboxState.value = it },
+    )
+
+    val triSateCheckboxState = remember { mutableStateOf<Boolean?>(null) }
+    SettingsTriStateCheckbox(
+      state = triSateCheckboxState.value,
+      title = { Text(text = "TriStateCheckbox") },
+      subtitle = { Text(text = "With child checkboxes") },
+      icon = iconSampleOrNull(showIcon),
+      onCheckedChange = { newState -> triSateCheckboxState.value = newState },
+    )
+
+    val state = remember { mutableStateOf<String?>(null) }
+
+    SettingsRadioButton(
+      state = state.value == SampleData.items.first().key,
+      title = { Text(text = SampleData.items.first().title) },
+      subtitle = { Text(text = SampleData.items.first().description) },
+      icon = iconSampleOrNull(showIcon),
+      onClick = { state.value = SampleData.items.first().key },
+    )
+
+    val sliderState = remember { mutableStateOf(5) }
+    SettingsSlider(
+      title = { Text(text = "Slider") },
+      value = sliderState.value.toFloat(),
+      onValueChange = { sliderState.value = it.toInt() },
+      subtitle = { Text(text = "Selected value: ${sliderState.value}") },
+      icon = iconSampleOrNull(showIcon),
+      valueRange = 0f..20f,
+      steps = 20,
+    )
   }
 }

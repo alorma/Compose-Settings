@@ -11,10 +11,12 @@ import com.alorma.compose.settings.ui.SettingsGroup
 @Composable
 internal fun SampleSection(
   title: String,
+  enabled: Boolean = true,
   content: @Composable ColumnScope.() -> Unit,
 ) {
   SettingsGroup(
     contentPadding = PaddingValues(16.dp),
+    enabled = enabled,
     title = { Text(text = title) },
   ) {
     ElevatedCard { content() }
