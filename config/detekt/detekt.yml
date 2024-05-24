@@ -790,7 +790,7 @@ style:
 TwitterCompose:
   CompositionLocalAllowlist:
     active: true
-    allowedCompositionLocals: [LocalTreemapChartMeasurer]
+    allowedCompositionLocals: [LocalTreemapChartMeasurer, LocalSettingsGroupEnabled]
   CompositionLocalNaming:
     active: true
   ContentEmitterReturningValues:

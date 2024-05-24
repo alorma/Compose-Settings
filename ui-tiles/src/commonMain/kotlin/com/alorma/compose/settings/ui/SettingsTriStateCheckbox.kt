@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
+import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
@@ -22,7 +23,7 @@ fun SettingsTriStateCheckbox(
   state: Boolean?,
   title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
-  enabled: Boolean = true,
+  enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),

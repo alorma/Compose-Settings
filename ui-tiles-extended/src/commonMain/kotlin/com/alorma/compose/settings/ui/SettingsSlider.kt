@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
@@ -22,7 +23,7 @@ fun SettingsSlider(
   modifier: Modifier = Modifier,
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
-  enabled: Boolean = true,
+  enabled: Boolean = LocalSettingsGroupEnabled.current,
   valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
