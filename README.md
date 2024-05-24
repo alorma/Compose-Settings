@@ -1,7 +1,7 @@
 # Compose Settings - Multiplatform
 
 [![Build](https://github.com/alorma/Compose-Settings/actions/workflows/main.yml/badge.svg)](https://github.com/alorma/Compose-Settings/actions/workflows/main.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.alorma.compose-settings/ui-tiles.svg)]([[https://search.maven.org/search?q=g:%22com.github.alorma.compose-settings](https://search.maven.org/search?q=g:%22com.github.alorma.compose-settings)](https://search.maven.org/search?q=g:%22com.github.alorma.compose-settings))
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.alorma.compose-settings/ui-tiles.svg)](https://central.sonatype.com/namespace/com.github.alorma.compose-settings)
 
 
 https://alorma.github.io/Compose-Settings/
