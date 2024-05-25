@@ -27,6 +27,7 @@ fun SettingsMenuLink(
       enabled = enabled,
       onClick = onClick,
     ).then(modifier),
+    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,
