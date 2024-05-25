@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
-private const val ListItemDisabledLabelTextOpacity = 0.3f
-private const val ListItemDisabledLeadingIconOpacity = 0.38f
-private const val ListItemDisabledTrailingIconOpacity = 0.38f
+private const val DISABLED_LABEL_TEXT_OPACITY = 0.3f
+private const val DISABLED_LEADING_ICON_OPACITY = 0.38f
+private const val DISABLED_TRAILING_ICON_OPACITY = 0.38f
 
 @Composable
 fun SettingsTileScaffold(
@@ -71,7 +71,7 @@ fun SettingsTileScaffold(
 @Composable
 private fun labelContentColor(enabled: Boolean): Color {
   return LocalContentColor.current.let {
-    if (enabled) it else it.copy(alpha = ListItemDisabledLabelTextOpacity)
+    if (enabled) it else it.copy(alpha = DISABLED_LABEL_TEXT_OPACITY)
   }
 }
 
@@ -79,7 +79,7 @@ private fun labelContentColor(enabled: Boolean): Color {
 @Composable
 private fun iconContentColor(enabled: Boolean): Color {
   return LocalContentColor.current.let {
-    if (enabled) it else it.copy(alpha = ListItemDisabledLeadingIconOpacity)
+    if (enabled) it else it.copy(alpha = DISABLED_LEADING_ICON_OPACITY)
   }
 }
 
@@ -87,7 +87,7 @@ private fun iconContentColor(enabled: Boolean): Color {
 @Composable
 private fun actionContentColor(enabled: Boolean): Color {
   return LocalContentColor.current.let {
-    if (enabled) it else it.copy(alpha = ListItemDisabledTrailingIconOpacity)
+    if (enabled) it else it.copy(alpha = DISABLED_TRAILING_ICON_OPACITY)
   }
 }
 
