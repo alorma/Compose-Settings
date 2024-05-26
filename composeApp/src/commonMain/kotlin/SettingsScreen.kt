@@ -6,11 +6,13 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
+import com.alorma.compose.settings.ui.SettingsTheme
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 import internal.MultiChoiceAlertDialog
 import internal.SampleData
@@ -414,6 +417,30 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       icon = iconSampleOrNull(showIcon),
       valueRange = 0f..20f,
       steps = 20,
+    )
+
+    val colors = listOf(
+      MaterialTheme.colorScheme.surfaceContainerHighest,
+      MaterialTheme.colorScheme.primary,
+      MaterialTheme.colorScheme.secondary,
+      MaterialTheme.colorScheme.tertiary,
+      MaterialTheme.colorScheme.error,
+    )
+    SettingsTheme(
+      stateColors = colors,
+      title = { Text(text = "Material colors") },
+      subtitle = { Text(text = "A subset of colors") },
+      icon = iconSampleOrNull(showIcon),
+      action = {
+        IconButton(
+          onClick = {},
+        ) {
+          Icon(
+            imageVector = Icons.Default.Settings,
+            contentDescription = null,
+          )
+        }
+      },
     )
   }
 }
