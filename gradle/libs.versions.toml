@@ -4,7 +4,6 @@ androidxannotations = "1.7.1"
 androidxactivity = "1.9.0"
 androidxpreference = "1.2.1"
 
-compose = "2024.02.02"
 composeMaterial3 = "1.2.0-rc01"
 
 gradleNexusStagingPlugin = "0.30.0"
