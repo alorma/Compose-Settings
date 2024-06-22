@@ -64,10 +64,6 @@ kotlin {
   }
 }
 
-compose.experimental {
-  web.application {}
-}
-
 android {
   namespace = libs.versions.namespace.get() + ".sample.shared"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
