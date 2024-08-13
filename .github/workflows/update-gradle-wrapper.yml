@@ -19,6 +19,4 @@ jobs:
           java-version: 17
 
       - uses: gradle-update/update-gradle-wrapper-action@v1
-        with:
-          repo-token: ${{ secrets.PAT_GRADLE_WRAPPER }}
 
