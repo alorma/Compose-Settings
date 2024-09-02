@@ -20,7 +20,7 @@ android-minSdkSample = "26"
 android-compileSdk = "34"
 android-targetSdk = "34"
 
-multiplatformSettings = "1.1.1"
+multiplatformSettings = "1.2.0"
 
 namespace = "com.alorma.compose.settings"
 
