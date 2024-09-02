@@ -13,7 +13,7 @@ mavenPlugin = "0.29.0"
 agp = "8.7.0-alpha08"
 compose-plugin = "1.6.11"
 
-kotlin = "2.0.10"
+kotlin = "2.0.20"
 
 android-minSdk = "21"
 android-minSdkSample = "26"
