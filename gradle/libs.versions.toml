@@ -27,7 +27,7 @@ namespace = "com.alorma.compose.settings"
 detekt = "1.23.6"
 compose-detekt-rules = "0.0.26"
 
-kotlinx-immutable = "0.3.7"
+kotlinx-immutable = "0.3.8"
 
 windowSizeClass = "0.5.0"
 
