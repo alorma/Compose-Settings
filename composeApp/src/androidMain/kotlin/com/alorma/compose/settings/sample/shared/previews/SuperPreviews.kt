@@ -38,30 +38,30 @@ import androidx.compose.ui.tooling.preview.Wallpapers
   apiLevel = 33,
   name = "Dark - No dynamic",
   wallpaper = Wallpapers.NONE,
-  uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+  uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Preview(
   apiLevel = 33,
   name = "Dark - Red",
   wallpaper = Wallpapers.RED_DOMINATED_EXAMPLE,
-  uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+  uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Preview(
   apiLevel = 33,
   name = "Dark - Blue",
   wallpaper = Wallpapers.BLUE_DOMINATED_EXAMPLE,
-  uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+  uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Preview(
   apiLevel = 33,
   name = "Dark - Green",
   wallpaper = Wallpapers.GREEN_DOMINATED_EXAMPLE,
-  uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+  uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Preview(
   apiLevel = 33,
   name = "Dark - Yellow",
   wallpaper = Wallpapers.YELLOW_DOMINATED_EXAMPLE,
-  uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL
+  uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 annotation class SuperPreviews
