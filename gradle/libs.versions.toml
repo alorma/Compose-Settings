@@ -31,7 +31,7 @@ kotlinx-immutable = "0.3.8"
 
 windowSizeClass = "0.5.0"
 
-screenshot = "0.0.1-alpha07"
+screenshot = "0.0.1-alpha08"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
