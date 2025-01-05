@@ -417,10 +417,13 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       steps = 20,
     )
 
-    val segmentedState = remember { mutableStateOf<String?>(null) }
+    val items = listOf(1, 2, 3)
+
+    val segmentedState = remember { mutableStateOf<Int?>(null) }
     SettingsSegmented(
       title = { Text(text = "Segmented") },
-      items = listOf("#1", "#2", "#3"),
+      items = items,
+      itemTitleMap = { item -> "#$item" },
       selectedItem = segmentedState.value,
       onItemSelected = { segmentedState.value = it },
       subtitle = { Text(text = "Selected value: ${segmentedState.value}") },

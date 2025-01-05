@@ -12,17 +12,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
-@Suppress("LongParameterList")
-fun SettingsSegmented(
+fun <T> SettingsSegmented(
   title: @Composable () -> Unit,
-  items: List<String>,
-  selectedItem: String?,
-  onItemSelected: (String) -> Unit,
+  items: List<T>,
+  selectedItem: T?,
+  onItemSelected: (T) -> Unit,
+  itemTitleMap: (T) -> CharSequence,
   modifier: Modifier = Modifier,
   buttonSpace: Dp = SegmentedButtonDefaults.BorderWidth,
   buttonShape: @Composable (Int) -> Shape = { index ->
@@ -55,7 +56,13 @@ fun SettingsSegmented(
 
             SegmentedButton(
               shape = shape,
-              label = { Text(text = item) },
+              label = {
+                when (val text = itemTitleMap(item)) {
+                  is String -> Text(text = text)
+                  is AnnotatedString -> Text(text = text)
+                  else -> Text(text = text.toString())
+                }
+              },
               selected = item == selectedItem,
               onClick = { onItemSelected(item) },
               colors = buttonColors,
