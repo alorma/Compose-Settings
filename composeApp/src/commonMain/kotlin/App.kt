@@ -1,3 +1,4 @@
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import kotlinx.coroutines.launch
 import theme.ComposeSettingsTheme
 
@@ -34,14 +36,24 @@ fun App(
 ) {
   val windowSizeClass = calculateWindowSizeClass()
 
-  ComposeSettingsTheme {
+  val darkModeState = rememberBooleanSettingState(
+    key = "darkMode",
+    defaultValue = isSystemInDarkTheme(),
+  )
+
+  ComposeSettingsTheme(
+    darkModeState = darkModeState,
+  ) {
     Scaffold(
       modifier = Modifier.fillMaxSize().then(modifier),
       topBar = { SampleTopBar() },
     ) {
       when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> {
-          SettingsScreen(modifier = Modifier.padding(it))
+          SettingsScreen(
+            modifier = Modifier.padding(it),
+            darkModeState = darkModeState,
+          )
         }
 
         else -> {
@@ -52,7 +64,7 @@ fun App(
             modifier = Modifier.padding(it),
             drawerState = drawerState,
             drawerContent = {
-              DismissibleDrawerSheet { SettingsScreen() }
+              DismissibleDrawerSheet { SettingsScreen(darkModeState = darkModeState) }
             },
             content = {
               Surface {
