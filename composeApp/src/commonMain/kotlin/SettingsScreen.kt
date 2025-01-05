@@ -36,8 +36,8 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SettingsScreen(
-  modifier: Modifier = Modifier,
   darkModeState: BooleanSettingValueState,
+  modifier: Modifier = Modifier,
 ) {
   Scaffold(
     modifier = modifier,
