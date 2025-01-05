@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
+import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
@@ -414,6 +415,16 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       icon = iconSampleOrNull(showIcon),
       valueRange = 0f..20f,
       steps = 20,
+    )
+
+    val segmentedState = remember { mutableStateOf<String?>(null) }
+    SettingsSegmented(
+      title = { Text(text = "Segmented") },
+      items = listOf("#1", "#2", "#3"),
+      selectedItem = segmentedState.value,
+      onItemSelected = { segmentedState.value = it },
+      subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
+      icon = iconSampleOrNull(showIcon),
     )
   }
 }
