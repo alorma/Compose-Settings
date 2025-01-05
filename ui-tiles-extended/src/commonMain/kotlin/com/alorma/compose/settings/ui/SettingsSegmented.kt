@@ -33,6 +33,9 @@ fun <T> SettingsSegmented(
     )
   },
   buttonColors: SegmentedButtonColors = SegmentedButtonDefaults.colors(),
+  buttonIcon: @Composable (Boolean) -> Unit = { selected ->
+    SegmentedButtonDefaults.Icon(selected)
+  },
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
@@ -63,6 +66,7 @@ fun <T> SettingsSegmented(
                   else -> Text(text = text.toString())
                 }
               },
+              icon = { buttonIcon(item == selectedItem) },
               selected = item == selectedItem,
               onClick = { onItemSelected(item) },
               colors = buttonColors,
