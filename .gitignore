@@ -10,3 +10,4 @@ build/
 .cxx
 local.properties
 yarn.lock
+docs/html
