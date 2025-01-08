@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
+  alias(libs.plugins.dokka)
   alias(libs.plugins.jetbrainsCompose) apply false
   alias(libs.plugins.composeCompiler) apply false
   alias(libs.plugins.androidApplication) apply false
@@ -45,3 +46,11 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 }
 
 apply(from = "${rootDir}/scripts/publish-root.gradle")
+
+dependencies {
+  listOf(
+    projects.uiBase,
+    projects.uiTiles,
+    projects.uiTilesExtended,
+  ).forEach { dep -> dokka(dep) }
+}
