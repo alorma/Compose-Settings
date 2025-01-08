@@ -1,4 +1,7 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -18,6 +21,11 @@ kotlin {
   jvm("desktop")
 
   js(IR) {
+    browser()
+    binaries.executable()
+  }
+
+  wasmJs {
     browser()
     binaries.executable()
   }
