@@ -3,6 +3,8 @@ package internal
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,6 +21,9 @@ internal fun LabelCheckbox(
       role = Role.RadioButton,
       onClick = onSelected,
       onClickLabel = item.title,
+    ),
+    colors = ListItemDefaults.colors(
+      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
     ),
     headlineContent = { Text(text = item.title) },
     supportingContent = { Text(text = item.description) },
