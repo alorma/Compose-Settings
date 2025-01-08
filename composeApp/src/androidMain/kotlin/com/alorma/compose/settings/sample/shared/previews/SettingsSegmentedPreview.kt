@@ -1,6 +1,5 @@
 package com.alorma.compose.settings.sample.shared.previews
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,24 +11,24 @@ import theme.ComposeSettingsTheme
 @SuperPreviews
 @Composable
 internal fun SettingsSegmentedPreview() {
-  val selectState = remember { mutableStateOf(false) }
+    val selectState = remember { mutableStateOf(false) }
 
-  ComposeSettingsTheme {
-    Surface {
-      val darkModes = listOf(true, false)
+    ComposeSettingsTheme {
+        Surface {
+            val darkModes = listOf(true, false)
 
-      SettingsSegmented(
-        title = { Text("Theme mode") },
-        items = darkModes,
-        selectedItem = selectState.value,
-        onItemSelected = { darkMode -> selectState.value = darkMode },
-        itemTitleMap = { item ->
-          when (item) {
-            true -> "Dark"
-            false -> "Light"
-          }
-        },
-      )
+            SettingsSegmented(
+                title = { Text("Theme mode") },
+                items = darkModes,
+                selectedItem = selectState.value,
+                onItemSelected = { darkMode -> selectState.value = darkMode },
+                itemTitleMap = { item ->
+                    when (item) {
+                        true -> "Dark"
+                        false -> "Light"
+                    }
+                },
+            )
+        }
     }
-  }
 }
