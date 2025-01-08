@@ -26,6 +26,9 @@ kotlin {
 
     commonMain.dependencies {
       api(projects.storageBase)
+
+      implementation(compose.runtime)
+      implementation(compose.foundation)
     }
   }
 }
