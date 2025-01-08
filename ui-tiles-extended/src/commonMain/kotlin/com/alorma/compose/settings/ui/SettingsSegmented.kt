@@ -18,6 +18,7 @@ import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
+@Suppress("LongParameterList")
 fun <T> SettingsSegmented(
   title: @Composable () -> Unit,
   items: List<T>,
