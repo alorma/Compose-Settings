@@ -31,7 +31,6 @@ import internal.SampleData
 import internal.SampleSection
 import internal.SingleChoiceAlertDialog
 import internal.iconSampleOrNull
-import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SettingsScreen(
@@ -307,7 +306,7 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
 
     if (showSingleChoiceDialog.value) {
       SingleChoiceAlertDialog(
-        items = items.toImmutableList(),
+        items = items,
         selectedItemKey = singleSelectionState.value,
         onItemSelected = { selectedItemKey ->
           singleSelectionState.value = selectedItemKey
@@ -352,8 +351,8 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
 
     if (showMultiChoiceDialog.value) {
       MultiChoiceAlertDialog(
-        items = items.toImmutableList(),
-        selectedItemKeys = multipleSelectionState.value?.split("|").orEmpty().toImmutableList(),
+        items = items,
+        selectedItemKeys = multipleSelectionState.value?.split("|").orEmpty(),
         onItemsSelected = { selectedItemKey ->
           if (selectedItemKey.isNotEmpty()) {
             multipleSelectionState.value = selectedItemKey.joinToString("|")

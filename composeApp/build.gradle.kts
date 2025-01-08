@@ -51,8 +51,6 @@ kotlin {
 
       implementation(projects.uiTiles)
       implementation(projects.uiTilesExtended)
-
-      implementation(libs.kotlinx.immutable)
     }
 
     val desktopMain by getting
@@ -74,6 +72,8 @@ android {
 
   defaultConfig {
     minSdk = libs.versions.android.minSdkSample.get().toInt()
+    targetSdk = libs.versions.android.targetSdk.get().toInt()
+
     versionCode = 1
     versionName = "1.0"
   }

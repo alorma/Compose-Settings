@@ -7,13 +7,12 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 internal fun SingleChoiceAlertDialog(
   selectedItemKey: String?,
   onItemSelected: (String?) -> Unit,
-  items: ImmutableList<SampleItem>
+  items: List<SampleItem>
 ) {
   val userSelectedItem = remember { mutableStateOf(selectedItemKey) }
 
