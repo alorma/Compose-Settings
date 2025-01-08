@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.storage.disk
+package disk
 
 import android.content.SharedPreferences
 import androidx.compose.runtime.Composable

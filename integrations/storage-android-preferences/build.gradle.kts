@@ -1,6 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidLibrary)
@@ -21,22 +18,6 @@ kotlin {
     publishLibraryVariants("release")
   }
 
-
-  jvm("desktop")
-
-  iosX64()
-  iosArm64()
-  iosSimulatorArm64()
-
-  js(IR) {
-    browser()
-  }
-
-  @OptIn(ExperimentalWasmDsl::class)
-  wasmJs {
-    browser()
-  }
-
   sourceSets {
     androidMain.dependencies {
       implementation(libs.androidx.preference.preference)
@@ -45,18 +26,12 @@ kotlin {
 
     commonMain.dependencies {
       api(projects.storageBase)
-
-      api(libs.multiplatform.settings)
-      api(libs.multiplatform.settings.noArg)
-
-      implementation(compose.runtime)
-      implementation(compose.foundation)
     }
   }
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".disk"
+  namespace = libs.versions.namespace.get() + ".android.preferences"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -86,16 +61,6 @@ android {
   }
   dependencies {
     debugImplementation(compose.uiTooling)
-  }
-}
-
-compose.desktop {
-  application {
-    nativeDistributions {
-      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".disk"
-      packageVersion = "1.0.0"
-    }
   }
 }
 
