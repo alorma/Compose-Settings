@@ -23,7 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
+import com.alorma.compose.settings.russwolf.settings.rememberBooleanSettingState
 import kotlinx.coroutines.launch
 import theme.ComposeSettingsTheme
 

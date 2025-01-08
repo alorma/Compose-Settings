@@ -19,7 +19,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.disk.BooleanSettingValueState
+import com.alorma.compose.settings.russwolf.settings.BooleanSettingValueState
+import com.alorma.compose.settings.storage.base.SettingValueState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
@@ -36,7 +37,7 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SettingsScreen(
-  darkModeState: BooleanSettingValueState,
+  darkModeState: SettingValueState<Boolean>,
   modifier: Modifier = Modifier,
 ) {
   Scaffold(
