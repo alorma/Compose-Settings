@@ -52,12 +52,30 @@ jobs:
         run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
 
   build-lib-storage:
+    name: Build ${{ matrix.config.target }} - PR
+    if: ${{ success() }}
+    needs: [ detekt, build-lib-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :storage-memory:${{ matrix.config.task }}
+
+  build-lib-storage-integrations:
     strategy:
       matrix:
         config: [
-          { target: memory, module: storage-memory, task: build, continueOnError: false },
-          { target: integration-android-prefs, module: integrations:storage-android-preferences, task: build, continueOnError: false },
-          { target: storage-russhwolf-settings, module: integrations:storage-russhwolf-settings, task: build, continueOnError: false },
+          { target: integration-android-prefs, module: storage-android-preferences, task: build, continueOnError: false },
+          { target: integration-russhwolf-settings, module: storage-russhwolf-settings, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
@@ -75,7 +93,7 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
+        run: ./gradlew :integrations:${{ matrix.config.module }}:${{ matrix.config.task }}
 
   build-lib-ui:
     strategy:
