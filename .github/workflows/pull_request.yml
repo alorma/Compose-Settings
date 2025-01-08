@@ -56,7 +56,8 @@ jobs:
       matrix:
         config: [
           { target: memory, module: storage-memory, task: build, continueOnError: false },
-          { target: disk, module: storage-disk, task: build, continueOnError: false },
+          { target: integration-android-prefs, module: integrations:storage-android-preferences, task: build, continueOnError: false },
+          { target: storage-russhwolf-settings, module: integrations:storage-russhwolf-settings, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
