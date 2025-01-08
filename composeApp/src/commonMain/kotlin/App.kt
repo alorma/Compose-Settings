@@ -1,4 +1,3 @@
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,13 +18,15 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.disk.rememberBooleanSettingState
 import kotlinx.coroutines.launch
 import theme.ComposeSettingsTheme
+
 
 @OptIn(
   ExperimentalMaterial3WindowSizeClassApi::class,
@@ -36,13 +37,10 @@ fun App(
 ) {
   val windowSizeClass = calculateWindowSizeClass()
 
-  val darkModeState = rememberBooleanSettingState(
-    key = "darkMode",
-    defaultValue = isSystemInDarkTheme(),
-  )
+  val darkModeState = remember { mutableStateOf(false) }
 
   ComposeSettingsTheme(
-    darkModeState = darkModeState,
+    darkModeState = darkModeState.value,
   ) {
     Scaffold(
       modifier = Modifier.fillMaxSize().then(modifier),
@@ -52,7 +50,8 @@ fun App(
         WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> {
           SettingsScreen(
             modifier = Modifier.padding(it),
-            darkModeState = darkModeState,
+            darkModeState = darkModeState.value,
+            onDarkModeState = { state -> darkModeState.value = state },
           )
         }
 
@@ -64,7 +63,12 @@ fun App(
             modifier = Modifier.padding(it),
             drawerState = drawerState,
             drawerContent = {
-              DismissibleDrawerSheet { SettingsScreen(darkModeState = darkModeState) }
+              DismissibleDrawerSheet {
+                SettingsScreen(
+                  darkModeState = darkModeState.value,
+                  onDarkModeState = { state -> darkModeState.value = state },
+                )
+              }
             },
             content = {
               Surface {

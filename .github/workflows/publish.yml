@@ -26,13 +26,7 @@ jobs:
         run: ./gradlew detektAll
 
   build-lib-base:
-    strategy:
-      matrix:
-        config: [
-          { target: storage, module: storage-base, task: build, continueOnError: false },
-          { target: ui, module: ui-base, task: build, continueOnError: false },
-        ]
-    name: Build ${{ matrix.config.target }} - Release
+    name: Build base - Release
     if: ${{ success() }}
     needs: [ detekt ]
     runs-on: macos-latest
@@ -48,32 +42,7 @@ jobs:
 
       - name: Build
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
-
-  build-lib-storage:
-    strategy:
-      matrix:
-        config: [
-          { target: memory, module: storage-memory, task: build, continueOnError: false },
-          { target: disk, module: storage-disk, task: build, continueOnError: false },
-        ]
-    name: Build ${{ matrix.config.target }} - Release
-    if: ${{ success() }}
-    needs: [ detekt, build-lib-base ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Build
-        continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
+        run: ./gradlew :ui-base:build
 
   build-lib-ui:
     strategy:
@@ -110,7 +79,7 @@ jobs:
           { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
         ]
     if: ${{ success() }}
-    needs: [ build-lib-ui, build-lib-storage ]
+    needs: [ build-lib-ui ]
     runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code

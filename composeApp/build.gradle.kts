@@ -52,9 +52,6 @@ kotlin {
       implementation(projects.uiTiles)
       implementation(projects.uiTilesExtended)
 
-      implementation(projects.storageMemory)
-      implementation(projects.storageDisk)
-
       implementation(libs.kotlinx.immutable)
     }
 

@@ -19,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.storage.disk.BooleanSettingValueState
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
@@ -36,7 +35,8 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun SettingsScreen(
-  darkModeState: BooleanSettingValueState,
+  darkModeState: Boolean,
+  onDarkModeState: (Boolean) -> Unit,
   modifier: Modifier = Modifier,
 ) {
   Scaffold(
@@ -61,8 +61,8 @@ fun SettingsScreen(
       SettingsSegmented(
         title = { Text("Theme mode") },
         items = darkModes,
-        selectedItem = darkModeState.value,
-        onItemSelected = { darkMode -> darkModeState.value = darkMode },
+        selectedItem = darkModeState,
+        onItemSelected = onDarkModeState,
         itemTitleMap = { item ->
           when (item) {
             true -> "Dark"

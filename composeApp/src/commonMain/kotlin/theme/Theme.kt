@@ -1,11 +1,10 @@
 package theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.alorma.compose.settings.storage.base.SettingValueState
-import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
 
 val DarkColorScheme = darkColorScheme(
   primary = Purple40,
@@ -21,12 +20,12 @@ val LightColorScheme = lightColorScheme(
 
 @Composable
 fun ComposeSettingsTheme(
-  darkModeState: SettingValueState<Boolean> = rememberMemoryBooleanSettingState(),
+  darkModeState: Boolean = isSystemInDarkTheme(),
   content: @Composable () -> Unit
 ) {
 
   MaterialTheme(
-    colorScheme = if (darkModeState.value) {
+    colorScheme = if (darkModeState) {
       DarkColorScheme
     } else {
       LightColorScheme

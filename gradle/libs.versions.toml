@@ -1,4 +1,5 @@
 [versions]
+composeRememberSetting = "1.0.2"
 core-ktx = "1.12.0"
 androidxannotations = "1.7.1"
 androidxactivity = "1.9.3"
@@ -44,12 +45,9 @@ plugin-gradle-nexus-staging = { module = "io.codearte.gradle.nexus:gradle-nexus-
 plugin-gradle-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "publishPlugin" }
 plugin-gradle-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPlugin" }
 
-multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
-multiplatform-settings-noArg = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
-
 compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", version.ref = "compose-detekt-rules" }
 
-kotlinx-immutable= { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutable" }
+kotlinx-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-immutable" }
 
 windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
 
@@ -65,4 +63,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot"}
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }
