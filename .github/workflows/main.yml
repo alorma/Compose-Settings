@@ -45,7 +45,7 @@ jobs:
           distribution: adopt
           java-version: 17
 
-      - name: Detekt - Main
+      - name: Dokka - Main
         run: ./gradlew dokkaGeneratePublicationHtml
 
   build-lib-base:
