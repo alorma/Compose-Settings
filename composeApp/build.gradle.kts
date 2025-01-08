@@ -53,7 +53,7 @@ kotlin {
       implementation(projects.uiTilesExtended)
 
       implementation(projects.storageMemory)
-      implementation(projects.storageDisk)
+      implementation(projects.integrations.storageRusshwolfSettings)
 
       implementation(libs.kotlinx.immutable)
     }

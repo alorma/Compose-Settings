@@ -25,7 +25,7 @@ include(":ui-tiles")
 include(":ui-tiles-extended")
 
 include(":storage-base")
-include(":storage-disk")
 include(":storage-memory")
 
 include(":integrations:storage-android-preferences")
+include(":integrations:storage-russhwolf-settings")

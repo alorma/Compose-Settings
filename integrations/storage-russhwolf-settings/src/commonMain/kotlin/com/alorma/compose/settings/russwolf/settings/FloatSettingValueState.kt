@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.storage.disk
+package com.alorma.compose.settings.russwolf.settings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,13 +9,13 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.russhwolf.settings.Settings
 
 @Composable
-fun rememberTriStateSetting(
+fun rememberFloatSettingState(
   key: String,
-  defaultValue: Boolean? = null,
+  defaultValue: Float = 0f,
   settings: Settings = Settings()
-): TriStateSettingValueState {
+): FloatSettingValueState {
   return remember {
-    TriStateSettingValueState(
+    FloatSettingValueState(
       settings = settings,
       key = key,
       defaultValue = defaultValue,
@@ -23,22 +23,18 @@ fun rememberTriStateSetting(
   }
 }
 
-class TriStateSettingValueState(
+class FloatSettingValueState(
   private val settings: Settings,
   val key: String,
-  val defaultValue: Boolean? = null,
-) : SettingValueState<Boolean?> {
+  val defaultValue: Float = 0f,
+) : SettingValueState<Float> {
 
-  private var _value by mutableStateOf(settings.getBooleanOrNull(key))
+  private var _value by mutableStateOf(settings.getFloat(key, defaultValue))
 
-  override var value: Boolean?
+  override var value: Float
     set(value) {
       _value = value
-      if (value == null) {
-        settings.remove(key)
-      } else {
-        settings.putBoolean(key, value)
-      }
+      settings.putFloat(key, value)
     }
     get() = _value
 

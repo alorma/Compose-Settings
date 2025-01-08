@@ -38,11 +38,6 @@ kotlin {
   }
 
   sourceSets {
-    androidMain.dependencies {
-      implementation(libs.androidx.preference.preference)
-      implementation(libs.androidx.preference.ktx)
-    }
-
     commonMain.dependencies {
       api(projects.storageBase)
 
@@ -56,7 +51,7 @@ kotlin {
 }
 
 android {
-  namespace = libs.versions.namespace.get() + ".disk"
+  namespace = libs.versions.namespace.get() + ".russwolf.settings"
   compileSdk = libs.versions.android.compileSdk.get().toInt()
 
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -93,7 +88,7 @@ compose.desktop {
   application {
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".disk"
+      packageName = libs.versions.namespace.get() + ".russwolf.settings"
       packageVersion = "1.0.0"
     }
   }

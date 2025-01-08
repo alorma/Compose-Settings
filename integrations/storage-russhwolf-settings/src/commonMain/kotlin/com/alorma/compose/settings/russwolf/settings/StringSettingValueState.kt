@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.storage.disk
+package com.alorma.compose.settings.russwolf.settings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -9,13 +9,13 @@ import com.alorma.compose.settings.storage.base.SettingValueState
 import com.russhwolf.settings.Settings
 
 @Composable
-fun rememberIntSettingState(
+fun rememberStringSettingState(
   key: String,
-  defaultValue: Int = -1,
+  defaultValue: String? = null,
   settings: Settings = Settings()
-): IntSettingValueState {
+): StringSettingValueState {
   return remember {
-    IntSettingValueState(
+    StringSettingValueState(
       settings = settings,
       key = key,
       defaultValue = defaultValue,
@@ -23,20 +23,30 @@ fun rememberIntSettingState(
   }
 }
 
-class IntSettingValueState(
+class StringSettingValueState(
   private val settings: Settings,
   val key: String,
-  val defaultValue: Int = 0,
-) : SettingValueState<Int> {
+  val defaultValue: String?,
+) : SettingValueState<String?> {
 
-  private var _value by mutableStateOf(settings.getInt(key, defaultValue))
+  private var _value by mutableStateOf(
+    if (defaultValue == null) {
+      settings.getStringOrNull(key)
+    } else {
+      settings.getString(key, defaultValue)
+    }
+  )
 
-  override var value: Int
+  override var value: String?
     set(value) {
       _value = value
-      settings.putInt(key, value)
+      if (value == null) {
+        settings.remove(key)
+      } else {
+        settings.putString(key, value)
+      }
     }
-    get() = _value
+    get() = _value ?: defaultValue
 
   override fun reset() {
     value = defaultValue
