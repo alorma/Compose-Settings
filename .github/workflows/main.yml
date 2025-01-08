@@ -194,18 +194,18 @@ jobs:
           java-version: 17
 
       - name: Build sample JS - Main
-        run: ./gradlew jsBrowserDistribution
+        run: ./gradlew wasmJsBrowserDistribution
 
       - name: Build dokka - Main
         run: ./gradlew dokkaGeneratePublicationHtml
 
       - name: Copy dokka html to dist
-        run: cp -r docs/html composeApp/build/dist/js/productionExecutable/dokka
+        run: cp -r docs/html composeApp/build/dist/wasmJs/productionExecutable/dokka
 
       - name: Upload your page as github pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: composeApp/build/dist/js/productionExecutable/
+          path: composeApp/build/dist/wasmJs/productionExecutable/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
