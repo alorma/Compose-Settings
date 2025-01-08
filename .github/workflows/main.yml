@@ -32,6 +32,22 @@ jobs:
       - name: Detekt - Main
         run: ./gradlew detektAll
 
+  dokka:
+    name: Dokka - Main
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Detekt - Main
+        run: ./gradlew dokkaGeneratePublicationHtml
+
   build-lib-base:
     name: Build base - Main
     if: ${{ success() }}
