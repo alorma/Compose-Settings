@@ -77,6 +77,8 @@ android {
 
   defaultConfig {
     minSdk = libs.versions.android.minSdkSample.get().toInt()
+    targetSdk = libs.versions.android.compileSdk.get().toInt()
+
     versionCode = 1
     versionName = "1.0"
   }
