@@ -1,37 +1,28 @@
 package com.alorma.compose.settings.sample.shared.previews
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.alorma.compose.settings.storage.memory.rememberMemoryBooleanSettingState
-import com.alorma.compose.settings.ui.SettingsMenuLink
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.alorma.compose.settings.ui.SettingsSegmented
 import theme.ComposeSettingsTheme
 
 @SuperPreviews
 @Composable
 internal fun SettingsSegmentedPreview() {
-  val darkModeState = rememberMemoryBooleanSettingState(
-    defaultValue = isSystemInDarkTheme(),
-  )
+  val selectState = remember { mutableStateOf(false) }
 
-  ComposeSettingsTheme(
-    darkModeState = darkModeState,
-  ) {
+  ComposeSettingsTheme {
     Surface {
       val darkModes = listOf(true, false)
 
       SettingsSegmented(
         title = { Text("Theme mode") },
         items = darkModes,
-        selectedItem = darkModeState.value,
-        onItemSelected = { darkMode -> darkModeState.value = darkMode },
+        selectedItem = selectState.value,
+        onItemSelected = { darkMode -> selectState.value = darkMode },
         itemTitleMap = { item ->
           when (item) {
             true -> "Dark"
