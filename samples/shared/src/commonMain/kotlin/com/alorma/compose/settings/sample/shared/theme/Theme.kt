@@ -1,6 +1,7 @@
 package theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -21,15 +22,18 @@ val LightColorScheme = lightColorScheme(
 @Composable
 fun ComposeSettingsTheme(
   darkModeState: Boolean = isSystemInDarkTheme(),
+  colorScheme: (Boolean) -> ColorScheme = { darkModeStateValue ->
+    if (darkModeState) {
+      DarkColorScheme
+    } else {
+      LightColorScheme
+    }
+  },
   content: @Composable () -> Unit
 ) {
 
   MaterialTheme(
-    colorScheme = if (darkModeState) {
-      DarkColorScheme
-    } else {
-      LightColorScheme
-    },
+    colorScheme = colorScheme(darkModeState),
     typography = Typography,
     content = content
   )
