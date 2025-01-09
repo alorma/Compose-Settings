@@ -2,30 +2,25 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
-  alias(libs.plugins.androidApplication)
+  alias(libs.plugins.androidLibrary)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.detekt)
 }
 
+version = "1.0-SNAPSHOT"
+
 kotlin {
-
   androidTarget()
-
-  applyDefaultHierarchyTemplate()
-
   jvm("desktop")
 
-  js(IR) {
+  js {
     browser()
-    binaries.executable()
+    useEsModules()
   }
 
   @OptIn(ExperimentalWasmDsl::class)
-  wasmJs {
-    browser()
-    binaries.executable()
-  }
+  wasmJs { browser() }
 
   listOf(
     iosX64(),
@@ -33,36 +28,71 @@ kotlin {
     iosSimulatorArm64()
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
-      baseName = "ComposeApp"
+      baseName = "shared"
       isStatic = true
-      binaryOption("bundleId", libs.versions.namespace.get() + ".sample")
     }
   }
 
-  sourceSets {
-    androidMain.dependencies {
-      implementation(compose.ui)
-      implementation(libs.androidx.activity.compose)
+  applyDefaultHierarchyTemplate()
 
+  sourceSets {
+    all {
+      languageSettings {
+        optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
+      }
+    }
+
+    androidMain.dependencies {
       implementation(compose.uiTooling)
     }
 
     commonMain.dependencies {
-      implementation(compose.material3)
-      implementation(libs.windowSizeClass)
-
       implementation(compose.runtime)
       implementation(compose.foundation)
+      implementation(compose.material3)
 
-      implementation(projects.uiTiles)
-      implementation(projects.uiTilesExtended)
+      implementation(compose.components.resources)
+    }
+
+    val jsWasmMain by creating {
+      dependsOn(commonMain.get())
+      dependencies {
+        implementation(npm("uuid", "^9.0.1"))
+      }
+    }
+
+    val jsMain by getting {
+      dependsOn(jsWasmMain)
+    }
+
+    val wasmJsMain by getting {
+      dependsOn(jsWasmMain)
     }
 
     val desktopMain by getting
     desktopMain.dependencies {
-      implementation(compose.desktop.currentOs)
+      implementation(compose.desktop.common)
     }
-
-    val jsMain by getting
   }
+}
+
+android {
+  namespace = libs.versions.namespace.get() + ".sample.shared"
+  compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+  sourceSets["main"].res.srcDirs("src/androidMain/res")
+  sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+
+  defaultConfig {
+    minSdk = libs.versions.android.minSdkSample.get().toInt()
+  }
+}
+
+composeCompiler {
+  includeSourceInformation = true
+}
+
+dependencies {
+  detektPlugins(libs.compose.detekt.rules)
 }

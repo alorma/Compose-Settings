@@ -1,3 +1,5 @@
+package com.alorma.compose.settings.sample.shared
+
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
@@ -6,6 +8,6 @@ fun main() = application {
     onCloseRequest = ::exitApplication,
     title = "Compose Settings - sample",
   ) {
-    App()
+    SampleApp()
   }
 }
