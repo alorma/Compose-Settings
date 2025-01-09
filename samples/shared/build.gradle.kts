@@ -30,6 +30,7 @@ kotlin {
     iosTarget.binaries.framework {
       baseName = "shared"
       isStatic = true
+      binaryOption("bundleId", libs.versions.namespace.get() + ".sample")
     }
   }
 
