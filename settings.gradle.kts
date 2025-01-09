@@ -25,6 +25,7 @@ include(":samples:desktopApp")
 include(":samples:jsApp")
 include(":samples:wasmApp")
 include(":samples:iosSampleApp")
+include(":samples:androidApp")
 
 include(":ui-base")
 include(":ui-tiles")

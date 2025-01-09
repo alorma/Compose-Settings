@@ -4,10 +4,10 @@
   <application
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
+      android:label="Compose settings - Sample"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
-      android:theme="@style/Theme.ComposeSettings"
+      android:theme="@android:style/Theme.Material.Light.NoActionBar"
       >
     <activity
         android:name="com.alorma.compose.settings.sample.shared.MainActivity"
