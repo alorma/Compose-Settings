@@ -18,7 +18,7 @@ dependencyResolutionManagement {
   }
 }
 
-include(":composeApp")
+//include(":composeApp")
 
 include(":samples:shared")
 include(":samples:desktopApp")
