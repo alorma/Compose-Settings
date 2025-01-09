@@ -46,9 +46,9 @@ jobs:
         with:
           reports: ${{ github.workspace }}/**/build/reports/detekt/*.xml
           checkName: Detekt
-          workflowSummary: false
+          workflowSummary: true
           warningsAsErrors: false
-          checksSummary: off
+          checksSummary: full
           failOnError: true
 
   build-lib-base:
