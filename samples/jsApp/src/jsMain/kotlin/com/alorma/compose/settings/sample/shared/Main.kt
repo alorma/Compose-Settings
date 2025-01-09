@@ -1,3 +1,5 @@
+package com.alorma.compose.settings.sample.shared
+
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
 import org.jetbrains.skiko.wasm.onWasmReady
@@ -9,7 +11,8 @@ fun main() {
       title = "Compose Settings - sample",
       canvasElementId = "ComposeTarget",
     ) {
-      App()
+      SampleApp()
     }
   }
 }
+

@@ -14,7 +14,7 @@ kotlin {
   androidTarget()
   jvm("desktop")
 
-  js {
+  js(IR) {
     browser()
     useEsModules()
   }
@@ -47,30 +47,29 @@ kotlin {
     }
 
     commonMain.dependencies {
-      implementation(compose.runtime)
-      implementation(compose.foundation)
-      implementation(compose.material3)
+      api(compose.ui)
+      api(compose.runtime)
+      api(compose.foundation)
+      api(compose.material3)
 
-      implementation(compose.components.resources)
+      api(compose.components.resources)
     }
 
-    val jsWasmMain by creating {
-      dependsOn(commonMain.get())
+    val jsMain by getting {
       dependencies {
         implementation(npm("uuid", "^9.0.1"))
       }
     }
 
-    val jsMain by getting {
-      dependsOn(jsWasmMain)
-    }
-
     val wasmJsMain by getting {
-      dependsOn(jsWasmMain)
+      dependencies {
+        implementation(npm("uuid", "^9.0.1"))
+      }
     }
 
     val desktopMain by getting
     desktopMain.dependencies {
+      api(compose.desktop.currentOs)
       implementation(compose.desktop.common)
     }
   }

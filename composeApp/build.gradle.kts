@@ -1,7 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidApplication)
@@ -16,17 +12,6 @@ kotlin {
   androidTarget()
 
   applyDefaultHierarchyTemplate()
-
-  js(IR) {
-    browser()
-    binaries.executable()
-  }
-
-  @OptIn(ExperimentalWasmDsl::class)
-  wasmJs {
-    browser()
-    binaries.executable()
-  }
 
   listOf(
     iosX64(),
@@ -58,8 +43,6 @@ kotlin {
       implementation(projects.uiTiles)
       implementation(projects.uiTilesExtended)
     }
-
-    val jsMain by getting
   }
 }
 
