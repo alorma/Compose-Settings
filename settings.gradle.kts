@@ -24,7 +24,7 @@ include(":samples:shared")
 include(":samples:desktopApp")
 include(":samples:jsApp")
 include(":samples:wasmApp")
-include(":samples:iosSampleApp")
+include(":samples:iosApp")
 include(":samples:androidApp")
 
 include(":ui-base")
