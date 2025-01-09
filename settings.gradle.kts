@@ -22,6 +22,7 @@ include(":composeApp")
 
 include(":samples:shared")
 include(":samples:desktopApp")
+include(":samples:jsApp")
 
 include(":ui-base")
 include(":ui-tiles")
