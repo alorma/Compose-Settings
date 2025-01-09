@@ -12,3 +12,5 @@ local.properties
 yarn.lock
 docs/html
 tasks.txt
+xcuserdata/
+contents.xcworkspacedata
