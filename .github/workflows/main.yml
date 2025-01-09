@@ -46,7 +46,6 @@ jobs:
         with:
           reports: ${{ github.workspace }}/**/build/reports/detekt/*.xml
           checkName: Detekt
-          token: ${{ github.token }}
           workflowSummary: false
           warningsAsErrors: false
           checksSummary: off
