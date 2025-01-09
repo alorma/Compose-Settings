@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.jetbrainsCompose)
@@ -6,7 +8,24 @@ plugins {
 }
 
 kotlin {
+  jvm()
 
-  jvm("desktop")
+  sourceSets {
+    jvmMain.dependencies {
+      implementation(compose.desktop.currentOs)
+      implementation(projects.samples.shared)
+    }
+  }
+}
 
+compose.desktop {
+  application {
+    mainClass = "com.alorma.compose.settings.sample.shared.MainKt"
+
+    nativeDistributions {
+      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+      packageName = libs.versions.namespace.get() + ".sample.shared"
+      packageVersion = "1.0.0"
+    }
+  }
 }

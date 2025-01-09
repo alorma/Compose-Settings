@@ -17,8 +17,6 @@ kotlin {
 
   applyDefaultHierarchyTemplate()
 
-  jvm("desktop")
-
   js(IR) {
     browser()
     binaries.executable()
@@ -59,11 +57,6 @@ kotlin {
 
       implementation(projects.uiTiles)
       implementation(projects.uiTilesExtended)
-    }
-
-    val desktopMain by getting
-    desktopMain.dependencies {
-      implementation(compose.desktop.currentOs)
     }
 
     val jsMain by getting
@@ -115,18 +108,6 @@ android {
     implementation(projects.uiTilesExtended)
 
     screenshotTestImplementation(compose.uiTooling)
-  }
-}
-
-compose.desktop {
-  application {
-    mainClass = "MainKt"
-
-    nativeDistributions {
-      targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-      packageName = libs.versions.namespace.get() + ".sample.shared"
-      packageVersion = "1.0.0"
-    }
   }
 }
 
