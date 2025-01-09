@@ -32,6 +32,26 @@ jobs:
       - name: Detekt - Main
         run: ./gradlew detektAll
 
+      - name: Fix path in logs
+        uses: richardrigutins/replace-in-files@v2.1.9
+        if: ${{ !cancelled() }}
+        with:
+          files: ${{ github.workspace }}/**/build/reports/detekt/*.xml
+          search-text: ${{ github.workspace }}/
+          replacement-text: ''
+
+      - name: Publish detekt results
+        if: ${{ !cancelled()}}
+        uses: gmazzo/publish-report-annotations@v1.11.3
+        with:
+          reports: ${{ github.workspace }}/**/build/reports/detekt/*.xml
+          checkName: Detekt
+          token: ${{ github.token }}
+          workflowSummary: false
+          warningsAsErrors: false
+          checksSummary: off
+          failOnError: true
+
   build-lib-base:
     name: Build base - Main
     if: ${{ success() }}
