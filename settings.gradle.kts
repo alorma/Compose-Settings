@@ -20,6 +20,9 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 
+include(":samples:shared")
+include(":samples:desktopApp")
+
 include(":ui-base")
 include(":ui-tiles")
 include(":ui-tiles-extended")
