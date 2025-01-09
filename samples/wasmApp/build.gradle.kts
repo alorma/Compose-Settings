@@ -8,7 +8,8 @@ plugins {
 }
 
 kotlin {
-  js(IR) {
+  @OptIn(ExperimentalWasmDsl::class)
+  wasmJs {
     moduleName = "composesettings"
     browser {
       commonWebpackConfig {
@@ -19,27 +20,9 @@ kotlin {
     useEsModules()
   }
 
-  @OptIn(ExperimentalWasmDsl::class)
-  wasmJs {
-    moduleName = "composesettings"
-    browser()
-    binaries.executable()
-  }
-
   sourceSets {
-    commonMain.dependencies {
+    wasmJsMain.dependencies {
       implementation(projects.samples.shared)
-    }
-
-    val jsMain by getting {
-      dependencies {
-        implementation(compose.runtime)
-        implementation(compose.ui)
-        implementation(compose.foundation)
-        implementation(compose.material3)
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-        implementation(compose.components.resources)
-      }
     }
   }
 }
