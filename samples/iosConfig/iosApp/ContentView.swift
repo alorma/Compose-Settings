@@ -1,6 +1,6 @@
 import UIKit
 import SwiftUI
-import iosSampleApp
+import iosApp
 
 struct ContentView: View {
     var body: some View {
