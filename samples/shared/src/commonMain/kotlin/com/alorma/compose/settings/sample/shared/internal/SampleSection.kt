@@ -1,4 +1,4 @@
-package internal
+package com.alorma.compose.settings.sample.shared.internal
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues

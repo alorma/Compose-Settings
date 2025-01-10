@@ -21,6 +21,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
+import com.alorma.compose.settings.sample.shared.internal.SampleData
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
@@ -28,11 +30,9 @@ import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
-import internal.MultiChoiceAlertDialog
-import internal.SampleData
-import internal.SampleSection
-import internal.SingleChoiceAlertDialog
-import internal.iconSampleOrNull
+import com.alorma.compose.settings.sample.shared.internal.SampleSection
+import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
+import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 
 @Composable
 fun SettingsScreen(

@@ -1,4 +1,4 @@
-package internal
+package com.alorma.compose.settings.sample.shared.internal
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.ListItem

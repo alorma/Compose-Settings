@@ -1,4 +1,4 @@
-package internal
+package com.alorma.compose.settings.sample.shared.internal
 
 internal object SampleData {
   val items = listOf(
