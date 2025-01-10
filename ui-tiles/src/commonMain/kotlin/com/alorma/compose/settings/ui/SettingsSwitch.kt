@@ -24,7 +24,7 @@ fun SettingsSwitch(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   switchColors: SwitchColors = SwitchDefaults.colors(),
-  colors: ListItemColors = LocalSettingsTileColors.current ?: SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,

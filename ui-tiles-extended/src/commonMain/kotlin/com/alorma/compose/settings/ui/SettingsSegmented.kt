@@ -42,7 +42,7 @@ fun <T> SettingsSegmented(
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: ListItemColors = LocalSettingsTileColors.current ?: SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {

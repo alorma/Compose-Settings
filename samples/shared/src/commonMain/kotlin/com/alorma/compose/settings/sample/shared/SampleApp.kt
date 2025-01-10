@@ -15,7 +15,7 @@ fun SampleApp(
 ) {
   CompositionLocalProvider(
     LocalSettingsTileColors provides SettingsTileDefaults.colors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+      containerColor = MaterialTheme.colorScheme.secondary,
     )
   ) {
     SettingsScreen(

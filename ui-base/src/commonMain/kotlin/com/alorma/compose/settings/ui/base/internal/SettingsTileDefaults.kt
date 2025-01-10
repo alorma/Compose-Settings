@@ -6,26 +6,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 object SettingsTileDefaults {
-  val disabledAlpha: Float = 0.38f
+  private const val disabledAlpha: Float = 0.38f
 
   @Composable
   fun colors(
-    containerColor: Color = Color.Transparent,
-    headlineColor: Color = MaterialTheme.colorScheme.onSurface,
-    leadingIconColor: Color = headlineColor,
-    overlineColor: Color = MaterialTheme.colorScheme.primary,
-    supportingColor: Color = headlineColor,
-    trailingIconColor: Color = headlineColor,
-    disabledHeadlineColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
-    disabledLeadingIconColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
-    disabledTrailingIconColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
+    containerColor: Color = LocalSettingsTileColors.current?.containerColor ?: Color.Transparent,
+    headlineColor: Color = LocalSettingsTileColors.current?.headlineColor
+      ?: MaterialTheme.colorScheme.onSurface,
+    leadingIconColor: Color = LocalSettingsTileColors.current?.leadingIconColor ?: headlineColor,
+    overlineColor: Color = LocalSettingsTileColors.current?.overlineColor
+      ?: MaterialTheme.colorScheme.primary,
+    supportingTextColor: Color = LocalSettingsTileColors.current?.supportingTextColor
+      ?: headlineColor,
+    trailingIconColor: Color = LocalSettingsTileColors.current?.trailingIconColor ?: headlineColor,
+    disabledHeadlineColor: Color = LocalSettingsTileColors.current?.disabledHeadlineColor
+      ?: MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
+    disabledLeadingIconColor: Color = LocalSettingsTileColors.current?.disabledLeadingIconColor
+      ?: MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
+    disabledTrailingIconColor: Color = LocalSettingsTileColors.current?.disabledTrailingIconColor
+      ?: MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
   ): ListItemColors =
     ListItemColors(
       containerColor = containerColor,
       headlineColor = headlineColor,
       leadingIconColor = leadingIconColor,
       overlineColor = overlineColor,
-      supportingTextColor = supportingColor,
+      supportingTextColor = supportingTextColor,
       trailingIconColor = trailingIconColor,
       disabledHeadlineColor = disabledHeadlineColor,
       disabledLeadingIconColor = disabledLeadingIconColor,

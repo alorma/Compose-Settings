@@ -24,7 +24,7 @@ fun SettingsCheckbox(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
-  colors: ListItemColors = LocalSettingsTileColors.current ?: SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,

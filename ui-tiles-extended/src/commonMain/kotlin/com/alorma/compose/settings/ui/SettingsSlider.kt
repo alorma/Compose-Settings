@@ -30,7 +30,7 @@ fun SettingsSlider(
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   sliderColors: SliderColors = SliderDefaults.colors(),
-  colors: ListItemColors = LocalSettingsTileColors.current ?: SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {
