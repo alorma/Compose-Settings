@@ -3,7 +3,6 @@ package com.alorma.compose.settings.ui.base.internal
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -28,27 +27,30 @@ fun SettingsTileScaffold(
       title()
     }
   }
-  val decoratedSubtitle: @Composable (() -> Unit)? = subtitle?.let {
-    {
-      ProvideContentColor(colors.subtitleColor(enabled)) {
-        subtitle()
+  val decoratedSubtitle: @Composable (() -> Unit)? =
+    subtitle?.let {
+      {
+        ProvideContentColor(colors.subtitleColor(enabled)) {
+          subtitle()
+        }
       }
     }
-  }
-  val decoratedIcon: @Composable (() -> Unit)? = icon?.let {
-    {
-      ProvideContentColor(colors.iconColor(enabled)) {
-        icon()
+  val decoratedIcon: @Composable (() -> Unit)? =
+    icon?.let {
+      {
+        ProvideContentColor(colors.iconColor(enabled)) {
+          icon()
+        }
       }
     }
-  }
-  val decoratedAction: @Composable (() -> Unit)? = action?.let {
-    {
-      ProvideContentColor(colors.actionColor(enabled)) {
-        action()
+  val decoratedAction: @Composable (() -> Unit)? =
+    action?.let {
+      {
+        ProvideContentColor(colors.actionColor(enabled)) {
+          action()
+        }
       }
     }
-  }
 
   ListItem(
     modifier = Modifier.fillMaxWidth().then(modifier),
@@ -56,17 +58,18 @@ fun SettingsTileScaffold(
     supportingContent = decoratedSubtitle,
     leadingContent = decoratedIcon,
     trailingContent = decoratedAction,
-    colors = ListItemColors(
-      containerColor = colors.containerColor,
-      headlineColor = colors.titleColor,
-      leadingIconColor = colors.iconColor,
-      overlineColor = colors.actionColor,
-      supportingTextColor = colors.subtitleColor,
-      trailingIconColor = colors.actionColor,
-      disabledHeadlineColor = colors.disabledTitleColor,
-      disabledLeadingIconColor = colors.disabledIconColor,
-      disabledTrailingIconColor = colors.disabledActionColor,
-    ),
+    colors =
+      ListItemColors(
+        containerColor = colors.containerColor,
+        headlineColor = colors.titleColor,
+        leadingIconColor = colors.iconColor,
+        overlineColor = colors.actionColor,
+        supportingTextColor = colors.subtitleColor,
+        trailingIconColor = colors.actionColor,
+        disabledHeadlineColor = colors.disabledTitleColor,
+        disabledLeadingIconColor = colors.disabledIconColor,
+        disabledTrailingIconColor = colors.disabledActionColor,
+      ),
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   )
@@ -75,7 +78,7 @@ fun SettingsTileScaffold(
 @Composable
 private fun ProvideContentColor(
   contentColor: Color,
-  content: @Composable () -> Unit
+  content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(LocalContentColor provides contentColor) {
     content()

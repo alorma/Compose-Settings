@@ -14,7 +14,7 @@ plugins {
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
 
 kotlin {
-  
+
   applyDefaultHierarchyTemplate()
 
   withSourcesJar()
@@ -22,7 +22,6 @@ kotlin {
   androidTarget {
     publishLibraryVariants("release")
   }
-
 
   jvm("desktop")
 

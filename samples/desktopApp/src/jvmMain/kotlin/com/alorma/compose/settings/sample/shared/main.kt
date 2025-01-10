@@ -6,19 +6,20 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import theme.ComposeSettingsTheme
 
-fun main() = application {
-  Window(
-    onCloseRequest = ::exitApplication,
-    title = "Compose Settings - sample",
-  ) {
-    val darkModeState = remember { mutableStateOf(false) }
-    ComposeSettingsTheme(
-      darkModeState = darkModeState.value,
+fun main() =
+  application {
+    Window(
+      onCloseRequest = ::exitApplication,
+      title = "Compose Settings - sample",
     ) {
-      SampleApp(
+      val darkModeState = remember { mutableStateOf(false) }
+      ComposeSettingsTheme(
         darkModeState = darkModeState.value,
-        onDarkModeState = { darkModeState.value =  it },
-      )
+      ) {
+        SampleApp(
+          darkModeState = darkModeState.value,
+          onDarkModeState = { darkModeState.value = it },
+        )
+      }
     }
   }
-}

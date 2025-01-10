@@ -1,8 +1,6 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
@@ -11,7 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
@@ -25,21 +22,23 @@ fun SettingsRadioButton(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  checkboxColors: RadioButtonColors = RadioButtonDefaults.colors(
-    selectedColor = colors.actionColor(enabled),
-    disabledSelectedColor = colors.actionColor(enabled),
-  ),
+  checkboxColors: RadioButtonColors =
+    RadioButtonDefaults.colors(
+      selectedColor = colors.actionColor(enabled),
+      disabledSelectedColor = colors.actionColor(enabled),
+    ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(
-    modifier = Modifier.toggleable(
-      enabled = enabled,
-      value = state,
-      role = Role.RadioButton,
-      onValueChange = { onClick() },
-    ).then(modifier),
+    modifier =
+      Modifier.toggleable(
+        enabled = enabled,
+        value = state,
+        role = Role.RadioButton,
+        onValueChange = { onClick() },
+      ).then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,

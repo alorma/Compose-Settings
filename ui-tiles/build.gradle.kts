@@ -23,7 +23,6 @@ kotlin {
     publishLibraryVariants("release")
   }
 
-
   jvm("desktop")
 
   iosX64()

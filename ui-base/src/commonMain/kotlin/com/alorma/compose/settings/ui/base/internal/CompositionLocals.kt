@@ -3,10 +3,12 @@ package com.alorma.compose.settings.ui.base.internal
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 
-val LocalSettingsGroupEnabled = compositionLocalOf {
+val LocalSettingsGroupEnabled =
+  compositionLocalOf {
     true
-}
+  }
 
-val LocalSettingsTileColors: ProvidableCompositionLocal<SettingsTileColors?> = compositionLocalOf {
+val LocalSettingsTileColors: ProvidableCompositionLocal<SettingsTileColors?> =
+  compositionLocalOf {
     null
-}
+  }

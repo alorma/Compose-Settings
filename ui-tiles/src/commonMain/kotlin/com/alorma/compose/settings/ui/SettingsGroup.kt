@@ -28,10 +28,11 @@ fun SettingsGroup(
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(
-    modifier = Modifier
-      .fillMaxWidth()
-      .then(modifier)
-      .padding(contentPadding),
+    modifier =
+      Modifier
+        .fillMaxWidth()
+        .then(modifier)
+        .padding(contentPadding),
   ) {
     CompositionLocalProvider(LocalContentColor provides colors.actionColor(enabled)) {
       if (title != null) {
@@ -47,9 +48,10 @@ fun SettingsGroup(
 @Composable
 internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
   Box(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(vertical = 8.dp, horizontal = 16.dp),
+    modifier =
+      Modifier
+        .fillMaxWidth()
+        .padding(vertical = 8.dp, horizontal = 16.dp),
     contentAlignment = Alignment.CenterStart,
   ) {
     val primary = MaterialTheme.colorScheme.primary

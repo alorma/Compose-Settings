@@ -4,7 +4,6 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,23 +23,25 @@ fun SettingsCheckbox(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  checkboxColors: CheckboxColors = CheckboxDefaults.colors(
-    checkedColor = colors.actionColor(enabled),
-    checkmarkColor = contentColorFor(colors.actionColor(enabled)),
-    disabledCheckedColor = colors.actionColor(enabled),
-  ),
+  checkboxColors: CheckboxColors =
+    CheckboxDefaults.colors(
+      checkedColor = colors.actionColor(enabled),
+      checkmarkColor = contentColorFor(colors.actionColor(enabled)),
+      disabledCheckedColor = colors.actionColor(enabled),
+    ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,
 ) {
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
   SettingsTileScaffold(
-    modifier = Modifier.toggleable(
-      enabled = enabled,
-      value = state,
-      role = Role.Switch,
-      onValueChange = { update(!state) },
-    ).then(modifier),
+    modifier =
+      Modifier.toggleable(
+        enabled = enabled,
+        value = state,
+        role = Role.Switch,
+        onValueChange = { update(!state) },
+      ).then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,

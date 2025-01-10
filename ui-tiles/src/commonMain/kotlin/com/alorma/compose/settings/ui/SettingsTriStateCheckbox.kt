@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
@@ -16,7 +14,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
@@ -30,25 +27,27 @@ fun SettingsTriStateCheckbox(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  checkboxColors: CheckboxColors = CheckboxDefaults.colors(
-    checkedColor = colors.actionColor(enabled),
-    checkmarkColor = contentColorFor(colors.actionColor(enabled)),
-    disabledCheckedColor = colors.actionColor(enabled),
-  ),
+  checkboxColors: CheckboxColors =
+    CheckboxDefaults.colors(
+      checkedColor = colors.actionColor(enabled),
+      checkmarkColor = contentColorFor(colors.actionColor(enabled)),
+      disabledCheckedColor = colors.actionColor(enabled),
+    ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
   Row(
-    modifier = Modifier
-      .fillMaxWidth()
-      .triStateToggleable(
-        state = mapNullableBooleanToToggleableState(state),
-        onClick = update,
-        enabled = enabled,
-        role = Role.Checkbox,
-      ).then(modifier),
+    modifier =
+      Modifier
+        .fillMaxWidth()
+        .triStateToggleable(
+          state = mapNullableBooleanToToggleableState(state),
+          onClick = update,
+          enabled = enabled,
+          role = Role.Checkbox,
+        ).then(modifier),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     SettingsTileScaffold(
@@ -70,8 +69,9 @@ fun SettingsTriStateCheckbox(
   }
 }
 
-private fun mapNullableBooleanToToggleableState(state: Boolean?) = when (state) {
-  true -> ToggleableState.On
-  false -> ToggleableState.Off
-  null -> ToggleableState.Indeterminate
-}
+private fun mapNullableBooleanToToggleableState(state: Boolean?) =
+  when (state) {
+    true -> ToggleableState.On
+    false -> ToggleableState.Off
+    null -> ToggleableState.Indeterminate
+  }

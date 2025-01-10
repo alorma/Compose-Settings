@@ -1,7 +1,6 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
@@ -24,12 +23,13 @@ fun SettingsSwitch(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  switchColors: SwitchColors = SwitchDefaults.colors(
-    checkedTrackColor = colors.actionColor(enabled),
-    checkedThumbColor = contentColorFor(colors.actionColor(enabled)),
-    disabledCheckedTrackColor = colors.actionColor(enabled),
-    disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
-  ),
+  switchColors: SwitchColors =
+    SwitchDefaults.colors(
+      checkedTrackColor = colors.actionColor(enabled),
+      checkedThumbColor = contentColorFor(colors.actionColor(enabled)),
+      disabledCheckedTrackColor = colors.actionColor(enabled),
+      disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
+    ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,
@@ -37,12 +37,13 @@ fun SettingsSwitch(
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
 
   SettingsTileScaffold(
-    modifier = Modifier.toggleable(
-      enabled = enabled,
-      value = state,
-      role = Role.Switch,
-      onValueChange = { update(!state) },
-    ).then(modifier),
+    modifier =
+      Modifier.toggleable(
+        enabled = enabled,
+        value = state,
+        role = Role.Switch,
+        onValueChange = { update(!state) },
+      ).then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,

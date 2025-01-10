@@ -16,7 +16,6 @@ class SettingsTileColors(
   val disabledSubtitleColor: Color,
   val disabledActionColor: Color,
 ) {
-
   @Stable
   fun titleColor(enabled: Boolean): Color {
     return if (enabled) titleColor else disabledTitleColor

@@ -20,10 +20,9 @@ fun main() {
       ) {
         SampleApp(
           darkModeState = darkModeState.value,
-          onDarkModeState = { darkModeState.value =  it },
+          onDarkModeState = { darkModeState.value = it },
         )
       }
     }
   }
 }
-

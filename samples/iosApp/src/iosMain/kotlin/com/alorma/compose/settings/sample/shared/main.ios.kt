@@ -1,6 +1,5 @@
 package com.alorma.compose.settings.sample.shared
 
-
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.window.ComposeUIViewController
@@ -15,7 +14,7 @@ fun MainViewController(): UIViewController {
     ) {
       SampleApp(
         darkModeState = darkModeState.value,
-        onDarkModeState = { darkModeState.value =  it },
+        onDarkModeState = { darkModeState.value = it },
       )
     }
   }
