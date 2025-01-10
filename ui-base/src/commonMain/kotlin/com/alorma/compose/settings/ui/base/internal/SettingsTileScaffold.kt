@@ -7,14 +7,9 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-
-private const val DISABLED_LABEL_TEXT_OPACITY = 0.3f
-private const val DISABLED_LEADING_ICON_OPACITY = 0.38f
-private const val DISABLED_TRAILING_ICON_OPACITY = 0.38f
 
 @Composable
 fun SettingsTileScaffold(
@@ -23,33 +18,33 @@ fun SettingsTileScaffold(
   enabled: Boolean = true,
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
-  colors: ListItemColors = SettingsTileDefaults.colors(),
+  colors: SettingsTileColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   action: @Composable (() -> Unit)? = null,
 ) {
   val decoratedTitle: @Composable () -> Unit = {
-    ProvideContentColor(labelContentColor(enabled)) {
+    ProvideContentColor(colors.titleColor(enabled)) {
       title()
     }
   }
   val decoratedSubtitle: @Composable (() -> Unit)? = subtitle?.let {
     {
-      ProvideContentColor(labelContentColor(enabled)) {
+      ProvideContentColor(colors.subtitleColor(enabled)) {
         subtitle()
       }
     }
   }
   val decoratedIcon: @Composable (() -> Unit)? = icon?.let {
     {
-      ProvideContentColor(iconContentColor(enabled)) {
+      ProvideContentColor(colors.iconColor(enabled)) {
         icon()
       }
     }
   }
   val decoratedAction: @Composable (() -> Unit)? = action?.let {
     {
-      ProvideContentColor(actionContentColor(enabled)) {
+      ProvideContentColor(colors.actionColor(enabled)) {
         action()
       }
     }
@@ -61,34 +56,20 @@ fun SettingsTileScaffold(
     supportingContent = decoratedSubtitle,
     leadingContent = decoratedIcon,
     trailingContent = decoratedAction,
-    colors = colors,
+    colors = ListItemColors(
+      containerColor = colors.containerColor,
+      headlineColor = colors.titleColor,
+      leadingIconColor = colors.iconColor,
+      overlineColor = colors.actionColor,
+      supportingTextColor = colors.subtitleColor,
+      trailingIconColor = colors.actionColor,
+      disabledHeadlineColor = colors.disabledTitleColor,
+      disabledLeadingIconColor = colors.disabledIconColor,
+      disabledTrailingIconColor = colors.disabledActionColor,
+    ),
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   )
-}
-
-@ReadOnlyComposable
-@Composable
-private fun labelContentColor(enabled: Boolean): Color {
-  return LocalContentColor.current.let {
-    if (enabled) it else it.copy(alpha = DISABLED_LABEL_TEXT_OPACITY)
-  }
-}
-
-@ReadOnlyComposable
-@Composable
-private fun iconContentColor(enabled: Boolean): Color {
-  return LocalContentColor.current.let {
-    if (enabled) it else it.copy(alpha = DISABLED_LEADING_ICON_OPACITY)
-  }
-}
-
-@ReadOnlyComposable
-@Composable
-private fun actionContentColor(enabled: Boolean): Color {
-  return LocalContentColor.current.let {
-    if (enabled) it else it.copy(alpha = DISABLED_TRAILING_ICON_OPACITY)
-  }
 }
 
 @Composable

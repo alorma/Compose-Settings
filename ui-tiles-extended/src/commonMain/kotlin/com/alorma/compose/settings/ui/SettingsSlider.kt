@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
+import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
@@ -30,7 +31,7 @@ fun SettingsSlider(
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   sliderColors: SliderColors = SliderDefaults.colors(),
-  colors: ListItemColors = SettingsTileDefaults.colors(),
+  colors: SettingsTileColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {

@@ -8,6 +8,7 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.TriStateCheckbox
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
+import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
@@ -27,8 +29,12 @@ fun SettingsTriStateCheckbox(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
-  colors: ListItemColors = SettingsTileDefaults.colors(),
+  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  checkboxColors: CheckboxColors = CheckboxDefaults.colors(
+    checkedColor = colors.actionColor(enabled),
+    checkmarkColor = contentColorFor(colors.actionColor(enabled)),
+    disabledCheckedColor = colors.actionColor(enabled),
+  ),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit = {},

@@ -51,6 +51,7 @@ fun SettingsScreen(
         .padding(top = padding.calculateTopPadding()),
     ) {
       val iconState = remember { mutableStateOf(false) }
+
       SettingsSwitch(
         state = iconState.value,
         title = { Text(text = "Show icon") },
@@ -72,6 +73,7 @@ fun SettingsScreen(
         },
       )
 
+      SettingsGroupSectionSample(iconState.value)
       SettingsSwitchSampleSection(iconState.value)
       SettingsCheckboxSampleSection(iconState.value)
       SettingsTriStateCheckboxSampleSection(iconState.value)
@@ -79,7 +81,6 @@ fun SettingsScreen(
       SettingsMenuLinkSectionSample(iconState.value)
       SettingsSliderSectionSample(iconState.value)
       SettingsSelectorsSample(iconState.value)
-      SettingsGroupSectionSample(iconState.value)
     }
   }
 }
@@ -415,14 +416,13 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       onCheckedChange = { newState -> triSateCheckboxState.value = newState },
     )
 
-    val state = remember { mutableStateOf<String?>(null) }
-
+    val state = remember { mutableStateOf(false) }
     SettingsRadioButton(
-      state = state.value == SampleData.items.first().key,
-      title = { Text(text = SampleData.items.first().title) },
-      subtitle = { Text(text = SampleData.items.first().description) },
+      state = state.value,
+      title = { Text(text = "RadioButton") },
+      subtitle = { Text(text = "RadioButton subtitle") },
       icon = iconSampleOrNull(showIcon),
-      onClick = { state.value = SampleData.items.first().key },
+      onClick = { state.value = !state.value },
     )
 
     val sliderState = remember { mutableStateOf(5) }

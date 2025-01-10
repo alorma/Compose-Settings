@@ -1,17 +1,17 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
+import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
@@ -23,8 +23,13 @@ fun SettingsSwitch(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  switchColors: SwitchColors = SwitchDefaults.colors(),
-  colors: ListItemColors = SettingsTileDefaults.colors(),
+  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  switchColors: SwitchColors = SwitchDefaults.colors(
+    checkedTrackColor = colors.actionColor(enabled),
+    checkedThumbColor = contentColorFor(colors.actionColor(enabled)),
+    disabledCheckedTrackColor = colors.actionColor(enabled),
+    disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
+  ),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,

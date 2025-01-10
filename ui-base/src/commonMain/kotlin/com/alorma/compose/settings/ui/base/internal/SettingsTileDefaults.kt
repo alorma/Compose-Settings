@@ -1,6 +1,5 @@
 package com.alorma.compose.settings.ui.base.internal
 
-import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -11,30 +10,25 @@ object SettingsTileDefaults {
   @Composable
   fun colors(
     containerColor: Color = LocalSettingsTileColors.current?.containerColor ?: Color.Transparent,
-    headlineColor: Color = LocalSettingsTileColors.current?.headlineColor
+    titleColor: Color = LocalSettingsTileColors.current?.titleColor
       ?: MaterialTheme.colorScheme.onSurface,
-    leadingIconColor: Color = LocalSettingsTileColors.current?.leadingIconColor ?: headlineColor,
-    overlineColor: Color = LocalSettingsTileColors.current?.overlineColor
+    iconColor: Color = LocalSettingsTileColors.current?.iconColor ?: titleColor,
+    subtitleColor: Color = LocalSettingsTileColors.current?.subtitleColor ?: titleColor,
+    actionColor: Color = LocalSettingsTileColors.current?.actionColor
       ?: MaterialTheme.colorScheme.primary,
-    supportingTextColor: Color = LocalSettingsTileColors.current?.supportingTextColor
-      ?: headlineColor,
-    trailingIconColor: Color = LocalSettingsTileColors.current?.trailingIconColor ?: headlineColor,
-    disabledHeadlineColor: Color = LocalSettingsTileColors.current?.disabledHeadlineColor
-      ?: MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
-    disabledLeadingIconColor: Color = LocalSettingsTileColors.current?.disabledLeadingIconColor
-      ?: MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
-    disabledTrailingIconColor: Color = LocalSettingsTileColors.current?.disabledTrailingIconColor
-      ?: MaterialTheme.colorScheme.onSurface.copy(alpha = disabledAlpha),
-  ): ListItemColors =
-    ListItemColors(
-      containerColor = containerColor,
-      headlineColor = headlineColor,
-      leadingIconColor = leadingIconColor,
-      overlineColor = overlineColor,
-      supportingTextColor = supportingTextColor,
-      trailingIconColor = trailingIconColor,
-      disabledHeadlineColor = disabledHeadlineColor,
-      disabledLeadingIconColor = disabledLeadingIconColor,
-      disabledTrailingIconColor = disabledTrailingIconColor,
-    )
+    disabledTitleColor: Color = titleColor.copy(alpha = disabledAlpha),
+    disabledIconColor: Color = iconColor.copy(alpha = disabledAlpha),
+    disabledSubtitleColor: Color = subtitleColor.copy(alpha = disabledAlpha),
+    disabledActionColor: Color = actionColor.copy(alpha = disabledAlpha),
+  ): SettingsTileColors = SettingsTileColors(
+    containerColor = containerColor,
+    titleColor = titleColor,
+    iconColor = iconColor,
+    subtitleColor = subtitleColor,
+    actionColor = actionColor,
+    disabledTitleColor = disabledTitleColor,
+    disabledIconColor = disabledIconColor,
+    disabledSubtitleColor = disabledSubtitleColor,
+    disabledActionColor = disabledActionColor,
+  )
 }
