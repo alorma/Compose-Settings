@@ -122,7 +122,7 @@ jobs:
 
       - name: Build sample ${{ matrix.config.target }} - PR
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :samples:${{matrix.module}}:${{ matrix.config.tasks }}
+        run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
 #  verify-screenshots:
 #    name: Validate screenshots - PR
