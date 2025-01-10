@@ -41,7 +41,7 @@ fun SettingsScreen(
 ) {
   Scaffold(
     modifier = modifier,
-    containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
+    containerColor = MaterialTheme.colorScheme.surfaceContainer,
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
