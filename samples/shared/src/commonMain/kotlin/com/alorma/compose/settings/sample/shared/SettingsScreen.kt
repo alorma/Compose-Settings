@@ -51,7 +51,6 @@ fun SettingsScreen(
         .padding(top = padding.calculateTopPadding()),
     ) {
       val iconState = remember { mutableStateOf(false) }
-      SettingsGroupSectionSample(iconState.value)
 
       SettingsSwitch(
         state = iconState.value,
@@ -81,6 +80,7 @@ fun SettingsScreen(
       SettingsMenuLinkSectionSample(iconState.value)
       SettingsSliderSectionSample(iconState.value)
       SettingsSelectorsSample(iconState.value)
+      SettingsGroupSectionSample(iconState.value)
     }
   }
 }
@@ -198,18 +198,26 @@ private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
 @Composable
 private fun SettingsSliderSectionSample(showIcon: Boolean) {
   SampleSection(title = "SettingsSlider") {
-    val state = remember { mutableStateOf(5) }
-
-    SettingsSlider(
-      title = { Text(text = "Slider") },
-      value = state.value.toFloat(),
-      onValueChange = { state.value = it.toInt() },
-      subtitle = { Text(text = "Selected value: ${state.value}") },
-      icon = iconSampleOrNull(showIcon),
-      valueRange = 0f..20f,
-      steps = 20,
-    )
+    DemoSlider(showIcon)
   }
+}
+
+@Composable
+private fun DemoSlider(
+  showIcon: Boolean,
+) {
+  val maxSteps = 6
+  val state = remember { mutableStateOf(maxSteps / 2) }
+
+  SettingsSlider(
+    title = { Text(text = "Slider") },
+    value = state.value.toFloat(),
+    onValueChange = { state.value = it.toInt() },
+    subtitle = { Text(text = "Selected value: ${state.value}") },
+    icon = iconSampleOrNull(showIcon),
+    valueRange = 0f..maxSteps.toFloat(),
+    steps = maxSteps - 1,
+  )
 }
 
 @Composable
@@ -425,16 +433,7 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       onClick = { state.value = !state.value },
     )
 
-    val sliderState = remember { mutableStateOf(5) }
-    SettingsSlider(
-      title = { Text(text = "Slider") },
-      value = sliderState.value.toFloat(),
-      onValueChange = { sliderState.value = it.toInt() },
-      subtitle = { Text(text = "Selected value: ${sliderState.value}") },
-      icon = iconSampleOrNull(showIcon),
-      valueRange = 0f..20f,
-      steps = 20,
-    )
+    DemoSlider(showIcon)
 
     val items = listOf(1, 2, 3)
 
