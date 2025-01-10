@@ -19,8 +19,8 @@ fun SettingsTileScaffold(
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  tonalElevation: Dp = ListItemDefaults.Elevation,
-  shadowElevation: Dp = ListItemDefaults.Elevation,
+  tonalElevation: Dp = SettingsTileDefaults.Elevation,
+  shadowElevation: Dp = SettingsTileDefaults.Elevation,
   action: @Composable (() -> Unit)? = null,
 ) {
   val decoratedTitle: @Composable () -> Unit = {

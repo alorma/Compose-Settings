@@ -30,8 +30,8 @@ fun SettingsSwitch(
     disabledCheckedTrackColor = colors.actionColor(enabled),
     disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
   ),
-  tonalElevation: Dp = ListItemDefaults.Elevation,
-  shadowElevation: Dp = ListItemDefaults.Elevation,
+  tonalElevation: Dp = SettingsTileDefaults.Elevation,
+  shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onCheckedChange: (Boolean) -> Unit,
 ) {
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }

@@ -29,8 +29,8 @@ fun SettingsRadioButton(
     selectedColor = colors.actionColor(enabled),
     disabledSelectedColor = colors.actionColor(enabled),
   ),
-  tonalElevation: Dp = ListItemDefaults.Elevation,
-  shadowElevation: Dp = ListItemDefaults.Elevation,
+  tonalElevation: Dp = SettingsTileDefaults.Elevation,
+  shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(

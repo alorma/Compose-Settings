@@ -32,8 +32,8 @@ fun SettingsSlider(
   onValueChangeFinished: (() -> Unit)? = null,
   sliderColors: SliderColors = SliderDefaults.colors(),
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  tonalElevation: Dp = ListItemDefaults.Elevation,
-  shadowElevation: Dp = ListItemDefaults.Elevation,
+  tonalElevation: Dp = SettingsTileDefaults.Elevation,
+  shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
   SettingsTileScaffold(
     modifier = modifier,

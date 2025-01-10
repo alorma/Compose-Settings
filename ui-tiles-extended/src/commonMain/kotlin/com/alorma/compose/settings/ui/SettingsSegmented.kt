@@ -2,8 +2,7 @@ package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonColors
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -12,10 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
@@ -29,6 +28,8 @@ fun <T> SettingsSegmented(
   onItemSelected: (T) -> Unit,
   itemTitleMap: (T) -> CharSequence,
   modifier: Modifier = Modifier,
+  enabled: Boolean = LocalSettingsGroupEnabled.current,
+  colors: SettingsTileColors = SettingsTileDefaults.colors(),
   buttonSpace: Dp = SegmentedButtonDefaults.BorderWidth,
   buttonShape: @Composable (Int) -> Shape = { index ->
     SegmentedButtonDefaults.itemShape(
@@ -36,16 +37,19 @@ fun <T> SettingsSegmented(
       count = items.size,
     )
   },
-  buttonColors: SegmentedButtonColors = SegmentedButtonDefaults.colors(),
+  buttonColors: SegmentedButtonColors = SegmentedButtonDefaults.colors(
+    activeContainerColor = colors.actionColor(enabled).copy(alpha = 0.4f)
+      .compositeOver(MaterialTheme.colorScheme.surfaceContainerLowest),
+    disabledActiveContainerColor = colors.actionColor(enabled).copy(alpha = 0.12f)
+      .compositeOver(MaterialTheme.colorScheme.surfaceContainerLowest),
+  ),
   buttonIcon: @Composable (Boolean) -> Unit = { selected ->
     SegmentedButtonDefaults.Icon(selected)
   },
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
-  enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  tonalElevation: Dp = ListItemDefaults.Elevation,
-  shadowElevation: Dp = ListItemDefaults.Elevation,
+  tonalElevation: Dp = SettingsTileDefaults.Elevation,
+  shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
   SettingsTileScaffold(
     modifier = modifier,
@@ -62,6 +66,7 @@ fun <T> SettingsSegmented(
             val shape = buttonShape(index)
 
             SegmentedButton(
+              enabled = enabled,
               shape = shape,
               label = {
                 when (val text = itemTitleMap(item)) {

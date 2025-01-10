@@ -21,8 +21,8 @@ fun SettingsMenuLink(
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  tonalElevation: Dp = ListItemDefaults.Elevation,
-  shadowElevation: Dp = ListItemDefaults.Elevation,
+  tonalElevation: Dp = SettingsTileDefaults.Elevation,
+  shadowElevation: Dp = SettingsTileDefaults.Elevation,
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(
