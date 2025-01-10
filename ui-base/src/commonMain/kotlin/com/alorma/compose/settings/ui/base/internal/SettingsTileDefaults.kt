@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.Dp
 
 object SettingsTileDefaults {
   val Elevation: Dp = ListItemDefaults.Elevation
-  private const val DisabledAlpha: Float = 0.38f
+  val DisabledAlpha: Float = 0.38f
 
   @Composable
   fun colors(
@@ -16,8 +16,8 @@ object SettingsTileDefaults {
       ?: MaterialTheme.colorScheme.surface,
     titleColor: Color = LocalSettingsTileColors.current?.titleColor
       ?: MaterialTheme.colorScheme.primary,
-    iconColor: Color = LocalSettingsTileColors.current?.iconColor ?: titleColor,
-    subtitleColor: Color = LocalSettingsTileColors.current?.subtitleColor ?: titleColor,
+    iconColor: Color = LocalSettingsTileColors.current?.iconColor ?: MaterialTheme.colorScheme.onSurface,
+    subtitleColor: Color = LocalSettingsTileColors.current?.subtitleColor ?: MaterialTheme.colorScheme.onSurface,
     actionColor: Color = LocalSettingsTileColors.current?.actionColor
       ?: MaterialTheme.colorScheme.primary,
     disabledTitleColor: Color = titleColor.copy(alpha = DisabledAlpha),

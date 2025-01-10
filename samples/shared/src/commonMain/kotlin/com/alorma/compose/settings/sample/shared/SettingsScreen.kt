@@ -51,6 +51,7 @@ fun SettingsScreen(
         .padding(top = padding.calculateTopPadding()),
     ) {
       val iconState = remember { mutableStateOf(false) }
+      SettingsGroupSectionSample(iconState.value)
 
       SettingsSwitch(
         state = iconState.value,
@@ -73,7 +74,6 @@ fun SettingsScreen(
         },
       )
 
-      SettingsGroupSectionSample(iconState.value)
       SettingsSwitchSampleSection(iconState.value)
       SettingsCheckboxSampleSection(iconState.value)
       SettingsTriStateCheckboxSampleSection(iconState.value)
