@@ -28,3 +28,7 @@ compose.desktop {
     }
   }
 }
+
+dependencies {
+  detektPlugins(libs.compose.detekt.rules)
+}
