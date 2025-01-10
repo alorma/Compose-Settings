@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<baseline version="1.0">
+    <file name="src/iosMain/kotlin/com/alorma/compose/settings/sample/shared/main.ios.kt">
+        <error line="1" column="1" source="standard:filename" />
+        <error line="9" column="5" source="standard:function-naming" />
+    </file>
+</baseline>

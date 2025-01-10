@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<baseline version="1.0">
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/SettingsCheckbox.kt">
+        <error line="18" column="5" source="standard:function-naming" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/SettingsGroup.kt">
+        <error line="22" column="5" source="standard:function-naming" />
+        <error line="49" column="14" source="standard:function-naming" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/SettingsMenuLink.kt">
+        <error line="13" column="5" source="standard:function-naming" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/SettingsRadioButton.kt">
+        <error line="17" column="5" source="standard:function-naming" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/SettingsSwitch.kt">
+        <error line="18" column="5" source="standard:function-naming" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/SettingsTriStateCheckbox.kt">
+        <error line="22" column="5" source="standard:function-naming" />
+    </file>
+</baseline>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<baseline version="1.0">
+    <file name="build/generated/compose/resourceGenerator/kotlin/androidMainResourceCollectors/compose_settings/samples/shared/generated/resources/ActualResourceCollectors.kt">
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+    </file>
+    <file name="build/generated/compose/resourceGenerator/kotlin/commonMainResourceCollectors/compose_settings/samples/shared/generated/resources/ExpectResourceCollectors.kt">
+        <error line="1" column="9" source="standard:package-name" />
+        <error line="3" column="1" source="standard:import-ordering" />
+    </file>
+    <file name="build/generated/compose/resourceGenerator/kotlin/commonResClass/compose_settings/samples/shared/generated/resources/Res.kt">
+        <error line="6" column="9" source="standard:package-name" />
+        <error line="8" column="1" source="standard:import-ordering" />
+        <error line="26" column="1" source="standard:indent" />
+        <error line="26" column="25" source="standard:multiline-expression-wrapping" />
+        <error line="26" column="25" source="standard:wrapping" />
+        <error line="26" column="25" source="standard:argument-list-wrapping" />
+        <error line="27" column="10" source="standard:wrapping" />
+        <error line="27" column="11" source="standard:argument-list-wrapping" />
+        <error line="38" column="44" source="standard:function-signature" />
+        <error line="39" column="1" source="standard:indent" />
+        <error line="41" column="17" source="standard:class-naming" />
+        <error line="43" column="17" source="standard:class-naming" />
+        <error line="45" column="17" source="standard:class-naming" />
+        <error line="47" column="17" source="standard:class-naming" />
+        <error line="49" column="17" source="standard:class-naming" />
+    </file>
+    <file name="build/generated/compose/resourceGenerator/kotlin/desktopMainResourceCollectors/compose_settings/samples/shared/generated/resources/ActualResourceCollectors.kt">
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+    </file>
+    <file name="build/generated/compose/resourceGenerator/kotlin/iosArm64MainResourceCollectors/compose_settings/samples/shared/generated/resources/ActualResourceCollectors.kt">
+        <error line="3" column="9" source="standard:package-name" />
+        <error line="5" column="1" source="standard:import-ordering" />
+        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
+        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SampleApp.kt">
+        <error line="11" column="5" source="standard:function-naming" />
+        <error line="17" column="38" source="standard:multiline-expression-wrapping" />
+        <error line="19" column="6" source="standard:trailing-comma-on-call-site" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SettingsScreen.kt">
+        <error line="37" column="5" source="standard:function-naming" />
+        <error line="48" column="18" source="standard:multiline-expression-wrapping" />
+        <error line="89" column="13" source="standard:function-naming" />
+        <error line="103" column="13" source="standard:function-naming" />
+        <error line="117" column="13" source="standard:function-naming" />
+        <error line="134" column="13" source="standard:function-naming" />
+        <error line="140" column="26" source="standard:multiline-expression-wrapping" />
+        <error line="155" column="34" source="standard:multiline-expression-wrapping" />
+        <error line="199" column="13" source="standard:function-naming" />
+        <error line="206" column="13" source="standard:function-naming" />
+        <error line="207" column="3" source="standard:function-signature" />
+        <error line="207" column="21" source="standard:function-signature" />
+        <error line="224" column="13" source="standard:function-naming" />
+        <error line="225" column="3" source="standard:function-signature" />
+        <error line="225" column="21" source="standard:function-signature" />
+        <error line="227" column="1" source="standard:no-empty-first-line-in-method-block" />
+        <error line="241" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="261" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="280" column="13" source="standard:function-naming" />
+        <error line="300" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="345" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="377" column="13" source="standard:function-naming" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/IconUtils.kt">
+        <error line="8" column="80" source="standard:multiline-expression-wrapping" />
+        <error line="8" column="80" source="standard:function-signature" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelCheckbox.kt">
+        <error line="14" column="14" source="standard:function-naming" />
+        <error line="20" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="25" column="14" source="standard:multiline-expression-wrapping" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelRadioButton.kt">
+        <error line="14" column="14" source="standard:function-naming" />
+        <error line="20" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="25" column="14" source="standard:multiline-expression-wrapping" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/MultiChoiceAlertDialog.kt">
+        <error line="13" column="14" source="standard:function-naming" />
+        <error line="41" column="21" source="standard:multiline-expression-wrapping" />
+        <error line="58" column="21" source="standard:multiline-expression-wrapping" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SampleData.kt">
+        <error line="4" column="15" source="standard:multiline-expression-wrapping" />
+        <error line="19" column="6" source="standard:trailing-comma-on-call-site" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SampleSection.kt">
+        <error line="15" column="14" source="standard:function-naming" />
+        <error line="26" column="16" source="standard:multiline-expression-wrapping" />
+        <error line="27" column="26" source="standard:multiline-expression-wrapping" />
+        <error line="27" column="27" source="standard:wrapping" />
+        <error line="28" column="42" source="standard:wrapping" />
+        <error line="28" column="59" source="standard:trailing-comma-on-call-site" />
+        <error line="29" column="8" source="standard:trailing-comma-on-call-site" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SingleChoiceAlertDialog.kt">
+        <error line="12" column="14" source="standard:function-naming" />
+        <error line="15" column="26" source="standard:trailing-comma-on-declaration-site" />
+        <error line="34" column="21" source="standard:multiline-expression-wrapping" />
+        <error line="51" column="21" source="standard:multiline-expression-wrapping" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/theme/Theme.kt">
+        <error line="10" column="23" source="standard:multiline-expression-wrapping" />
+        <error line="13" column="20" source="standard:trailing-comma-on-call-site" />
+        <error line="16" column="24" source="standard:multiline-expression-wrapping" />
+        <error line="19" column="20" source="standard:trailing-comma-on-call-site" />
+        <error line="23" column="5" source="standard:function-naming" />
+        <error line="32" column="34" source="standard:trailing-comma-on-declaration-site" />
+        <error line="34" column="1" source="standard:no-empty-first-line-in-method-block" />
+        <error line="38" column="22" source="standard:trailing-comma-on-call-site" />
+    </file>
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/theme/Type.kt">
+        <error line="9" column="18" source="standard:multiline-expression-wrapping" />
+        <error line="10" column="15" source="standard:multiline-expression-wrapping" />
+        <error line="15" column="27" source="standard:trailing-comma-on-call-site" />
+        <error line="16" column="4" source="standard:trailing-comma-on-call-site" />
+    </file>
+</baseline>
