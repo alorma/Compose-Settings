@@ -8,6 +8,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import theme.ComposeSettingsTheme
 import theme.DarkColorScheme
@@ -22,23 +24,29 @@ class MainActivity : ComponentActivity() {
     setContent {
       val context: Context = LocalContext.current
 
+      val darkModeState = remember { mutableStateOf(false) }
+
       ComposeSettingsTheme(
-        colorScheme = { darkModeState ->
+        darkModeState = darkModeState.value,
+        colorScheme = { darkModeStateValue ->
           val isS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
           if (isS) {
-            if (darkModeState) {
+            if (darkModeStateValue) {
               dynamicDarkColorScheme(context)
             } else {
               dynamicLightColorScheme(context)
             }
-          } else if (darkModeState) {
+          } else if (darkModeStateValue) {
             DarkColorScheme
           } else {
             LightColorScheme
           }
         },
       ) {
-        SampleApp()
+        SampleApp(
+          darkModeState = darkModeState.value,
+          onDarkModeState = { darkModeState.value = it },
+        )
       }
     }
   }

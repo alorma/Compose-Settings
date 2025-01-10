@@ -54,6 +54,10 @@ kotlin {
       api(compose.material3)
 
       api(compose.components.resources)
+
+      implementation(projects.uiBase)
+      implementation(projects.uiTiles)
+      implementation(projects.uiTilesExtended)
     }
 
     val jsMain by getting {
