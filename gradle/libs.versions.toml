@@ -19,6 +19,7 @@ android-targetSdk = "34"
 namespace = "com.alorma.compose.settings"
 
 detekt = "1.23.7"
+ktlint = "12.1.2"
 dokka = "2.0.0"
 
 compose-detekt-rules = "0.0.26"
@@ -51,6 +52,7 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 
 screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }

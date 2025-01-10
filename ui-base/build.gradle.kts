@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.dokka)
   alias(libs.plugins.detekt)
+  alias(libs.plugins.ktlint)
 }
 
 apply(from = "${rootProject.projectDir}/scripts/publish-module.gradle")
