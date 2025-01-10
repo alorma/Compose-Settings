@@ -24,7 +24,6 @@ fun SettingsGroup(
   title: @Composable (() -> Unit)? = null,
   content: @Composable ColumnScope.() -> Unit,
 ) {
-  Surface {
     Column(
       modifier = Modifier
         .fillMaxWidth()
@@ -38,7 +37,6 @@ fun SettingsGroup(
         content()
       }
     }
-  }
 }
 
 @Composable

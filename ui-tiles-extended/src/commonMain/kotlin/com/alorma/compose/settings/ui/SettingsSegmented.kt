@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
+import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @Composable
@@ -40,7 +41,7 @@ fun <T> SettingsSegmented(
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: ListItemColors = ListItemDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {

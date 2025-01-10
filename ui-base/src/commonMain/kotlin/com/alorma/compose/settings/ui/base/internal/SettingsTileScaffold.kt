@@ -23,7 +23,7 @@ fun SettingsTileScaffold(
   enabled: Boolean = true,
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
-  colors: ListItemColors = ListItemDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   action: @Composable (() -> Unit)? = null,
