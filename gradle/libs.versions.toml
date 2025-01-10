@@ -23,8 +23,6 @@ dokka = "2.0.0"
 
 compose-detekt-rules = "0.0.26"
 
-kotlinx-immutable = "0.3.8"
-
 windowSizeClass = "0.5.0"
 
 screenshot = "0.0.1-alpha08"
