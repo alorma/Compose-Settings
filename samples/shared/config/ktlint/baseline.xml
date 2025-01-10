@@ -76,11 +76,7 @@
         <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
         <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
     </file>
-    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SampleApp.kt">
-        <error line="11" column="5" source="standard:function-naming" />
-        <error line="17" column="38" source="standard:multiline-expression-wrapping" />
-        <error line="19" column="6" source="standard:trailing-comma-on-call-site" />
-    </file>
+
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SettingsScreen.kt">
         <error line="37" column="5" source="standard:function-naming" />
         <error line="48" column="18" source="standard:multiline-expression-wrapping" />
