@@ -82,7 +82,7 @@ jobs:
         if: ${{ !cancelled()}}
         uses: gmazzo/publish-report-annotations@v1.11.3
         with:
-          reports: ${{ github.workspace }}/**/build/reports/detekt/*.xml
+          reports: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
           checkName: Detekt
           token: ${{ github.token }}
           workflowSummary: true
