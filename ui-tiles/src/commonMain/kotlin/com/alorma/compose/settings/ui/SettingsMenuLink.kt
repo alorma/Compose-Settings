@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
+import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
@@ -18,7 +19,7 @@ fun SettingsMenuLink(
   icon: (@Composable () -> Unit)? = null,
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
-  colors: ListItemColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = LocalSettingsTileColors.current ?: SettingsTileDefaults.colors(),
   tonalElevation: Dp = ListItemDefaults.Elevation,
   shadowElevation: Dp = ListItemDefaults.Elevation,
   onClick: () -> Unit,

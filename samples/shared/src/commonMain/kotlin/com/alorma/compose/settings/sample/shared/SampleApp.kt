@@ -1,7 +1,11 @@
 package com.alorma.compose.settings.sample.shared
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
+import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 
 @Composable
 fun SampleApp(
@@ -9,9 +13,15 @@ fun SampleApp(
   onDarkModeState: (Boolean) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  SettingsScreen(
-    modifier = modifier,
-    darkModeState = darkModeState,
-    onDarkModeState = onDarkModeState,
-  )
+  CompositionLocalProvider(
+    LocalSettingsTileColors provides SettingsTileDefaults.colors(
+      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+    )
+  ) {
+    SettingsScreen(
+      modifier = modifier,
+      darkModeState = darkModeState,
+      onDarkModeState = onDarkModeState,
+    )
+  }
 }

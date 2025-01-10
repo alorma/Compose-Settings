@@ -8,8 +8,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -24,6 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
 import com.alorma.compose.settings.sample.shared.internal.SampleData
+import com.alorma.compose.settings.sample.shared.internal.SampleSection
+import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
+import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
@@ -31,9 +32,6 @@ import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
-import com.alorma.compose.settings.sample.shared.internal.SampleSection
-import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
-import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 
 @Composable
 fun SettingsScreen(
@@ -170,9 +168,7 @@ private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
         child3State.value = newState
       },
     )
-    ElevatedCard(
-      elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp),
-    ) {
+    Column {
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child1State.value,
