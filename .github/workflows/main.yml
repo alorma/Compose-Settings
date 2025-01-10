@@ -83,7 +83,7 @@ jobs:
         uses: gmazzo/publish-report-annotations@v1.11.3
         with:
           reports: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
-          checkName: Detekt
+          checkName: Ktlint
           token: ${{ github.token }}
           workflowSummary: true
           warningsAsErrors: false
