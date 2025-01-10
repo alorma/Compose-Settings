@@ -94,10 +94,11 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: android, os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
-          { target: iOS, os: macos-latest, tasks: compileKotlinIosArm64 compileKotlinIosX64 compileKotlinIosSimulatorArm64, continueOnError: false },
-          { target: js, os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
-          { target: desktop, os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
+          { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
+          { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64, continueOnError: false },
+          { target: js,  module: jsApp , os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
+          { target: wasm,  module: wasmApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution, continueOnError: false },
+          { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: compileKotlinDesktop, continueOnError: false }
         ]
     if: ${{ success() }}
     needs: [ build-lib-ui ]
@@ -114,7 +115,7 @@ jobs:
 
       - name: Build sample ${{ matrix.config.target }} - Release
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :composeApp:${{ matrix.config.tasks }}
+        run: ./gradlew :samples:${{matrix.module}}:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - Release
