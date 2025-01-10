@@ -7,17 +7,19 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-val DarkColorScheme = darkColorScheme(
-  primary = Purple40,
-  secondary = PurpleGrey40,
-  tertiary = Pink40
-)
+val DarkColorScheme =
+  darkColorScheme(
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+  )
 
-val LightColorScheme = lightColorScheme(
-  primary = Purple40,
-  secondary = PurpleGrey40,
-  tertiary = Pink40
-)
+val LightColorScheme =
+  lightColorScheme(
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+  )
 
 @Composable
 fun ComposeSettingsTheme(
@@ -29,12 +31,11 @@ fun ComposeSettingsTheme(
       LightColorScheme
     }
   },
-  content: @Composable () -> Unit
+  content: @Composable () -> Unit,
 ) {
-
   MaterialTheme(
     colorScheme = colorScheme(darkModeState),
     typography = Typography,
-    content = content
+    content = content,
   )
 }

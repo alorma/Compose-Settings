@@ -23,10 +23,14 @@ internal fun SampleSection(
     title = { Text(text = title) },
   ) {
     ElevatedCard(
-      colors = CardDefaults.elevatedCardColors(
-        containerColor = (LocalSettingsTileColors.current
-          ?: SettingsTileDefaults.colors()).containerColor
-      )
+      colors =
+        CardDefaults.elevatedCardColors(
+          containerColor =
+            (
+              LocalSettingsTileColors.current
+                ?: SettingsTileDefaults.colors()
+            ).containerColor,
+        ),
     ) { content() }
   }
 }

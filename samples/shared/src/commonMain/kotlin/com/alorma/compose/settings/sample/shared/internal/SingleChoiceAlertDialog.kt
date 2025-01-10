@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 internal fun SingleChoiceAlertDialog(
   selectedItemKey: String?,
   onItemSelected: (String?) -> Unit,
-  items: List<SampleItem>
+  items: List<SampleItem>,
 ) {
   val userSelectedItem = remember { mutableStateOf(selectedItemKey) }
 
@@ -31,33 +31,35 @@ internal fun SingleChoiceAlertDialog(
         }
       }
     },
-    confirmButton = if (userSelectedItem.value == null) {
-      {
-        TextButton(
-          onClick = { onItemSelected(null) },
-        ) {
-          Text(text = "Cancel")
+    confirmButton =
+      if (userSelectedItem.value == null) {
+        {
+          TextButton(
+            onClick = { onItemSelected(null) },
+          ) {
+            Text(text = "Cancel")
+          }
         }
-      }
-    } else {
-      {
-        TextButton(
-          onClick = { onItemSelected(userSelectedItem.value) },
-        ) {
-          Text(text = "Select")
+      } else {
+        {
+          TextButton(
+            onClick = { onItemSelected(userSelectedItem.value) },
+          ) {
+            Text(text = "Select")
+          }
         }
-      }
-    },
-    dismissButton = if (userSelectedItem.value == null) {
-      null
-    } else {
-      {
-        TextButton(
-          onClick = { onItemSelected(null) },
-        ) {
-          Text(text = "Clear")
+      },
+    dismissButton =
+      if (userSelectedItem.value == null) {
+        null
+      } else {
+        {
+          TextButton(
+            onClick = { onItemSelected(null) },
+          ) {
+            Text(text = "Clear")
+          }
         }
-      }
-    },
+      },
   )
 }

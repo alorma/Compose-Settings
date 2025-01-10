@@ -45,10 +45,11 @@ fun SettingsScreen(
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
-      modifier = Modifier
-        .consumeWindowInsets(padding)
-        .verticalScroll(scrollState)
-        .padding(top = padding.calculateTopPadding()),
+      modifier =
+        Modifier
+          .consumeWindowInsets(padding)
+          .verticalScroll(scrollState)
+          .padding(top = padding.calculateTopPadding()),
     ) {
       val iconState = remember { mutableStateOf(false) }
 
@@ -137,26 +138,28 @@ private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
     val child2State = remember { mutableStateOf(true) }
     val child3State = remember { mutableStateOf(false) }
 
-    val allChildStates = remember {
-      derivedStateOf {
-        listOf(
-          child1State.value,
-          child2State.value,
-          child3State.value,
-        )
+    val allChildStates =
+      remember {
+        derivedStateOf {
+          listOf(
+            child1State.value,
+            child2State.value,
+            child3State.value,
+          )
+        }
       }
-    }
 
     val areAllChildEnabled = allChildStates.value.all { it }
     val areNoneChildEnabled = allChildStates.value.none { it }
 
     val areSomeChildEnabled = !areAllChildEnabled && !areNoneChildEnabled
 
-    val triStateWithChildState = if (areSomeChildEnabled) {
-      null
-    } else {
-      areAllChildEnabled || !areNoneChildEnabled
-    }
+    val triStateWithChildState =
+      if (areSomeChildEnabled) {
+        null
+      } else {
+        areAllChildEnabled || !areNoneChildEnabled
+      }
 
     SettingsTriStateCheckbox(
       state = triStateWithChildState,
@@ -203,9 +206,7 @@ private fun SettingsSliderSectionSample(showIcon: Boolean) {
 }
 
 @Composable
-private fun DemoSlider(
-  showIcon: Boolean,
-) {
+private fun DemoSlider(showIcon: Boolean) {
   val maxSteps = 6
   val state = remember { mutableStateOf(maxSteps / 2) }
 
@@ -221,10 +222,7 @@ private fun DemoSlider(
 }
 
 @Composable
-private fun SettingsMenuLinkSectionSample(
-  showIcon: Boolean,
-) {
-
+private fun SettingsMenuLinkSectionSample(showIcon: Boolean) {
   SampleSection(title = "SettingsMenuLink") {
     val actionState = remember { mutableStateOf(false) }
 
@@ -238,40 +236,42 @@ private fun SettingsMenuLinkSectionSample(
       title = { Text(text = "Menu") },
       onClick = { },
       icon = iconSampleOrNull(showIcon),
-      action = if (!actionState.value) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = {},
-          ) {
-            Icon(
-              imageVector = Icons.Default.Build,
-              contentDescription = null,
-            )
+      action =
+        if (!actionState.value) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = {},
+            ) {
+              Icon(
+                imageVector = Icons.Default.Build,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       subtitle = { Text(text = "With subtitle") },
       onClick = { },
       icon = iconSampleOrNull(showIcon),
-      action = if (!actionState.value) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = {},
-          ) {
-            Icon(
-              imageVector = Icons.Default.Build,
-              contentDescription = null,
-            )
+      action =
+        if (!actionState.value) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = {},
+            ) {
+              Icon(
+                imageVector = Icons.Default.Build,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
   }
 }
@@ -297,20 +297,21 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
       },
       onClick = { showSingleChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
-      action = if (singleSelectionState.value == null) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = { singleSelectionState.value = null },
-          ) {
-            Icon(
-              imageVector = Icons.Default.Delete,
-              contentDescription = null,
-            )
+      action =
+        if (singleSelectionState.value == null) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = { singleSelectionState.value = null },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
 
     if (showSingleChoiceDialog.value) {
@@ -342,20 +343,21 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
       },
       onClick = { showMultiChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
-      action = if (multipleSelectionState.value == null) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = { multipleSelectionState.value = null },
-          ) {
-            Icon(
-              imageVector = Icons.Default.Delete,
-              contentDescription = null,
-            )
+      action =
+        if (multipleSelectionState.value == null) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = { multipleSelectionState.value = null },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
 
     if (showMultiChoiceDialog.value) {

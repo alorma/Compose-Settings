@@ -29,11 +29,12 @@ fun SettingsSlider(
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  sliderColors: SliderColors = SliderDefaults.colors(
-    thumbColor = colors.actionColor(enabled),
-    activeTrackColor = colors.actionColor(enabled),
-    inactiveTrackColor = colors.actionColor(enabled).copy(alpha = 0.12f),
-  ),
+  sliderColors: SliderColors =
+    SliderDefaults.colors(
+      thumbColor = colors.actionColor(enabled),
+      activeTrackColor = colors.actionColor(enabled),
+      inactiveTrackColor = colors.actionColor(enabled).copy(alpha = 0.12f),
+    ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {

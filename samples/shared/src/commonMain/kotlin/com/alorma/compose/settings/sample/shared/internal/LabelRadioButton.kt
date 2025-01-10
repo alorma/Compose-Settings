@@ -17,14 +17,16 @@ internal fun LabelRadioButton(
   onClick: () -> Unit,
 ) {
   ListItem(
-    modifier = Modifier.clickable(
-      role = Role.RadioButton,
-      onClick = onClick,
-      onClickLabel = item.title,
-    ),
-    colors = ListItemDefaults.colors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-    ),
+    modifier =
+      Modifier.clickable(
+        role = Role.RadioButton,
+        onClick = onClick,
+        onClickLabel = item.title,
+      ),
+    colors =
+      ListItemDefaults.colors(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+      ),
     headlineContent = { Text(text = item.title) },
     supportingContent = { Text(text = item.description) },
     trailingContent = { RadioButton(selected = isSelected, onClick = null) },

@@ -14,9 +14,10 @@ fun SampleApp(
   modifier: Modifier = Modifier,
 ) {
   CompositionLocalProvider(
-    LocalSettingsTileColors provides SettingsTileDefaults.colors(
-      actionColor = MaterialTheme.colorScheme.error,
-    )
+    LocalSettingsTileColors provides
+      SettingsTileDefaults.colors(
+        actionColor = MaterialTheme.colorScheme.error,
+      ),
   ) {
     SettingsScreen(
       modifier = modifier,

@@ -38,33 +38,35 @@ internal fun MultiChoiceAlertDialog(
         }
       }
     },
-    confirmButton = if (userSelectedItems.isEmpty()) {
-      {
-        TextButton(
-          onClick = { onItemsSelected(emptyList<String>().toList()) },
-        ) {
-          Text(text = "Cancel")
+    confirmButton =
+      if (userSelectedItems.isEmpty()) {
+        {
+          TextButton(
+            onClick = { onItemsSelected(emptyList<String>().toList()) },
+          ) {
+            Text(text = "Cancel")
+          }
         }
-      }
-    } else {
-      {
-        TextButton(
-          onClick = { onItemsSelected(userSelectedItems.toSet().toList()) },
-        ) {
-          Text(text = "Select")
+      } else {
+        {
+          TextButton(
+            onClick = { onItemsSelected(userSelectedItems.toSet().toList()) },
+          ) {
+            Text(text = "Select")
+          }
         }
-      }
-    },
-    dismissButton = if (userSelectedItems.isEmpty()) {
-      null
-    } else {
-      {
-        TextButton(
-          onClick = { onItemsSelected(emptyList<String>().toList()) },
-        ) {
-          Text(text = "Clear")
+      },
+    dismissButton =
+      if (userSelectedItems.isEmpty()) {
+        null
+      } else {
+        {
+          TextButton(
+            onClick = { onItemsSelected(emptyList<String>().toList()) },
+          ) {
+            Text(text = "Clear")
+          }
         }
-      }
-    },
+      },
   )
 }

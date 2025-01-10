@@ -17,14 +17,16 @@ internal fun LabelCheckbox(
   onSelected: () -> Unit,
 ) {
   ListItem(
-    modifier = Modifier.clickable(
-      role = Role.RadioButton,
-      onClick = onSelected,
-      onClickLabel = item.title,
-    ),
-    colors = ListItemDefaults.colors(
-      containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-    ),
+    modifier =
+      Modifier.clickable(
+        role = Role.RadioButton,
+        onClick = onSelected,
+        onClickLabel = item.title,
+      ),
+    colors =
+      ListItemDefaults.colors(
+        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+      ),
     headlineContent = { Text(text = item.title) },
     supportingContent = { Text(text = item.description) },
     trailingContent = { Checkbox(checked = isSelected, onCheckedChange = null) },
