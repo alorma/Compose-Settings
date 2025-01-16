@@ -1,5 +1,5 @@
 [versions]
-androidxactivity = "1.9.3"
+androidxactivity = "1.10.0"
 androidxpreference = "1.2.1"
 
 gradleNexusStagingPlugin = "0.30.0"
