@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <baseline version="1.0">
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/base/internal/SettingsTileDefaults.kt">
+        <error line="11" column="13" source="standard:property-naming" />
+    </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/base/internal/SettingsTileScaffold.kt">
         <error line="14" column="5" source="standard:function-naming" />
         <error line="79" column="13" source="standard:function-naming" />

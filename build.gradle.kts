@@ -69,9 +69,11 @@ subprojects {
     }
     filter {
       exclude("**/build/**")
+      exclude("**/generated/**")
     }
   }
 }
+
 dependencies {
   listOf(
     projects.uiBase,

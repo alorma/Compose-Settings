@@ -1,56 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <baseline version="1.0">
-    <file name="build/generated/compose/resourceGenerator/kotlin/androidMainResourceCollectors/compose_settings/samples/shared/generated/resources/ActualResourceCollectors.kt">
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="3" column="9" source="standard:package-name" />
-        <error line="5" column="1" source="standard:import-ordering" />
-        <error line="21" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="28" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="35" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="42" column="1" source="standard:no-consecutive-blank-lines" />
-        <error line="49" column="1" source="standard:no-consecutive-blank-lines" />
-    </file>
     <file name="build/generated/compose/resourceGenerator/kotlin/commonMainResourceCollectors/compose_settings/samples/shared/generated/resources/ExpectResourceCollectors.kt">
         <error line="1" column="9" source="standard:package-name" />
         <error line="3" column="1" source="standard:import-ordering" />
@@ -73,7 +22,7 @@
         <error line="49" column="17" source="standard:class-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SampleApp.kt">
-        <error line="11" column="5" source="standard:function-naming" />
+        <error line="7" column="5" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SettingsScreen.kt">
         <error line="37" column="5" source="standard:function-naming" />
