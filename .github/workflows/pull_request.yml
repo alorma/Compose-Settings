@@ -53,10 +53,46 @@ jobs:
           checksSummary: full
           failOnError: true
 
+  ktlint:
+    name: Ktlint - PR
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Ktlint - PR
+        run: ./gradlew ktlintCheck
+
+      - name: Fix path in logs
+        uses: richardrigutins/replace-in-files@v2.1.9
+        if: ${{ !cancelled() }}
+        with:
+          files: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
+          search-text: ${{ github.workspace }}/
+          replacement-text: ''
+
+      - name: Publish ktlint results
+        if: ${{ !cancelled()}}
+        uses: gmazzo/publish-report-annotations@v1.11.3
+        with:
+          reports: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
+          checkName: Ktlint
+          token: ${{ github.token }}
+          workflowSummary: true
+          warningsAsErrors: false
+          checksSummary: full
+          failOnError: true
+
   build-lib-base:
     name: Build base - PR
     if: ${{ success() }}
-    needs: [ detekt ]
+    needs: [ detekt, ktlint ]
     runs-on: macos-latest
     steps:
       - name: Check out code
