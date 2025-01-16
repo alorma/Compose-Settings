@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.Dp
 
 object SettingsTileDefaults {
   val Elevation: Dp = ListItemDefaults.Elevation
-  val DisabledAlpha: Float = 0.38f
+  const val DisabledAlpha: Float = 0.38f
 
   @Composable
   fun colors(
