@@ -239,8 +239,8 @@ jobs:
       - name: Build dokka - Main
         run: ./gradlew dokkaGeneratePublicationHtml
 
-      - name: Copy dokka html to dist
-        run: cp -r docs/html composeApp/build/dist/wasmJs/productionExecutable/dokka
+#      - name: Copy dokka html to dist
+#        run: cp -r docs/html composeApp/#build/dist/wasmJs/productionExecutable/#dokka
 
       - name: Upload your page as github pages artifact
         uses: actions/upload-pages-artifact@v3
