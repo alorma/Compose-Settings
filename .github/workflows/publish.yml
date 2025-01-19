@@ -97,7 +97,6 @@ jobs:
           java-version: 17
 
       - name: Build
-        continue-on-error: ${{ matrix.config.continueOnError }}
         run: ./gradlew :ui-base:build
 
   build-lib-ui:
@@ -129,11 +128,11 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
-          { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64, continueOnError: false },
+          { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug },
+          { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64 },
           { target: js,  module: jsApp , os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
-          { target: wasm,  module: wasmApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution, continueOnError: false },
-          { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: assemble, continueOnError: false }
+          { target: wasm,  module: wasmApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
+          { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: assemble }
         ]
     if: ${{ success() }}
     needs: [ build-lib-ui ]
@@ -149,8 +148,8 @@ jobs:
           java-version: 17
 
       - name: Build sample ${{ matrix.config.target }} - Release
-        continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :samples:${{ matrix.module }}:${{ matrix.config.tasks }}
+        continue-on-error: false
+        run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - Release
