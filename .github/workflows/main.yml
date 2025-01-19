@@ -234,7 +234,7 @@ jobs:
           java-version: 17
 
       - name: Build sample JS - Main
-        run: ./gradlew wasmJsBrowserDistribution
+        run: ./gradlew :samples:wasmApp:wasmJsBrowserDistribution
 
       - name: Build dokka - Main
         run: ./gradlew dokkaGeneratePublicationHtml
@@ -245,7 +245,7 @@ jobs:
       - name: Upload your page as github pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: composeApp/build/dist/wasmJs/productionExecutable/
+          path: samples/wasmApp/build/dist/wasmJs/productionExecutable/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
