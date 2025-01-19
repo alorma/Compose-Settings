@@ -137,11 +137,11 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: android,  path: androidApp, os: ubuntu-latest, tasks: assembleDebug  },
-          { target: iOS,  path: iosApp, os: macos-latest, tasks: compileKotlinIosArm64 },
-          { target: js,  path: jsApp, os: ubuntu-latest, tasks: jsBrowserDistribution },
-          { target: wasm,  path: wasmApp, os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
-          { target: desktop,  path: desktopApp, os: ubuntu-latest, tasks: assemble }
+          { target: android,  module: androidApp, os: ubuntu-latest, tasks: assembleDebug  },
+          { target: iOS,  module: iosApp, os: macos-latest, tasks: compileKotlinIosArm64 },
+          { target: js,  module: jsApp, os: ubuntu-latest, tasks: jsBrowserDistribution },
+          { target: wasm,  module: wasmApp, os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
+          { target: desktop,  module: desktopApp, os: ubuntu-latest, tasks: assemble }
         ]
     if: ${{ success() }}
     needs: [ build-lib-ui ]
@@ -158,7 +158,7 @@ jobs:
 
       - name: Build sample ${{ matrix.config.target }} - Main
         continue-on-error: false
-        run: ./gradlew :samples:${{ matrix.config.path }}:${{ matrix.config.tasks }}
+        run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - Main
