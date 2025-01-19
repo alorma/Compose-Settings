@@ -150,7 +150,7 @@ jobs:
 
       - name: Build sample ${{ matrix.config.target }} - Release
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :samples:${{matrix.module}}:${{ matrix.config.tasks }}
+        run: ./gradlew :samples:${{ matrix.module }}:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - Release
