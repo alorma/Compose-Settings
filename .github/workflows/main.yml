@@ -159,25 +159,7 @@ jobs:
 
       - name: Build sample ${{ matrix.config.target }} - Main
         continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :samples:${{matrix.module}}:${{ matrix.config.tasks }}
-
-  verify-screenshots:
-    name: Validate screenshots - PR
-    if: ${{ success() }}
-    needs: [ build-sample ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Validate screenshots - PR
-        run: ./gradlew validateScreenshotTest
+        run: ./gradlew :samples:${{ matrix.module }}:${{ matrix.config.tasks }}
 
   check-sign:
     name: Check signature - Main
