@@ -46,7 +46,7 @@ jobs:
         uses: gmazzo/publish-report-annotations@v1.11.3
         with:
           reports: ${{ github.workspace }}/**/build/reports/detekt/*.xml
-          checkName: Detekt
+          checkName: Detekt - PR
           token: ${{ github.token }}
           workflowSummary: true
           warningsAsErrors: false
@@ -82,7 +82,7 @@ jobs:
         uses: gmazzo/publish-report-annotations@v1.11.3
         with:
           reports: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
-          checkName: Ktlint
+          checkName: Ktlint - PR
           token: ${{ github.token }}
           workflowSummary: true
           warningsAsErrors: false
@@ -137,11 +137,11 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug, continueOnError: false },
-          { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64, continueOnError: false },
-          { target: js,  module: jsApp , os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
-          { target: wasm,  module: wasmApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution, continueOnError: false },
-          { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: assemble, continueOnError: false }
+          { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug },
+          { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64 },
+          { target: js,  module: jsApp , os: ubuntu-latest, tasks: jsBrowserDistribution },
+          { target: wasm,  module: wasmApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
+          { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: assemble }
         ]
     if: ${{ success() }}
     needs: [ build-lib-ui ]
@@ -157,26 +157,8 @@ jobs:
           java-version: 17
 
       - name: Build sample ${{ matrix.config.target }} - PR
-        continue-on-error: ${{ matrix.config.continueOnError }}
+        continue-on-error: false
         run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
-
-#  verify-screenshots:
-#    name: Validate screenshots - PR
-#    if: ${{ success() }}
-#    needs: [ build-sample ]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Check out code
-#        uses: actions/checkout@v4
-#
-#      - name: Set up JDK
-#        uses: actions/setup-java@v4
-#        with:
-#          distribution: adopt
-#          java-version: 17
-#
-#      - name: Validate screenshots - PR
-#        run: ./gradlew validateScreenshotTest
 
   check-sign:
     name: Check signature - PR
