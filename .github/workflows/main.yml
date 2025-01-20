@@ -236,16 +236,19 @@ jobs:
       - name: Build sample JS - Main
         run: ./gradlew :samples:wasmApp:wasmJsBrowserDistribution
 
+      - name: Copy wasmApp to dist
+        run: cp -r samples/wasmApp/build/dist/wasmJs/productionExecutable deployment/
+
       - name: Build dokka - Main
         run: ./gradlew dokkaGeneratePublicationHtml
 
-#      - name: Copy dokka html to dist
-#        run: cp -r docs/html composeApp/#build/dist/wasmJs/productionExecutable/#dokka
+      - name: Copy dokka html to dist
+        run: cp -r docs/html deployment/dokka
 
       - name: Upload your page as github pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: samples/wasmApp/build/dist/wasmJs/productionExecutable/
+          path: deployment/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
