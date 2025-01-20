@@ -4,8 +4,6 @@ plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
-  alias(libs.plugins.detekt)
-  alias(libs.plugins.ktlint)
 }
 
 kotlin {
@@ -32,6 +30,3 @@ composeCompiler {
   includeSourceInformation = true
 }
 
-dependencies {
-  detektPlugins(libs.compose.detekt.rules)
-}
