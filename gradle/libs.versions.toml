@@ -26,8 +26,6 @@ compose-detekt-rules = "0.0.26"
 
 windowSizeClass = "0.5.0"
 
-screenshot = "0.0.1-alpha08"
-
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
 androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
@@ -54,5 +52,3 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-
-screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshot" }

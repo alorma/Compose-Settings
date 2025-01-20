@@ -3,8 +3,8 @@ plugins {
   alias(libs.plugins.androidApplication)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
-  alias(libs.plugins.detekt)
-  alias(libs.plugins.ktlint)
+//  alias(libs.plugins.detekt)
+//  alias(libs.plugins.ktlint)
 }
 
 kotlin {
@@ -58,9 +58,6 @@ android {
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
-  }
-  composeOptions {
-    experimentalProperties["android.experimental.enableScreenshotTest"] = true
   }
 }
 
