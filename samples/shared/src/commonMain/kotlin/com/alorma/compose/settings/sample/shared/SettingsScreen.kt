@@ -73,8 +73,8 @@ fun SettingsScreen(
         },
       )
       SettingsSwitchSampleSection(iconState.value)
+      SettingsCheckboxSampleSection(iconState.value)
       /*
-            SettingsCheckboxSampleSection(iconState.value)
             SettingsTriStateCheckboxSampleSection(iconState.value)
             SettingsRadioButtonSampleSection(iconState.value)
             SettingsMenuLinkSectionSample(iconState.value)
@@ -108,6 +108,13 @@ private fun SettingsCheckboxSampleSection(showIcon: Boolean) {
       state = state.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
+      icon = iconSampleOrNull(showIcon),
+      onCheckedChange = { state.value = it },
+    )
+    SettingsCheckbox(
+      state = state.value,
+      title = { Text(text = "Checkbox 2") },
+      subtitle = { Text(text = "Checkbox subtitle 2") },
       icon = iconSampleOrNull(showIcon),
       onCheckedChange = { state.value = it },
     )
