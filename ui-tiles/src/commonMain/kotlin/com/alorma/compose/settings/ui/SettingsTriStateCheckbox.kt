@@ -11,6 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
@@ -35,19 +38,20 @@ fun SettingsTriStateCheckbox(
     ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
+  semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
   Row(
-    modifier =
-      Modifier
+    modifier = Modifier
         .fillMaxWidth()
         .triStateToggleable(
           state = mapNullableBooleanToToggleableState(state),
           onClick = update,
           enabled = enabled,
           role = Role.Checkbox,
-        ).then(modifier),
+        ).semantics(properties = semanticProperties)
+        .then(modifier),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     SettingsTileScaffold(
@@ -60,6 +64,7 @@ fun SettingsTriStateCheckbox(
       shadowElevation = shadowElevation,
     ) {
       TriStateCheckbox(
+        modifier = Modifier.clearAndSetSemantics {  },
         enabled = enabled,
         state = mapNullableBooleanToToggleableState(state),
         onClick = update,

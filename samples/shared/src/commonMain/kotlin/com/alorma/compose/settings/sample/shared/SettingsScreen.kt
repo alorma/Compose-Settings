@@ -74,14 +74,12 @@ fun SettingsScreen(
       )
       SettingsSwitchSampleSection(iconState.value)
       SettingsCheckboxSampleSection(iconState.value)
-      /*
-            SettingsTriStateCheckboxSampleSection(iconState.value)
-            SettingsRadioButtonSampleSection(iconState.value)
-            SettingsMenuLinkSectionSample(iconState.value)
-            SettingsSliderSectionSample(iconState.value)
-            SettingsSelectorsSample(iconState.value)
-            SettingsGroupSectionSample(iconState.value)
-       */
+      SettingsTriStateCheckboxSampleSection(iconState.value)
+      SettingsRadioButtonSampleSection(iconState.value)
+      SettingsMenuLinkSectionSample(iconState.value)
+      SettingsSliderSectionSample(iconState.value)
+      SettingsSelectorsSample(iconState.value)
+      SettingsGroupSectionSample(iconState.value)
     }
   }
 }
