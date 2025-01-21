@@ -109,13 +109,6 @@ private fun SettingsCheckboxSampleSection(showIcon: Boolean) {
       icon = iconSampleOrNull(showIcon),
       onCheckedChange = { state.value = it },
     )
-    SettingsCheckbox(
-      state = state.value,
-      title = { Text(text = "Checkbox 2") },
-      subtitle = { Text(text = "Checkbox subtitle 2") },
-      icon = iconSampleOrNull(showIcon),
-      onCheckedChange = { state.value = it },
-    )
   }
 }
 

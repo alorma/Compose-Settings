@@ -7,6 +7,9 @@ import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
@@ -29,16 +32,16 @@ fun SettingsRadioButton(
     ),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
+  semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(
-    modifier =
-      Modifier.toggleable(
-        enabled = enabled,
-        value = state,
-        role = Role.RadioButton,
-        onValueChange = { onClick() },
-      ).then(modifier),
+    modifier = Modifier.toggleable(
+      enabled = enabled,
+      value = state,
+      role = Role.RadioButton,
+      onValueChange = { onClick() },
+    ).semantics(properties = semanticProperties).then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,
@@ -48,6 +51,7 @@ fun SettingsRadioButton(
     shadowElevation = shadowElevation,
   ) {
     RadioButton(
+      modifier = Modifier.clearAndSetSemantics {  },
       enabled = enabled,
       selected = state,
       onClick = onClick,
