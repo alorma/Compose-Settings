@@ -1,40 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <baseline version="1.0">
-    <file name="build/generated/compose/resourceGenerator/kotlin/commonMainResourceCollectors/compose_settings/samples/shared/generated/resources/ExpectResourceCollectors.kt">
-        <error line="1" column="9" source="standard:package-name" />
-        <error line="3" column="1" source="standard:import-ordering" />
-    </file>
-    <file name="build/generated/compose/resourceGenerator/kotlin/commonResClass/compose_settings/samples/shared/generated/resources/Res.kt">
-        <error line="6" column="9" source="standard:package-name" />
-        <error line="8" column="1" source="standard:import-ordering" />
-        <error line="26" column="1" source="standard:indent" />
-        <error line="26" column="25" source="standard:multiline-expression-wrapping" />
-        <error line="26" column="25" source="standard:wrapping" />
-        <error line="26" column="25" source="standard:argument-list-wrapping" />
-        <error line="27" column="10" source="standard:wrapping" />
-        <error line="27" column="11" source="standard:argument-list-wrapping" />
-        <error line="38" column="44" source="standard:function-signature" />
-        <error line="39" column="1" source="standard:indent" />
-        <error line="41" column="17" source="standard:class-naming" />
-        <error line="43" column="17" source="standard:class-naming" />
-        <error line="45" column="17" source="standard:class-naming" />
-        <error line="47" column="17" source="standard:class-naming" />
-        <error line="49" column="17" source="standard:class-naming" />
-    </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SampleApp.kt">
         <error line="7" column="5" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SettingsScreen.kt">
         <error line="37" column="5" source="standard:function-naming" />
-        <error line="90" column="13" source="standard:function-naming" />
-        <error line="104" column="13" source="standard:function-naming" />
-        <error line="118" column="13" source="standard:function-naming" />
-        <error line="135" column="13" source="standard:function-naming" />
-        <error line="202" column="13" source="standard:function-naming" />
-        <error line="209" column="13" source="standard:function-naming" />
-        <error line="225" column="13" source="standard:function-naming" />
-        <error line="280" column="13" source="standard:function-naming" />
-        <error line="379" column="13" source="standard:function-naming" />
+        <error line="89" column="13" source="standard:function-naming" />
+        <error line="103" column="13" source="standard:function-naming" />
+        <error line="117" column="13" source="standard:function-naming" />
+        <error line="134" column="13" source="standard:function-naming" />
+        <error line="201" column="13" source="standard:function-naming" />
+        <error line="208" column="13" source="standard:function-naming" />
+        <error line="224" column="13" source="standard:function-naming" />
+        <error line="279" column="13" source="standard:function-naming" />
+        <error line="378" column="13" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelCheckbox.kt">
         <error line="14" column="14" source="standard:function-naming" />

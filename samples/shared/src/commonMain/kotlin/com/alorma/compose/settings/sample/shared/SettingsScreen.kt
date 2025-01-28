@@ -45,10 +45,11 @@ fun SettingsScreen(
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
-      modifier = Modifier
-        .consumeWindowInsets(padding)
-        .verticalScroll(scrollState)
-        .padding(top = padding.calculateTopPadding()),
+      modifier =
+        Modifier
+          .consumeWindowInsets(padding)
+          .verticalScroll(scrollState)
+          .padding(top = padding.calculateTopPadding()),
     ) {
       val iconState = remember { mutableStateOf(false) }
 
@@ -235,20 +236,20 @@ private fun SettingsMenuLinkSectionSample(showIcon: Boolean) {
       onClick = { },
       icon = iconSampleOrNull(showIcon),
       action =
-      if (!actionState.value) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = {},
-          ) {
-            Icon(
-              imageVector = Icons.Default.Build,
-              contentDescription = null,
-            )
+        if (!actionState.value) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = {},
+            ) {
+              Icon(
+                imageVector = Icons.Default.Build,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
     SettingsMenuLink(
       title = { Text(text = "Menu") },
@@ -256,20 +257,20 @@ private fun SettingsMenuLinkSectionSample(showIcon: Boolean) {
       onClick = { },
       icon = iconSampleOrNull(showIcon),
       action =
-      if (!actionState.value) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = {},
-          ) {
-            Icon(
-              imageVector = Icons.Default.Build,
-              contentDescription = null,
-            )
+        if (!actionState.value) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = {},
+            ) {
+              Icon(
+                imageVector = Icons.Default.Build,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
   }
 }
@@ -296,20 +297,20 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
       onClick = { showSingleChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
       action =
-      if (singleSelectionState.value == null) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = { singleSelectionState.value = null },
-          ) {
-            Icon(
-              imageVector = Icons.Default.Delete,
-              contentDescription = null,
-            )
+        if (singleSelectionState.value == null) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = { singleSelectionState.value = null },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
 
     if (showSingleChoiceDialog.value) {
@@ -342,20 +343,20 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
       onClick = { showMultiChoiceDialog.value = true },
       icon = iconSampleOrNull(showIcon),
       action =
-      if (multipleSelectionState.value == null) {
-        null
-      } else {
-        {
-          IconButton(
-            onClick = { multipleSelectionState.value = null },
-          ) {
-            Icon(
-              imageVector = Icons.Default.Delete,
-              contentDescription = null,
-            )
+        if (multipleSelectionState.value == null) {
+          null
+        } else {
+          {
+            IconButton(
+              onClick = { multipleSelectionState.value = null },
+            ) {
+              Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = null,
+              )
+            }
           }
-        }
-      },
+        },
     )
 
     if (showMultiChoiceDialog.value) {

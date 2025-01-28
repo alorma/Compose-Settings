@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
@@ -25,12 +27,14 @@ fun SettingsGroup(
   contentPadding: PaddingValues = PaddingValues(0.dp),
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
   title: @Composable (() -> Unit)? = null,
+  semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(
     modifier =
       Modifier
         .fillMaxWidth()
+        .semantics(properties = semanticProperties)
         .then(modifier)
         .padding(contentPadding),
   ) {

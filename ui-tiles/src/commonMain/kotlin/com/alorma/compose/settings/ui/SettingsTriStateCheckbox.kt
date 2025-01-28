@@ -43,15 +43,15 @@ fun SettingsTriStateCheckbox(
 ) {
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
   Row(
-    modifier = Modifier
+    modifier =
+      Modifier
         .fillMaxWidth()
         .triStateToggleable(
           state = mapNullableBooleanToToggleableState(state),
           onClick = update,
           enabled = enabled,
           role = Role.Checkbox,
-        ).semantics(properties = semanticProperties)
-        .then(modifier),
+        ).semantics(properties = semanticProperties).then(modifier),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     SettingsTileScaffold(
@@ -64,7 +64,7 @@ fun SettingsTriStateCheckbox(
       shadowElevation = shadowElevation,
     ) {
       TriStateCheckbox(
-        modifier = Modifier.clearAndSetSemantics {  },
+        modifier = Modifier.clearAndSetSemantics { },
         enabled = enabled,
         state = mapNullableBooleanToToggleableState(state),
         onClick = update,

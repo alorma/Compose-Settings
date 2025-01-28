@@ -36,12 +36,13 @@ fun SettingsRadioButton(
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(
-    modifier = Modifier.toggleable(
-      enabled = enabled,
-      value = state,
-      role = Role.RadioButton,
-      onValueChange = { onClick() },
-    ).semantics(properties = semanticProperties).then(modifier),
+    modifier =
+      Modifier.toggleable(
+        enabled = enabled,
+        value = state,
+        role = Role.RadioButton,
+        onValueChange = { onClick() },
+      ).semantics(properties = semanticProperties).then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,
@@ -51,7 +52,7 @@ fun SettingsRadioButton(
     shadowElevation = shadowElevation,
   ) {
     RadioButton(
-      modifier = Modifier.clearAndSetSemantics {  },
+      modifier = Modifier.clearAndSetSemantics { },
       enabled = enabled,
       selected = state,
       onClick = onClick,

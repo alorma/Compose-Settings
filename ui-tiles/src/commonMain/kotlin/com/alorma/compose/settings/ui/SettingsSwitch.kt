@@ -41,13 +41,13 @@ fun SettingsSwitch(
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
 
   SettingsTileScaffold(
-    modifier = Modifier.toggleable(
-      enabled = enabled,
-      value = state,
-      role = Role.Switch,
-      onValueChange = { update(!state) },
-    ).semantics(properties = semanticProperties)
-      .then(modifier),
+    modifier =
+      Modifier.toggleable(
+        enabled = enabled,
+        value = state,
+        role = Role.Switch,
+        onValueChange = { update(!state) },
+      ).semantics(properties = semanticProperties).then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,
