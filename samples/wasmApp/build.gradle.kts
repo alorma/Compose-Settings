@@ -29,4 +29,3 @@ kotlin {
 composeCompiler {
   includeSourceInformation = true
 }
-
