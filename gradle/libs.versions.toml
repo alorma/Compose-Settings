@@ -18,7 +18,7 @@ android-targetSdk = "35"
 
 namespace = "com.alorma.compose.settings"
 
-detekt = "1.23.7"
+detekt = "1.23.8"
 ktlint = "12.1.2"
 dokka = "2.0.0"
 
