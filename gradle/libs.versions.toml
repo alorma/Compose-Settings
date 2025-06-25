@@ -7,7 +7,7 @@ publishPlugin = "1.3.0"
 mavenPlugin = "0.31.0"
 
 agp = "8.10.0"
-compose-plugin = "1.8.0"
+compose-plugin = "1.9.0+dev2591"
 
 kotlin = "2.1.20"
 
