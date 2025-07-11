@@ -42,7 +42,9 @@ fun <T> SettingsSegmented(
   buttonColors: SegmentedButtonColors =
     SegmentedButtonDefaults.colors(
       activeContainerColor =
-        colors.actionColor(enabled).copy(alpha = 0.4f)
+        colors
+          .actionColor(enabled)
+          .copy(alpha = 0.4f)
           .compositeOver(MaterialTheme.colorScheme.surfaceContainerLowest),
       inactiveContainerColor = colors.containerColor,
       activeContentColor = colors.subtitleColor(enabled),
@@ -50,7 +52,9 @@ fun <T> SettingsSegmented(
       activeBorderColor = colors.subtitleColor,
       inactiveBorderColor = colors.subtitleColor,
       disabledActiveContainerColor =
-        colors.actionColor(enabled).copy(alpha = 0.12f)
+        colors
+          .actionColor(enabled)
+          .copy(alpha = 0.12f)
           .compositeOver(MaterialTheme.colorScheme.surfaceContainerLowest),
       disabledInactiveContainerColor =
         MaterialTheme.colorScheme.surface
