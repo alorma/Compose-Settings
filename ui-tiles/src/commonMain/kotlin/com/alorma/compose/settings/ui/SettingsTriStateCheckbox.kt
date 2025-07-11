@@ -51,7 +51,8 @@ fun SettingsTriStateCheckbox(
           onClick = update,
           enabled = enabled,
           role = Role.Checkbox,
-        ).semantics(properties = semanticProperties).then(modifier),
+        ).semantics(properties = semanticProperties)
+        .then(modifier),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     SettingsTileScaffold(

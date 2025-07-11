@@ -17,22 +17,14 @@ class SettingsTileColors(
   val disabledActionColor: Color,
 ) {
   @Stable
-  fun titleColor(enabled: Boolean): Color {
-    return if (enabled) titleColor else disabledTitleColor
-  }
+  fun titleColor(enabled: Boolean): Color = if (enabled) titleColor else disabledTitleColor
 
   @Stable
-  fun iconColor(enabled: Boolean): Color {
-    return if (enabled) iconColor else disabledIconColor
-  }
+  fun iconColor(enabled: Boolean): Color = if (enabled) iconColor else disabledIconColor
 
   @Stable
-  fun subtitleColor(enabled: Boolean): Color {
-    return if (enabled) subtitleColor else disabledSubtitleColor
-  }
+  fun subtitleColor(enabled: Boolean): Color = if (enabled) subtitleColor else disabledSubtitleColor
 
   @Stable
-  fun actionColor(enabled: Boolean): Color {
-    return if (enabled) actionColor else disabledActionColor
-  }
+  fun actionColor(enabled: Boolean): Color = if (enabled) actionColor else disabledActionColor
 }

@@ -27,10 +27,12 @@ fun SettingsMenuLink(
 ) {
   SettingsTileScaffold(
     modifier =
-      Modifier.clickable(
-        enabled = enabled,
-        onClick = onClick,
-      ).semantics(properties = semanticProperties).then(modifier),
+      Modifier
+        .clickable(
+          enabled = enabled,
+          onClick = onClick,
+        ).semantics(properties = semanticProperties)
+        .then(modifier),
     enabled = enabled,
     title = title,
     subtitle = subtitle,

@@ -6,8 +6,8 @@ import androidx.compose.ui.window.ComposeUIViewController
 import platform.UIKit.UIViewController
 import theme.ComposeSettingsTheme
 
-fun MainViewController(): UIViewController {
-  return ComposeUIViewController {
+fun MainViewController(): UIViewController =
+  ComposeUIViewController {
     val darkModeState = remember { mutableStateOf(false) }
     ComposeSettingsTheme(
       darkModeState = darkModeState.value,
@@ -18,4 +18,3 @@ fun MainViewController(): UIViewController {
       )
     }
   }
-}
