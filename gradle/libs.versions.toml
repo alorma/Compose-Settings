@@ -13,7 +13,7 @@ kotlin = "2.2.0"
 
 android-minSdk = "21"
 android-minSdkSample = "26"
-android-compileSdk = "36
+android-compileSdk = "36"
 android-targetSdk = "36"
 
 namespace = "com.alorma.compose.settings"
