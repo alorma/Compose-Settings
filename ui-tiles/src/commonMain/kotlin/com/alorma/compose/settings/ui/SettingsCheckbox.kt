@@ -44,7 +44,7 @@ fun SettingsCheckbox(
         .toggleable(
           enabled = enabled,
           value = state,
-          role = Role.Switch,
+          role = Role.Checkbox,
           onValueChange = { update(!state) },
         ).semantics(properties = semanticProperties)
         .then(modifier),
