@@ -11,6 +11,8 @@ permissions:
   checks: write
   statuses: write
   id-token: write
+  pull-requests: write
+  repository-projects: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
