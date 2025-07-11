@@ -6,7 +6,6 @@ plugins {
 
 kotlin {
   js(IR) {
-    moduleName = "composesettings"
     browser {
       commonWebpackConfig {
         outputFileName = "composesettings.js"
