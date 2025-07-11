@@ -35,26 +35,6 @@ jobs:
       - name: Detekt - PR
         run: ./gradlew detektAll
 
-      - name: Fix path in logs
-        uses: richardrigutins/replace-in-files@v2.1.9
-        if: ${{ !cancelled() }}
-        with:
-          files: ${{ github.workspace }}/**/build/reports/detekt/*.xml
-          search-text: ${{ github.workspace }}/
-          replacement-text: ''
-
-      - name: Publish detekt results
-        if: ${{ !cancelled()}}
-        uses: gmazzo/publish-report-annotations@v1.11.3
-        with:
-          reports: ${{ github.workspace }}/**/build/reports/detekt/*.xml
-          checkName: Detekt - PR
-          token: ${{ github.token }}
-          workflowSummary: true
-          warningsAsErrors: false
-          checksSummary: full
-          failOnError: true
-
   ktlint:
     name: Ktlint - PR
     runs-on: macos-latest
@@ -70,26 +50,6 @@ jobs:
 
       - name: Ktlint - PR
         run: ./gradlew ktlintCheck
-
-      - name: Fix path in logs
-        uses: richardrigutins/replace-in-files@v2.1.9
-        if: ${{ !cancelled() }}
-        with:
-          files: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
-          search-text: ${{ github.workspace }}/
-          replacement-text: ''
-
-      - name: Publish ktlint results
-        if: ${{ !cancelled()}}
-        uses: gmazzo/publish-report-annotations@v1.11.3
-        with:
-          reports: ${{ github.workspace }}/**/build/reports/ktlint/**/*.xml
-          checkName: Ktlint - PR
-          token: ${{ github.token }}
-          workflowSummary: true
-          warningsAsErrors: false
-          checksSummary: full
-          failOnError: true
 
   build-lib-base:
     name: Build base - PR
