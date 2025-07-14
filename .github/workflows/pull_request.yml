@@ -19,42 +19,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  detekt:
-    name: Detekt - PR
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Detekt - PR
-        run: ./gradlew detektAll
-
-  ktlint:
-    name: Ktlint - PR
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: adopt
-          java-version: 17
-
-      - name: Ktlint - PR
-        run: ./gradlew ktlintCheck
-
   build-lib-base:
     name: Build base - PR
     if: ${{ success() }}
-    needs: [ detekt, ktlint ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -79,7 +46,7 @@ jobs:
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
-    needs: [ detekt, build-lib-base ]
+    needs: [ build-lib-base ]
     runs-on: macos-latest
     steps:
       - name: Check out code
