@@ -79,7 +79,6 @@ private fun SettingsSwitchSampleSection() {
       state = state.value,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
-
       onCheckedChange = { state.value = it },
     )
   }
@@ -93,7 +92,6 @@ private fun SettingsCheckboxSampleSection() {
       state = state.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
-
       onCheckedChange = { state.value = it },
     )
   }
@@ -109,7 +107,6 @@ private fun SettingsRadioButtonSampleSection() {
         state = state.value == sampleItem.key,
         title = { Text(text = sampleItem.title) },
         subtitle = { Text(text = sampleItem.description) },
-
         onClick = { state.value = sampleItem.key },
       )
     }
@@ -150,7 +147,6 @@ private fun SettingsTriStateCheckboxSampleSection() {
       state = triStateWithChildState,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
-
       onCheckedChange = { newState ->
         child1State.value = newState
         child2State.value = newState
@@ -162,21 +158,18 @@ private fun SettingsTriStateCheckboxSampleSection() {
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child1State.value,
         title = { Text(text = "Child #1") },
-
         onCheckedChange = { child1State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child2State.value,
         title = { Text(text = "Child #2") },
-
         onCheckedChange = { child2State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child3State.value,
         title = { Text(text = "Child #3") },
-
         onCheckedChange = { child3State.value = it },
       )
     }
@@ -219,14 +212,12 @@ private fun SettingsMenuLinkSectionSample() {
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       onClick = { },
-
-      )
+    )
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       subtitle = { Text(text = "With subtitle") },
       onClick = { },
-
-      )
+    )
   }
 }
 
@@ -250,8 +241,7 @@ private fun SettingsSelectorsSample() {
         }
       },
       onClick = { showSingleChoiceDialog.value = true },
-
-      )
+    )
 
     if (showSingleChoiceDialog.value) {
       SingleChoiceAlertDialog(
@@ -281,8 +271,7 @@ private fun SettingsSelectorsSample() {
         }
       },
       onClick = { showMultiChoiceDialog.value = true },
-
-      )
+    )
 
     if (showMultiChoiceDialog.value) {
       MultiChoiceAlertDialog(
@@ -310,7 +299,6 @@ private fun SettingsGroupSectionSample() {
       state = groupEnabled.value,
       title = { Text(text = "Group Enabled") },
       subtitle = { Text(text = "This Switch is always enabled") },
-
       enabled = true,
       onCheckedChange = { groupEnabled.value = it },
     )
@@ -320,15 +308,13 @@ private fun SettingsGroupSectionSample() {
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       onClick = { },
-
-      )
+    )
 
     val switchState = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = switchState.value,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
-
       onCheckedChange = { switchState.value = it },
     )
 
@@ -337,7 +323,6 @@ private fun SettingsGroupSectionSample() {
       state = checkboxState.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
-
       onCheckedChange = { checkboxState.value = it },
     )
 
@@ -346,7 +331,6 @@ private fun SettingsGroupSectionSample() {
       state = triSateCheckboxState.value,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
-
       onCheckedChange = { newState -> triSateCheckboxState.value = newState },
     )
 
@@ -355,7 +339,6 @@ private fun SettingsGroupSectionSample() {
       state = state.value,
       title = { Text(text = "RadioButton") },
       subtitle = { Text(text = "RadioButton subtitle") },
-
       onClick = { state.value = !state.value },
     )
 
@@ -371,7 +354,6 @@ private fun SettingsGroupSectionSample() {
       selectedItem = segmentedState.value,
       onItemSelected = { segmentedState.value = it },
       subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
-
-      )
+    )
   }
 }
