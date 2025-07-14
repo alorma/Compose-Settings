@@ -5,12 +5,7 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,7 +19,6 @@ import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
 import com.alorma.compose.settings.sample.shared.internal.SampleData
 import com.alorma.compose.settings.sample.shared.internal.SampleSection
 import com.alorma.compose.settings.sample.shared.internal.SingleChoiceAlertDialog
-import com.alorma.compose.settings.sample.shared.internal.iconSampleOrNull
 import com.alorma.compose.settings.ui.SettingsCheckbox
 import com.alorma.compose.settings.ui.SettingsMenuLink
 import com.alorma.compose.settings.ui.SettingsRadioButton
@@ -51,14 +45,6 @@ fun SettingsScreen(
           .verticalScroll(scrollState)
           .padding(top = padding.calculateTopPadding()),
     ) {
-      val iconState = remember { mutableStateOf(false) }
-
-      SettingsSwitch(
-        state = iconState.value,
-        title = { Text(text = "Show icon") },
-        onCheckedChange = { iconState.value = it },
-      )
-
       val darkModes = listOf(true, false)
 
       SettingsSegmented(
@@ -73,48 +59,48 @@ fun SettingsScreen(
           }
         },
       )
-      SettingsSwitchSampleSection(iconState.value)
-      SettingsCheckboxSampleSection(iconState.value)
-      SettingsTriStateCheckboxSampleSection(iconState.value)
-      SettingsRadioButtonSampleSection(iconState.value)
-      SettingsMenuLinkSectionSample(iconState.value)
-      SettingsSliderSectionSample(iconState.value)
-      SettingsSelectorsSample(iconState.value)
-      SettingsGroupSectionSample(iconState.value)
+      SettingsSwitchSampleSection()
+      SettingsCheckboxSampleSection()
+      SettingsTriStateCheckboxSampleSection()
+      SettingsRadioButtonSampleSection()
+      SettingsMenuLinkSectionSample()
+      SettingsSliderSectionSample()
+      SettingsSelectorsSample()
+      SettingsGroupSectionSample()
     }
   }
 }
 
 @Composable
-private fun SettingsSwitchSampleSection(showIcon: Boolean) {
+private fun SettingsSwitchSampleSection() {
   SampleSection(title = "SettingsSwitch") {
     val state = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = state.value,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
-      icon = iconSampleOrNull(showIcon),
+
       onCheckedChange = { state.value = it },
     )
   }
 }
 
 @Composable
-private fun SettingsCheckboxSampleSection(showIcon: Boolean) {
+private fun SettingsCheckboxSampleSection() {
   SampleSection(title = "SettingsCheckbox") {
     val state = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = state.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
-      icon = iconSampleOrNull(showIcon),
+
       onCheckedChange = { state.value = it },
     )
   }
 }
 
 @Composable
-private fun SettingsRadioButtonSampleSection(showIcon: Boolean) {
+private fun SettingsRadioButtonSampleSection() {
   SampleSection(title = "SettingsRadioButton") {
     val state = remember { mutableStateOf<String?>(null) }
 
@@ -123,7 +109,7 @@ private fun SettingsRadioButtonSampleSection(showIcon: Boolean) {
         state = state.value == sampleItem.key,
         title = { Text(text = sampleItem.title) },
         subtitle = { Text(text = sampleItem.description) },
-        icon = iconSampleOrNull(showIcon),
+
         onClick = { state.value = sampleItem.key },
       )
     }
@@ -131,7 +117,7 @@ private fun SettingsRadioButtonSampleSection(showIcon: Boolean) {
 }
 
 @Composable
-private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
+private fun SettingsTriStateCheckboxSampleSection() {
   SampleSection(title = "SettingsTriStateCheckbox") {
     val child1State = remember { mutableStateOf(false) }
     val child2State = remember { mutableStateOf(true) }
@@ -164,7 +150,7 @@ private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
       state = triStateWithChildState,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
-      icon = iconSampleOrNull(showIcon),
+
       onCheckedChange = { newState ->
         child1State.value = newState
         child2State.value = newState
@@ -176,21 +162,21 @@ private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child1State.value,
         title = { Text(text = "Child #1") },
-        icon = iconSampleOrNull(showIcon),
+
         onCheckedChange = { child1State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child2State.value,
         title = { Text(text = "Child #2") },
-        icon = iconSampleOrNull(showIcon),
+
         onCheckedChange = { child2State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child3State.value,
         title = { Text(text = "Child #3") },
-        icon = iconSampleOrNull(showIcon),
+
         onCheckedChange = { child3State.value = it },
       )
     }
@@ -198,14 +184,14 @@ private fun SettingsTriStateCheckboxSampleSection(showIcon: Boolean) {
 }
 
 @Composable
-private fun SettingsSliderSectionSample(showIcon: Boolean) {
+private fun SettingsSliderSectionSample() {
   SampleSection(title = "SettingsSlider") {
-    DemoSlider(showIcon)
+    DemoSlider()
   }
 }
 
 @Composable
-private fun DemoSlider(showIcon: Boolean) {
+private fun DemoSlider() {
   val maxSteps = 6
   val state = remember { mutableStateOf(maxSteps / 2) }
 
@@ -214,14 +200,13 @@ private fun DemoSlider(showIcon: Boolean) {
     value = state.value.toFloat(),
     onValueChange = { state.value = it.toInt() },
     subtitle = { Text(text = "Selected value: ${state.value}") },
-    icon = iconSampleOrNull(showIcon),
     valueRange = 0f..maxSteps.toFloat(),
     steps = maxSteps - 1,
   )
 }
 
 @Composable
-private fun SettingsMenuLinkSectionSample(showIcon: Boolean) {
+private fun SettingsMenuLinkSectionSample() {
   SampleSection(title = "SettingsMenuLink") {
     val actionState = remember { mutableStateOf(false) }
 
@@ -234,49 +219,19 @@ private fun SettingsMenuLinkSectionSample(showIcon: Boolean) {
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       onClick = { },
-      icon = iconSampleOrNull(showIcon),
-      action =
-        if (!actionState.value) {
-          null
-        } else {
-          {
-            IconButton(
-              onClick = {},
-            ) {
-              Icon(
-                imageVector = Icons.Default.Build,
-                contentDescription = null,
-              )
-            }
-          }
-        },
-    )
+
+      )
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       subtitle = { Text(text = "With subtitle") },
       onClick = { },
-      icon = iconSampleOrNull(showIcon),
-      action =
-        if (!actionState.value) {
-          null
-        } else {
-          {
-            IconButton(
-              onClick = {},
-            ) {
-              Icon(
-                imageVector = Icons.Default.Build,
-                contentDescription = null,
-              )
-            }
-          }
-        },
-    )
+
+      )
   }
 }
 
 @Composable
-private fun SettingsSelectorsSample(showIcon: Boolean) {
+private fun SettingsSelectorsSample() {
   val items = SampleData.items
 
   SampleSection(title = "Selectors") {
@@ -295,23 +250,8 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
         }
       },
       onClick = { showSingleChoiceDialog.value = true },
-      icon = iconSampleOrNull(showIcon),
-      action =
-        if (singleSelectionState.value == null) {
-          null
-        } else {
-          {
-            IconButton(
-              onClick = { singleSelectionState.value = null },
-            ) {
-              Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-              )
-            }
-          }
-        },
-    )
+
+      )
 
     if (showSingleChoiceDialog.value) {
       SingleChoiceAlertDialog(
@@ -341,23 +281,8 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
         }
       },
       onClick = { showMultiChoiceDialog.value = true },
-      icon = iconSampleOrNull(showIcon),
-      action =
-        if (multipleSelectionState.value == null) {
-          null
-        } else {
-          {
-            IconButton(
-              onClick = { multipleSelectionState.value = null },
-            ) {
-              Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = null,
-              )
-            }
-          }
-        },
-    )
+
+      )
 
     if (showMultiChoiceDialog.value) {
       MultiChoiceAlertDialog(
@@ -375,7 +300,7 @@ private fun SettingsSelectorsSample(showIcon: Boolean) {
 }
 
 @Composable
-private fun SettingsGroupSectionSample(showIcon: Boolean) {
+private fun SettingsGroupSectionSample() {
   val groupEnabled = remember { mutableStateOf(true) }
   SampleSection(
     title = "SettingsGroup",
@@ -385,7 +310,7 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       state = groupEnabled.value,
       title = { Text(text = "Group Enabled") },
       subtitle = { Text(text = "This Switch is always enabled") },
-      icon = iconSampleOrNull(showIcon),
+
       enabled = true,
       onCheckedChange = { groupEnabled.value = it },
     )
@@ -395,15 +320,15 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
     SettingsMenuLink(
       title = { Text(text = "Menu") },
       onClick = { },
-      icon = iconSampleOrNull(showIcon),
-    )
+
+      )
 
     val switchState = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = switchState.value,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
-      icon = iconSampleOrNull(showIcon),
+
       onCheckedChange = { switchState.value = it },
     )
 
@@ -412,7 +337,7 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       state = checkboxState.value,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
-      icon = iconSampleOrNull(showIcon),
+
       onCheckedChange = { checkboxState.value = it },
     )
 
@@ -421,7 +346,7 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       state = triSateCheckboxState.value,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
-      icon = iconSampleOrNull(showIcon),
+
       onCheckedChange = { newState -> triSateCheckboxState.value = newState },
     )
 
@@ -430,11 +355,11 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       state = state.value,
       title = { Text(text = "RadioButton") },
       subtitle = { Text(text = "RadioButton subtitle") },
-      icon = iconSampleOrNull(showIcon),
+
       onClick = { state.value = !state.value },
     )
 
-    DemoSlider(showIcon)
+    DemoSlider()
 
     val items = listOf(1, 2, 3)
 
@@ -446,7 +371,7 @@ private fun SettingsGroupSectionSample(showIcon: Boolean) {
       selectedItem = segmentedState.value,
       onItemSelected = { segmentedState.value = it },
       subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
-      icon = iconSampleOrNull(showIcon),
-    )
+
+      )
   }
 }
