@@ -19,11 +19,13 @@ kotlin {
 
   withSourcesJar()
 
-  androidTarget {
-    publishLibraryVariants("release")
+  androidLibrary {
+    namespace = libs.versions.namespace.get() + ".ui.extended"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    minSdk = libs.versions.android.minSdk.get().toInt()
   }
 
-  jvm("desktop")
+  // jvm("desktop")
 
   iosX64()
   iosArm64()
@@ -54,46 +56,7 @@ kotlin {
   }
 }
 
-android {
-  namespace = libs.versions.namespace.get() + ".ui.extended"
-  compileSdk =
-    libs.versions.android.compileSdk
-      .get()
-      .toInt()
-
-  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-  sourceSets["main"].res.srcDirs("src/androidMain/res")
-  sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
-  defaultConfig {
-    minSdk =
-      libs.versions.android.minSdk
-        .get()
-        .toInt()
-  }
-  packaging {
-    resources {
-      excludes += "/META-INF/{AL2.0,LGPL2.1}"
-    }
-  }
-  lint {
-    checkReleaseBuilds = false
-    abortOnError = false
-  }
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-    }
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-  }
-  dependencies {
-    debugImplementation(compose.uiTooling)
-  }
-}
-
+/*
 compose.desktop {
   application {
     nativeDistributions {
@@ -103,6 +66,7 @@ compose.desktop {
     }
   }
 }
+ */
 
 dependencies {
   detektPlugins(libs.compose.detekt.rules)

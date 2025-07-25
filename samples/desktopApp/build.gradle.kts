@@ -7,7 +7,7 @@ plugins {
 }
 
 kotlin {
-  jvm()
+  // jvm("desktop")
 
   sourceSets {
     jvmMain.dependencies {
@@ -16,6 +16,7 @@ kotlin {
   }
 }
 
+/*
 compose.desktop {
   application {
     mainClass = "com.alorma.compose.settings.sample.shared.MainKt"
@@ -27,3 +28,4 @@ compose.desktop {
     }
   }
 }
+*/
