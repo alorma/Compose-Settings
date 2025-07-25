@@ -13,7 +13,7 @@ version = "1.0-SNAPSHOT"
 
 kotlin {
   androidLibrary {
-    namespace = libs.versions.namespace.get() + ".samples.shared"
+    namespace = libs.versions.namespace.get() + ".sample.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     minSdk = libs.versions.android.minSdk.get().toInt()
   }
