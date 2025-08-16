@@ -34,7 +34,6 @@ jobs:
           java-version: 17
 
       - name: Build
-        continue-on-error: ${{ matrix.config.continueOnError }}
         run: ./gradlew :ui-base:build
 
   build-lib-ui:
