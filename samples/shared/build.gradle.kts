@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
-  alias(libs.plugins.androidLibrary)
+  alias(libs.plugins.androidKmpLibrary)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.detekt)
@@ -12,8 +12,13 @@ plugins {
 version = "1.0-SNAPSHOT"
 
 kotlin {
-  androidTarget()
-  jvm("desktop")
+  androidLibrary {
+    namespace = libs.versions.namespace.get() + ".sample.shared"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    minSdk = libs.versions.android.minSdk.get().toInt()
+  }
+
+  // jvm("desktop")
 
   js(IR) {
     browser()
@@ -73,34 +78,13 @@ kotlin {
       }
     }
 
+    /*
     val desktopMain by getting
     desktopMain.dependencies {
       api(compose.desktop.currentOs)
       implementation(compose.desktop.common)
     }
-  }
-}
-
-android {
-  namespace = libs.versions.namespace.get() + ".sample.shared"
-  compileSdk =
-    libs.versions.android.compileSdk
-      .get()
-      .toInt()
-
-  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-  sourceSets["main"].res.srcDirs("src/androidMain/res")
-  sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
-  defaultConfig {
-    minSdk =
-      libs.versions.android.minSdkSample
-        .get()
-        .toInt()
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+     */
   }
 }
 
