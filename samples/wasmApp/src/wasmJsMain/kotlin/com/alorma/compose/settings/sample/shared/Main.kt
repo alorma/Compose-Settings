@@ -3,7 +3,8 @@ package com.alorma.compose.settings.sample.shared
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
+import kotlinx.browser.document
 import org.jetbrains.compose.resources.configureWebResources
 import theme.ComposeSettingsTheme
 
@@ -12,9 +13,8 @@ fun main() {
   configureWebResources {
     resourcePathMapping { path -> "./$path" }
   }
-  CanvasBasedWindow(
-    title = "Compose Settings - sample",
-    canvasElementId = "ComposeTarget",
+  ComposeViewport(
+    viewportContainer = document.body!!,
   ) {
     val darkModeState = remember { mutableStateOf(false) }
     ComposeSettingsTheme(
