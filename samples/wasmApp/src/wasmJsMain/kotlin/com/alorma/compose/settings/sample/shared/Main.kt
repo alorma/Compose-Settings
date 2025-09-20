@@ -4,13 +4,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
-import kotlinx.browser.document
 import theme.ComposeSettingsTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
   ComposeViewport(
-    viewportContainer = document.body!!,
+    configure = { isA11YEnabled = true },
   ) {
     val darkModeState = remember { mutableStateOf(false) }
     ComposeSettingsTheme(
