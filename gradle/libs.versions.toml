@@ -20,7 +20,7 @@ namespace = "com.alorma.compose.settings"
 
 detekt = "1.23.8"
 ktlint = "13.1.0"
-dokka = "2.0.0"
+dokka = "2.1.0"
 
 compose-detekt-rules = "0.0.26"
 
