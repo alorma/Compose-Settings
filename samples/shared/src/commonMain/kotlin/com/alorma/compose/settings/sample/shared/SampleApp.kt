@@ -5,13 +5,9 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SampleApp(
-  darkModeState: Boolean,
-  onDarkModeState: (Boolean) -> Unit,
   modifier: Modifier = Modifier,
 ) {
   SettingsScreen(
     modifier = modifier,
-    darkModeState = darkModeState,
-    onDarkModeState = onDarkModeState,
   )
 }

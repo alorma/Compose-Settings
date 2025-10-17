@@ -29,8 +29,6 @@ import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 
 @Composable
 fun SettingsScreen(
-  darkModeState: Boolean,
-  onDarkModeState: (Boolean) -> Unit,
   modifier: Modifier = Modifier,
 ) {
   Scaffold(
@@ -45,20 +43,6 @@ fun SettingsScreen(
           .verticalScroll(scrollState)
           .padding(top = padding.calculateTopPadding()),
     ) {
-      val darkModes = listOf(true, false)
-
-      SettingsSegmented(
-        title = { Text("Theme mode") },
-        items = darkModes,
-        selectedItem = darkModeState,
-        onItemSelected = onDarkModeState,
-        itemTitleMap = { item ->
-          when (item) {
-            true -> "Dark"
-            false -> "Light"
-          }
-        },
-      )
       SettingsSwitchSampleSection()
       SettingsCheckboxSampleSection()
       SettingsTriStateCheckboxSampleSection()
