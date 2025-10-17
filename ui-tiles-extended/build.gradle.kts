@@ -49,7 +49,7 @@ kotlin {
 
       implementation(compose.runtime)
       implementation(compose.foundation)
-      implementation(compose.material3)
+      compileOnly(compose.material3)
     }
   }
 }

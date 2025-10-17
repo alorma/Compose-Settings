@@ -52,7 +52,7 @@ kotlin {
       api(compose.ui)
       api(compose.runtime)
       api(compose.foundation)
-      api(compose.material3)
+      api(libs.compose.material3.expressive)
 
       api(compose.components.resources)
 

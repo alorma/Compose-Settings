@@ -17,7 +17,6 @@ kotlin {
 
       implementation(compose.ui)
       implementation(compose.foundation)
-            implementation(libs.compose.material3.expressive)
       implementation(compose.uiTooling)
 
       implementation(projects.samples.shared)

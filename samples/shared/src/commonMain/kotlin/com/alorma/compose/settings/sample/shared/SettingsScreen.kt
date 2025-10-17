@@ -37,11 +37,10 @@ fun SettingsScreen(
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
-      modifier =
-        Modifier
-          .consumeWindowInsets(padding)
-          .verticalScroll(scrollState)
-          .padding(top = padding.calculateTopPadding()),
+      modifier = Modifier
+        .consumeWindowInsets(padding)
+        .verticalScroll(scrollState)
+        .padding(top = padding.calculateTopPadding()),
     ) {
       SettingsSwitchSampleSection()
       SettingsCheckboxSampleSection()
