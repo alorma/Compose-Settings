@@ -27,19 +27,19 @@ compose-detekt-rules = "0.0.26"
 windowSizeClass = "0.5.0"
 
 [libraries]
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
-androidx-preference-preference = { module = "androidx.preference:preference", version.ref = "androidxpreference" }
-androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidxpreference" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxactivity" }
+androidx-preference-preference = { group = "androidx.preference", name = "preference", version.ref = "androidxpreference" }
+androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "androidxpreference" }
 
-plugin-gradle-nexus-staging = { module = "io.codearte.gradle.nexus:gradle-nexus-staging-plugin", version.ref = "gradleNexusStagingPlugin" }
-plugin-gradle-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "publishPlugin" }
-plugin-gradle-maven-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPlugin" }
+plugin-gradle-nexus-staging = { group = "io.codearte.gradle.nexus", name = "gradle-nexus-staging-plugin", version.ref = "gradleNexusStagingPlugin" }
+plugin-gradle-publish = { group = "io.github.gradle-nexus", name = "publish-plugin", version.ref = "publishPlugin" }
+plugin-gradle-maven-publish = { group = "com.vanniktech", name = "gradle-maven-publish-plugin", version.ref = "mavenPlugin" }
 
 compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", version.ref = "compose-detekt-rules" }
 
-windowSizeClass = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
+windowSizeClass = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
 
-compose-material3-expressive = { group = "org.jetbrains.compose.material3", name = "material3", version = "1.9.0-alpha04"}
+compose-material3-expressive = { group = "org.jetbrains.compose.material3", name = "material3", version = "1.9.0-alpha04" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
