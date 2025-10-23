@@ -5,10 +5,20 @@ plugins {
 }
 
 kotlin {
-  js(IR) {
+  js {
     browser {
       commonWebpackConfig {
-        outputFileName = "composesettings.js"
+        outputFileName = "composeApp.js"
+      }
+    }
+    binaries.executable()
+    useEsModules()
+  }
+
+  wasmJs {
+    browser {
+      commonWebpackConfig {
+        outputFileName = "composeApp.js"
       }
     }
     binaries.executable()
