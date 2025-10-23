@@ -161,10 +161,10 @@ jobs:
           java-version: 17
 
       - name: Build sample JS - Main
-        run: ./gradlew :samples:wasmApp:wasmJsBrowserDistribution
+        run: ./gradlew :samples:webApp:wasmJsBrowserDistribution
 
-      - name: Copy wasmApp to dist
-        run: cp -r samples/wasmApp/build/dist/wasmJs/productionExecutable deployment/
+      - name: Copy webApp to dist
+        run: cp -r samples/webApp/build/dist/wasmJs/productionExecutable deployment/
 
       - name: Build dokka - Main
         run: ./gradlew dokkaGeneratePublicationHtml
