@@ -47,7 +47,7 @@ kotlin {
     commonMain.dependencies {
       implementation(compose.runtime)
       implementation(compose.foundation)
-      compileOnly(compose.material3)
+      api(compose.material3)
     }
   }
 }
