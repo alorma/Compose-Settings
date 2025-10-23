@@ -57,8 +57,8 @@ jobs:
         config: [
           { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug },
           { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64 },
-          { target: js,  module: jsApp , os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
-          { target: wasm,  module: wasmApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
+          { target: js,  module: webApp , os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
+          { target: wasm,  module: webApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
           { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: assemble }
         ]
     if: ${{ success() }}
