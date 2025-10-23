@@ -26,7 +26,7 @@ kotlin {
   }
 
   sourceSets {
-    jsMain.dependencies {
+    webMain.dependencies {
       implementation(projects.samples.shared)
     }
   }
