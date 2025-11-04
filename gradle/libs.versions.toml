@@ -39,7 +39,7 @@ compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", v
 
 windowSizeClass = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
 
-compose-material3-expressive = { group = "org.jetbrains.compose.material3", name = "material3", version = "1.10.0-alpha03" }
+compose-material3-expressive = { group = "org.jetbrains.compose.material3", name = "material3", version = "1.10.0-alpha04" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
