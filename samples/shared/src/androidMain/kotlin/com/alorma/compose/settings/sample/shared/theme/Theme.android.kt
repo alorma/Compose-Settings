@@ -13,8 +13,8 @@ import androidx.compose.ui.platform.LocalContext
  * Dynamic colors adapt to the user's wallpaper and system theme (Material You).
  */
 @Composable
-actual fun getDynamicColorScheme(darkTheme: Boolean): ColorScheme? {
-  return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+actual fun getDynamicColorScheme(darkTheme: Boolean): ColorScheme? =
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
     val context = LocalContext.current
     if (darkTheme) {
       dynamicDarkColorScheme(context)
@@ -24,4 +24,3 @@ actual fun getDynamicColorScheme(darkTheme: Boolean): ColorScheme? {
   } else {
     null
   }
-}
