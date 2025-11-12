@@ -103,7 +103,7 @@ jobs:
           java-version: 17
 
       - name: Check signature - Main
-        run: ./gradlew signReleasePublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+        run: ./gradlew ui-base:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
 
   fake-publish:
     name: Fake publish - Main
