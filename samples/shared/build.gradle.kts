@@ -1,5 +1,6 @@
 import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -16,13 +17,15 @@ kotlin {
 
   androidLibrary {
     namespace = libs.versions.namespace.get() + ".sample.shared"
-    compileSdk = libs.versions.android.compileSdk
-      .get()
-      .toInt()
+    compileSdk =
+      libs.versions.android.compileSdk
+        .get()
+        .toInt()
 
-    minSdk = libs.versions.android.minSdk
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.android.minSdk
+        .get()
+        .toInt()
 
     packaging {
       resources {
@@ -36,11 +39,7 @@ kotlin {
     }
 
     compilations.configureEach {
-      compilerOptions.configure {
-        jvmTarget.set(
-          org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-        )
-      }
+      compilerOptions.configure { jvmTarget.set(JvmTarget.JVM_17) }
     }
   }
 
