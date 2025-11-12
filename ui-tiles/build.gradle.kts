@@ -22,13 +22,15 @@ kotlin {
 
   androidLibrary {
     namespace = libs.versions.namespace.get() + ".ui"
-    compileSdk = libs.versions.android.compileSdk
-      .get()
-      .toInt()
+    compileSdk =
+      libs.versions.android.compileSdk
+        .get()
+        .toInt()
 
-    minSdk = libs.versions.android.minSdk
-      .get()
-      .toInt()
+    minSdk =
+      libs.versions.android.minSdk
+        .get()
+        .toInt()
 
     packaging {
       resources {
@@ -44,7 +46,7 @@ kotlin {
     compilations.configureEach {
       compilerOptions.configure {
         jvmTarget.set(
-          org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+          org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17,
         )
       }
     }
