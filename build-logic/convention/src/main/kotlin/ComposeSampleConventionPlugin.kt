@@ -28,7 +28,7 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
         androidLibrary {
           namespace = libs.findVersion("namespace").get().toString() + ".sample.shared"
           compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
-          minSdk = libs.findVersion("android-minSdk").get().toString().toInt()
+          minSdk = libs.findVersion("android-minSdkSample").get().toString().toInt()
 
           packaging {
             resources {
