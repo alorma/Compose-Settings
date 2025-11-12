@@ -1,9 +1,10 @@
+import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
-  alias(libs.plugins.androidLibrary)
+  alias(libs.plugins.kotlinMultiplatformAndroidLibrary)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
   alias(libs.plugins.dokka)
@@ -19,8 +20,34 @@ kotlin {
 
   withSourcesJar()
 
-  androidTarget {
-    publishLibraryVariants("release")
+  androidLibrary {
+    namespace = libs.versions.namespace.get() + ".ui.base"
+    compileSdk = libs.versions.android.compileSdk
+      .get()
+      .toInt()
+
+    minSdk = libs.versions.android.minSdk
+      .get()
+      .toInt()
+
+    packaging {
+      resources {
+        excludes += "/META-INF/{AL2.0,LGPL2.1}"
+      }
+
+      lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+      }
+
+      compilations.configureEach {
+        compilerOptions.configure {
+          jvmTarget.set(
+            org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+          )
+        }
+      }
+    }
   }
 
   jvm("desktop")
@@ -49,47 +76,6 @@ kotlin {
       implementation(compose.foundation)
       api(compose.material3)
     }
-  }
-}
-
-android {
-  namespace = libs.versions.namespace.get() + ".ui.base"
-  compileSdk =
-    libs.versions.android.compileSdk
-      .get()
-      .toInt()
-
-  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-  sourceSets["main"].res.srcDirs("src/androidMain/res")
-  sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
-  defaultConfig {
-    minSdk =
-      libs.versions.android.minSdk
-        .get()
-        .toInt()
-  }
-
-  packaging {
-    resources {
-      excludes += "/META-INF/{AL2.0,LGPL2.1}"
-    }
-  }
-  lint {
-    checkReleaseBuilds = false
-    abortOnError = false
-  }
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-    }
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-  }
-  dependencies {
-    debugImplementation(compose.uiTooling)
   }
 }
 
