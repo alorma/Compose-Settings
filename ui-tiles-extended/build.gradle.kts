@@ -34,18 +34,18 @@ kotlin {
       resources {
         excludes += "/META-INF/{AL2.0,LGPL2.1}"
       }
+    }
 
-      lint {
-        checkReleaseBuilds = false
-        abortOnError = false
-      }
+    lint {
+      checkReleaseBuilds = false
+      abortOnError = false
+    }
 
-      compilations.configureEach {
-        compilerOptions.configure {
-          jvmTarget.set(
-            org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
-          )
-        }
+    compilations.configureEach {
+      compilerOptions.configure {
+        jvmTarget.set(
+          org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        )
       }
     }
   }
