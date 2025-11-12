@@ -1,6 +1,7 @@
 import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -44,11 +45,7 @@ kotlin {
     }
 
     compilations.configureEach {
-      compilerOptions.configure {
-        jvmTarget.set(
-          org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17,
-        )
-      }
+      compilerOptions.configure { jvmTarget.set(JvmTarget.JVM_17) }
     }
   }
 
