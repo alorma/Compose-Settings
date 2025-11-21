@@ -33,7 +33,6 @@ class VersioningConventionPlugin : Plugin<Project> {
           }
         }
       }
-      }
     }
   }
 

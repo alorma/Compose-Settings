@@ -124,6 +124,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -138,6 +139,13 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "Releasing version: $VERSION"
 
+      - name: Checkout main branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git checkout main
+
       - name: Update gradle.properties with release version
         run: |
           sed -i.bak "s/^libVersion=.*/libVersion=${{ steps.version.outputs.VERSION }}/" gradle.properties
@@ -146,11 +154,9 @@ jobs:
 
       - name: Commit and push release version
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add gradle.properties
           git commit -m "chore: set version to ${{ steps.version.outputs.VERSION }} for release"
-          git push origin HEAD:main
+          git push origin main
 
       - name: Publish to MavenCentral
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }}
@@ -177,4 +183,4 @@ jobs:
         run: |
           git add gradle.properties
           git commit -m "chore: bump version to ${{ steps.next_version.outputs.NEXT_VERSION }} for development"
-          git push origin HEAD:main
+          git push origin main
