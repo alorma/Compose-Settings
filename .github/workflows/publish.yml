@@ -167,7 +167,8 @@ jobs:
           VERSION=${{ steps.version.outputs.VERSION }}
           MAJOR=$(echo $VERSION | cut -d. -f1)
           MINOR=$(echo $VERSION | cut -d. -f2)
-          PATCH=$(echo $VERSION | cut -d. -f3)
+          # Strip any suffix like -SNAPSHOT or -RC1 from patch version
+          PATCH=$(echo $VERSION | cut -d. -f3 | cut -d- -f1)
           NEXT_MINOR=$((MINOR + 1))
           NEXT_VERSION="${MAJOR}.${NEXT_MINOR}.0"
           echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_OUTPUT
