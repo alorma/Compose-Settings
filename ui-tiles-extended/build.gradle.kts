@@ -2,10 +2,11 @@ plugins {
   id("compose.library")
 }
 
-// Set the namespace suffix for this module
-extra["namespaceSuffix"] = ".ui.extended"
-
 kotlin {
+  androidLibrary {
+    namespace = libs.versions.namespace.get() + ".ui.extended"
+  }
+
   sourceSets {
     commonMain.dependencies {
       api(projects.uiBase)

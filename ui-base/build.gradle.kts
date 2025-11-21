@@ -2,5 +2,8 @@ plugins {
   id("compose.library")
 }
 
-// Set the namespace suffix for this module
-extra["namespaceSuffix"] = ".ui.base"
+kotlin {
+  androidLibrary {
+    namespace = libs.versions.namespace.get() + ".ui.base"
+  }
+}
