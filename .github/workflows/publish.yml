@@ -167,8 +167,10 @@ jobs:
           VERSION=${{ steps.version.outputs.VERSION }}
           MAJOR=$(echo $VERSION | cut -d. -f1)
           MINOR=$(echo $VERSION | cut -d. -f2)
-          # Strip any suffix like -SNAPSHOT or -RC1 from patch version
-          PATCH=$(echo $VERSION | cut -d. -f3 | cut -d- -f1)
+          # Versioning strategy: After each release, bump the minor version and reset patch to 0
+          # This follows a release flow where:
+          # - Release: 2.15.0 -> Development: 2.16.0 -> Next Release: 2.16.0 (or 2.17.0 if more features added)
+          # - Patch versions (e.g., 2.15.1) are handled manually for hotfixes on release branches
           NEXT_MINOR=$((MINOR + 1))
           NEXT_VERSION="${MAJOR}.${NEXT_MINOR}.0"
           echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_OUTPUT

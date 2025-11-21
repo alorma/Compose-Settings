@@ -44,7 +44,7 @@ val generateBuildConfig by tasks.registering {
       internal object BuildConfig {
         const val VERSION = "$libVersion"
       }
-      """.trimIndent()
+      """.trimIndent(),
     )
   }
 }
