@@ -122,6 +122,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -129,5 +131,50 @@ jobs:
           distribution: adopt
           java-version: 17
 
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Releasing version: $VERSION"
+
+      - name: Update gradle.properties with release version
+        run: |
+          sed -i.bak "s/^libVersion=.*/libVersion=${{ steps.version.outputs.VERSION }}/" gradle.properties
+          rm gradle.properties.bak
+          cat gradle.properties
+
+      - name: Commit and push release version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add gradle.properties
+          git commit -m "chore: set version to ${{ steps.version.outputs.VERSION }} for release"
+          git push origin HEAD:main
+
       - name: Publish to MavenCentral
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }}
+
+      - name: Calculate next version
+        id: next_version
+        run: |
+          VERSION=${{ steps.version.outputs.VERSION }}
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f2)
+          PATCH=$(echo $VERSION | cut -d. -f3)
+          NEXT_MINOR=$((MINOR + 1))
+          NEXT_VERSION="${MAJOR}.${NEXT_MINOR}.0"
+          echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_OUTPUT
+          echo "Next development version: $NEXT_VERSION"
+
+      - name: Update gradle.properties with next version
+        run: |
+          sed -i.bak "s/^libVersion=.*/libVersion=${{ steps.next_version.outputs.NEXT_VERSION }}/" gradle.properties
+          rm gradle.properties.bak
+          cat gradle.properties
+
+      - name: Commit and push next development version
+        run: |
+          git add gradle.properties
+          git commit -m "chore: bump version to ${{ steps.next_version.outputs.NEXT_VERSION }} for development"
+          git push origin HEAD:main
