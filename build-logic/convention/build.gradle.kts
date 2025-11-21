@@ -36,5 +36,9 @@ gradlePlugin {
       id = "compose.sample"
       implementationClass = "ComposeSampleConventionPlugin"
     }
+    register("versioning") {
+      id = "versioning"
+      implementationClass = "VersioningConventionPlugin"
+    }
   }
 }

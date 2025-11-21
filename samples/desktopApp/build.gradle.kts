@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
+  id("versioning")
 }
 
 kotlin {
@@ -23,7 +24,6 @@ compose.desktop {
     nativeDistributions {
       targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
       packageName = libs.versions.namespace.get() + ".sample.shared"
-      packageVersion = "1.0.0"
     }
   }
 }

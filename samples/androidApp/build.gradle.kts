@@ -3,6 +3,7 @@ plugins {
   alias(libs.plugins.androidApplication)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
+  id("versioning")
 }
 
 kotlin {
@@ -44,9 +45,6 @@ android {
       libs.versions.android.targetSdk
         .get()
         .toInt()
-
-    versionCode = 1
-    versionName = "1.0"
   }
   packaging {
     resources {
