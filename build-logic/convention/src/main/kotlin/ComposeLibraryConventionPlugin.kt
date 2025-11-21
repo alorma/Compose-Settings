@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.androidLibrary
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
@@ -26,13 +27,15 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
       val libs = extensions.getByType<org.gradle.api.artifacts.VersionCatalogsExtension>().named("libs")
       val compose = extensions.getByType<ComposeExtension>()
 
+      val defaultNamespace = libs.findVersion("namespace").get().toString()
+
       extensions.configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
         withSourcesJar()
 
         androidLibrary {
-          // Default namespace - modules should override this with their unique namespace
-          namespace = libs.findVersion("namespace").get().toString()
+          // Default namespace - modules MUST override this with their unique namespace
+          namespace = defaultNamespace
 
           compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
           minSdk = libs.findVersion("android-minSdk").get().toString().toInt()
@@ -93,6 +96,32 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
       // Configure detekt
       dependencies {
         add("detektPlugins", libs.findLibrary("compose-detekt-rules").get())
+      }
+
+      // Validate that module has overridden the namespace
+      afterEvaluate {
+        extensions.findByType<KotlinMultiplatformExtension>()?.let { kotlin ->
+          kotlin.androidLibrary {
+            val currentNamespace = namespace
+            if (currentNamespace == defaultNamespace) {
+              throw GradleException(
+                """
+                |Module '${project.path}' must override the namespace!
+                |
+                |Each library module must set a unique namespace in its build.gradle.kts:
+                |
+                |  kotlin {
+                |    androidLibrary {
+                |      namespace = libs.versions.namespace.get() + ".your.unique.suffix"
+                |    }
+                |  }
+                |
+                |Current namespace: $currentNamespace (this is the default and will cause conflicts)
+                """.trimMargin()
+              )
+            }
+          }
+        }
       }
     }
   }
