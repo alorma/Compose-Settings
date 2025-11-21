@@ -44,6 +44,7 @@ fun SettingsScreen(
         .verticalScroll(scrollState)
         .padding(top = padding.calculateTopPadding()),
     ) {
+      VersionSection()
       SettingsSwitchSampleSection()
       SettingsCheckboxSampleSection()
       SettingsTriStateCheckboxSampleSection()
@@ -270,6 +271,17 @@ private fun SettingsSelectorsSample() {
         },
       )
     }
+  }
+}
+
+@Composable
+private fun VersionSection() {
+  SampleSection(title = "App Version") {
+    SettingsMenuLink(
+      title = { Text(text = "Version") },
+      subtitle = { Text(text = BuildConfig.VERSION) },
+      onClick = { },
+    )
   }
 }
 
