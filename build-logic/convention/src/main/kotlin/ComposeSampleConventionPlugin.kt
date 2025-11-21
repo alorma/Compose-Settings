@@ -42,8 +42,10 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
           }
 
           compilations.configureEach {
-            compilerOptions.configure {
-              jvmTarget.set(JvmTarget.JVM_17)
+            compileTaskProvider.configure {
+              compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_17)
+              }
             }
           }
         }
