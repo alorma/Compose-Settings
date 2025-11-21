@@ -31,8 +31,8 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
         withSourcesJar()
 
         androidLibrary {
-          namespace = libs.findVersion("namespace").get().toString() +
-            project.findProperty("namespaceSuffix")?.toString().orEmpty()
+          // Default namespace - modules should override this with their unique namespace
+          namespace = libs.findVersion("namespace").get().toString()
 
           compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
           minSdk = libs.findVersion("android-minSdk").get().toString().toInt()
