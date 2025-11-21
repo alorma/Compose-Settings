@@ -25,14 +25,14 @@ class VersioningConventionPlugin : Plugin<Project> {
 
       // Configure Desktop application version if Compose Desktop plugin is applied
       pluginManager.withPlugin("org.jetbrains.compose") {
-        extensions.configure<ComposeExtension> {
-          val desktopExtension = this as? DesktopExtension
-          desktopExtension?.application {
+        extensions.findByType(DesktopExtension::class.java)?.apply {
+          application {
             nativeDistributions {
               packageVersion = libVersion
             }
           }
         }
+      }
       }
     }
   }
