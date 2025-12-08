@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
+
 plugins {
   id("compose.sample")
 }
@@ -11,8 +13,9 @@ val generateVersionFile by tasks.registering {
   val outputDir = layout.buildDirectory.dir("generated/kotlin")
   val outputFile = outputDir.get().file("com/alorma/compose/settings/sample/shared/Version.kt").asFile
 
+  // Track the version as an input so the task only runs when the version changes
+  inputs.property("libVersion", libVersion)
   outputs.file(outputFile)
-  outputs.upToDateWhen { false }
 
   doLast {
     outputFile.parentFile.mkdirs()
@@ -45,7 +48,7 @@ kotlin {
 
 // Ensure the version file is generated before any Kotlin compilation tasks
 afterEvaluate {
-  tasks.matching { it.name.startsWith("compileKotlin") }.configureEach {
+  tasks.withType<AbstractKotlinCompile<*>>().configureEach {
     dependsOn(generateVersionFile)
   }
 }
