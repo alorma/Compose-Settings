@@ -17,6 +17,7 @@ import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Suppress("LongParameterList")
 @Composable
 fun <T> SettingsButtonGroup(
   title: @Composable () -> Unit,
