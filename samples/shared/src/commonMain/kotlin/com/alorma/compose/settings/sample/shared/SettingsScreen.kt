@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -27,6 +28,7 @@ import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
+import com.alorma.compose.settings.ui.expressive.SettingsButtonGroup
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -273,6 +275,7 @@ private fun SettingsSelectorsSample() {
   }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun SettingsGroupSectionSample() {
   val groupEnabled = remember { mutableStateOf(true) }
@@ -329,16 +332,26 @@ private fun SettingsGroupSectionSample() {
 
     DemoSlider()
 
-    val items = listOf(1, 2, 3)
-
+    val segmentedItems = listOf(1, 2, 3)
     val segmentedState = remember { mutableStateOf(3) }
     SettingsSegmented(
       title = { Text(text = "Segmented") },
-      items = items,
+      items = segmentedItems,
       itemTitleMap = { item -> "#$item" },
       selectedItem = segmentedState.value,
       onItemSelected = { segmentedState.value = it },
       subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
+    )
+
+    val buttonGroupItems = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+    val buttonGroupState = remember { mutableStateOf(3) }
+    SettingsButtonGroup(
+      title = { Text(text = "Button group") },
+      items = buttonGroupItems,
+      itemTitleMap = { item -> "#$item" },
+      selectedItem = buttonGroupState.value,
+      onItemSelected = { buttonGroupState.value = it },
+      subtitle = { Text(text = "Selected value: ${buttonGroupState.value}") },
     )
   }
 }

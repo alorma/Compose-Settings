@@ -8,6 +8,7 @@ kotlin {
       implementation(projects.uiBase)
       implementation(projects.uiTiles)
       implementation(projects.uiTilesExtended)
+      implementation(projects.uiTilesExpressive)
     }
   }
 }
