@@ -37,7 +37,7 @@ fun SettingsScreen(
 ) {
   Scaffold(
     modifier = modifier,
-    topBar = { TopAppBar(title = { Text(text = "Compose Settings") }) },
+    topBar = { TopAppBar(title = { Text(text = "Compose Settings v${Version.LIB_VERSION}") }) },
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
