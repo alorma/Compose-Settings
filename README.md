@@ -186,17 +186,3 @@ SettingsGroup(
 ```
 
 <img width="300" alt="group.png" src="docs/art/group.png" />
-
-## Development
-
-### Hot Reload
-
-All sample applications include the Compose Hot Reload plugin for faster development iterations. When running the sample apps in development mode, code changes to Composable functions will be instantly reflected without restarting the application.
-
-**How to use:**
-- **Android**: Run the app in debug mode from Android Studio or IntelliJ IDEA
-- **Desktop**: Run the app with `./gradlew :samples:desktopApp:run`
-- **Web/WASM**: Run with `./gradlew :samples:webApp:jsBrowserDevelopmentRun` or `wasmJsBrowserDevelopmentRun`
-- **iOS**: Build and run the iOS app from Xcode
-
-The hot reload functionality is automatically enabled in development builds and requires no additional configuration.
