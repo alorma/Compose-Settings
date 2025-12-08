@@ -1,4 +1,20 @@
-name: Release
+name: Trigger release
+
+# This workflow creates a new release for the library.
+# It can be triggered manually from the GitHub Actions UI.
+#
+# The workflow performs the following steps:
+# 1. Checks out the latest commit from the main branch
+# 2. Reads the current version from gradle.properties
+# 3. Creates a git tag and GitHub release with auto-generated release notes
+# 4. Calculates the next version (increments minor version, resets patch to 0)
+# 5. Updates gradle.properties with the new version
+# 6. Commits and pushes the version update back to the main branch
+#
+# Example: If current version is 2.16.0, this workflow will:
+# - Create tag v2.16.0 and release from the current main branch commit
+# - Update gradle.properties to version 2.17.0
+# - Commit and push the version update to main
 
 on:
   workflow_dispatch:
