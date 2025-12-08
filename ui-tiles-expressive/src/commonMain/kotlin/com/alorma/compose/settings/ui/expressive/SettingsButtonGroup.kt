@@ -17,8 +17,8 @@ import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Suppress("LongParameterList")
 @Composable
+@Suppress("LongParameterList")
 fun <T> SettingsButtonGroup(
   title: @Composable () -> Unit,
   items: List<T>,
@@ -33,7 +33,7 @@ fun <T> SettingsButtonGroup(
   icon: @Composable (() -> Unit)? = null,
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
-  overflowIndicator: @Composable (ButtonGroupMenuState) -> Unit= {},
+  overflowIndicator: @Composable (ButtonGroupMenuState) -> Unit = {},
 ) {
   SettingsTileScaffold(
     modifier = modifier,
