@@ -74,6 +74,7 @@ composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "k
 
 # Compose
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeHotReload = { id = "org.jetbrains.compose.reload", version.ref = "compose-plugin" }
 
 # Code Quality
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
