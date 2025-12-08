@@ -2,11 +2,15 @@ package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ButtonGroup
-import androidx.compose.material3.ButtonGroupMenuState
+import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedToggleButton
 import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
@@ -33,7 +37,6 @@ fun <T> SettingsButtonGroup(
   icon: @Composable (() -> Unit)? = null,
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
-  overflowIndicator: @Composable (ButtonGroupMenuState) -> Unit = {},
 ) {
   SettingsTileScaffold(
     modifier = modifier,
@@ -45,19 +48,22 @@ fun <T> SettingsButtonGroup(
       ) {
         subtitle?.invoke()
 
-        ButtonGroup(
+        Row(
           modifier = Modifier.fillMaxWidth(),
-          overflowIndicator = overflowIndicator,
+          horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
         ) {
           items.forEachIndexed { _, item ->
-            toggleableItem(
+            OutlinedToggleButton(
+              modifier = Modifier.weight(1f),
               checked = item == selectedItem,
-              label = itemTitleMap(item).toString(),
-              icon = { buttonIcon(item == selectedItem) },
               onCheckedChange = { onItemSelected(item) },
               enabled = enabled,
-              weight = 1f,
-            )
+              colors = ToggleButtonDefaults.toggleButtonColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+              )
+            ) {
+              Text(text = itemTitleMap(item).toString())
+            }
           }
         }
       }

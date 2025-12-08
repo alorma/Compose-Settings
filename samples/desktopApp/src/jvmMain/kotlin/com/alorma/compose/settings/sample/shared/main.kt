@@ -10,7 +10,7 @@ fun main() =
       onCloseRequest = ::exitApplication,
       title = "Compose Settings - sample",
     ) {
-      ComposeSettingsTheme {
+      ComposeSettingsTheme(darkTheme = false) {
         SampleApp()
       }
     }

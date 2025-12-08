@@ -9,7 +9,7 @@ fun main() {
   ComposeViewport(
     configure = { isA11YEnabled = true },
   ) {
-    ComposeSettingsTheme {
+    ComposeSettingsTheme(darkTheme = false) {
       SampleApp()
     }
   }

@@ -355,7 +355,7 @@ private fun SettingsGroupSectionSample() {
       subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
     )
 
-    val buttonGroupItems = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+    val buttonGroupItems = listOf(1, 2, 3)
     val buttonGroupState = remember { mutableStateOf(3) }
     SettingsButtonGroup(
       title = { Text(text = "Button group") },
