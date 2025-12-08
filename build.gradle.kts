@@ -79,5 +79,6 @@ dependencies {
     projects.uiBase,
     projects.uiTiles,
     projects.uiTilesExtended,
+    projects.uiTilesExpressive,
   ).forEach { dep -> dokka(dep) }
 }

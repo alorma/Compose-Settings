@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<baseline version="1.0">
+    <file name="src/commonMain/kotlin/com/alorma/compose/settings/ui/expressive/SettingsButtonGroup.kt">
+        <error line="22" column="9" source="standard:function-naming" />
+    </file>
+</baseline>
