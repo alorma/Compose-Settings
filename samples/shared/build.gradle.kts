@@ -47,8 +47,6 @@ kotlin {
 }
 
 // Ensure the version file is generated before any Kotlin compilation tasks
-afterEvaluate {
-  tasks.withType<AbstractKotlinCompile<*>>().configureEach {
-    dependsOn(generateVersionFile)
-  }
+tasks.withType<AbstractKotlinCompile<*>>().configureEach {
+  dependsOn(generateVersionFile)
 }
