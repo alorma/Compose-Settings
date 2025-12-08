@@ -8,7 +8,6 @@ import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedToggleButton
-import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
@@ -32,7 +31,6 @@ fun <T> SettingsButtonGroup(
   modifier: Modifier = Modifier,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  buttonIcon: @Composable (Boolean) -> Unit = { selected -> SegmentedButtonDefaults.Icon(selected) },
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
@@ -59,8 +57,8 @@ fun <T> SettingsButtonGroup(
               onCheckedChange = { onItemSelected(item) },
               enabled = enabled,
               colors = ToggleButtonDefaults.toggleButtonColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-              )
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+              ),
             ) {
               Text(text = itemTitleMap(item).toString())
             }

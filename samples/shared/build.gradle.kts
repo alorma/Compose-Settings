@@ -26,7 +26,8 @@ val generateVersionFile by tasks.registering {
       |object Version {
       |    const val LIB_VERSION = "$libVersion"
       |}
-      |""".trimMargin()
+      |
+      """.trimMargin(),
     )
   }
 }
