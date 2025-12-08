@@ -1,0 +1,250 @@
+name: Publish and Release
+
+# This workflow publishes the library to Maven Central and creates a GitHub release.
+# It can be triggered manually from the GitHub Actions UI.
+#
+# The workflow performs the following steps:
+# 1. Reads the current version from gradle.properties (BEFORE publishing)
+# 2. Builds all library modules
+# 3. Builds sample applications
+# 4. Checks signatures
+# 5. Publishes to Maven Central
+# 6. After successful publish:
+#    - Creates a git tag and GitHub release with auto-generated release notes
+#    - Calculates the next version (increments minor version, resets patch to 0)
+#    - Updates gradle.properties with the new version
+#    - Commits and pushes the version update back to the main branch
+#
+# Example: If current version is 2.18.0, this workflow will:
+# - Publish version 2.18.0 to Maven Central
+# - Create tag v2.18.0 and release from the current main branch commit
+# - Update gradle.properties to version 2.19.0
+# - Commit and push the version update to main
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  get-version:
+    name: Get Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Get current version
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(grep "^libVersion=" gradle.properties | cut -d'=' -f2)
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version to publish: $CURRENT_VERSION"
+
+  build-lib-base:
+    name: Build base - Release
+    needs: [ get-version ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        run: ./gradlew :ui-base:build
+
+  build-lib-ui:
+    strategy:
+      matrix:
+        config: [
+          { target: tiles, module: ui-tiles, task: build, continueOnError: false },
+          { target: tiles expanded, module: ui-tiles-extended, task: build, continueOnError: false },
+          { target: tiles expressive, module: ui-tiles-expressive, task: build, continueOnError: false },
+        ]
+    name: Build ${{ matrix.config.target }} - Release
+    needs: [ build-lib-base ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build
+        continue-on-error: ${{ matrix.config.continueOnError }}
+        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
+
+  build-sample:
+    strategy:
+      matrix:
+        config: [
+          { target: android,  module: androidApp , os: ubuntu-latest, tasks: assembleDebug },
+          { target: iOS,  module: iosApp , os: macos-latest, tasks: compileKotlinIosArm64 },
+          { target: js,  module: webApp , os: ubuntu-latest, tasks: jsBrowserDistribution, continueOnError: false },
+          { target: wasm,  module: webApp , os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
+          { target: desktop,  module: desktopApp , os: ubuntu-latest, tasks: assemble }
+        ]
+    needs: [ build-lib-ui ]
+    runs-on: ${{ matrix.config.os }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Build sample ${{ matrix.config.target }} - Release
+        continue-on-error: false
+        run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
+
+  check-sign:
+    name: Check signature - Release
+    needs: [ build-sample ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Check signature - Release
+        run: ./gradlew ui-base:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication ui-tiles-expressive:signKotlinMultiplatformPublication -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+
+  fake-publish:
+    name: Fake publish - Release
+    needs: [ build-sample ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Publish to MavenLocal
+        run: ./gradlew publishToMavenLocal -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }}
+
+  publish:
+    name: Run publish - Release
+    needs: [ check-sign, build-sample, get-version ]
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Publish to MavenCentral
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 -Psigning.secretKeyRingFile=../secrets.gpg -Psigning.keyId=${{ secrets.GPG_KEY_NAME }} -Psigning.password=${{ secrets.GPG_PASSPHRASE }} -PmavenCentralUsername=${{ secrets.OSSRH_USERNAME }} -PmavenCentralPassword=${{ secrets.OSSRH_PASSWORD }}
+
+  create-release-and-update-version:
+    name: Create Release and Update Version
+    needs: [ publish, get-version ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+
+      - name: Create tag and release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.get-version.outputs.version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          TAG_NAME="${VERSION}"
+          echo "Creating tag: $TAG_NAME"
+          
+          # Create and push tag
+          git tag -a "$TAG_NAME" -m "$TAG_NAME"
+          git push origin "$TAG_NAME"
+          
+          # Create release with auto-generated notes
+          gh release create "$TAG_NAME" \
+            --title "Release $TAG_NAME" \
+            --generate-notes \
+            --target main
+
+      - name: Calculate next version
+        id: next_version
+        run: |
+          CURRENT_VERSION="${{ needs.get-version.outputs.version }}"
+          echo "Current version: $CURRENT_VERSION"
+          
+          # Parse semantic version (major.minor.patch), removing any pre-release or build metadata
+          BASE_VERSION=$(echo "$CURRENT_VERSION" | sed 's/[-+].*//')
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$BASE_VERSION"
+          
+          # Increment minor version and reset patch to 0
+          NEXT_MINOR=$((MINOR + 1))
+          NEXT_VERSION="${MAJOR}.${NEXT_MINOR}.0"
+          
+          echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+          echo "Next version: $NEXT_VERSION"
+
+      - name: Update version in gradle.properties
+        run: |
+          NEXT_VERSION="${{ steps.next_version.outputs.next_version }}"
+          echo "Updating gradle.properties to version: $NEXT_VERSION"
+          sed -i "s/^libVersion=.*/libVersion=$NEXT_VERSION/" gradle.properties
+          
+          # Verify the change
+          echo "Updated version:"
+          grep "^libVersion=" gradle.properties
+
+      - name: Commit and push version update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          NEXT_VERSION="${{ steps.next_version.outputs.next_version }}"
+          
+          git add gradle.properties
+          git commit -m "Bump version to $NEXT_VERSION"
+          git push origin main
