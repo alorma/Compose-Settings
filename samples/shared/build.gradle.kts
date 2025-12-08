@@ -2,8 +2,11 @@ plugins {
   id("compose.sample")
 }
 
+// Read the library version from gradle.properties
 val libVersion: String by project
 
+// Task to generate a Version.kt file containing the library version
+// This allows the sample app to display the current version in the UI
 val generateVersionFile by tasks.registering {
   val outputDir = layout.buildDirectory.dir("generated/kotlin")
   val outputFile = outputDir.get().file("com/alorma/compose/settings/sample/shared/Version.kt").asFile
@@ -28,6 +31,7 @@ val generateVersionFile by tasks.registering {
 kotlin {
   sourceSets {
     commonMain {
+      // Add the generated source directory to the source sets
       kotlin.srcDir(layout.buildDirectory.dir("generated/kotlin"))
       dependencies {
         implementation(projects.uiBase)
@@ -39,6 +43,7 @@ kotlin {
   }
 }
 
+// Ensure the version file is generated before any Kotlin compilation tasks
 afterEvaluate {
   tasks.matching { it.name.startsWith("compileKotlin") }.configureEach {
     dependsOn(generateVersionFile)
