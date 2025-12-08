@@ -55,11 +55,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          TAG_NAME="v${VERSION}"
+          TAG_NAME="${VERSION}"
           echo "Creating tag: $TAG_NAME"
           
           # Create and push tag
-          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
+          git tag -a "$TAG_NAME" -m "$TAG_NAME"
           git push origin "$TAG_NAME"
           
           # Create release with auto-generated notes
