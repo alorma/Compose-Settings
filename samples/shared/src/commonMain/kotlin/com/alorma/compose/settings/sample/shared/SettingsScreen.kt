@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.HorizontalDivider
@@ -37,7 +38,18 @@ fun SettingsScreen(
 ) {
   Scaffold(
     modifier = modifier,
-    topBar = { TopAppBar(title = { Text(text = "Compose Settings v${Version.LIB_VERSION}") }) },
+    topBar = {
+      TopAppBar(
+        title = { Text(text = "Compose Settings") },
+        actions = {
+          AssistChip(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            label = { Text(text = Version.LIB_VERSION) },
+            onClick = {},
+          )
+        },
+      )
+    },
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
