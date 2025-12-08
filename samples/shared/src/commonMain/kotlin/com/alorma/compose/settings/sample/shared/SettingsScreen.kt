@@ -284,6 +284,29 @@ private fun SettingsSelectorsSample() {
         },
       )
     }
+
+
+    val segmentedItems = listOf(1, 2, 3)
+    val segmentedState = remember { mutableStateOf(3) }
+    SettingsSegmented(
+      title = { Text(text = "Segmented") },
+      items = segmentedItems,
+      itemTitleMap = { item -> "#$item" },
+      selectedItem = segmentedState.value,
+      onItemSelected = { segmentedState.value = it },
+      subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
+    )
+
+    val buttonGroupItems = listOf(1, 2, 3)
+    val buttonGroupState = remember { mutableStateOf(3) }
+    SettingsButtonGroup(
+      title = { Text(text = "Button group") },
+      items = buttonGroupItems,
+      itemTitleMap = { item -> "#$item" },
+      selectedItem = buttonGroupState.value,
+      onItemSelected = { buttonGroupState.value = it },
+      subtitle = { Text(text = "Selected value: ${buttonGroupState.value}") },
+    )
   }
 }
 
@@ -340,30 +363,6 @@ private fun SettingsGroupSectionSample() {
       title = { Text(text = "RadioButton") },
       subtitle = { Text(text = "RadioButton subtitle") },
       onClick = { state.value = !state.value },
-    )
-
-    DemoSlider()
-
-    val segmentedItems = listOf(1, 2, 3)
-    val segmentedState = remember { mutableStateOf(3) }
-    SettingsSegmented(
-      title = { Text(text = "Segmented") },
-      items = segmentedItems,
-      itemTitleMap = { item -> "#$item" },
-      selectedItem = segmentedState.value,
-      onItemSelected = { segmentedState.value = it },
-      subtitle = { Text(text = "Selected value: ${segmentedState.value}") },
-    )
-
-    val buttonGroupItems = listOf(1, 2, 3)
-    val buttonGroupState = remember { mutableStateOf(3) }
-    SettingsButtonGroup(
-      title = { Text(text = "Button group") },
-      items = buttonGroupItems,
-      itemTitleMap = { item -> "#$item" },
-      selectedItem = buttonGroupState.value,
-      onItemSelected = { buttonGroupState.value = it },
-      subtitle = { Text(text = "Selected value: ${buttonGroupState.value}") },
     )
   }
 }
