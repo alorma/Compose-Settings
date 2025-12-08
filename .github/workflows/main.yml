@@ -18,9 +18,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  get-version:
+    name: Get Version
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Get current version
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(grep "^libVersion=" gradle.properties | cut -d'=' -f2)
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $CURRENT_VERSION"
+
   build-lib-base:
     name: Build base - Main
     if: ${{ success() }}
+    needs: [ get-version ]
     runs-on: macos-latest
     steps:
       - name: Check out code
