@@ -3,6 +3,7 @@ plugins {
   alias(libs.plugins.androidApplication)
   alias(libs.plugins.jetbrainsCompose)
   alias(libs.plugins.composeCompiler)
+  alias(libs.plugins.composeHotReload)
 }
 
 kotlin {
