@@ -8,18 +8,21 @@ name: Publish and Release
 # 2. Builds all library modules
 # 3. Builds sample applications
 # 4. Checks signatures
-# 5. Publishes to Maven Central
-# 6. After successful publish:
-#    - Creates a git tag and GitHub release with auto-generated release notes
-#    - Calculates the next version (increments minor version, resets patch to 0)
-#    - Updates gradle.properties with the new version
-#    - Commits and pushes the version update back to the main branch
+# 5. In parallel:
+#    a. Publishes to Maven Central
+#    b. Creates a git tag and GitHub release with auto-generated release notes
+#       Calculates the next version (increments minor version, resets patch to 0)
+#       Updates gradle.properties with the new version
+#       Commits and pushes the version update back to the main branch
 #
 # Example: If current version is 2.18.0, this workflow will:
-# - Publish version 2.18.0 to Maven Central
-# - Create tag v2.18.0 and release from the current main branch commit
+# - Publish version 2.18.0 to Maven Central (in parallel with release creation)
+# - Create tag v2.18.0 and release from the current main branch commit (in parallel with Maven publish)
 # - Update gradle.properties to version 2.19.0
 # - Commit and push the version update to main
+#
+# Note: The release creation runs in parallel to Maven Central publishing to avoid
+# failures due to Maven Central verification lag.
 
 on:
   workflow_dispatch:
@@ -172,7 +175,7 @@ jobs:
 
   create-release-and-update-version:
     name: Create Release and Update Version
-    needs: [ publish, get-version ]
+    needs: [ check-sign, build-sample, get-version ]
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
