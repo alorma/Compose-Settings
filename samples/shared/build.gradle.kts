@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
   id("compose.sample")
@@ -48,6 +48,6 @@ kotlin {
 }
 
 // Ensure the version file is generated before any Kotlin compilation tasks
-tasks.withType<AbstractKotlinCompile<*>>().configureEach {
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
   dependsOn(generateVersionFile)
 }
