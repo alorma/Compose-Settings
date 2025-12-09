@@ -64,6 +64,7 @@ subprojects {
   // Optionally configure plugin
   configure<KtlintExtension> {
     android.set(false)
+    baseline.set(file("config/ktlint/baseline.xml"))
     reporters {
       reporter(ReporterType.CHECKSTYLE)
     }

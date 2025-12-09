@@ -4,16 +4,16 @@
         <error line="7" column="5" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/SettingsScreen.kt">
-        <error line="37" column="5" source="standard:function-naming" />
-        <error line="89" column="13" source="standard:function-naming" />
-        <error line="103" column="13" source="standard:function-naming" />
-        <error line="117" column="13" source="standard:function-naming" />
-        <error line="134" column="13" source="standard:function-naming" />
-        <error line="201" column="13" source="standard:function-naming" />
-        <error line="208" column="13" source="standard:function-naming" />
-        <error line="224" column="13" source="standard:function-naming" />
-        <error line="279" column="13" source="standard:function-naming" />
-        <error line="378" column="13" source="standard:function-naming" />
+        <error line="36" column="5" source="standard:function-naming" />
+        <error line="73" column="13" source="standard:function-naming" />
+        <error line="86" column="13" source="standard:function-naming" />
+        <error line="99" column="13" source="standard:function-naming" />
+        <error line="115" column="13" source="standard:function-naming" />
+        <error line="178" column="13" source="standard:function-naming" />
+        <error line="185" column="13" source="standard:function-naming" />
+        <error line="200" column="13" source="standard:function-naming" />
+        <error line="223" column="13" source="standard:function-naming" />
+        <error line="313" column="13" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelCheckbox.kt">
         <error line="14" column="14" source="standard:function-naming" />
@@ -31,6 +31,6 @@
         <error line="12" column="14" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/theme/Theme.kt">
-        <error line="25" column="5" source="standard:function-naming" />
+        <error line="82" column="5" source="standard:function-naming" />
     </file>
 </baseline>
