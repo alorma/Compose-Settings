@@ -109,7 +109,7 @@ jobs:
   check-sign:
     name: Check signature - PR
     if: ${{ success() }}
-    needs: [ build-sample ]
+    needs: [ build-lib-ui ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -127,7 +127,7 @@ jobs:
   fake-publish:
     name: Fake publish - PR
     if: ${{ success() }}
-    needs: [ build-sample ]
+    needs: [ build-lib-ui ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -145,7 +145,7 @@ jobs:
   publish-dry:
     name: Dry run publish - PR
     if: ${{ success() }}
-    needs: [ check-sign, build-sample ]
+    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
