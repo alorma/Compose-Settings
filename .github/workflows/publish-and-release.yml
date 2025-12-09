@@ -124,7 +124,7 @@ jobs:
 
   check-sign:
     name: Check signature - Release
-    needs: [ build-sample ]
+    needs: [ build-lib-ui ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -141,7 +141,7 @@ jobs:
 
   fake-publish:
     name: Fake publish - Release
-    needs: [ build-sample ]
+    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -158,7 +158,7 @@ jobs:
 
   publish:
     name: Run publish - Release
-    needs: [ check-sign, build-sample, get-version ]
+    needs: [ check-sign, get-version ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -175,7 +175,7 @@ jobs:
 
   create-release-and-update-version:
     name: Create Release and Update Version
-    needs: [ check-sign, build-sample, get-version ]
+    needs: [ check-sign, get-version ]
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
