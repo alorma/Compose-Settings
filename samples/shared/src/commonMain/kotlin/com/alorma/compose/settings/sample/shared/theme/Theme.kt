@@ -84,11 +84,12 @@ fun ComposeSettingsTheme(
   dynamicColor: Boolean = true,
   content: @Composable () -> Unit,
 ) {
-  val colorScheme = when {
-    dynamicColor -> getDynamicColorScheme(darkTheme) ?: if (darkTheme) DarkColorScheme else LightColorScheme
-    darkTheme -> DarkColorScheme
-    else -> LightColorScheme
-  }
+  val colorScheme =
+    when {
+      dynamicColor -> getDynamicColorScheme(darkTheme) ?: if (darkTheme) DarkColorScheme else LightColorScheme
+      darkTheme -> DarkColorScheme
+      else -> LightColorScheme
+    }
 
   MaterialExpressiveTheme(
     colorScheme = colorScheme,

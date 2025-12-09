@@ -33,9 +33,7 @@ import com.alorma.compose.settings.ui.expressive.SettingsButtonGroup
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(
-  modifier: Modifier = Modifier,
-) {
+fun SettingsScreen(modifier: Modifier = Modifier) {
   Scaffold(
     modifier = modifier,
     topBar = {
@@ -53,10 +51,11 @@ fun SettingsScreen(
   ) { padding ->
     val scrollState = rememberScrollState()
     Column(
-      modifier = Modifier
-        .consumeWindowInsets(padding)
-        .verticalScroll(scrollState)
-        .padding(top = padding.calculateTopPadding()),
+      modifier =
+        Modifier
+          .consumeWindowInsets(padding)
+          .verticalScroll(scrollState)
+          .padding(top = padding.calculateTopPadding()),
     ) {
       SettingsSwitchSampleSection()
       SettingsCheckboxSampleSection()
@@ -284,7 +283,6 @@ private fun SettingsSelectorsSample() {
         },
       )
     }
-
 
     val segmentedItems = listOf(1, 2, 3)
     val segmentedState = remember { mutableStateOf(3) }
