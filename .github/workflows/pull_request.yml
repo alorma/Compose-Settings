@@ -127,7 +127,7 @@ jobs:
   fake-publish:
     name: Fake publish - PR
     if: ${{ success() }}
-    needs: [ build-lib-ui ]
+    needs: [ check-sign ]
     runs-on: macos-latest
     steps:
       - name: Check out code
