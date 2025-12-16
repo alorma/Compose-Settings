@@ -32,7 +32,7 @@ mavenPlugin = "0.35.0"
 
 # Other Libraries
 windowSizeClass = "0.5.0"
-compose-material3-expressive = "1.10.0-alpha05"
+compose-material3-expressive = "1.11.0-alpha01"
 
 [libraries]
 # AndroidX
