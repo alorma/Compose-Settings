@@ -139,4 +139,33 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
       }
     }
   }
+
+  private fun configurePom(pom: MavenPom) {
+    pom.apply {
+      name.set("Compose Settings")
+      description.set("Compose settings UI components for Kotlin Multiplatform")
+      url.set("https://github.com/alorma/Compose-Settings")
+
+      licenses {
+        license {
+          name.set("MIT License")
+          url.set("https://github.com/alorma/Compose-Settings/blob/main/LICENSE")
+        }
+      }
+
+      developers {
+        developer {
+          id.set("alorma")
+          name.set("Bernat Borrás")
+          email.set("bernatbor15@gmail.com")
+        }
+      }
+
+      scm {
+        connection.set("scm:git:github.com/alorma/Compose-Settings.git")
+        developerConnection.set("scm:git:ssh://github.com/alorma/Compose-Settings.git")
+        url.set("https://github.com/alorma/Compose-Settings/tree/main")
+      }
+    }
+  }
 }
