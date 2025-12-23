@@ -24,6 +24,7 @@ dependencies {
   compileOnly(libs.detekt.gradlePlugin)
   compileOnly(libs.ktlint.gradlePlugin)
   compileOnly(libs.dokka.gradlePlugin)
+  compileOnly(libs.plugin.gradle.maven.publish)
 }
 
 gradlePlugin {
