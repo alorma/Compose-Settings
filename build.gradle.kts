@@ -19,15 +19,10 @@ plugins {
 buildscript {
   repositories {
     dependencies {
-      classpath(libs.plugin.gradle.publish)
-      classpath(libs.plugin.gradle.nexus.staging)
       classpath(libs.plugin.gradle.maven.publish)
     }
   }
 }
-
-apply(plugin = "io.codearte.nexus-staging")
-apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
 allprojects {
   repositories {
