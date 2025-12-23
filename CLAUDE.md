@@ -120,6 +120,8 @@ Sample applications demonstrating the library are in `samples/`:
 ./gradlew publishAndReleaseToMavenCentral
 ```
 
+See [PUBLISHING.md](PUBLISHING.md) for detailed publishing instructions and configuration.
+
 ## Development Notes
 
 ### Adding New Components
@@ -148,3 +150,22 @@ All library modules are configured with:
 - WebAssembly (wasmJs)
 
 The default hierarchy template is applied via `applyDefaultHierarchyTemplate()`.
+
+### Build Convention Plugins
+
+The project uses Gradle convention plugins located in `build-logic/convention/`:
+
+1. **ComposeLibraryConventionPlugin** (`compose.library`)
+   - Applied to all library modules (ui-base, ui-tiles, ui-tiles-extended)
+   - Configures Kotlin Multiplatform with all target platforms
+   - Sets up Compose Multiplatform and Compose Compiler
+   - Configures Android library settings
+   - Integrates Maven publishing with automatic signing
+   - Applies code quality tools (Detekt, ktlint, Dokka)
+   - Location: `build-logic/convention/src/main/kotlin/ComposeLibraryConventionPlugin.kt`
+
+2. **ComposeSampleConventionPlugin** (`compose.sample`)
+   - Applied to sample application modules
+   - Configures sample apps with appropriate dependencies
+
+All library modules automatically get Maven Central publishing configured through the convention plugin.
