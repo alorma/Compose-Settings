@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.androidLibrary
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
-import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -33,7 +32,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
 
       // Configure Maven Publishing
       extensions.configure<MavenPublishBaseExtension> {
-        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+        publishToMavenCentral(validateDeployment = false)
         signAllPublications()
 
         pom { configurePom(this) }
