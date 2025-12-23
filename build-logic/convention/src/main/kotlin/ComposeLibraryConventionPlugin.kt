@@ -1,7 +1,10 @@
 import com.android.build.api.dsl.androidLibrary
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
+import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.publish.maven.MavenPom
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
@@ -19,15 +22,26 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
         apply("org.jetbrains.dokka")
         apply("io.gitlab.arturbosch.detekt")
         apply("org.jlleitschuh.gradle.ktlint")
+        apply("com.vanniktech.maven.publish")
+        apply("signing")
       }
-
-      // Apply publish script
-      apply(mapOf("from" to "${rootProject.projectDir}/scripts/publish-module.gradle"))
 
       val libs = extensions.getByType<org.gradle.api.artifacts.VersionCatalogsExtension>().named("libs")
       val compose = extensions.getByType<ComposeExtension>()
 
       val defaultNamespace = libs.findVersion("namespace").get().toString()
+
+      // Configure Maven Publishing
+      extensions.configure<MavenPublishBaseExtension> {
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+        signAllPublications()
+
+        pom { configurePom(this) }
+      }
+
+      // Set group and version from properties
+      group = findProperty("libGroup")?.toString() ?: "com.alorma.compose.settings"
+      version = findProperty("libVersion")?.toString() ?: "0.0.1"
 
       extensions.configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()

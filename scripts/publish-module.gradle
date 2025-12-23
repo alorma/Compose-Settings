@@ -2,39 +2,40 @@ apply plugin: "signing"
 apply plugin: "com.vanniktech.maven.publish"
 
 tasks.withType(AbstractPublishToMaven).configureEach {
-    def signingTasks = tasks.withType(Sign)
-    mustRunAfter(signingTasks)
+  def signingTasks = tasks.withType(Sign)
+  mustRunAfter(signingTasks)
 }
 
 group = project.property("libGroup")
 version = project.property("libVersion")
 
 mavenPublishing {
-    publishToMavenCentral()
-    signAllPublications()
+  publishToMavenCentral()
 
-    pom {
-        name = project.project.getName()
+  signAllPublications()
 
-        description = 'Compose settings'
-        url = 'https://github.com/alorma/Compose-Settings'
-        licenses {
-            license {
-                name = 'MIT License'
-                url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
-            }
-        }
-        developers {
-            developer {
-                id = 'alorma'
-                name = 'Bernat Borrás'
-                email = 'bernatbor15@gmail.com'
-            }
-        }
-        scm {
-            connection = 'scm:git:github.com/alorma/Compose-Settings.git'
-            developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
-            url = 'https://github.com/alorma/Compose-Settings/tree/main'
-        }
+  pom {
+    name = project.project.getName()
+
+    description = 'Compose settings'
+    url = 'https://github.com/alorma/Compose-Settings'
+    licenses {
+      license {
+        name = 'MIT License'
+        url = 'https://github.com/alorma/Compose-Settings/blob/main/LICENSE'
+      }
     }
+    developers {
+      developer {
+        id = 'alorma'
+        name = 'Bernat Borrás'
+        email = 'bernatbor15@gmail.com'
+      }
+    }
+    scm {
+      connection = 'scm:git:github.com/alorma/Compose-Settings.git'
+      developerConnection = 'scm:git:ssh://github.com/alorma/Compose-Settings.git'
+      url = 'https://github.com/alorma/Compose-Settings/tree/main'
+    }
+  }
 }
