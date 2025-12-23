@@ -16,3 +16,4 @@ xcuserdata/
 contents.xcworkspacedata
 deployment/
 .claude/*.local.*
+secrets.gpg
