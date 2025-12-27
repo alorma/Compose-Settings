@@ -41,12 +41,19 @@ developers build complex settings screens without all the boilerplate.
 |-----------------------------------|----------------------------------------------------------------|
 | [SettingsSlider](#SettingsSlider) | <img width="200" alt="slider.png" src="docs/art/slider.png" /> |
 
+**Ui tiles expressive**
+
+| Component                                   | Screenshot                                                     |
+|---------------------------------------------|----------------------------------------------------------------|
+| [SettingsButtonGroup](#SettingsButtonGroup) | <img width="200" alt="button-group.png" src="docs/art/button-group.png" /> |
+
 ## Install
 
 ```
 ##// groovy
 implementation 'com.github.alorma.compose-settings:ui-tiles:$version'
 implementation 'com.github.alorma.compose-settings:ui-tiles-extended:$version'
+implementation 'com.github.alorma.compose-settings:ui-tiles-expressive:$version'
 
 [...]
 
@@ -54,6 +61,7 @@ implementation 'com.github.alorma.compose-settings:ui-tiles-extended:$version'
 
 implementation("com.github.alorma.compose-settings:ui-tiles:$version")
 implementation("com.github.alorma.compose-settings:ui-tiles-extended:$version")
+implementation("com.github.alorma.compose-settings:ui-tiles-expressive:$version")
 
 [...]
 
@@ -65,6 +73,7 @@ compose-settings = "{{libVersion}}"
 [libraries]
 composeSettings-ui = { group = "com.github.alorma.compose-settings", name = "ui-tiles", version.ref = "compose-settings" }
 composeSettings-ui-extended = { group = "com.github.alorma.compose-settings", name = "ui-tiles-extended", version.ref = "compose-settings" }
+composeSettings-ui-expressive = { group = "com.github.alorma.compose-settings", name = "ui-tiles-expressive", version.ref = "compose-settings" }
 ```
 
 ## Usage
@@ -186,3 +195,23 @@ SettingsGroup(
 ```
 
 <img width="300" alt="group.png" src="docs/art/group.png" />
+
+##### SettingsButtonGroup
+
+> Requires Material 3 Expressive components (uses `OutlinedToggleButton` from Material 3 Expressive API).
+
+```kotlin
+SettingsButtonGroup(
+  title = { Text(text = "Setting title") },
+  items = listOf(1, 2, 3),
+  selectedItem = 2,
+  itemTitleMap = { item -> "#$item" },
+  onItemSelected = { selectedItem -> },
+  modifier = Modifier,
+  enabled = false / true,
+  subtitle = { Text(text = "Setting subtitle") },
+  icon = { Icon(...) },
+)
+```
+
+<img width="300" alt="button-group.png" src="docs/art/button-group.png" />
