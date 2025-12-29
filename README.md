@@ -18,7 +18,6 @@
 
 <a href="https://www.buymeacoffee.com/alorma" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-
 ### Preview
 
 This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
@@ -33,7 +32,7 @@ developers build complex settings screens without all the boilerplate.
 | [SettingsTriStateCheckbox](#SettingsTriStateCheckbox) | <img width="200" alt="triState-checkbox" src="docs/art/triState-checkbox.png" /> |
 | [SettingsRadioButton](#SettingsRadioButton)           | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" />         |
 | [SettingsSwitch](#SettingsSwitch)                     | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
-| [SettingsGroup](#SettingsGroup)                      | <img width="200" alt="group.png" src="docs/art/group.png" />                     |
+| [SettingsGroup](#SettingsGroup)                       | <img width="200" alt="group.png" src="docs/art/group.png" />                     |
 
 **Ui tiles expanded**
 
@@ -43,8 +42,8 @@ developers build complex settings screens without all the boilerplate.
 
 **Ui tiles expressive**
 
-| Component                                   | Screenshot                                                     |
-|---------------------------------------------|----------------------------------------------------------------|
+| Component                                   | Screenshot                                                                 |
+|---------------------------------------------|----------------------------------------------------------------------------|
 | [SettingsButtonGroup](#SettingsButtonGroup) | <img width="200" alt="button-group.png" src="docs/art/button-group.png" /> |
 
 ## Install
@@ -178,7 +177,8 @@ SettingsSlider(
 
 ##### SettingsGroup
 
-> Updates on `enabled` will be reflected on it's internal components unless you change their `enabled` state manually.
+> Updates on `enabled` will be reflected on it's internal components unless you change their
+`enabled` state manually.
 
 ```kotlin
 SettingsGroup(
@@ -198,7 +198,8 @@ SettingsGroup(
 
 ##### SettingsButtonGroup
 
-> Requires Material 3 Expressive components (uses `OutlinedToggleButton` from Material 3 Expressive API).
+> Requires Material 3 Expressive components (uses `OutlinedToggleButton` from Material 3 Expressive
+> API).
 
 ```kotlin
 SettingsButtonGroup(

@@ -5,7 +5,9 @@ This document explains how to publish Compose-Settings library to Maven Central.
 ## Overview
 
 The publishing process is fully automated through GitHub Actions and uses:
-- **Convention Plugin**: Maven publishing configuration integrated in `ComposeLibraryConventionPlugin`
+
+- **Convention Plugin**: Maven publishing configuration integrated in
+  `ComposeLibraryConventionPlugin`
 - **In-Memory GPG Signing**: No local keyring files needed
 - **GitHub Actions**: Automated building, signing, and publishing
 - **Maven Central Portal**: Modern Sonatype publishing endpoint
@@ -14,11 +16,13 @@ The publishing process is fully automated through GitHub Actions and uses:
 
 ### Convention Plugin Setup
 
-All library modules (`ui-base`, `ui-tiles`, `ui-tiles-extended`, `ui-tiles-expressive`) use the `compose.library` convention plugin which automatically configures:
+All library modules (`ui-base`, `ui-tiles`, `ui-tiles-extended`, `ui-tiles-expressive`) use the
+`compose.library` convention plugin which automatically configures:
 
 **Location**: `build-logic/convention/src/main/kotlin/ComposeLibraryConventionPlugin.kt`
 
 **What it does**:
+
 1. Applies `com.vanniktech.maven.publish` plugin
 2. Applies `signing` plugin for GPG signatures
 3. Configures Maven Central publishing endpoint
@@ -26,6 +30,7 @@ All library modules (`ui-base`, `ui-tiles`, `ui-tiles-extended`, `ui-tiles-expre
 5. Reads `libGroup` and `libVersion` from `gradle.properties`
 
 **Key Configuration**:
+
 ```kotlin
 extensions.configure<MavenPublishBaseExtension> {
   publishToMavenCentral(validateDeployment = false)
@@ -85,12 +90,12 @@ Navigate to: **GitHub.com → Repository → Settings → Secrets and variables 
 
 ### Required Secrets
 
-| Secret Name | Description | How to Get It |
-|------------|-------------|---------------|
-| `GPG_KEY` | Your GPG private key | `gpg --export-secret-keys --armor 54137F1B26EEAF35` |
-| `GPG_PASSWORD` | Passphrase for the GPG key | The password you use to unlock the key |
-| `MAVEN_CENTRAL_USERNAME` | Sonatype username/token | From https://central.sonatype.com/ |
-| `MAVEN_CENTRAL_PASSWORD` | Sonatype password/token | From https://central.sonatype.com/ |
+| Secret Name              | Description                | How to Get It                                       |
+|--------------------------|----------------------------|-----------------------------------------------------|
+| `GPG_KEY`                | Your GPG private key       | `gpg --export-secret-keys --armor 54137F1B26EEAF35` |
+| `GPG_PASSWORD`           | Passphrase for the GPG key | The password you use to unlock the key              |
+| `MAVEN_CENTRAL_USERNAME` | Sonatype username/token    | From https://central.sonatype.com/                  |
+| `MAVEN_CENTRAL_PASSWORD` | Sonatype password/token    | From https://central.sonatype.com/                  |
 
 ## GitHub Actions Workflows
 
@@ -99,6 +104,7 @@ Navigate to: **GitHub.com → Repository → Settings → Secrets and variables 
 **Triggers**: On pull requests to `main`
 
 **Steps**:
+
 - Builds all library modules
 - Builds all sample apps
 - Checks GPG signatures
@@ -112,6 +118,7 @@ Navigate to: **GitHub.com → Repository → Settings → Secrets and variables 
 **Triggers**: On push to `main` branch
 
 **Steps**:
+
 - Builds all library modules
 - Builds all sample apps
 - Checks GPG signatures
@@ -126,18 +133,20 @@ Navigate to: **GitHub.com → Repository → Settings → Secrets and variables 
 **Triggers**: Manual (workflow_dispatch)
 
 **Steps**:
+
 1. Reads current version from `gradle.properties`
 2. Builds all library modules
 3. Builds all sample apps
 4. Checks GPG signatures
 5. **In Parallel**:
-   - Publishes to Maven Central
-   - Creates GitHub release with tag
+    - Publishes to Maven Central
+    - Creates GitHub release with tag
 6. Calculates next version (increments minor, resets patch to 0)
 7. Updates `gradle.properties` with next version
 8. Commits and pushes version update to `main`
 
 **Example Flow**:
+
 - Current version: `2.18.0`
 - Published version: `2.18.0`
 - GitHub tag created: `v2.18.0`
@@ -159,43 +168,47 @@ The convention plugin reads these properties and applies them to all library mod
 ### How to Publish a New Release
 
 1. **Ensure main branch is ready**:
-   - All features merged
-   - Tests passing
-   - Version in `gradle.properties` is what you want to release
+    - All features merged
+    - Tests passing
+    - Version in `gradle.properties` is what you want to release
 
 2. **Trigger the workflow**:
-   - Go to GitHub Actions tab
-   - Select "Publish and Release" workflow
-   - Click "Run workflow"
-   - Select `main` branch
-   - Click "Run workflow"
+    - Go to GitHub Actions tab
+    - Select "Publish and Release" workflow
+    - Click "Run workflow"
+    - Select `main` branch
+    - Click "Run workflow"
 
 3. **Monitor the workflow**:
-   - Watch the GitHub Actions run
-   - Check for any failures
-   - Verify Maven Central publication
-   - Verify GitHub release creation
+    - Watch the GitHub Actions run
+    - Check for any failures
+    - Verify Maven Central publication
+    - Verify GitHub release creation
 
 4. **Automatic version bump**:
-   - The workflow automatically bumps to next minor version
-   - Commits the change back to `main`
-   - You don't need to manually update the version
+    - The workflow automatically bumps to next minor version
+    - Commits the change back to `main`
+    - You don't need to manually update the version
 
 ### Testing Locally
 
 **Test signing** (requires GPG password):
+
 ```bash
 ./gradlew :ui-tiles:signKotlinMultiplatformPublication
 ```
 
 **Test local publish**:
+
 ```bash
 ./gradlew publishToMavenLocal
 ```
 
-**Note**: Local testing without environment variables will fail at signing step. This is expected and safe.
+**Note**: Local testing without environment variables will fail at signing step. This is expected
+and safe.
 
 **Test with credentials** (for advanced testing):
+
 ```bash
 export ORG_GRADLE_PROJECT_signingInMemoryKey="$(gpg --export-secret-keys --armor 54137F1B26EEAF35)"
 export ORG_GRADLE_PROJECT_signingInMemoryKeyPassword="your-password"
@@ -206,7 +219,8 @@ export ORG_GRADLE_PROJECT_mavenCentralPassword="your-password"
 
 ## How In-Memory Signing Works
 
-The `com.vanniktech.maven.publish` plugin automatically detects and uses in-memory GPG keys when these environment variables are set:
+The `com.vanniktech.maven.publish` plugin automatically detects and uses in-memory GPG keys when
+these environment variables are set:
 
 ```yaml
 env:
@@ -215,12 +229,14 @@ env:
 ```
 
 **Benefits**:
+
 - No keyring files to manage
 - Works seamlessly in CI/CD
 - More secure (keys never touch disk)
 - Cross-platform compatible
 
 **How it works**:
+
 1. GitHub Actions sets environment variables from secrets
 2. Gradle picks them up as project properties
 3. vanniktech plugin passes them to Gradle's signing plugin
@@ -231,20 +247,28 @@ env:
 Each library module publishes multiple artifacts for each platform:
 
 ### ui-base
+
 - `com.alorma.compose.settings:ui-base:$version`
-- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`, `-wasmjs`
+- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`,
+  `-wasmjs`
 
 ### ui-tiles
+
 - `com.alorma.compose.settings:ui-tiles:$version`
-- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`, `-wasmjs`
+- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`,
+  `-wasmjs`
 
 ### ui-tiles-extended
+
 - `com.alorma.compose.settings:ui-tiles-extended:$version`
-- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`, `-wasmjs`
+- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`,
+  `-wasmjs`
 
 ### ui-tiles-expressive
+
 - `com.alorma.compose.settings:ui-tiles-expressive:$version`
-- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`, `-wasmjs`
+- Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`,
+  `-wasmjs`
 
 ## Troubleshooting
 
@@ -253,6 +277,7 @@ Each library module publishes multiple artifacts for each platform:
 **Cause**: Missing or incorrect GPG configuration.
 
 **Solution**:
+
 - Verify `GPG_KEY` secret contains the full ASCII-armored key
 - Verify `GPG_PASSWORD` secret is correct
 - Check GitHub Actions logs for environment variable presence
@@ -262,6 +287,7 @@ Each library module publishes multiple artifacts for each platform:
 **Cause**: Invalid Maven Central credentials.
 
 **Solution**:
+
 - Verify `MAVEN_CENTRAL_USERNAME` secret
 - Verify `MAVEN_CENTRAL_PASSWORD` secret
 - Check if token has expired at https://central.sonatype.com/
@@ -271,6 +297,7 @@ Each library module publishes multiple artifacts for each platform:
 **Cause**: Trying to publish a version that's already published.
 
 **Solution**:
+
 - Update `libVersion` in `gradle.properties`
 - Commit and push the change
 - Trigger the publish workflow again
@@ -280,6 +307,7 @@ Each library module publishes multiple artifacts for each platform:
 **Cause**: GPG key passed its expiration date.
 
 **Solution**:
+
 1. Renew the key (see "Renewing the GPG Key" section)
 2. Export the renewed key
 3. Update the `GPG_KEY` secret in GitHub
@@ -288,10 +316,12 @@ Each library module publishes multiple artifacts for each platform:
 ## Maven Central Portal
 
 After publishing, artifacts appear at:
+
 - **Portal**: https://central.sonatype.com/
 - **Repository**: https://repo1.maven.org/maven2/com/alorma/compose/settings/
 
 **Timing**:
+
 - Artifacts appear in portal immediately after successful publish
 - Full propagation to Maven Central can take 15-30 minutes
 - CDNs and mirrors may take up to 2 hours

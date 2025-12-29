@@ -15,19 +15,24 @@
         <error line="223" column="13" source="standard:function-naming" />
         <error line="313" column="13" source="standard:function-naming" />
     </file>
-    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelCheckbox.kt">
+    <file
+        name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelCheckbox.kt">
         <error line="14" column="14" source="standard:function-naming" />
     </file>
-    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelRadioButton.kt">
+    <file
+        name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/LabelRadioButton.kt">
         <error line="14" column="14" source="standard:function-naming" />
     </file>
-    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/MultiChoiceAlertDialog.kt">
+    <file
+        name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/MultiChoiceAlertDialog.kt">
         <error line="13" column="14" source="standard:function-naming" />
     </file>
-    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SampleSection.kt">
+    <file
+        name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SampleSection.kt">
         <error line="15" column="14" source="standard:function-naming" />
     </file>
-    <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SingleChoiceAlertDialog.kt">
+    <file
+        name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/internal/SingleChoiceAlertDialog.kt">
         <error line="12" column="14" source="standard:function-naming" />
     </file>
     <file name="src/commonMain/kotlin/com/alorma/compose/settings/sample/shared/theme/Theme.kt">

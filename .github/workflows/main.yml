@@ -82,7 +82,7 @@ jobs:
     strategy:
       matrix:
         config: [
-          { target: android,  module: androidApp, os: ubuntu-latest, tasks: assembleDebug  },
+          { target: android,  module: androidApp, os: ubuntu-latest, tasks: assembleDebug },
           { target: iOS,  module: iosApp, os: macos-latest, tasks: compileKotlinIosArm64 },
           { target: js,  module: webApp, os: ubuntu-latest, tasks: jsBrowserDistribution },
           { target: wasm,  module: webApp, os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
