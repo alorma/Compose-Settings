@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.sample.shared
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
@@ -75,6 +76,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
       SettingsShapeSampleSection()
       SettingsTextStylesSampleSection()
       SettingsGroupSectionSample()
+      SettingsGroupSpacingSample()
     }
   }
 }
@@ -472,6 +474,59 @@ private fun SettingsGroupSectionSample() {
       title = { Text(text = "RadioButton") },
       subtitle = { Text(text = "RadioButton subtitle") },
       onClick = { state.value = !state.value },
+    )
+  }
+}
+
+@Composable
+private fun SettingsGroupSpacingSample() {
+  SampleSection(
+    title = "SettingsGroup - Custom Spacing",
+    verticalArrangement = Arrangement.spacedBy(4.dp),
+  ) {
+    val switch1State = remember { mutableStateOf(false) }
+    SettingsSwitch(
+      state = switch1State.value,
+      title = { Text(text = "Compact spacing") },
+      subtitle = { Text(text = "Using 4.dp spacing between items") },
+      onCheckedChange = { switch1State.value = it },
+    )
+
+    val switch2State = remember { mutableStateOf(true) }
+    SettingsSwitch(
+      state = switch2State.value,
+      title = { Text(text = "Another switch") },
+      subtitle = { Text(text = "Notice the reduced spacing") },
+      onCheckedChange = { switch2State.value = it },
+    )
+
+    val checkboxState = remember { mutableStateOf(false) }
+    SettingsCheckbox(
+      state = checkboxState.value,
+      title = { Text(text = "Checkbox item") },
+      subtitle = { Text(text = "All items have consistent 4.dp spacing") },
+      onCheckedChange = { checkboxState.value = it },
+    )
+  }
+
+  SampleSection(
+    title = "SettingsGroup - No Spacing",
+    verticalArrangement = Arrangement.Top,
+  ) {
+    val switch1State = remember { mutableStateOf(false) }
+    SettingsSwitch(
+      state = switch1State.value,
+      title = { Text(text = "No spacing") },
+      subtitle = { Text(text = "Using Arrangement.Top for no spacing") },
+      onCheckedChange = { switch1State.value = it },
+    )
+
+    val switch2State = remember { mutableStateOf(true) }
+    SettingsSwitch(
+      state = switch2State.value,
+      title = { Text(text = "Tightly packed") },
+      subtitle = { Text(text = "Items are directly adjacent") },
+      onCheckedChange = { switch2State.value = it },
     )
   }
 }

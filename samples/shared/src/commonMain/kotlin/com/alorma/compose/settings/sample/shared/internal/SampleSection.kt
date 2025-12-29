@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.sample.shared.internal
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Card
@@ -15,10 +16,12 @@ import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 internal fun SampleSection(
   title: String,
   enabled: Boolean = true,
+  verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(12.dp),
   content: @Composable ColumnScope.() -> Unit,
 ) {
   SettingsGroup(
     contentPadding = PaddingValues(16.dp),
+    verticalArrangement = verticalArrangement,
     enabled = enabled,
     title = { Text(text = title) },
   ) {

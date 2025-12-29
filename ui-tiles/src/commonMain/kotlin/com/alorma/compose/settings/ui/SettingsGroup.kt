@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -25,6 +26,7 @@ fun SettingsGroup(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   contentPadding: PaddingValues = PaddingValues(0.dp),
+  verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(8.dp),
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
   title: @Composable (() -> Unit)? = null,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
@@ -37,6 +39,7 @@ fun SettingsGroup(
         .semantics(properties = semanticProperties)
         .then(modifier)
         .padding(contentPadding),
+    verticalArrangement = verticalArrangement,
   ) {
     CompositionLocalProvider(LocalContentColor provides colors.actionColor(enabled)) {
       if (title != null) {
