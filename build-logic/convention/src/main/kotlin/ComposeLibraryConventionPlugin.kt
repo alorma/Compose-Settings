@@ -20,7 +20,6 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
         apply("org.jetbrains.kotlin.plugin.compose")
         apply("org.jetbrains.dokka")
         apply("io.gitlab.arturbosch.detekt")
-        apply("org.jlleitschuh.gradle.ktlint")
         apply("com.vanniktech.maven.publish")
         apply("signing")
       }

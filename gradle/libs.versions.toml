@@ -21,7 +21,6 @@ androidxpreference = "1.2.1"
 
 # Code Quality
 detekt = "1.23.8"
-ktlint = "14.0.1"
 dokka = "2.1.0"
 compose-detekt-rules = "0.0.26"
 
@@ -55,7 +54,6 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 compose-gradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose-plugin" }
 detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
-ktlint-gradlePlugin = { group = "org.jlleitschuh.gradle", name = "ktlint-gradle", version.ref = "ktlint" }
 dokka-gradlePlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokka" }
 
 [plugins]
@@ -73,5 +71,4 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 
 # Code Quality
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }

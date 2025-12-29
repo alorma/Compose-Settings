@@ -100,12 +100,6 @@ Sample applications demonstrating the library are in `samples/`:
 ### Code Quality
 
 ```bash
-# Run ktlint for code formatting
-./gradlew ktlintCheck
-
-# Auto-format code with ktlint
-./gradlew ktlintFormat
-
 # Run detekt for static code analysis
 ./gradlew detekt
 
@@ -177,7 +171,7 @@ The project uses Gradle convention plugins located in `build-logic/convention/`:
     - Sets up Compose Multiplatform and Compose Compiler
     - Configures Android library settings
     - Integrates Maven publishing with automatic signing
-    - Applies code quality tools (Detekt, ktlint, Dokka)
+    - Applies code quality tools (Detekt, Dokka)
     - Location: `build-logic/convention/src/main/kotlin/ComposeLibraryConventionPlugin.kt`
 
 2. **ComposeSampleConventionPlugin** (`compose.sample`)

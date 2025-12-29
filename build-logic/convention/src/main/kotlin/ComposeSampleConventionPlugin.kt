@@ -16,7 +16,6 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
         apply("org.jetbrains.compose")
         apply("org.jetbrains.kotlin.plugin.compose")
         apply("io.gitlab.arturbosch.detekt")
-        apply("org.jlleitschuh.gradle.ktlint")
       }
 
       version = "1.0-SNAPSHOT"

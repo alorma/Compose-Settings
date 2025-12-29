@@ -1,8 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockMismatchReport
 import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension
-import org.jlleitschuh.gradle.ktlint.KtlintExtension
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
   alias(libs.plugins.dokka)
@@ -13,7 +11,6 @@ plugins {
   alias(libs.plugins.kotlinMultiplatformAndroidLibrary) apply false
   alias(libs.plugins.kotlinAndroid) apply false
   alias(libs.plugins.detekt).apply(false)
-  alias(libs.plugins.ktlint).apply(false)
 }
 
 buildscript {
@@ -48,27 +45,6 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 }
 
 apply(from = "${rootDir}/scripts/publish-root.gradle")
-
-subprojects {
-  apply(plugin = "org.jlleitschuh.gradle.ktlint")
-
-  repositories {
-    mavenCentral()
-  }
-
-  // Optionally configure plugin
-  configure<KtlintExtension> {
-    android.set(false)
-    baseline.set(file("config/ktlint/baseline.xml"))
-    reporters {
-      reporter(ReporterType.CHECKSTYLE)
-    }
-    filter {
-      exclude("**/build/**")
-      exclude("**/generated/**")
-    }
-  }
-}
 
 dependencies {
   listOf(
