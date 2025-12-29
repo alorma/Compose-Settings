@@ -77,6 +77,54 @@ composeSettings-ui-expressive = { group = "com.github.alorma.compose-settings", 
 
 ## Usage
 
+### Customization
+
+All settings components support customization through common parameters:
+
+#### Shape
+
+Customize the shape of any settings component using the `shape` parameter:
+
+```kotlin
+SettingsSwitch(
+  state = switchState,
+  title = { Text("Rounded corners") },
+  shape = RoundedCornerShape(16.dp), // Custom shape
+  onCheckedChange = { switchState = it },
+)
+```
+
+Available shapes include:
+- `RoundedCornerShape(size)` - Rounded corners
+- `CutCornerShape(size)` - Cut corners
+- `CircleShape` - Fully circular
+- Custom shapes implementing the `Shape` interface
+
+#### Text Styles
+
+Customize title and subtitle text styles using the `textStyles` parameter:
+
+```kotlin
+SettingsCheckbox(
+  state = checkboxState,
+  title = { Text("Custom styled title") },
+  subtitle = { Text("Custom styled subtitle") },
+  textStyles = SettingsTileDefaults.textStyles(
+    titleStyle = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+    subtitleStyle = MaterialTheme.typography.bodyLarge,
+  ),
+  onCheckedChange = { checkboxState = it },
+)
+```
+
+This allows you to:
+- Change font sizes, weights, and families
+- Adjust letter spacing and line height
+- Apply custom colors and decorations
+- Match your app's typography system
+
+### Components
+
 ##### SettingsMenuLink:
 
 ```kotlin
@@ -186,12 +234,34 @@ SettingsGroup(
   enabled = false / true,
   title = { Text(text = "SettingsGroup") },
   contentPadding = PaddingValues(16.dp),
+  verticalArrangement = Arrangement.spacedBy(8.dp), // Spacing between items (default: 8.dp)
 ) {
     SettingsMenuLink(...)
     SettingsCheckbox(...)
     SettingsSwitch(...)
     ...
 }
+```
+
+**Spacing customization:**
+
+Control the spacing between items in the group using the `verticalArrangement` parameter:
+
+```kotlin
+// Compact spacing
+SettingsGroup(
+  verticalArrangement = Arrangement.spacedBy(4.dp),
+) { ... }
+
+// No spacing (tightly packed items)
+SettingsGroup(
+  verticalArrangement = Arrangement.Top,
+) { ... }
+
+// Large spacing
+SettingsGroup(
+  verticalArrangement = Arrangement.spacedBy(16.dp),
+) { ... }
 ```
 
 <img width="300" alt="group.png" src="docs/art/group.png" />
