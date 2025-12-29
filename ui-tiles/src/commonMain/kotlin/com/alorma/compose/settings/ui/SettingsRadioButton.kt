@@ -16,6 +16,7 @@ import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.base.internal.SettingsTextStyles
 
 @Composable
 fun SettingsRadioButton(
@@ -31,6 +32,7 @@ fun SettingsRadioButton(
       selectedColor = colors.actionColor(enabled),
       disabledSelectedColor = colors.actionColor(enabled),
     ),
+  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -52,6 +54,7 @@ fun SettingsRadioButton(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
+    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

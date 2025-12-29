@@ -17,6 +17,7 @@ import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.base.internal.SettingsTextStyles
 
 @Composable
 fun SettingsCheckbox(
@@ -33,6 +34,7 @@ fun SettingsCheckbox(
       checkmarkColor = contentColorFor(colors.actionColor(enabled)),
       disabledCheckedColor = colors.actionColor(enabled),
     ),
+  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -55,6 +57,7 @@ fun SettingsCheckbox(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
+    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

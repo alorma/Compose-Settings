@@ -4,11 +4,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -17,7 +21,9 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
 import com.alorma.compose.settings.sample.shared.internal.SampleData
 import com.alorma.compose.settings.sample.shared.internal.SampleSection
@@ -29,6 +35,8 @@ import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
+import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
+import com.alorma.compose.settings.ui.base.internal.SettingsTextStyles
 import com.alorma.compose.settings.ui.expressive.SettingsButtonGroup
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,6 +72,8 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
       SettingsMenuLinkSectionSample()
       SettingsSliderSectionSample()
       SettingsSelectorsSample()
+      SettingsShapeSampleSection()
+      SettingsTextStylesSampleSection()
       SettingsGroupSectionSample()
     }
   }
@@ -304,6 +314,107 @@ private fun SettingsSelectorsSample() {
       selectedItem = buttonGroupState.value,
       onItemSelected = { buttonGroupState.value = it },
       subtitle = { Text(text = "Selected value: ${buttonGroupState.value}") },
+    )
+  }
+}
+
+@Composable
+private fun SettingsTextStylesSampleSection() {
+  SampleSection(title = "Custom Text Styles") {
+    val largeTextState = remember { mutableStateOf(false) }
+    SettingsSwitch(
+      state = largeTextState.value,
+      title = { Text(text = "Large title text") },
+      subtitle = { Text(text = "Using custom title and subtitle styles") },
+      textStyles = SettingsTileDefaults.textStyles(
+        titleStyle = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+        subtitleStyle = MaterialTheme.typography.bodyLarge,
+      ),
+      onCheckedChange = { largeTextState.value = it },
+    )
+
+    val smallTextState = remember { mutableStateOf(false) }
+    SettingsCheckbox(
+      state = smallTextState.value,
+      title = { Text(text = "Small title text") },
+      subtitle = { Text(text = "Using smaller typography") },
+      textStyles = SettingsTileDefaults.textStyles(
+        titleStyle = MaterialTheme.typography.bodySmall,
+        subtitleStyle = MaterialTheme.typography.labelSmall,
+      ),
+      onCheckedChange = { smallTextState.value = it },
+    )
+
+    val customFontState = remember { mutableStateOf<String?>(null) }
+    SettingsRadioButton(
+      state = customFontState.value == "custom",
+      title = { Text(text = "Custom font weight") },
+      subtitle = { Text(text = "Title with bold and subtitle with light weight") },
+      textStyles = SettingsTileDefaults.textStyles(
+        titleStyle = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.ExtraBold),
+        subtitleStyle = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Light),
+      ),
+      onClick = { customFontState.value = "custom" },
+    )
+
+    SettingsMenuLink(
+      title = { Text(text = "Menu with custom styles") },
+      subtitle = { Text(text = "Both title and subtitle customized") },
+      textStyles = SettingsTileDefaults.textStyles(
+        titleStyle = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+        subtitleStyle = MaterialTheme.typography.bodySmall.copy(letterSpacing = 0.5.sp),
+      ),
+      onClick = { },
+    )
+  }
+}
+
+@Composable
+private fun SettingsShapeSampleSection() {
+  SampleSection(title = "Custom Shapes") {
+    val roundedState = remember { mutableStateOf(false) }
+    SettingsSwitch(
+      state = roundedState.value,
+      title = { Text(text = "Rounded corners") },
+      subtitle = { Text(text = "Using RoundedCornerShape(16.dp)") },
+      shape = RoundedCornerShape(16.dp),
+      onCheckedChange = { roundedState.value = it },
+    )
+
+    val cutCornerState = remember { mutableStateOf(false) }
+    SettingsCheckbox(
+      state = cutCornerState.value,
+      title = { Text(text = "Cut corners") },
+      subtitle = { Text(text = "Using CutCornerShape(8.dp)") },
+      shape = CutCornerShape(8.dp),
+      onCheckedChange = { cutCornerState.value = it },
+    )
+
+    val circleState = remember { mutableStateOf<String?>(null) }
+    SettingsRadioButton(
+      state = circleState.value == "circle",
+      title = { Text(text = "Circle shape") },
+      subtitle = { Text(text = "Using CircleShape") },
+      shape = CircleShape,
+      onClick = { circleState.value = "circle" },
+    )
+
+    SettingsMenuLink(
+      title = { Text(text = "Menu with rounded shape") },
+      subtitle = { Text(text = "Using RoundedCornerShape(24.dp)") },
+      shape = RoundedCornerShape(24.dp),
+      onClick = { },
+    )
+
+    val sliderValue = remember { mutableStateOf(3f) }
+    SettingsSlider(
+      title = { Text(text = "Slider with shape") },
+      value = sliderValue.value,
+      onValueChange = { sliderValue.value = it },
+      subtitle = { Text(text = "Using RoundedCornerShape(12.dp)") },
+      shape = RoundedCornerShape(12.dp),
+      valueRange = 0f..6f,
+      steps = 5,
     )
   }
 }

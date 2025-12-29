@@ -4,12 +4,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 
 @Composable
@@ -20,20 +22,27 @@ fun SettingsTileScaffold(
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   action: @Composable (() -> Unit)? = null,
 ) {
   val decoratedTitle: @Composable () -> Unit = {
-    ProvideContentColor(colors.titleColor(enabled)) {
+    ProvideContentColorAndTextStyle(
+      contentColor = colors.titleColor(enabled),
+      textStyle = textStyles.titleStyle,
+    ) {
       title()
     }
   }
   val decoratedSubtitle: @Composable (() -> Unit)? =
     subtitle?.let {
       {
-        ProvideContentColor(colors.subtitleColor(enabled)) {
+        ProvideContentColorAndTextStyle(
+          contentColor = colors.subtitleColor(enabled),
+          textStyle = textStyles.subtitleStyle,
+        ) {
           subtitle()
         }
       }
@@ -84,6 +93,20 @@ private fun ProvideContentColor(
   content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(LocalContentColor provides contentColor) {
+    content()
+  }
+}
+
+@Composable
+private fun ProvideContentColorAndTextStyle(
+  contentColor: Color,
+  textStyle: TextStyle,
+  content: @Composable () -> Unit,
+) {
+  CompositionLocalProvider(
+    LocalContentColor provides contentColor,
+    LocalTextStyle provides textStyle,
+  ) {
     content()
   }
 }

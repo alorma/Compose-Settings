@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 
 object SettingsTileDefaults {
@@ -13,6 +14,20 @@ object SettingsTileDefaults {
 
   @Composable
   fun shape(): Shape = ListItemDefaults.shape
+
+  @Composable
+  fun textStyles(
+    titleStyle: TextStyle =
+      LocalSettingsTextStyles.current?.titleStyle
+        ?: MaterialTheme.typography.bodyLarge,
+    subtitleStyle: TextStyle =
+      LocalSettingsTextStyles.current?.subtitleStyle
+        ?: MaterialTheme.typography.bodyMedium,
+  ): SettingsTextStyles =
+    SettingsTextStyles(
+      titleStyle = titleStyle,
+      subtitleStyle = subtitleStyle,
+    )
 
   @Composable
   fun colors(

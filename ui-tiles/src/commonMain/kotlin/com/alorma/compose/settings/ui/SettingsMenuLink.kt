@@ -11,6 +11,7 @@ import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.base.internal.SettingsTextStyles
 
 @Composable
 fun SettingsMenuLink(
@@ -21,6 +22,7 @@ fun SettingsMenuLink(
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -40,6 +42,7 @@ fun SettingsMenuLink(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
+    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
