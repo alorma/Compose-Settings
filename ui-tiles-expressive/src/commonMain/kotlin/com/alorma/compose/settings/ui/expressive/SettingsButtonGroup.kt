@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
@@ -33,6 +34,7 @@ fun <T> SettingsButtonGroup(
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
@@ -66,6 +68,7 @@ fun <T> SettingsButtonGroup(
     },
     icon = icon,
     colors = colors,
+    shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   )

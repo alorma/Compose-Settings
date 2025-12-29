@@ -7,6 +7,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -33,6 +34,7 @@ fun SettingsSwitch(
       disabledCheckedTrackColor = colors.actionColor(enabled),
       disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
     ),
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
@@ -55,6 +57,7 @@ fun SettingsSwitch(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
+    shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   ) {

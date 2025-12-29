@@ -6,6 +6,7 @@ import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -30,6 +31,7 @@ fun SettingsRadioButton(
       selectedColor = colors.actionColor(enabled),
       disabledSelectedColor = colors.actionColor(enabled),
     ),
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
@@ -50,6 +52,7 @@ fun SettingsRadioButton(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
+    shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   ) {

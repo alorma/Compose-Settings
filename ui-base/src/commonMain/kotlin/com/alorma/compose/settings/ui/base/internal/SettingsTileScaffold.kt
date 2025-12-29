@@ -7,7 +7,9 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 
 @Composable
@@ -18,6 +20,7 @@ fun SettingsTileScaffold(
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   action: @Composable (() -> Unit)? = null,
@@ -53,7 +56,7 @@ fun SettingsTileScaffold(
     }
 
   ListItem(
-    modifier = Modifier.fillMaxWidth().then(modifier),
+    modifier = Modifier.fillMaxWidth().clip(shape).then(modifier),
     headlineContent = decoratedTitle,
     supportingContent = decoratedSubtitle,
     leadingContent = decoratedIcon,

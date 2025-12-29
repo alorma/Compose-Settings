@@ -68,6 +68,7 @@ fun <T> SettingsSegmented(
   buttonIcon: @Composable (Boolean) -> Unit = { selected -> SegmentedButtonDefaults.Icon(selected) },
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
@@ -85,11 +86,11 @@ fun <T> SettingsSegmented(
           space = buttonSpace,
         ) {
           items.forEachIndexed { index, item ->
-            val shape = buttonShape(index)
+            val buttonItemShape = buttonShape(index)
 
             SegmentedButton(
               enabled = enabled,
-              shape = shape,
+              shape = buttonItemShape,
               label = {
                 when (val text = itemTitleMap(item)) {
                   is String -> Text(text = text)
@@ -108,6 +109,7 @@ fun <T> SettingsSegmented(
     },
     icon = icon,
     colors = colors,
+    shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   )

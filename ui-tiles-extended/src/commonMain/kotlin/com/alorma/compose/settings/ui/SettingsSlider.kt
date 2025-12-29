@@ -8,6 +8,7 @@ import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
@@ -35,6 +36,7 @@ fun SettingsSlider(
       activeTrackColor = colors.actionColor(enabled),
       inactiveTrackColor = colors.actionColor(enabled).copy(alpha = 0.12f),
     ),
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
@@ -61,6 +63,7 @@ fun SettingsSlider(
     },
     icon = icon,
     colors = colors,
+    shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   )

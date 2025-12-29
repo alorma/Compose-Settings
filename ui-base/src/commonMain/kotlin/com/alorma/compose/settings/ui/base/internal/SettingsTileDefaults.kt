@@ -4,11 +4,15 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 
 object SettingsTileDefaults {
   val Elevation: Dp = ListItemDefaults.Elevation
   const val DisabledAlpha: Float = 0.38f
+
+  @Composable
+  fun shape(): Shape = ListItemDefaults.shape
 
   @Composable
   fun colors(

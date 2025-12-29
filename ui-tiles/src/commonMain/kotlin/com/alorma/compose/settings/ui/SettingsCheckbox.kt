@@ -7,6 +7,7 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -32,6 +33,7 @@ fun SettingsCheckbox(
       checkmarkColor = contentColorFor(colors.actionColor(enabled)),
       disabledCheckedColor = colors.actionColor(enabled),
     ),
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
@@ -53,6 +55,7 @@ fun SettingsCheckbox(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
+    shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
   ) {

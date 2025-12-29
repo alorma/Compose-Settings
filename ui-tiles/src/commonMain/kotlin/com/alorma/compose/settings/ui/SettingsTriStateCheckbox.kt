@@ -1,15 +1,13 @@
 package com.alorma.compose.settings.ui
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -36,42 +34,39 @@ fun SettingsTriStateCheckbox(
       checkmarkColor = contentColorFor(colors.actionColor(enabled)),
       disabledCheckedColor = colors.actionColor(enabled),
     ),
+  shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   onCheckedChange: (Boolean) -> Unit = {},
 ) {
   val update: () -> Unit = { onCheckedChange(state?.not() ?: true) }
-  Row(
+  SettingsTileScaffold(
     modifier =
       Modifier
-        .fillMaxWidth()
         .triStateToggleable(
           state = mapNullableBooleanToToggleableState(state),
-          onClick = update,
           enabled = enabled,
           role = Role.Checkbox,
+          onClick = update,
         ).semantics(properties = semanticProperties)
         .then(modifier),
-    verticalAlignment = Alignment.CenterVertically,
+    enabled = enabled,
+    title = title,
+    subtitle = subtitle,
+    icon = icon,
+    colors = colors,
+    shape = shape,
+    tonalElevation = tonalElevation,
+    shadowElevation = shadowElevation,
   ) {
-    SettingsTileScaffold(
+    TriStateCheckbox(
+      modifier = Modifier.clearAndSetSemantics { },
       enabled = enabled,
-      title = title,
-      subtitle = subtitle,
-      icon = icon,
-      colors = colors,
-      tonalElevation = tonalElevation,
-      shadowElevation = shadowElevation,
-    ) {
-      TriStateCheckbox(
-        modifier = Modifier.clearAndSetSemantics { },
-        enabled = enabled,
-        state = mapNullableBooleanToToggleableState(state),
-        onClick = update,
-        colors = checkboxColors,
-      )
-    }
+      state = mapNullableBooleanToToggleableState(state),
+      onClick = update,
+      colors = checkboxColors,
+    )
   }
 }
 
