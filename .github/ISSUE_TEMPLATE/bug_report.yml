@@ -8,6 +8,41 @@ body:
       value: |
         Thanks for taking the time to report a bug! Please fill out the form below with as much detail as possible.
 
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected? (optional)
+      options:
+        - Not sure / General
+        - SettingsMenuLink
+        - SettingsCheckbox
+        - SettingsTriStateCheckbox
+        - SettingsRadioButton
+        - SettingsSwitch
+        - SettingsSlider
+        - SettingsGroup
+        - SettingsButtonGroup
+        - Styling / Theming
+        - Build / Publishing
+    validations:
+      required: false
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which platform(s) are affected?
+      multiple: true
+      options:
+        - Android
+        - iOS
+        - Desktop (JVM)
+        - JavaScript
+        - WebAssembly
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
@@ -44,41 +79,6 @@ body:
       label: Actual Behavior
       description: What actually happened?
       placeholder: The app crashes with NullPointerException
-    validations:
-      required: true
-
-  - type: dropdown
-    id: component
-    attributes:
-      label: Component
-      description: Which component is affected? (optional)
-      options:
-        - Not sure / General
-        - SettingsMenuLink
-        - SettingsCheckbox
-        - SettingsTriStateCheckbox
-        - SettingsRadioButton
-        - SettingsSwitch
-        - SettingsSlider
-        - SettingsGroup
-        - SettingsButtonGroup
-        - Styling / Theming
-        - Build / Publishing
-    validations:
-      required: false
-
-  - type: dropdown
-    id: platform
-    attributes:
-      label: Platform
-      description: Which platform(s) are affected?
-      multiple: true
-      options:
-        - Android
-        - iOS
-        - Desktop (JVM)
-        - JavaScript
-        - WebAssembly
     validations:
       required: true
 
