@@ -1,0 +1,166 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below with as much detail as possible.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the bug
+      placeholder: What went wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Add SettingsSwitch component
+        2. Toggle the switch
+        3. Observe the crash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: The switch should toggle without crashing
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: The app crashes with NullPointerException
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component is affected? (optional)
+      options:
+        - Not sure / General
+        - SettingsMenuLink
+        - SettingsCheckbox
+        - SettingsTriStateCheckbox
+        - SettingsRadioButton
+        - SettingsSwitch
+        - SettingsSlider
+        - SettingsGroup
+        - SettingsButtonGroup
+        - Styling / Theming
+        - Build / Publishing
+    validations:
+      required: false
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: Which platform(s) are affected?
+      multiple: true
+      options:
+        - Android
+        - iOS
+        - Desktop (JVM)
+        - JavaScript
+        - WebAssembly
+    validations:
+      required: true
+
+  - type: input
+    id: library-version
+    attributes:
+      label: Library Version
+      description: Which version of Compose-Settings are you using?
+      placeholder: e.g., 2.24.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Additional environment information
+      placeholder: |
+        - Kotlin version: 1.9.20
+        - Compose version: 1.5.4
+        - Android API level: 34 (if Android)
+        - iOS version: 17.0 (if iOS)
+        - Device/Simulator: Pixel 7 / iPhone 15 Pro
+    validations:
+      required: false
+
+  - type: textarea
+    id: code-sample
+    attributes:
+      label: Code Sample
+      description: Provide a minimal code sample that reproduces the issue
+      render: kotlin
+      placeholder: |
+        @Composable
+        fun MySettings() {
+            var switchState by remember { mutableStateOf(false) }
+            SettingsSwitch(
+                state = switchState,
+                title = { Text("Enable feature") },
+                onCheckedChange = { switchState = it }
+            )
+        }
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Stack Trace
+      description: Include any relevant logs or error messages
+      render: shell
+      placeholder: Paste logs or stack traces here
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Add screenshots if applicable
+      placeholder: Drag and drop images here
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other information that might be helpful
+      placeholder: This started happening after updating from version X to Y
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to ensure this hasn't been reported before
+          required: true
+        - label: I have provided a clear description and reproduction steps
+          required: true
+        - label: I am using a supported version of the library
+          required: true
