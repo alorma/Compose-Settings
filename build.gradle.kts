@@ -44,8 +44,6 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
   rootProject.the<YarnRootExtension>().yarnLockAutoReplace = false // true
 }
 
-apply(from = "${rootDir}/scripts/publish-root.gradle")
-
 dependencies {
   listOf(
     projects.uiBase,
