@@ -88,13 +88,6 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
         }
 
         sourceSets.apply {
-          val androidMain by getting {
-            dependencies {
-              implementation(libs.findLibrary("androidx-preference-preference").get())
-              implementation(libs.findLibrary("androidx-preference-ktx").get())
-            }
-          }
-
           val commonMain by getting {
             dependencies {
               implementation(compose.dependencies.runtime)
