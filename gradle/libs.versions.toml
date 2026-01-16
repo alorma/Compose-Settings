@@ -4,7 +4,7 @@ kotlin = "2.3.0"
 compose-plugin = "1.10.0"
 
 # Android Gradle Plugin
-agp = "8.13.2"
+agp = "9.0.0"
 
 # Android SDK
 android-minSdk = "21"
