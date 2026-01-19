@@ -25,7 +25,7 @@ dokka = "2.1.0"
 compose-detekt-rules = "0.0.26"
 
 # Publishing
-mavenPlugin = "0.35.0"
+mavenPlugin = "0.36.0"
 
 # Other Libraries
 windowSizeClass = "0.5.0"
