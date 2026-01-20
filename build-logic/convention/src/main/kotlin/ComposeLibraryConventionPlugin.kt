@@ -31,7 +31,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
 
       // Configure Maven Publishing
       extensions.configure<MavenPublishBaseExtension> {
-        publishToMavenCentral(validateDeployment = false)
+        publishToMavenCentral()
         signAllPublications()
 
         pom { configurePom(this) }
