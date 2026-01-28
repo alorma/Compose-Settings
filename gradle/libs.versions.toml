@@ -17,7 +17,6 @@ namespace = "com.alorma.compose.settings"
 
 # AndroidX
 androidxactivity = "1.12.2"
-androidxpreference = "1.2.1"
 
 # Code Quality
 detekt = "1.23.8"
@@ -28,14 +27,11 @@ compose-detekt-rules = "0.0.26"
 mavenPlugin = "0.36.0"
 
 # Other Libraries
-windowSizeClass = "0.5.0"
 compose-material3-expressive = "1.11.0-alpha01"
 
 [libraries]
 # AndroidX
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxactivity" }
-androidx-preference-preference = { group = "androidx.preference", name = "preference", version.ref = "androidxpreference" }
-androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "androidxpreference" }
 
 # Compose
 compose-material3-expressive = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "compose-material3-expressive" }
@@ -45,9 +41,6 @@ compose-detekt-rules = { group = "com.twitter.compose.rules", name = "detekt", v
 
 # Publishing Plugins
 plugin-gradle-maven-publish = { group = "com.vanniktech", name = "gradle-maven-publish-plugin", version.ref = "mavenPlugin" }
-
-# Other Libraries
-windowSizeClass = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "windowSizeClass" }
 
 # Build-logic Convention Plugins
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
