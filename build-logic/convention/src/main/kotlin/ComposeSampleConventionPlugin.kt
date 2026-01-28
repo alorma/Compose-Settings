@@ -1,10 +1,9 @@
-import com.android.build.api.dsl.androidLibrary
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class ComposeSampleConventionPlugin : Plugin<Project> {
@@ -24,7 +23,7 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
       val compose = extensions.getByType<ComposeExtension>()
 
       extensions.configure<KotlinMultiplatformExtension> {
-        androidLibrary {
+        extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
           namespace = libs.findVersion("namespace").get().toString() + ".sample.shared"
           compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
           minSdk = libs.findVersion("android-minSdkSample").get().toString().toInt()
@@ -38,14 +37,6 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
           lint {
             checkReleaseBuilds = false
             abortOnError = false
-          }
-
-          compilations.configureEach {
-            compileTaskProvider.configure {
-              compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
-              }
-            }
           }
         }
 

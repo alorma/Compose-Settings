@@ -1,13 +1,17 @@
-import com.android.build.api.dsl.androidLibrary
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPom
-import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.findByType
+import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.getValue
+import org.gradle.kotlin.dsl.getting
 import org.jetbrains.compose.ComposeExtension
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class ComposeLibraryConventionPlugin : Plugin<Project> {
@@ -45,7 +49,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
         applyDefaultHierarchyTemplate()
         withSourcesJar()
 
-        androidLibrary {
+        extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
           // Default namespace - modules MUST override this with their unique namespace
           namespace = defaultNamespace
 
@@ -61,14 +65,6 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
           lint {
             checkReleaseBuilds = false
             abortOnError = false
-          }
-
-          compilations.configureEach {
-            compileTaskProvider.configure {
-              compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
-              }
-            }
           }
         }
 
@@ -105,12 +101,11 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
 
       // Validate that module has overridden the namespace
       afterEvaluate {
-        extensions.findByType<KotlinMultiplatformExtension>()?.let { kotlin ->
-          kotlin.androidLibrary {
-            val currentNamespace = namespace
-            if (currentNamespace == defaultNamespace) {
-              throw GradleException(
-                """
+        extensions.findByType<KotlinMultiplatformAndroidLibraryExtension>()?.let { kotlin ->
+          val currentNamespace = kotlin.namespace
+          if (currentNamespace == defaultNamespace) {
+            throw GradleException(
+              """
                 |Module '${project.path}' must override the namespace!
                 |
                 |Each library module must set a unique namespace in its build.gradle.kts:
@@ -123,8 +118,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
                 |
                 |Current namespace: $currentNamespace (this is the default and will cause conflicts)
                 """.trimMargin()
-              )
-            }
+            )
           }
         }
       }

@@ -4,7 +4,7 @@ kotlin = "2.3.0"
 compose-plugin = "1.10.0"
 
 # Android Gradle Plugin
-agp = "8.13.2"
+agp = "9.0.0"
 
 # Android SDK
 android-minSdk = "21"
@@ -56,7 +56,6 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 # Kotlin
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinMultiplatformAndroidLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 # Compose
