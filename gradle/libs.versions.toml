@@ -16,7 +16,7 @@ android-targetSdk = "36"
 namespace = "com.alorma.compose.settings"
 
 # AndroidX
-androidxactivity = "1.12.2"
+androidxactivity = "1.12.3"
 
 # Code Quality
 detekt = "1.23.8"
