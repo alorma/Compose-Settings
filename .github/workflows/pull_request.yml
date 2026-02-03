@@ -26,7 +26,7 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get current version
         id: get_version
@@ -42,7 +42,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -67,7 +67,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -94,7 +94,7 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -113,7 +113,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -134,7 +134,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -155,7 +155,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK
         uses: actions/setup-java@v4
