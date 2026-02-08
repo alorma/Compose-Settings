@@ -41,12 +41,16 @@ object SettingsTileDefaults {
     titleColor: Color =
       LocalSettingsTileColors.current?.titleColor
         ?: MaterialTheme.colorScheme.primary,
+    groupTitleColor: Color =
+      LocalSettingsTileColors.current?.groupTitleColor
+        ?: MaterialTheme.colorScheme.onBackground,
     iconColor: Color = LocalSettingsTileColors.current?.iconColor ?: MaterialTheme.colorScheme.onSurface,
     subtitleColor: Color = LocalSettingsTileColors.current?.subtitleColor ?: MaterialTheme.colorScheme.onSurface,
     actionColor: Color =
       LocalSettingsTileColors.current?.actionColor
         ?: MaterialTheme.colorScheme.primary,
     disabledTitleColor: Color = titleColor.copy(alpha = DisabledAlpha),
+    disabledGroupTitleColor: Color = groupTitleColor.copy(alpha = DisabledAlpha),
     disabledIconColor: Color = iconColor.copy(alpha = DisabledAlpha),
     disabledSubtitleColor: Color = subtitleColor.copy(alpha = DisabledAlpha),
     disabledActionColor: Color = actionColor.copy(alpha = DisabledAlpha),
@@ -54,10 +58,12 @@ object SettingsTileDefaults {
     SettingsTileColors(
       containerColor = containerColor,
       titleColor = titleColor,
+      groupTitleColor = groupTitleColor,
       iconColor = iconColor,
       subtitleColor = subtitleColor,
       actionColor = actionColor,
       disabledTitleColor = disabledTitleColor,
+      disabledGroupTitleColor = disabledGroupTitleColor,
       disabledIconColor = disabledIconColor,
       disabledSubtitleColor = disabledSubtitleColor,
       disabledActionColor = disabledActionColor,
