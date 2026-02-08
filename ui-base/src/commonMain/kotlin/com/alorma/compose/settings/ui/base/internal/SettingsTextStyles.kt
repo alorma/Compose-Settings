@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextStyle
 
 @Immutable
 class SettingsTextStyles(
+  val groupTitleStyle: TextStyle,
   val titleStyle: TextStyle,
   val subtitleStyle: TextStyle,
 )

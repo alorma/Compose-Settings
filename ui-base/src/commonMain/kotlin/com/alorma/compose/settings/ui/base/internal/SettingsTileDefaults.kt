@@ -17,6 +17,9 @@ object SettingsTileDefaults {
 
   @Composable
   fun textStyles(
+    groupTitleStyle: TextStyle =
+      LocalSettingsTextStyles.current?.groupTitleStyle
+        ?: MaterialTheme.typography.titleMedium,
     titleStyle: TextStyle =
       LocalSettingsTextStyles.current?.titleStyle
         ?: MaterialTheme.typography.bodyLarge,
@@ -25,6 +28,7 @@ object SettingsTileDefaults {
         ?: MaterialTheme.typography.bodyMedium,
   ): SettingsTextStyles =
     SettingsTextStyles(
+      groupTitleStyle = groupTitleStyle,
       titleStyle = titleStyle,
       subtitleStyle = subtitleStyle,
     )
