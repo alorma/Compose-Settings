@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -61,8 +59,6 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
         .padding(vertical = 8.dp, horizontal = 16.dp),
     contentAlignment = Alignment.CenterStart,
   ) {
-    val primary = MaterialTheme.colorScheme.primary
-    val titleStyle = MaterialTheme.typography.headlineMedium.copy(color = primary)
-    ProvideTextStyle(value = titleStyle) { title() }
+    title()
   }
 }
