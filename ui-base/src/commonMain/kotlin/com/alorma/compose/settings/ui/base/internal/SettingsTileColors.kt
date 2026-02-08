@@ -8,14 +8,19 @@ import androidx.compose.ui.graphics.Color
 class SettingsTileColors(
   val containerColor: Color,
   val titleColor: Color,
+  val groupTitleColor: Color,
   val iconColor: Color,
   val subtitleColor: Color,
   val actionColor: Color,
   val disabledTitleColor: Color,
+  val disabledGroupTitleColor: Color,
   val disabledIconColor: Color,
   val disabledSubtitleColor: Color,
   val disabledActionColor: Color,
 ) {
+  @Stable
+  fun groupTitleColor(enabled: Boolean): Color = if (enabled) groupTitleColor else disabledGroupTitleColor
+
   @Stable
   fun titleColor(enabled: Boolean): Color = if (enabled) titleColor else disabledTitleColor
 

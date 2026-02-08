@@ -44,7 +44,7 @@ fun SettingsGroup(
     verticalArrangement = verticalArrangement,
   ) {
     if (title != null) {
-      CompositionLocalProvider(LocalContentColor provides colors.actionColor(enabled)) {
+      CompositionLocalProvider(LocalContentColor provides colors.groupTitleColor(enabled)) {
         ProvideTextStyle(
           textStyles.groupTitleStyle,
         ) {
