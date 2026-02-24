@@ -28,26 +28,30 @@ Compose-Settings is a Kotlin Multiplatform library that provides pre-built setti
 
 ```
 ui-tiles ──────────┐
-                   ├──> ui-base (internal)
-ui-tiles-extended ─┘
+                   │
+ui-tiles-extended ─┼──> ui-core (foundation)
+                   │
+ui-tiles-expressive┘
 ```
 
 ### Module Responsibilities
 
-#### ui-base
+#### ui-core
 
-**Purpose**: Internal foundation module providing shared infrastructure
+**Purpose**: Foundation module providing shared infrastructure
 
-**Location**: `ui-base/src/commonMain/kotlin/com/alorma/compose/settings/ui/base/internal/`
+**Location**: `ui-core/src/commonMain/kotlin/com/alorma/compose/settings/ui/core/`
 
 **Key Components**:
 - `SettingsTileScaffold` - Base composable for all settings components
-- `SettingsTileDefaults` - Default values for colors, shapes, text styles
+- `SettingsTileCoreDefaults` - Shared default values for colors and text styles
+- `SettingsTileDefaults` - Module-specific defaults (e.g., shapes)
 - `SettingsTileColors` - Color system for settings components
 - `SettingsTextStyles` - Typography system
 - `LocalSettingsGroupEnabled` - Composition local for hierarchical enabled state
+- `SettingsTileConstants` - Shared constants
 
-**Visibility**: All APIs are `internal` - not exposed to library consumers
+**Visibility**: Most APIs are `internal` - not exposed to library consumers
 
 **Why separate module?**
 - Prevents duplication between `ui-tiles` and `ui-tiles-extended`
@@ -356,19 +360,20 @@ All dependencies in `gradle/libs.versions.toml`:
 
 ## Design Decisions
 
-### Why Internal ui-base Module?
+### Why ui-core Foundation Module?
 
-**Problem**: Both `ui-tiles` and `ui-tiles-extended` need shared components
+**Problem**: All component modules (`ui-tiles`, `ui-tiles-extended`, `ui-tiles-expressive`) need shared components
 
 **Options considered**:
-1. Duplicate code in both modules ❌
-2. Make one depend on the other ❌ (circular dependency potential)
-3. Create internal shared module ✅
+1. Duplicate code in all modules ❌
+2. Make modules depend on each other ❌ (circular dependency potential)
+3. Create shared foundation module ✅
 
-**Decision**: Internal `ui-base` module
+**Decision**: `ui-core` foundation module
 - Prevents duplication
-- Both modules depend on it
-- Not exposed to consumers (implementation detail)
+- All component modules depend on it
+- Contains scaffolds, colors, styles, and shared utilities
+- Published as a separate artifact for flexibility
 
 ### Why Composable Content Parameters?
 

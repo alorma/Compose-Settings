@@ -54,8 +54,8 @@ jobs:
           echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           echo "Current version to publish: $CURRENT_VERSION"
 
-  build-lib-base:
-    name: Build base - Release
+  build-lib-core:
+    name: Build core - Release
     needs: [ get-version ]
     runs-on: macos-latest
     steps:
@@ -69,7 +69,7 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :ui-base:build
+        run: ./gradlew :ui-core:build
 
   build-lib-ui:
     strategy:
@@ -80,7 +80,7 @@ jobs:
           { target: tiles expressive, module: ui-tiles-expressive, task: build, continueOnError: false },
         ]
     name: Build ${{ matrix.config.target }} - Release
-    needs: [ build-lib-base ]
+    needs: [ build-lib-core ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -140,7 +140,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
-        run: ./gradlew ui-base:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication ui-tiles-expressive:signKotlinMultiplatformPublication
+        run: ./gradlew ui-core:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication ui-tiles-expressive:signKotlinMultiplatformPublication
 
   fake-publish:
     name: Fake publish - Release

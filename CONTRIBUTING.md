@@ -41,9 +41,10 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 
 ```
 Compose-Settings/
-├── ui-base/              # Foundation module (internal components)
+├── ui-core/              # Foundation module (shared components)
 ├── ui-tiles/             # Core settings components
 ├── ui-tiles-extended/    # Advanced settings components
+├── ui-tiles-expressive/  # Expressive Material 3 components
 ├── samples/              # Sample applications
 │   ├── androidApp/       # Android demo
 │   ├── desktopApp/       # Desktop (JVM) demo
@@ -151,7 +152,7 @@ When creating new settings components:
    - `ui-tiles-extended`: Advanced components requiring additional dependencies (slider, etc.)
 
 2. **Use the scaffold pattern**:
-   - Build on `SettingsTileScaffold` from `ui-base`
+   - Build on `SettingsTileScaffold` from `ui-core`
    - This ensures consistent layout and theming
 
 3. **Follow the API pattern**:
