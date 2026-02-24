@@ -2,6 +2,7 @@ package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
 import androidx.compose.material3.ListItemShapes
 import androidx.compose.material3.Switch
@@ -15,8 +16,6 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.core.SettingsTileColors
-import com.alorma.compose.settings.ui.core.SettingsTextStyles
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -27,15 +26,8 @@ fun SettingsSwitch(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  switchColors: SwitchColors =
-    SwitchDefaults.colors(
-      checkedTrackColor = colors.actionColor(enabled),
-      checkedThumbColor = contentColorFor(colors.actionColor(enabled)),
-      disabledCheckedTrackColor = colors.actionColor(enabled),
-      disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
+  switchColors: SwitchColors = SwitchDefaults.colors(),
   shapes: ListItemShapes = SettingsTileDefaults.shapes(),
   elevation: ListItemElevation = SettingsTileDefaults.elevation(),
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
@@ -58,7 +50,6 @@ fun SettingsSwitch(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shapes = shapes,
     elevation = elevation,
   ) {
