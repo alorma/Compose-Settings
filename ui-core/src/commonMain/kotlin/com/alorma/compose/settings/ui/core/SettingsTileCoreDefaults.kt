@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.Dp
 abstract class SettingsTileCoreDefaults {
 
   abstract val Elevation: Dp
+  val DisabledAlpha: Float = 0.38f
 
   /**
    * Creates a [SettingsTextStyles] with default values from MaterialTheme typography

@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.ui.base.internal
+package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ListItem

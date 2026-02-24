@@ -45,7 +45,7 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 
 dependencies {
   listOf(
-    projects.uiBase,
+    projects.uiCore,
     projects.uiTiles,
     projects.uiTilesExtended,
     projects.uiTilesExpressive,

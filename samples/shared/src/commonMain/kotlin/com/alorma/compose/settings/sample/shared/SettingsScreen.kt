@@ -36,7 +36,7 @@ import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
+import com.alorma.compose.settings.ui.SettingsTileDefaults
 import com.alorma.compose.settings.ui.expressive.SettingsButtonGroup
 
 @OptIn(ExperimentalMaterial3Api::class)

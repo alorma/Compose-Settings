@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 import com.alorma.compose.settings.ui.core.SettingsTextStyles
 import com.alorma.compose.settings.ui.core.SettingsTileColors
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
 
 @Composable
 fun SettingsGroup(

@@ -35,8 +35,8 @@ jobs:
           echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           echo "Current version: $CURRENT_VERSION"
 
-  build-lib-base:
-    name: Build base - PR
+  build-lib-core:
+    name: Build core - PR
     if: ${{ success() }}
     needs: [ get-version ]
     runs-on: macos-latest
@@ -51,7 +51,7 @@ jobs:
           java-version: 17
 
       - name: Build
-        run: ./gradlew :ui-base:build
+        run: ./gradlew :ui-core:build
 
   build-lib-ui:
     strategy:
@@ -63,7 +63,7 @@ jobs:
         ]
     name: Build ${{ matrix.config.target }} - PR
     if: ${{ success() }}
-    needs: [ build-lib-base ]
+    needs: [ build-lib-core ]
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -125,7 +125,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
-        run: ./gradlew ui-base:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication ui-tiles-expressive:signKotlinMultiplatformPublication
+        run: ./gradlew ui-core:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication ui-tiles-expressive:signKotlinMultiplatformPublication
 
   fake-publish:
     name: Fake publish - PR
