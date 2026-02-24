@@ -15,8 +15,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.core.SettingsTileColors
-import com.alorma.compose.settings.ui.core.SettingsTextStyles
 
 @Composable
 fun SettingsTriStateCheckbox(

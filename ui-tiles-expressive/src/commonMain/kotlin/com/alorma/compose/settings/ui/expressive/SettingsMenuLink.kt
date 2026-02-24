@@ -9,8 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.core.SettingsTileColors
-import com.alorma.compose.settings.ui.core.SettingsTextStyles
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

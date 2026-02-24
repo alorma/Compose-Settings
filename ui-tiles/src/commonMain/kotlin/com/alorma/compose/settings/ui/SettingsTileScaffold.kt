@@ -13,8 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import com.alorma.compose.settings.ui.core.SettingsTileColors
-import com.alorma.compose.settings.ui.core.SettingsTextStyles
 
 @Composable
 fun SettingsTileScaffold(

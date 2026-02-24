@@ -5,17 +5,9 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
 import androidx.compose.material3.ListItemShapes
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.SegmentedListItem
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
-import com.alorma.compose.settings.ui.core.SettingsTileColors
-import com.alorma.compose.settings.ui.core.SettingsTextStyles
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -25,47 +17,14 @@ fun SettingsTileScaffold(
   enabled: Boolean = true,
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   shapes: ListItemShapes = SettingsTileDefaults.shapes(),
   elevation: ListItemElevation = SettingsTileDefaults.elevation(),
   action: @Composable (() -> Unit)? = null,
 ) {
-  val decoratedTitle: @Composable () -> Unit = {
-    ProvideContentColorAndTextStyle(
-      contentColor = colors.titleColor(enabled),
-      textStyle = textStyles.titleStyle,
-    ) {
-      title()
-    }
-  }
-  val decoratedSubtitle: @Composable (() -> Unit)? =
-    subtitle?.let {
-      {
-        ProvideContentColorAndTextStyle(
-          contentColor = colors.subtitleColor(enabled),
-          textStyle = textStyles.subtitleStyle,
-        ) {
-          subtitle()
-        }
-      }
-    }
-  val decoratedIcon: @Composable (() -> Unit)? =
-    icon?.let {
-      {
-        ProvideContentColor(colors.iconColor(enabled)) {
-          icon()
-        }
-      }
-    }
-  val decoratedAction: @Composable (() -> Unit)? =
-    action?.let {
-      {
-        ProvideContentColor(colors.actionColor(enabled)) {
-          action()
-        }
-      }
-    }
+  val decoratedSubtitle: @Composable (() -> Unit)? = subtitle?.let { { subtitle() } }
+  val decoratedIcon: @Composable (() -> Unit)? = icon?.let { { icon() } }
+  val decoratedAction: @Composable (() -> Unit)? = action?.let { { action() } }
 
   SegmentedListItem(
     selected = false,
@@ -76,44 +35,9 @@ fun SettingsTileScaffold(
     leadingContent = decoratedIcon,
     trailingContent = decoratedAction,
     supportingContent = decoratedSubtitle,
-    colors =
-      ListItemColors(
-        containerColor = colors.containerColor,
-        headlineColor = colors.titleColor,
-        leadingIconColor = colors.iconColor,
-        overlineColor = colors.actionColor,
-        supportingTextColor = colors.subtitleColor,
-        trailingIconColor = colors.actionColor,
-        disabledHeadlineColor = colors.disabledTitleColor,
-        disabledLeadingIconColor = colors.disabledIconColor,
-        disabledTrailingIconColor = colors.disabledActionColor,
-      ),
+    colors = colors,
     elevation = elevation,
   ) {
-    decoratedTitle()
-  }
-}
-
-@Composable
-private fun ProvideContentColor(
-  contentColor: Color,
-  content: @Composable () -> Unit,
-) {
-  CompositionLocalProvider(LocalContentColor provides contentColor) {
-    content()
-  }
-}
-
-@Composable
-private fun ProvideContentColorAndTextStyle(
-  contentColor: Color,
-  textStyle: TextStyle,
-  content: @Composable () -> Unit,
-) {
-  CompositionLocalProvider(
-    LocalContentColor provides contentColor,
-    LocalTextStyle provides textStyle,
-  ) {
-    content()
+    title()
   }
 }

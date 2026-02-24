@@ -17,7 +17,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.core.SettingsTileColors
 
 @Composable
 @Suppress("LongParameterList")

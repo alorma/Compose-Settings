@@ -1,5 +1,6 @@
 package com.alorma.compose.settings.ui
 
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Shape
@@ -11,4 +12,7 @@ object SettingsTileDefaults : SettingsTileCoreDefaults() {
 
   @Composable
   fun shape(): Shape = ListItemDefaults.shape
+
+  @Composable
+  override fun colors(): ListItemColors = ListItemDefaults.colors()
 }
