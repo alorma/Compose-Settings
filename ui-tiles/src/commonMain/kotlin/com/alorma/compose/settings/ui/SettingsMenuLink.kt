@@ -1,6 +1,7 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.clickable
+import androidx.compose.material3.ListItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -18,7 +19,6 @@ fun SettingsMenuLink(
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -26,19 +26,16 @@ fun SettingsMenuLink(
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(
-    modifier =
-      Modifier
-        .clickable(
-          enabled = enabled,
-          onClick = onClick,
-        ).semantics(properties = semanticProperties)
-        .then(modifier),
-    enabled = enabled,
+    modifier = Modifier
+      .clickable(
+        enabled = enabled,
+        onClick = onClick,
+      ).semantics(properties = semanticProperties)
+      .then(modifier),
     title = title,
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

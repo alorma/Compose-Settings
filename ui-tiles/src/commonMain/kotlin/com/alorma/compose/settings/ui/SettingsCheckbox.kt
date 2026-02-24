@@ -42,7 +42,6 @@ fun SettingsCheckbox(
           onValueChange = { update(!state) },
         ).semantics(properties = semanticProperties)
         .then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,

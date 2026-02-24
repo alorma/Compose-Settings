@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
 import androidx.compose.material3.ListItemShapes
 import androidx.compose.material3.MaterialTheme
@@ -38,7 +39,7 @@ fun <T> SettingsButtonGroup(
     modifier = modifier,
     enabled = enabled,
     title = title,
-    subtitle = {
+    supportingContent = {
       Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
       ) {
@@ -62,7 +63,7 @@ fun <T> SettingsButtonGroup(
         }
       }
     },
-    icon = icon,
+    leadingContent = icon,
     colors = colors,
     shapes = shapes,
     elevation = elevation,
