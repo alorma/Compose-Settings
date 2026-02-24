@@ -28,7 +28,7 @@ fun <T> SettingsSegmented(
   itemTitleMap: (T) -> CharSequence,
   modifier: Modifier = Modifier,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   buttonSpace: Dp = SegmentedButtonDefaults.BorderWidth,
   buttonShape: @Composable (Int) -> Shape = { index ->
     SegmentedButtonDefaults.itemShape(
