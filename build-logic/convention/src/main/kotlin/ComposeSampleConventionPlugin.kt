@@ -79,11 +79,11 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
 
           val commonMain by getting {
             dependencies {
-              api(compose.dependencies.ui)
-              api(compose.dependencies.runtime)
-              api(compose.dependencies.foundation)
+              api(libs.findLibrary("compose-ui").get())
+              api(libs.findLibrary("compose-runtime").get())
+              api(libs.findLibrary("compose-foundation").get())
               api(libs.findLibrary("compose-material3-expressive").get())
-              api(compose.dependencies.components.resources)
+              api(libs.findLibrary("compose-resources").get())
             }
           }
 

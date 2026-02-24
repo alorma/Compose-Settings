@@ -53,9 +53,9 @@ composeCompiler {
 dependencies {
   implementation(libs.androidx.activity.compose)
 
-  implementation(compose.ui)
-  implementation(compose.foundation)
-  implementation(compose.uiTooling)
+  implementation(libs.compose.ui)
+  implementation(libs.compose.foundation)
+  implementation(libs.compose.ui.tooling)
 
   implementation(projects.samples.shared)
 }

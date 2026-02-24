@@ -2,6 +2,7 @@
 # Kotlin & Compose
 kotlin = "2.3.10"
 compose-plugin = "1.10.1"
+compose = "1.10.1"
 
 # Android Gradle Plugin
 agp = "9.0.1"
@@ -27,6 +28,7 @@ compose-detekt-rules = "0.0.26"
 mavenPlugin = "0.36.0"
 
 # Other Libraries
+compose-material3 = "1.9.0"
 compose-material3-expressive = "1.11.0-alpha01"
 
 [libraries]
@@ -34,6 +36,15 @@ compose-material3-expressive = "1.11.0-alpha01"
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxactivity" }
 
 # Compose
+compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose" }
+compose-foundation = { group = "org.jetbrains.compose.foundation", name = "foundation", version.ref = "compose" }
+compose-ui = { group = "org.jetbrains.compose.ui", name = "ui", version.ref = "compose" }
+compose-ui-tooling = { group = "org.jetbrains.compose.ui", name = "ui-tooling", version.ref = "compose" }
+compose-resources = { group = "org.jetbrains.compose.components", name = "components-resources", version.ref = "compose" }
+
+#noinspection SimilarGradleDependency
+compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "compose-material3" }
+#noinspection SimilarGradleDependency
 compose-material3-expressive = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "compose-material3-expressive" }
 
 # Code Quality

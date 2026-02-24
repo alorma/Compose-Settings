@@ -86,9 +86,9 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
         sourceSets.apply {
           val commonMain by getting {
             dependencies {
-              implementation(compose.dependencies.runtime)
-              implementation(compose.dependencies.foundation)
-              api(compose.dependencies.material3)
+              implementation(libs.findLibrary("compose-runtime").get())
+              implementation(libs.findLibrary("compose-foundation").get())
+              api(libs.findLibrary("compose-material3").get())
             }
           }
         }
