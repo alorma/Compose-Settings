@@ -1,21 +1,23 @@
 package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ListItem
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemElevation
+import androidx.compose.material3.ListItemShapes
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.core.SettingsTileColors
 import com.alorma.compose.settings.ui.core.SettingsTextStyles
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SettingsTileScaffold(
   title: @Composable () -> Unit,
@@ -25,9 +27,8 @@ fun SettingsTileScaffold(
   icon: @Composable (() -> Unit)? = null,
   colors: SettingsTileColors = SettingsTileDefaults.colors(),
   textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
-  shape: Shape = SettingsTileDefaults.shape(),
-  tonalElevation: Dp = SettingsTileDefaults.Elevation,
-  shadowElevation: Dp = SettingsTileDefaults.Elevation,
+  shapes: ListItemShapes = SettingsTileDefaults.shapes(),
+  elevation: ListItemElevation = SettingsTileDefaults.elevation(),
   action: @Composable (() -> Unit)? = null,
 ) {
   val decoratedTitle: @Composable () -> Unit = {
@@ -66,12 +67,15 @@ fun SettingsTileScaffold(
       }
     }
 
-  ListItem(
-    modifier = Modifier.fillMaxWidth().clip(shape).then(modifier),
-    headlineContent = decoratedTitle,
-    supportingContent = decoratedSubtitle,
+  SegmentedListItem(
+    selected = false,
+    onClick = {},
+    shapes = shapes,
+    modifier = Modifier.fillMaxWidth().then(modifier),
+    enabled = enabled,
     leadingContent = decoratedIcon,
     trailingContent = decoratedAction,
+    supportingContent = decoratedSubtitle,
     colors =
       ListItemColors(
         containerColor = colors.containerColor,
@@ -84,9 +88,10 @@ fun SettingsTileScaffold(
         disabledLeadingIconColor = colors.disabledIconColor,
         disabledTrailingIconColor = colors.disabledActionColor,
       ),
-    tonalElevation = tonalElevation,
-    shadowElevation = shadowElevation,
-  )
+    elevation = elevation,
+  ) {
+    decoratedTitle()
+  }
 }
 
 @Composable
