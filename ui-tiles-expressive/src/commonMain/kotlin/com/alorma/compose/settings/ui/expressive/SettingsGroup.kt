@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -26,8 +24,6 @@ fun SettingsGroup(
   enabled: Boolean = true,
   contentPadding: PaddingValues = PaddingValues(0.dp),
   verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(8.dp),
-  colors: ListItemColors = SettingsTileDefaults.colors(),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   title: @Composable (() -> Unit)? = null,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   content: @Composable ColumnScope.() -> Unit,
@@ -42,13 +38,7 @@ fun SettingsGroup(
     verticalArrangement = verticalArrangement,
   ) {
     if (title != null) {
-      CompositionLocalProvider(LocalContentColor provides colors.groupTitleColor(enabled)) {
-        ProvideTextStyle(
-          textStyles.groupTitleStyle,
-        ) {
-          SettingsGroupTitle(title)
-        }
-      }
+      SettingsGroupTitle(title)
     }
     CompositionLocalProvider(LocalSettingsGroupEnabled provides enabled) {
       content()

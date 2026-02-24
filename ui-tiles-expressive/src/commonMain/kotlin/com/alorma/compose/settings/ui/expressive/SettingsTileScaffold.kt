@@ -15,26 +15,22 @@ fun SettingsTileScaffold(
   title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  subtitle: @Composable (() -> Unit)? = null,
-  icon: @Composable (() -> Unit)? = null,
+  supportingContent: @Composable (() -> Unit)? = null,
+  leadingContent: @Composable (() -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
   shapes: ListItemShapes = SettingsTileDefaults.shapes(),
   elevation: ListItemElevation = SettingsTileDefaults.elevation(),
-  action: @Composable (() -> Unit)? = null,
+  trailingContent: @Composable (() -> Unit)? = null,
 ) {
-  val decoratedSubtitle: @Composable (() -> Unit)? = subtitle?.let { { subtitle() } }
-  val decoratedIcon: @Composable (() -> Unit)? = icon?.let { { icon() } }
-  val decoratedAction: @Composable (() -> Unit)? = action?.let { { action() } }
-
   SegmentedListItem(
     selected = false,
     onClick = {},
     shapes = shapes,
     modifier = Modifier.fillMaxWidth().then(modifier),
     enabled = enabled,
-    leadingContent = decoratedIcon,
-    trailingContent = decoratedAction,
-    supportingContent = decoratedSubtitle,
+    leadingContent = leadingContent,
+    trailingContent = trailingContent,
+    supportingContent = supportingContent,
     colors = colors,
     elevation = elevation,
   ) {

@@ -2,6 +2,7 @@ package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
 import androidx.compose.material3.ListItemShapes
 import androidx.compose.runtime.Composable
@@ -20,7 +21,6 @@ fun SettingsMenuLink(
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shapes: ListItemShapes = SettingsTileDefaults.shapes(),
   elevation: ListItemElevation = SettingsTileDefaults.elevation(),
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
@@ -36,12 +36,11 @@ fun SettingsMenuLink(
         .then(modifier),
     enabled = enabled,
     title = title,
-    subtitle = subtitle,
-    icon = icon,
+    supportingContent = subtitle,
+    leadingContent = icon,
     colors = colors,
-    textStyles = textStyles,
     shapes = shapes,
     elevation = elevation,
-    action = action,
+    trailingContent = action,
   )
 }

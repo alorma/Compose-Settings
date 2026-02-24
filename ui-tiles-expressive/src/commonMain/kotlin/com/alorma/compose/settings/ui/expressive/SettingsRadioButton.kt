@@ -1,15 +1,16 @@
 package com.alorma.compose.settings.ui.expressive
 
-import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
 import androidx.compose.material3.ListItemShapes
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
@@ -25,42 +26,35 @@ fun SettingsRadioButton(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  checkboxColors: RadioButtonColors =
-    RadioButtonDefaults.colors(
-      selectedColor = colors.actionColor(enabled),
-      disabledSelectedColor = colors.actionColor(enabled),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  checkboxColors: RadioButtonColors = RadioButtonDefaults.colors(),
   shapes: ListItemShapes = SettingsTileDefaults.shapes(),
   elevation: ListItemElevation = SettingsTileDefaults.elevation(),
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   onClick: () -> Unit,
 ) {
-  SettingsTileScaffold(
-    modifier =
-      Modifier
-        .toggleable(
-          enabled = enabled,
-          value = state,
-          role = Role.RadioButton,
-          onValueChange = { onClick() },
-        ).semantics(properties = semanticProperties)
-        .then(modifier),
-    enabled = enabled,
-    title = title,
-    subtitle = subtitle,
-    icon = icon,
-    colors = colors,
-    textStyles = textStyles,
+
+  SegmentedListItem(
+    modifier = Modifier
+      .fillMaxWidth()
+      .semantics(properties = semanticProperties)
+      .then(modifier),
+    checked = true,
+    onCheckedChange = { onClick() },
     shapes = shapes,
+    enabled = enabled,
+    content = title,
+    leadingContent = icon,
+    supportingContent = subtitle,
+    colors = colors,
     elevation = elevation,
-  ) {
-    RadioButton(
-      modifier = Modifier.clearAndSetSemantics { },
-      enabled = enabled,
-      selected = state,
-      onClick = onClick,
-      colors = checkboxColors,
-    )
-  }
+    trailingContent = {
+      RadioButton(
+        modifier = Modifier.clearAndSetSemantics { },
+        enabled = enabled,
+        selected = state,
+        onClick = onClick,
+        colors = checkboxColors,
+      )
+    },
+  )
 }

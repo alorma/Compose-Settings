@@ -1,10 +1,10 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -24,14 +24,7 @@ fun SettingsSwitch(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  switchColors: SwitchColors =
-    SwitchDefaults.colors(
-      checkedTrackColor = colors.actionColor(enabled),
-      checkedThumbColor = contentColorFor(colors.actionColor(enabled)),
-      disabledCheckedTrackColor = colors.actionColor(enabled),
-      disabledCheckedThumbColor = contentColorFor(colors.actionColor(enabled)),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  switchColors: SwitchColors = SwitchDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -50,12 +43,10 @@ fun SettingsSwitch(
           onValueChange = { update(!state) },
         ).semantics(properties = semanticProperties)
         .then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

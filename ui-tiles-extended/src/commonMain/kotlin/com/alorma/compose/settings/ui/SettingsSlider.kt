@@ -3,6 +3,7 @@ package com.alorma.compose.settings.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderDefaults
@@ -27,19 +28,13 @@ fun SettingsSlider(
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  sliderColors: SliderColors =
-    SliderDefaults.colors(
-      thumbColor = colors.actionColor(enabled),
-      activeTrackColor = colors.actionColor(enabled),
-      inactiveTrackColor = colors.actionColor(enabled).copy(alpha = 0.12f),
-    ),
+  sliderColors: SliderColors = SliderDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
   SettingsTileScaffold(
     modifier = modifier,
-    enabled = enabled,
     title = title,
     subtitle = {
       Column(
