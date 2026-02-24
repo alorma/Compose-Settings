@@ -249,7 +249,7 @@ fun CustomSettingsComponent(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: SettingsTileColors = SettingsTileDefaults.colors(),
+    colors: ListItemColors = SettingsTileDefaults.colors(),
 ) {
     val groupEnabled = LocalSettingsGroupEnabled.current
     val actualEnabled = enabled && groupEnabled

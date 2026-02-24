@@ -9,16 +9,15 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.alorma.compose.settings.sample.shared.internal.MultiChoiceAlertDialog
 import com.alorma.compose.settings.sample.shared.internal.SampleData
 import com.alorma.compose.settings.sample.shared.internal.SampleSection
@@ -29,7 +28,6 @@ import com.alorma.compose.settings.ui.SettingsRadioButton
 import com.alorma.compose.settings.ui.SettingsSegmented
 import com.alorma.compose.settings.ui.SettingsSlider
 import com.alorma.compose.settings.ui.SettingsSwitch
-import com.alorma.compose.settings.ui.SettingsTileDefaults
 import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 
 @Composable
@@ -39,26 +37,51 @@ fun StandardMaterial3Samples() {
       .verticalScroll(rememberScrollState()),
     verticalArrangement = Arrangement.spacedBy(8.dp),
   ) {
-    SettingsSwitchSampleSection()
-    SettingsCheckboxSampleSection()
-    SettingsTriStateCheckboxSampleSection()
-    SettingsRadioButtonSampleSection()
-    SettingsMenuLinkSectionSample()
-    SettingsSliderSectionSample()
-    SettingsSelectorsSample()
-    SettingsShapeSampleSection()
-    SettingsTextStylesSampleSection()
-    SettingsGroupSectionSample()
-    SettingsGroupSpacingSample()
+    val colors = ListItemDefaults.colors()
+
+    SettingsSwitchSampleSection(
+      colors = colors,
+    )
+    SettingsCheckboxSampleSection(
+      colors = colors,
+    )
+    SettingsTriStateCheckboxSampleSection(
+      colors = colors,
+    )
+    SettingsRadioButtonSampleSection(
+      colors = colors,
+    )
+    SettingsMenuLinkSectionSample(
+      colors = colors,
+    )
+    SettingsSliderSectionSample(
+      colors = colors,
+    )
+    SettingsSelectorsSample(
+      colors = colors,
+    )
+    SettingsShapeSampleSection(
+      colors = colors,
+    )
+    SettingsGroupSectionSample(
+      colors = colors,
+    )
+    SettingsGroupSpacingSample(
+      colors = colors,
+    )
   }
 }
 
 @Composable
-private fun SettingsSwitchSampleSection() {
+private fun SettingsSwitchSampleSection(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsSwitch") {
     val state = remember { mutableStateOf(false) }
+
     SettingsSwitch(
       state = state.value,
+      colors = colors,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
       onCheckedChange = { state.value = it },
@@ -67,11 +90,14 @@ private fun SettingsSwitchSampleSection() {
 }
 
 @Composable
-private fun SettingsCheckboxSampleSection() {
+private fun SettingsCheckboxSampleSection(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsCheckbox") {
     val state = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = state.value,
+      colors = colors,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
       onCheckedChange = { state.value = it },
@@ -80,13 +106,16 @@ private fun SettingsCheckboxSampleSection() {
 }
 
 @Composable
-private fun SettingsRadioButtonSampleSection() {
+private fun SettingsRadioButtonSampleSection(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsRadioButton") {
     val state = remember { mutableStateOf<String?>(null) }
 
     SampleData.items.forEach { sampleItem ->
       SettingsRadioButton(
         state = state.value == sampleItem.key,
+        colors = colors,
         title = { Text(text = sampleItem.title) },
         subtitle = { Text(text = sampleItem.description) },
         onClick = { state.value = sampleItem.key },
@@ -96,7 +125,9 @@ private fun SettingsRadioButtonSampleSection() {
 }
 
 @Composable
-private fun SettingsTriStateCheckboxSampleSection() {
+private fun SettingsTriStateCheckboxSampleSection(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsTriStateCheckbox") {
     val child1State = remember { mutableStateOf(false) }
     val child2State = remember { mutableStateOf(true) }
@@ -127,6 +158,7 @@ private fun SettingsTriStateCheckboxSampleSection() {
 
     SettingsTriStateCheckbox(
       state = triStateWithChildState,
+      colors = colors,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
       onCheckedChange = { newState ->
@@ -139,18 +171,21 @@ private fun SettingsTriStateCheckboxSampleSection() {
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child1State.value,
+        colors = colors,
         title = { Text(text = "Child #1") },
         onCheckedChange = { child1State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child2State.value,
+        colors = colors,
         title = { Text(text = "Child #2") },
         onCheckedChange = { child2State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child3State.value,
+        colors = colors,
         title = { Text(text = "Child #3") },
         onCheckedChange = { child3State.value = it },
       )
@@ -159,7 +194,9 @@ private fun SettingsTriStateCheckboxSampleSection() {
 }
 
 @Composable
-private fun SettingsSliderSectionSample() {
+private fun SettingsSliderSectionSample(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsSlider") {
     val maxSteps = 6
     val state = remember { mutableStateOf(maxSteps / 2) }
@@ -176,12 +213,15 @@ private fun SettingsSliderSectionSample() {
 }
 
 @Composable
-private fun SettingsMenuLinkSectionSample() {
+private fun SettingsMenuLinkSectionSample(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsMenuLink") {
     val actionState = remember { mutableStateOf(false) }
 
     SettingsSwitch(
       state = actionState.value,
+      colors = colors,
       title = { Text(text = "Show action") },
       onCheckedChange = { actionState.value = it },
     )
@@ -199,7 +239,9 @@ private fun SettingsMenuLinkSectionSample() {
 }
 
 @Composable
-private fun SettingsSelectorsSample() {
+private fun SettingsSelectorsSample(
+  colors: ListItemColors,
+) {
   val items = SampleData.items
 
   SampleSection(title = "Selectors") {
@@ -275,62 +317,14 @@ private fun SettingsSelectorsSample() {
 }
 
 @Composable
-private fun SettingsTextStylesSampleSection() {
-  SampleSection(title = "Custom Text Styles") {
-    val largeTextState = remember { mutableStateOf(false) }
-    SettingsSwitch(
-      state = largeTextState.value,
-      title = { Text(text = "Large title text") },
-      subtitle = { Text(text = "Using custom title and subtitle styles") },
-      textStyles = SettingsTileDefaults.textStyles(
-        titleStyle = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-        subtitleStyle = MaterialTheme.typography.bodyLarge,
-      ),
-      onCheckedChange = { largeTextState.value = it },
-    )
-
-    val smallTextState = remember { mutableStateOf(false) }
-    SettingsCheckbox(
-      state = smallTextState.value,
-      title = { Text(text = "Small title text") },
-      subtitle = { Text(text = "Using smaller typography") },
-      textStyles = SettingsTileDefaults.textStyles(
-        titleStyle = MaterialTheme.typography.bodySmall,
-        subtitleStyle = MaterialTheme.typography.labelSmall,
-      ),
-      onCheckedChange = { smallTextState.value = it },
-    )
-
-    val customFontState = remember { mutableStateOf<String?>(null) }
-    SettingsRadioButton(
-      state = customFontState.value == "custom",
-      title = { Text(text = "Custom font weight") },
-      subtitle = { Text(text = "Title with bold and subtitle with light weight") },
-      textStyles = SettingsTileDefaults.textStyles(
-        titleStyle = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.ExtraBold),
-        subtitleStyle = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Light),
-      ),
-      onClick = { customFontState.value = "custom" },
-    )
-
-    SettingsMenuLink(
-      title = { Text(text = "Menu with custom styles") },
-      subtitle = { Text(text = "Both title and subtitle customized") },
-      textStyles = SettingsTileDefaults.textStyles(
-        titleStyle = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-        subtitleStyle = MaterialTheme.typography.bodySmall.copy(letterSpacing = 0.5.sp),
-      ),
-      onClick = { },
-    )
-  }
-}
-
-@Composable
-private fun SettingsShapeSampleSection() {
+private fun SettingsShapeSampleSection(
+  colors: ListItemColors,
+) {
   SampleSection(title = "Custom Shapes") {
     val roundedState = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = roundedState.value,
+      colors = colors,
       title = { Text(text = "Rounded corners") },
       subtitle = { Text(text = "Using RoundedCornerShape(16.dp)") },
       shape = RoundedCornerShape(16.dp),
@@ -340,6 +334,7 @@ private fun SettingsShapeSampleSection() {
     val cutCornerState = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = cutCornerState.value,
+      colors = colors,
       title = { Text(text = "Cut corners") },
       subtitle = { Text(text = "Using CutCornerShape(8.dp)") },
       shape = CutCornerShape(8.dp),
@@ -349,6 +344,7 @@ private fun SettingsShapeSampleSection() {
     val circleState = remember { mutableStateOf<String?>(null) }
     SettingsRadioButton(
       state = circleState.value == "circle",
+      colors = colors,
       title = { Text(text = "Circle shape") },
       subtitle = { Text(text = "Using CircleShape") },
       shape = CircleShape,
@@ -356,6 +352,7 @@ private fun SettingsShapeSampleSection() {
     )
 
     SettingsMenuLink(
+      colors = colors,
       title = { Text(text = "Menu with rounded shape") },
       subtitle = { Text(text = "Using RoundedCornerShape(24.dp)") },
       shape = RoundedCornerShape(24.dp),
@@ -365,6 +362,7 @@ private fun SettingsShapeSampleSection() {
     val sliderValue = remember { mutableStateOf(3f) }
     SettingsSlider(
       title = { Text(text = "Slider with shape") },
+      colors = colors,
       value = sliderValue.value,
       onValueChange = { sliderValue.value = it },
       subtitle = { Text(text = "Using RoundedCornerShape(12.dp)") },
@@ -376,7 +374,9 @@ private fun SettingsShapeSampleSection() {
 }
 
 @Composable
-private fun SettingsGroupSectionSample() {
+private fun SettingsGroupSectionSample(
+  colors: ListItemColors,
+) {
   val groupEnabled = remember { mutableStateOf(true) }
   SampleSection(
     title = "SettingsGroup",
@@ -384,6 +384,7 @@ private fun SettingsGroupSectionSample() {
   ) {
     SettingsSwitch(
       state = groupEnabled.value,
+      colors = colors,
       title = { Text(text = "Group Enabled") },
       subtitle = { Text(text = "This Switch is always enabled") },
       enabled = true,
@@ -393,6 +394,7 @@ private fun SettingsGroupSectionSample() {
     HorizontalDivider()
 
     SettingsMenuLink(
+      colors = colors,
       title = { Text(text = "Menu") },
       onClick = { },
     )
@@ -400,6 +402,7 @@ private fun SettingsGroupSectionSample() {
     val switchState = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = switchState.value,
+      colors = colors,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
       onCheckedChange = { switchState.value = it },
@@ -408,6 +411,7 @@ private fun SettingsGroupSectionSample() {
     val checkboxState = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = checkboxState.value,
+      colors = colors,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
       onCheckedChange = { checkboxState.value = it },
@@ -416,6 +420,7 @@ private fun SettingsGroupSectionSample() {
     val triSateCheckboxState = remember { mutableStateOf<Boolean?>(null) }
     SettingsTriStateCheckbox(
       state = triSateCheckboxState.value,
+      colors = colors,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
       onCheckedChange = { newState -> triSateCheckboxState.value = newState },
@@ -424,6 +429,7 @@ private fun SettingsGroupSectionSample() {
     val state = remember { mutableStateOf(false) }
     SettingsRadioButton(
       state = state.value,
+      colors = colors,
       title = { Text(text = "RadioButton") },
       subtitle = { Text(text = "RadioButton subtitle") },
       onClick = { state.value = !state.value },
@@ -432,7 +438,9 @@ private fun SettingsGroupSectionSample() {
 }
 
 @Composable
-private fun SettingsGroupSpacingSample() {
+private fun SettingsGroupSpacingSample(
+  colors: ListItemColors,
+) {
   SampleSection(
     title = "SettingsGroup - Custom Spacing",
     verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -440,6 +448,7 @@ private fun SettingsGroupSpacingSample() {
     val switch1State = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = switch1State.value,
+      colors = colors,
       title = { Text(text = "Compact spacing") },
       subtitle = { Text(text = "Using 4.dp spacing between items") },
       onCheckedChange = { switch1State.value = it },
@@ -448,6 +457,7 @@ private fun SettingsGroupSpacingSample() {
     val switch2State = remember { mutableStateOf(true) }
     SettingsSwitch(
       state = switch2State.value,
+      colors = colors,
       title = { Text(text = "Another switch") },
       subtitle = { Text(text = "Notice the reduced spacing") },
       onCheckedChange = { switch2State.value = it },
@@ -456,6 +466,7 @@ private fun SettingsGroupSpacingSample() {
     val checkboxState = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = checkboxState.value,
+      colors = colors,
       title = { Text(text = "Checkbox item") },
       subtitle = { Text(text = "All items have consistent 4.dp spacing") },
       onCheckedChange = { checkboxState.value = it },
@@ -469,6 +480,7 @@ private fun SettingsGroupSpacingSample() {
     val switch1State = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = switch1State.value,
+      colors = colors,
       title = { Text(text = "No spacing") },
       subtitle = { Text(text = "Using Arrangement.Top for no spacing") },
       onCheckedChange = { switch1State.value = it },
@@ -477,6 +489,7 @@ private fun SettingsGroupSpacingSample() {
     val switch2State = remember { mutableStateOf(true) }
     SettingsSwitch(
       state = switch2State.value,
+      colors = colors,
       title = { Text(text = "Tightly packed") },
       subtitle = { Text(text = "Items are directly adjacent") },
       onCheckedChange = { switch2State.value = it },

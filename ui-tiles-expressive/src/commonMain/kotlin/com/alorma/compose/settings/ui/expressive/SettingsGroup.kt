@@ -26,7 +26,7 @@ fun SettingsGroup(
   enabled: Boolean = true,
   contentPadding: PaddingValues = PaddingValues(0.dp),
   verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(8.dp),
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   title: @Composable (() -> Unit)? = null,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},

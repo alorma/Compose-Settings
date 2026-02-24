@@ -4,7 +4,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.contentColorFor
+import androidx.compose.material3.ListItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
@@ -23,14 +23,8 @@ fun SettingsCheckbox(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  checkboxColors: CheckboxColors =
-    CheckboxDefaults.colors(
-      checkedColor = colors.actionColor(enabled),
-      checkmarkColor = contentColorFor(colors.actionColor(enabled)),
-      disabledCheckedColor = colors.actionColor(enabled),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
+  checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -53,7 +47,6 @@ fun SettingsCheckbox(
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

@@ -28,7 +28,7 @@ fun <T> SettingsButtonGroup(
   itemTitleMap: (T) -> CharSequence,
   modifier: Modifier = Modifier,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
   shapes: ListItemShapes = SettingsTileDefaults.shapes(),

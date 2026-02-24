@@ -164,7 +164,7 @@ When creating new settings components:
        subtitle: @Composable (() -> Unit)? = null,
        icon: @Composable (() -> Unit)? = null,
        enabled: Boolean = true,
-       colors: SettingsTileColors = SettingsTileDefaults.colors(),
+       colors: ListItemColors = SettingsTileDefaults.colors(),
        // Component-specific parameters
    ) {
        // Implementation using SettingsTileScaffold
