@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,23 +35,40 @@ fun ExpressiveMaterial3Samples() {
   ) {
     val colors = ListItemDefaults.segmentedColors()
 
-    SettingsSwitchSampleSectionExpressive()
-    SettingsCheckboxSampleSectionExpressive()
-    SettingsTriStateCheckboxSampleSectionExpressive()
-    SettingsRadioButtonSampleSectionExpressive()
-    SettingsMenuLinkSectionSampleExpressive()
-    SettingsButtonGroupSample()
-    SettingsGroupSectionSampleExpressive()
+    SettingsSwitchSampleSectionExpressive(
+      colors = colors,
+    )
+    SettingsCheckboxSampleSectionExpressive(
+      colors = colors,
+    )
+    SettingsTriStateCheckboxSampleSectionExpressive(
+      colors = colors,
+    )
+    SettingsRadioButtonSampleSectionExpressive(
+      colors = colors,
+    )
+    SettingsMenuLinkSectionSampleExpressive(
+      colors = colors,
+    )
+    SettingsButtonGroupSample(
+      colors = colors,
+    )
+    SettingsGroupSectionSampleExpressive(
+      colors = colors,
+    )
   }
 }
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsSwitchSampleSectionExpressive() {
+private fun SettingsSwitchSampleSectionExpressive(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsSwitch (Expressive)") {
     val state = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = state.value,
+      colors = colors,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
       onCheckedChange = { state.value = it },
@@ -60,11 +78,14 @@ private fun SettingsSwitchSampleSectionExpressive() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsCheckboxSampleSectionExpressive() {
+private fun SettingsCheckboxSampleSectionExpressive(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsCheckbox (Expressive)") {
     val state = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = state.value,
+      colors = colors,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
       onCheckedChange = { state.value = it },
@@ -74,13 +95,16 @@ private fun SettingsCheckboxSampleSectionExpressive() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsRadioButtonSampleSectionExpressive() {
+private fun SettingsRadioButtonSampleSectionExpressive(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsRadioButton (Expressive)") {
     val state = remember { mutableStateOf<String?>(null) }
 
     SampleData.items.forEach { sampleItem ->
       SettingsRadioButton(
         state = state.value == sampleItem.key,
+        colors = colors,
         title = { Text(text = sampleItem.title) },
         subtitle = { Text(text = sampleItem.description) },
         onClick = { state.value = sampleItem.key },
@@ -91,7 +115,9 @@ private fun SettingsRadioButtonSampleSectionExpressive() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsTriStateCheckboxSampleSectionExpressive() {
+private fun SettingsTriStateCheckboxSampleSectionExpressive(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsTriStateCheckbox (Expressive)") {
     val child1State = remember { mutableStateOf(false) }
     val child2State = remember { mutableStateOf(true) }
@@ -122,6 +148,7 @@ private fun SettingsTriStateCheckboxSampleSectionExpressive() {
 
     SettingsTriStateCheckbox(
       state = triStateWithChildState,
+      colors = colors,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
       onCheckedChange = { newState ->
@@ -134,18 +161,21 @@ private fun SettingsTriStateCheckboxSampleSectionExpressive() {
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child1State.value,
+        colors = colors,
         title = { Text(text = "Child #1") },
         onCheckedChange = { child1State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child2State.value,
+        colors = colors,
         title = { Text(text = "Child #2") },
         onCheckedChange = { child2State.value = it },
       )
       SettingsCheckbox(
         modifier = Modifier.padding(start = 16.dp, end = 32.dp),
         state = child3State.value,
+        colors = colors,
         title = { Text(text = "Child #3") },
         onCheckedChange = { child3State.value = it },
       )
@@ -155,21 +185,27 @@ private fun SettingsTriStateCheckboxSampleSectionExpressive() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsMenuLinkSectionSampleExpressive() {
+private fun SettingsMenuLinkSectionSampleExpressive(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsMenuLink (Expressive)") {
     val actionState = remember { mutableStateOf(false) }
 
     SettingsSwitch(
       state = actionState.value,
+      colors = colors,
       title = { Text(text = "Show action") },
       onCheckedChange = { actionState.value = it },
     )
 
     SettingsMenuLink(
+      colors = colors,
       title = { Text(text = "Menu") },
       onClick = { },
     )
+
     SettingsMenuLink(
+      colors = colors,
       title = { Text(text = "Menu") },
       subtitle = { Text(text = "With subtitle") },
       onClick = { },
@@ -179,11 +215,14 @@ private fun SettingsMenuLinkSectionSampleExpressive() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsButtonGroupSample() {
+private fun SettingsButtonGroupSample(
+  colors: ListItemColors,
+) {
   SampleSection(title = "SettingsButtonGroup (Expressive)") {
     val buttonGroupItems = listOf(1, 2, 3)
     val buttonGroupState = remember { mutableStateOf(3) }
     SettingsButtonGroup(
+      colors = colors,
       title = { Text(text = "Button group") },
       items = buttonGroupItems,
       itemTitleMap = { item -> "#$item" },
@@ -196,7 +235,9 @@ private fun SettingsButtonGroupSample() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-private fun SettingsGroupSectionSampleExpressive() {
+private fun SettingsGroupSectionSampleExpressive(
+  colors: ListItemColors,
+) {
   val groupEnabled = remember { mutableStateOf(true) }
   SampleSection(
     title = "SettingsGroup (Expressive)",
@@ -204,6 +245,7 @@ private fun SettingsGroupSectionSampleExpressive() {
   ) {
     SettingsSwitch(
       state = groupEnabled.value,
+      colors = colors,
       title = { Text(text = "Group Enabled") },
       subtitle = { Text(text = "This Switch is always enabled") },
       enabled = true,
@@ -213,6 +255,7 @@ private fun SettingsGroupSectionSampleExpressive() {
     HorizontalDivider()
 
     SettingsMenuLink(
+      colors = colors,
       title = { Text(text = "Menu") },
       onClick = { },
     )
@@ -220,6 +263,7 @@ private fun SettingsGroupSectionSampleExpressive() {
     val switchState = remember { mutableStateOf(false) }
     SettingsSwitch(
       state = switchState.value,
+      colors = colors,
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
       onCheckedChange = { switchState.value = it },
@@ -228,6 +272,7 @@ private fun SettingsGroupSectionSampleExpressive() {
     val checkboxState = remember { mutableStateOf(false) }
     SettingsCheckbox(
       state = checkboxState.value,
+      colors = colors,
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
       onCheckedChange = { checkboxState.value = it },
@@ -236,6 +281,7 @@ private fun SettingsGroupSectionSampleExpressive() {
     val triSateCheckboxState = remember { mutableStateOf<Boolean?>(null) }
     SettingsTriStateCheckbox(
       state = triSateCheckboxState.value,
+      colors = colors,
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
       onCheckedChange = { newState -> triSateCheckboxState.value = newState },
@@ -244,6 +290,7 @@ private fun SettingsGroupSectionSampleExpressive() {
     val state = remember { mutableStateOf(false) }
     SettingsRadioButton(
       state = state.value,
+      colors = colors,
       title = { Text(text = "RadioButton") },
       subtitle = { Text(text = "RadioButton subtitle") },
       onClick = { state.value = !state.value },

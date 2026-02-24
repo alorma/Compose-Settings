@@ -26,7 +26,7 @@ fun SettingsTriStateCheckbox(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   checkboxColors: CheckboxColors =
     CheckboxDefaults.colors(
       checkedColor = colors.actionColor(enabled),

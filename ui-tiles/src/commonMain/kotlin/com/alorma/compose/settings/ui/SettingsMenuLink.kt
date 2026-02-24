@@ -17,7 +17,7 @@ fun SettingsMenuLink(
   icon: (@Composable () -> Unit)? = null,
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,

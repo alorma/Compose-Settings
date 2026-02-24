@@ -26,7 +26,7 @@ fun SettingsSlider(
   valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   sliderColors: SliderColors =
     SliderDefaults.colors(
       thumbColor = colors.actionColor(enabled),
