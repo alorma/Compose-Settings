@@ -9,8 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.SettingsGroup
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsTileColors
 import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
+import com.alorma.compose.settings.ui.core.LocalSettingsTileColors
 
 @Composable
 internal fun SampleSection(

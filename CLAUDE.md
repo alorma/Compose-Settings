@@ -12,39 +12,77 @@ Jetpack Compose. It targets Android, iOS, Desktop (JVM), JavaScript, and WebAsse
 
 ### Module Structure
 
-The project is organized into three main library modules:
+The project is organized into four main library modules:
 
-1. **ui-base** - Foundation module containing shared internal components
+1. **ui-core** - Pure Kotlin shared logic (no Material 3 dependencies)
+    - Location: `ui-core/src/commonMain/kotlin/com/alorma/compose/settings/ui/core/`
+    - Provides: `SettingsTileColors`, `SettingsTextStyles`, `CompositionLocals` (
+      `LocalSettingsGroupEnabled`, `LocalSettingsTileColors`, `LocalSettingsTextStyles`),
+      `SettingsTileConstants`
+    - Contains only pure data classes and composition locals - no UI rendering
+    - Used by both standard and expressive Material 3 implementations
+
+2. **ui-base** - Standard Material 3 foundation module
     - Location: `ui-base/src/commonMain/kotlin/com/alorma/compose/settings/ui/base/internal/`
-    - Provides: `SettingsTileScaffold`, `SettingsTileDefaults`, `SettingsTileColors`,
-      `CompositionLocals`
+    - Depends on: `ui-core`, standard Material 3
+    - Provides: `SettingsTileScaffold` (wraps Material 3's `ListItem`), `SettingsTileDefaults`
     - Contains no public API - only internal utilities used by other modules
 
-2. **ui-tiles** - Core settings components
+3. **ui-tiles** - Core settings components (standard Material 3)
     - Location: `ui-tiles/src/commonMain/kotlin/com/alorma/compose/settings/ui/`
     - Depends on: `ui-base`
     - Components: `SettingsMenuLink`, `SettingsCheckbox`, `SettingsRadioButton`, `SettingsSwitch`,
       `SettingsTriStateCheckbox`, `SettingsGroup`
     - Published as: `com.github.alorma.compose-settings:ui-tiles`
 
-3. **ui-tiles-extended** - Advanced/extended settings components
+4. **ui-tiles-extended** - Advanced/extended settings components (standard Material 3)
     - Location: `ui-tiles-extended/src/commonMain/kotlin/com/alorma/compose/settings/ui/`
     - Depends on: `ui-base`
     - Components: `SettingsSlider`, `SettingsSegmented`
     - Published as: `com.github.alorma.compose-settings:ui-tiles-extended`
 
+5. **ui-tiles-expressive** - Expressive Material 3 components
+    - Location: `ui-tiles-expressive/src/commonMain/kotlin/com/alorma/compose/settings/ui/expressive/`
+    - Depends on: `ui-base`, Material 3 Expressive
+    - Components: `SettingsButtonGroup`
+    - Published as: `com.github.alorma.compose-settings:ui-tiles-expressive`
+
 ### Design Patterns
 
 All settings components follow a consistent pattern:
 
-1. Built on top of `SettingsTileScaffold` (from `ui-base`)
+1. Built on top of `SettingsTileScaffold` (from `ui-base` or `ui-base-expressive`)
 2. Accept common parameters: `title`, `subtitle`, `icon`, `modifier`, `enabled`, `colors`
 3. Use Material 3 components internally (ListItem, Checkbox, Switch, etc.)
 4. Support `LocalSettingsGroupEnabled` for hierarchical enabled state
-5. Leverage `SettingsTileColors` for consistent theming across all components
+5. Leverage `SettingsTileColors` and `SettingsTextStyles` (from `ui-core`) for consistent theming
+   across all components
 
 The `SettingsTileScaffold` wraps Material 3's `ListItem` and provides consistent layout and color
 handling.
+
+### Architecture Layers
+
+The library uses a layered architecture:
+
+```
+ui-core (pure Kotlin - colors, text styles, composition locals)
+   ↓
+ui-base (standard Material 3 - ListItem scaffold)
+   ↓
+ui-tiles, ui-tiles-extended (standard Material 3 components)
+
+ui-core (pure Kotlin - colors, text styles, composition locals)
+   ↓
+ui-base-expressive (Material 3 Expressive - SegmentedListItem scaffold) [PLANNED]
+   ↓
+ui-tiles-expressive (expressive Material 3 components)
+```
+
+This separation allows:
+- **Code reuse**: Pure logic (colors, styles) shared between standard and expressive variants
+- **Flexibility**: Easy to add support for new Material 3 variants
+- **Type safety**: Strong separation between rendering layer and data layer
 
 ### Platform-Specific Code
 

@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.ui.base.internal
+package com.alorma.compose.settings.ui.core
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
