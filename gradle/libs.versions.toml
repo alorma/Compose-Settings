@@ -29,7 +29,7 @@ mavenPlugin = "0.36.0"
 
 # Other Libraries
 compose-material3 = "1.9.0"
-compose-material3-expressive = "1.11.0-alpha01"
+compose-material3-expressive = "1.11.0-alpha02"
 
 [libraries]
 # AndroidX

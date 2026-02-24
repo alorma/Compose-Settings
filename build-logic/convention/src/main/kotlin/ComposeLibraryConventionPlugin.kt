@@ -70,7 +70,6 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
 
         jvm("desktop")
 
-        iosX64()
         iosArm64()
         iosSimulatorArm64()
 

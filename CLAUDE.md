@@ -155,7 +155,7 @@ All library modules are configured with:
 
 - Android (minSdk 21)
 - JVM Desktop
-- iOS (iosX64, iosArm64, iosSimulatorArm64)
+- iOS (iosArm64, iosSimulatorArm64)
 - JavaScript (IR)
 - WebAssembly (wasmJs)
 
