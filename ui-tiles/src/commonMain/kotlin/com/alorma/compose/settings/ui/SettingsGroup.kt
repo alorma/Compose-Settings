@@ -17,8 +17,6 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.core.SettingsTextStyles
-import com.alorma.compose.settings.ui.core.SettingsTileColors
 
 @Composable
 fun SettingsGroup(
