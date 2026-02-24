@@ -49,7 +49,8 @@ body:
       options:
         - ui-tiles (core components)
         - ui-tiles-extended (advanced components)
-        - ui-base (internal/shared)
+        - ui-tiles-expressive (expressive Material 3)
+        - ui-core (foundation/shared)
         - New module
         - Not sure
     validations:

@@ -87,7 +87,6 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
             dependencies {
               implementation(libs.findLibrary("compose-runtime").get())
               implementation(libs.findLibrary("compose-foundation").get())
-              api(libs.findLibrary("compose-material3").get())
             }
           }
         }

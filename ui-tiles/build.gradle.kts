@@ -9,7 +9,8 @@ kotlin {
 
   sourceSets {
     commonMain.dependencies {
-      api(projects.uiBase)
+      api(projects.uiCore)
+      api(libs.compose.material3)
     }
   }
 }

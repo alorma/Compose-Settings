@@ -38,7 +38,7 @@ kotlin {
       // Add the generated source directory to the source sets
       kotlin.srcDir(layout.buildDirectory.dir("generated/kotlin"))
       dependencies {
-        implementation(projects.uiBase)
+        implementation(projects.uiCore)
         implementation(projects.uiTiles)
         implementation(projects.uiTilesExtended)
         implementation(projects.uiTilesExpressive)
