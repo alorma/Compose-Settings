@@ -1,15 +1,17 @@
-package com.alorma.compose.settings.ui
+package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.clickable
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemElevation
+import androidx.compose.material3.ListItemShapes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.Dp
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SettingsMenuLink(
   title: @Composable () -> Unit,
@@ -19,26 +21,26 @@ fun SettingsMenuLink(
   subtitle: (@Composable () -> Unit)? = null,
   action: (@Composable () -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  shape: Shape = SettingsTileDefaults.shape(),
-  tonalElevation: Dp = SettingsTileDefaults.Elevation,
-  shadowElevation: Dp = SettingsTileDefaults.Elevation,
+  shapes: ListItemShapes = SettingsTileDefaults.shapes(),
+  elevation: ListItemElevation = SettingsTileDefaults.elevation(),
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   onClick: () -> Unit,
 ) {
   SettingsTileScaffold(
-    modifier = Modifier
-      .clickable(
-        enabled = enabled,
-        onClick = onClick,
-      ).semantics(properties = semanticProperties)
-      .then(modifier),
+    modifier =
+      Modifier
+        .clickable(
+          enabled = enabled,
+          onClick = onClick,
+        ).semantics(properties = semanticProperties)
+        .then(modifier),
+    enabled = enabled,
     title = title,
-    subtitle = subtitle,
-    icon = icon,
+    supportingContent = subtitle,
+    leadingContent = icon,
     colors = colors,
-    shape = shape,
-    tonalElevation = tonalElevation,
-    shadowElevation = shadowElevation,
-    action = action,
+    shapes = shapes,
+    elevation = elevation,
+    trailingContent = action,
   )
 }

@@ -25,7 +25,7 @@ include(":samples:webApp")
 include(":samples:iosApp")
 include(":samples:androidApp")
 
-include(":ui-base")
+include(":ui-core")
 include(":ui-tiles")
 include(":ui-tiles-extended")
 include(":ui-tiles-expressive")

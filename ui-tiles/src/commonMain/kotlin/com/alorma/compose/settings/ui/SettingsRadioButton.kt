@@ -1,6 +1,7 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
@@ -12,11 +13,7 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
-import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
-import com.alorma.compose.settings.ui.base.internal.SettingsTextStyles
+import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
 @Composable
 fun SettingsRadioButton(
@@ -26,13 +23,8 @@ fun SettingsRadioButton(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  checkboxColors: RadioButtonColors =
-    RadioButtonDefaults.colors(
-      selectedColor = colors.actionColor(enabled),
-      disabledSelectedColor = colors.actionColor(enabled),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
+  checkboxColors: RadioButtonColors = RadioButtonDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -49,12 +41,10 @@ fun SettingsRadioButton(
           onValueChange = { onClick() },
         ).semantics(properties = semanticProperties)
         .then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,

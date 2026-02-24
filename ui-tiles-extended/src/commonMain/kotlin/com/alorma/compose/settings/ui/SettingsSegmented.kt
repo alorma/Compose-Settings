@@ -3,7 +3,7 @@ package com.alorma.compose.settings.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonColors
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -12,14 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
-import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
 @Composable
 @Suppress("LongParameterList")
@@ -31,7 +27,7 @@ fun <T> SettingsSegmented(
   itemTitleMap: (T) -> CharSequence,
   modifier: Modifier = Modifier,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   buttonSpace: Dp = SegmentedButtonDefaults.BorderWidth,
   buttonShape: @Composable (Int) -> Shape = { index ->
     SegmentedButtonDefaults.itemShape(
@@ -39,32 +35,7 @@ fun <T> SettingsSegmented(
       count = items.size,
     )
   },
-  buttonColors: SegmentedButtonColors =
-    SegmentedButtonDefaults.colors(
-      activeContainerColor =
-        colors
-          .actionColor(enabled)
-          .copy(alpha = 0.4f)
-          .compositeOver(MaterialTheme.colorScheme.surfaceContainerLowest),
-      inactiveContainerColor = colors.containerColor,
-      activeContentColor = colors.subtitleColor(enabled),
-      inactiveContentColor = colors.subtitleColor(enabled),
-      activeBorderColor = colors.subtitleColor,
-      inactiveBorderColor = colors.subtitleColor,
-      disabledActiveContainerColor =
-        colors
-          .actionColor(enabled)
-          .copy(alpha = 0.12f)
-          .compositeOver(MaterialTheme.colorScheme.surfaceContainerLowest),
-      disabledInactiveContainerColor =
-        MaterialTheme.colorScheme.surface
-          .copy(alpha = SettingsTileDefaults.DisabledAlpha)
-          .compositeOver(colors.containerColor),
-      disabledActiveContentColor = colors.subtitleColor(enabled),
-      disabledInactiveContentColor = colors.subtitleColor(enabled),
-      disabledActiveBorderColor = colors.subtitleColor(enabled),
-      disabledInactiveBorderColor = colors.subtitleColor(enabled),
-    ),
+  buttonColors: SegmentedButtonColors = SegmentedButtonDefaults.colors(),
   buttonIcon: @Composable (Boolean) -> Unit = { selected -> SegmentedButtonDefaults.Icon(selected) },
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
@@ -74,7 +45,6 @@ fun <T> SettingsSegmented(
 ) {
   SettingsTileScaffold(
     modifier = modifier,
-    enabled = enabled,
     title = title,
     subtitle = {
       Column(

@@ -12,39 +12,65 @@ Jetpack Compose. It targets Android, iOS, Desktop (JVM), JavaScript, and WebAsse
 
 ### Module Structure
 
-The project is organized into three main library modules:
+The project is organized into four main library modules:
 
-1. **ui-base** - Foundation module containing shared internal components
-    - Location: `ui-base/src/commonMain/kotlin/com/alorma/compose/settings/ui/base/internal/`
-    - Provides: `SettingsTileScaffold`, `SettingsTileDefaults`, `SettingsTileColors`,
-      `CompositionLocals`
-    - Contains no public API - only internal utilities used by other modules
+1. **ui-core** - Foundation module with shared logic and Material 3 scaffold
+    - Location: `ui-core/src/commonMain/kotlin/com/alorma/compose/settings/ui/core/`
+    - Provides: `SettingsTileColors`, `SettingsTextStyles`, `SettingsTileCoreDefaults`,
+      `CompositionLocals` (`LocalSettingsGroupEnabled`, `LocalSettingsTileColors`,
+      `LocalSettingsTextStyles`), `SettingsTileConstants`, `SettingsTileScaffold` (wraps Material
+      3's `ListItem`)
+    - Contains internal utilities and data models used by all other modules
+    - Depends on: standard Material 3
+    - Published as: `com.github.alorma.compose-settings:ui-core`
 
-2. **ui-tiles** - Core settings components
+2. **ui-tiles** - Core settings components (standard Material 3)
     - Location: `ui-tiles/src/commonMain/kotlin/com/alorma/compose/settings/ui/`
-    - Depends on: `ui-base`
+    - Depends on: `ui-core`
     - Components: `SettingsMenuLink`, `SettingsCheckbox`, `SettingsRadioButton`, `SettingsSwitch`,
       `SettingsTriStateCheckbox`, `SettingsGroup`
     - Published as: `com.github.alorma.compose-settings:ui-tiles`
 
-3. **ui-tiles-extended** - Advanced/extended settings components
+3. **ui-tiles-extended** - Advanced/extended settings components (standard Material 3)
     - Location: `ui-tiles-extended/src/commonMain/kotlin/com/alorma/compose/settings/ui/`
-    - Depends on: `ui-base`
+    - Depends on: `ui-core`
     - Components: `SettingsSlider`, `SettingsSegmented`
     - Published as: `com.github.alorma.compose-settings:ui-tiles-extended`
+
+4. **ui-tiles-expressive** - Expressive Material 3 components
+    - Location: `ui-tiles-expressive/src/commonMain/kotlin/com/alorma/compose/settings/ui/expressive/`
+    - Depends on: `ui-core`, Material 3 Expressive
+    - Components: `SettingsButtonGroup`
+    - Published as: `com.github.alorma.compose-settings:ui-tiles-expressive`
 
 ### Design Patterns
 
 All settings components follow a consistent pattern:
 
-1. Built on top of `SettingsTileScaffold` (from `ui-base`)
+1. Built on top of `SettingsTileScaffold` (from `ui-core`)
 2. Accept common parameters: `title`, `subtitle`, `icon`, `modifier`, `enabled`, `colors`
 3. Use Material 3 components internally (ListItem, Checkbox, Switch, etc.)
 4. Support `LocalSettingsGroupEnabled` for hierarchical enabled state
-5. Leverage `SettingsTileColors` for consistent theming across all components
+5. Leverage `SettingsTileColors` and `SettingsTextStyles` (from `ui-core`) for consistent theming
+   across all components
 
 The `SettingsTileScaffold` wraps Material 3's `ListItem` and provides consistent layout and color
 handling.
+
+### Architecture Layers
+
+The library uses a layered architecture:
+
+```
+ui-core (foundation - colors, styles, scaffold, composition locals)
+   ↓
+ui-tiles, ui-tiles-extended, ui-tiles-expressive (components)
+```
+
+This separation allows:
+- **Code reuse**: Shared foundation (colors, styles, scaffold) used by all component modules
+- **Flexibility**: Easy to add new component modules
+- **Type safety**: Strong separation between foundation layer and component layer
 
 ### Platform-Specific Code
 
@@ -166,7 +192,7 @@ The default hierarchy template is applied via `applyDefaultHierarchyTemplate()`.
 The project uses Gradle convention plugins located in `build-logic/convention/`:
 
 1. **ComposeLibraryConventionPlugin** (`compose.library`)
-    - Applied to all library modules (ui-base, ui-tiles, ui-tiles-extended)
+    - Applied to all library modules (ui-core, ui-tiles, ui-tiles-extended, ui-tiles-expressive)
     - Configures Kotlin Multiplatform with all target platforms
     - Sets up Compose Multiplatform and Compose Compiler
     - Configures Android library settings

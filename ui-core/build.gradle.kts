@@ -4,12 +4,11 @@ plugins {
 
 kotlin {
   androidLibrary {
-    namespace = libs.versions.namespace.get() + ".ui.tiles"
+    namespace = libs.versions.namespace.get() + ".ui.core"
   }
 
   sourceSets {
     commonMain.dependencies {
-      api(projects.uiCore)
       api(libs.compose.material3)
     }
   }

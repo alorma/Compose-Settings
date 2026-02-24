@@ -3,6 +3,7 @@ package com.alorma.compose.settings.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderDefaults
@@ -11,10 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
-import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
 @Composable
 @Suppress("LongParameterList")
@@ -29,20 +27,14 @@ fun SettingsSlider(
   valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
   steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  sliderColors: SliderColors =
-    SliderDefaults.colors(
-      thumbColor = colors.actionColor(enabled),
-      activeTrackColor = colors.actionColor(enabled),
-      inactiveTrackColor = colors.actionColor(enabled).copy(alpha = 0.12f),
-    ),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
+  sliderColors: SliderColors = SliderDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
 ) {
   SettingsTileScaffold(
     modifier = modifier,
-    enabled = enabled,
     title = title,
     subtitle = {
       Column(

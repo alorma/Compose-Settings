@@ -6,19 +6,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ButtonGroupDefaults
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemElevation
+import androidx.compose.material3.ListItemShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedToggleButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
-import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
+import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -31,18 +29,17 @@ fun <T> SettingsButtonGroup(
   itemTitleMap: (T) -> CharSequence,
   modifier: Modifier = Modifier,
   enabled: Boolean = LocalSettingsGroupEnabled.current,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
   subtitle: @Composable (() -> Unit)? = null,
   icon: @Composable (() -> Unit)? = null,
-  shape: Shape = SettingsTileDefaults.shape(),
-  tonalElevation: Dp = SettingsTileDefaults.Elevation,
-  shadowElevation: Dp = SettingsTileDefaults.Elevation,
+  shapes: ListItemShapes = SettingsTileDefaults.shapes(),
+  elevation: ListItemElevation = SettingsTileDefaults.elevation(),
 ) {
   SettingsTileScaffold(
     modifier = modifier,
     enabled = enabled,
     title = title,
-    subtitle = {
+    supportingContent = {
       Column(
         verticalArrangement = Arrangement.spacedBy(4.dp),
       ) {
@@ -66,10 +63,9 @@ fun <T> SettingsButtonGroup(
         }
       }
     },
-    icon = icon,
+    leadingContent = icon,
     colors = colors,
-    shape = shape,
-    tonalElevation = tonalElevation,
-    shadowElevation = shadowElevation,
+    shapes = shapes,
+    elevation = elevation,
   )
 }

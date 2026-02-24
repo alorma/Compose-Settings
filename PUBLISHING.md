@@ -16,7 +16,7 @@ The publishing process is fully automated through GitHub Actions and uses:
 
 ### Convention Plugin Setup
 
-All library modules (`ui-base`, `ui-tiles`, `ui-tiles-extended`, `ui-tiles-expressive`) use the
+All library modules (`ui-core`, `ui-tiles`, `ui-tiles-extended`, `ui-tiles-expressive`) use the
 `compose.library` convention plugin which automatically configures:
 
 **Location**: `build-logic/convention/src/main/kotlin/ComposeLibraryConventionPlugin.kt`
@@ -246,9 +246,9 @@ env:
 
 Each library module publishes multiple artifacts for each platform:
 
-### ui-base
+### ui-core
 
-- `com.alorma.compose.settings:ui-base:$version`
+- `com.alorma.compose.settings:ui-core:$version`
 - Platform variants: `-android`, `-desktop`, `-iosarm64`, `-iossimulatorarm64`, `-iosx64`, `-js`,
   `-wasmjs`
 

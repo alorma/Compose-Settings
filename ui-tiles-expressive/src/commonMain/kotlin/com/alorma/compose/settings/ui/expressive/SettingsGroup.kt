@@ -1,4 +1,4 @@
-package com.alorma.compose.settings.ui
+package com.alorma.compose.settings.ui.expressive
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ListItemColors
-import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -18,19 +17,20 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SettingsGroup(
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   contentPadding: PaddingValues = PaddingValues(0.dp),
   verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(8.dp),
-  colors: ListItemColors = SettingsTileDefaults.colors(),
   title: @Composable (() -> Unit)? = null,
   semanticProperties: (SemanticsPropertyReceiver.() -> Unit) = {},
   content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(
-    modifier = Modifier
+    modifier =
+      Modifier
         .fillMaxWidth()
         .semantics(properties = semanticProperties)
         .then(modifier)
@@ -38,9 +38,7 @@ fun SettingsGroup(
     verticalArrangement = verticalArrangement,
   ) {
     if (title != null) {
-      CompositionLocalProvider(LocalContentColor provides colors.headlineColor) {
-        SettingsGroupTitle(title)
-      }
+      SettingsGroupTitle(title)
     }
     CompositionLocalProvider(LocalSettingsGroupEnabled provides enabled) {
       content()

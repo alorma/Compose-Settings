@@ -9,7 +9,7 @@ kotlin {
 
   sourceSets {
     commonMain.dependencies {
-      api(projects.uiBase)
+      implementation(projects.uiCore)
       // Use material3-expressive instead of standard material3
       api(libs.compose.material3.expressive)
     }

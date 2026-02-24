@@ -3,6 +3,7 @@ package com.alorma.compose.settings.ui
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
@@ -14,11 +15,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.unit.Dp
-import com.alorma.compose.settings.ui.base.internal.LocalSettingsGroupEnabled
-import com.alorma.compose.settings.ui.base.internal.SettingsTileColors
-import com.alorma.compose.settings.ui.base.internal.SettingsTileDefaults
-import com.alorma.compose.settings.ui.base.internal.SettingsTileScaffold
-import com.alorma.compose.settings.ui.base.internal.SettingsTextStyles
+import com.alorma.compose.settings.ui.core.LocalSettingsGroupEnabled
 
 @Composable
 fun SettingsTriStateCheckbox(
@@ -28,14 +25,8 @@ fun SettingsTriStateCheckbox(
   enabled: Boolean = LocalSettingsGroupEnabled.current,
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
-  colors: SettingsTileColors = SettingsTileDefaults.colors(),
-  checkboxColors: CheckboxColors =
-    CheckboxDefaults.colors(
-      checkedColor = colors.actionColor(enabled),
-      checkmarkColor = contentColorFor(colors.actionColor(enabled)),
-      disabledCheckedColor = colors.actionColor(enabled),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  colors: ListItemColors = SettingsTileDefaults.colors(),
+  checkboxColors: CheckboxColors = CheckboxDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -53,12 +44,10 @@ fun SettingsTriStateCheckbox(
           onClick = update,
         ).semantics(properties = semanticProperties)
         .then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
