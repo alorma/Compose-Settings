@@ -1,8 +1,7 @@
-package com.alorma.compose.settings.ui.base.internal
+package com.alorma.compose.settings.ui.core
 
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.ui.text.TextStyle
 
 val LocalSettingsGroupEnabled: ProvidableCompositionLocal<Boolean> = compositionLocalOf { true }
 
