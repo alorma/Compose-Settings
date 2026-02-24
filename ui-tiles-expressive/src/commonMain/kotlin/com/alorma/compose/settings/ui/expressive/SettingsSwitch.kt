@@ -1,17 +1,16 @@
 package com.alorma.compose.settings.ui.expressive
 
-import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
 import androidx.compose.material3.ListItemShapes
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
@@ -35,30 +34,28 @@ fun SettingsSwitch(
 ) {
   val update: (Boolean) -> Unit = { boolean -> onCheckedChange(boolean) }
 
-  SettingsTileScaffold(
-    modifier =
-      Modifier
-        .toggleable(
-          enabled = enabled,
-          value = state,
-          role = Role.Switch,
-          onValueChange = { update(!state) },
-        ).semantics(properties = semanticProperties)
-        .then(modifier),
-    enabled = enabled,
-    title = title,
-    subtitle = subtitle,
-    icon = icon,
-    colors = colors,
+  SegmentedListItem(
+    modifier = Modifier
+      .fillMaxWidth()
+      .semantics(properties = semanticProperties)
+      .then(modifier),
+    checked = true,
+    onCheckedChange = { update(!state) },
     shapes = shapes,
+    enabled = enabled,
+    content = title,
+    leadingContent = icon,
+    supportingContent = subtitle,
+    colors = colors,
     elevation = elevation,
-  ) {
-    Switch(
-      modifier = Modifier.clearAndSetSemantics { },
-      enabled = enabled,
-      checked = state,
-      onCheckedChange = update,
-      colors = switchColors,
-    )
-  }
+    trailingContent = {
+      Switch(
+        modifier = Modifier.clearAndSetSemantics { },
+        enabled = enabled,
+        checked = state,
+        onCheckedChange = update,
+        colors = switchColors,
+      )
+    },
+  )
 }

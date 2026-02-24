@@ -1,6 +1,7 @@
 package com.alorma.compose.settings.ui
 
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
@@ -23,12 +24,7 @@ fun SettingsRadioButton(
   icon: @Composable (() -> Unit)? = null,
   subtitle: @Composable (() -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
-  checkboxColors: RadioButtonColors =
-    RadioButtonDefaults.colors(
-      selectedColor = colors.actionColor(enabled),
-      disabledSelectedColor = colors.actionColor(enabled),
-    ),
-  textStyles: SettingsTextStyles = SettingsTileDefaults.textStyles(),
+  checkboxColors: RadioButtonColors = RadioButtonDefaults.colors(),
   shape: Shape = SettingsTileDefaults.shape(),
   tonalElevation: Dp = SettingsTileDefaults.Elevation,
   shadowElevation: Dp = SettingsTileDefaults.Elevation,
@@ -45,12 +41,10 @@ fun SettingsRadioButton(
           onValueChange = { onClick() },
         ).semantics(properties = semanticProperties)
         .then(modifier),
-    enabled = enabled,
     title = title,
     subtitle = subtitle,
     icon = icon,
     colors = colors,
-    textStyles = textStyles,
     shape = shape,
     tonalElevation = tonalElevation,
     shadowElevation = shadowElevation,
