@@ -38,7 +38,7 @@ fun SettingsRadioButton(
       .fillMaxWidth()
       .semantics(properties = semanticProperties)
       .then(modifier),
-    checked = true,
+    checked = state,
     onCheckedChange = { onClick() },
     shapes = shapes,
     enabled = enabled,

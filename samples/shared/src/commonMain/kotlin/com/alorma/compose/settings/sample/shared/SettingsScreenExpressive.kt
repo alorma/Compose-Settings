@@ -2,11 +2,13 @@ package com.alorma.compose.settings.sample.shared
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.ListItemShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,7 +32,8 @@ import com.alorma.compose.settings.ui.expressive.SettingsTriStateCheckbox
 fun ExpressiveMaterial3Samples() {
   Column(
     modifier = Modifier
-      .verticalScroll(rememberScrollState()),
+      .verticalScroll(rememberScrollState())
+      .padding(bottom = 90.dp),
     verticalArrangement = Arrangement.spacedBy(8.dp),
   ) {
     val colors = ListItemDefaults.segmentedColors(
@@ -60,6 +63,39 @@ fun ExpressiveMaterial3Samples() {
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
+private fun SettingsMenuLinkSectionSampleExpressive(
+  colors: ListItemColors,
+) {
+  SampleSection(
+    title = "SettingsMenuLink (Expressive)",
+    verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap),
+  ) {
+    SettingsMenuLink(
+      colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(0, 3,),
+      title = { Text(text = "Menu 1") },
+      onClick = { },
+    )
+
+    SettingsMenuLink(
+      colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(1, 3,),
+      title = { Text(text = "Menu 2") },
+      onClick = { },
+    )
+
+    SettingsMenuLink(
+      colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(2, 3,),
+      title = { Text(text = "Menu 3") },
+      subtitle = { Text(text = "With subtitle") },
+      onClick = { },
+    )
+  }
+}
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
 private fun SettingsSwitchSampleSectionExpressive(
   colors: ListItemColors,
 ) {
@@ -71,9 +107,19 @@ private fun SettingsSwitchSampleSectionExpressive(
     SettingsSwitch(
       state = state.value,
       colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(0, 3),
       title = { Text(text = "Switch") },
       subtitle = { Text(text = "Switch subtitle") },
       onCheckedChange = { state.value = it },
+    )
+
+    SettingsSwitch(
+      state = !state.value,
+      colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(1, 3),
+      title = { Text(text = "Switch") },
+      subtitle = { Text(text = "Switch subtitle") },
+      onCheckedChange = { state.value = !it },
     )
   }
 }
@@ -91,9 +137,18 @@ private fun SettingsCheckboxSampleSectionExpressive(
     SettingsCheckbox(
       state = state.value,
       colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(0, 2),
       title = { Text(text = "Checkbox") },
       subtitle = { Text(text = "Checkbox subtitle") },
       onCheckedChange = { state.value = it },
+    )
+    SettingsCheckbox(
+      state = !state.value,
+      colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(1, 2),
+      title = { Text(text = "Checkbox") },
+      subtitle = { Text(text = "Checkbox subtitle") },
+      onCheckedChange = { state.value = !it },
     )
   }
 }
@@ -109,10 +164,11 @@ private fun SettingsRadioButtonSampleSectionExpressive(
   ) {
     val state = remember { mutableStateOf<String?>(null) }
 
-    SampleData.items.forEach { sampleItem ->
+    SampleData.items.forEachIndexed { index, sampleItem ->
       SettingsRadioButton(
         state = state.value == sampleItem.key,
         colors = colors,
+        shapes = ListItemDefaults.segmentedShapes(index, SampleData.items.size),
         title = { Text(text = sampleItem.title) },
         subtitle = { Text(text = sampleItem.description) },
         onClick = { state.value = sampleItem.key },
@@ -159,6 +215,7 @@ private fun SettingsTriStateCheckboxSampleSectionExpressive(
     SettingsTriStateCheckbox(
       state = triStateWithChildState,
       colors = colors,
+      shapes = ListItemDefaults.segmentedShapes(0, 4),
       title = { Text(text = "TriStateCheckbox") },
       subtitle = { Text(text = "With child checkboxes") },
       onCheckedChange = { newState ->
@@ -173,64 +230,25 @@ private fun SettingsTriStateCheckboxSampleSectionExpressive(
       SettingsCheckbox(
         state = child1State.value,
         colors = colors,
+        shapes = ListItemDefaults.segmentedShapes(1, 4),
         title = { Text(text = "Child #1") },
         onCheckedChange = { child1State.value = it },
       )
       SettingsCheckbox(
         state = child2State.value,
         colors = colors,
+        shapes = ListItemDefaults.segmentedShapes(2, 4),
         title = { Text(text = "Child #2") },
         onCheckedChange = { child2State.value = it },
       )
       SettingsCheckbox(
         state = child3State.value,
         colors = colors,
+        shapes = ListItemDefaults.segmentedShapes(3, 4),
         title = { Text(text = "Child #3") },
         onCheckedChange = { child3State.value = it },
       )
     }
-  }
-}
-
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
-@Composable
-private fun SettingsMenuLinkSectionSampleExpressive(
-  colors: ListItemColors,
-) {
-  SampleSection(
-    title = "SettingsMenuLink (Expressive)",
-    verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap),
-  ) {
-    SettingsMenuLink(
-      colors = colors,
-      shapes = ListItemDefaults.segmentedShapes(
-        index = 0,
-        count = 3,
-      ),
-      title = { Text(text = "Menu 1") },
-      onClick = { },
-    )
-
-    SettingsMenuLink(
-      colors = colors,
-      shapes = ListItemDefaults.segmentedShapes(
-        index = 1,
-        count = 3,
-      ),
-      title = { Text(text = "Menu 2") },
-      onClick = { },
-    )
-
-    SettingsMenuLink(
-      colors = colors,
-      shapes = ListItemDefaults.segmentedShapes(
-        index = 2,
-        count = 3,
-      ),
-      title = { Text(text = "Menu 3") },
-      subtitle = { Text(text = "With subtitle") },
-      onClick = { },
-    )
   }
 }
 
@@ -247,7 +265,7 @@ private fun SettingsButtonGroupSample(
     val buttonGroupState = remember { mutableStateOf(3) }
     SettingsButtonGroup(
       colors = colors,
-      shapes = ListItemDefaults.shapes(),
+      shapes = ListItemDefaults.segmentedShapes(0, 1),
       title = { Text(text = "Button group") },
       items = buttonGroupItems,
       itemTitleMap = { item -> "#$item" },
