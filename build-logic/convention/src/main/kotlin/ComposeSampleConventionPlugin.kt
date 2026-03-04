@@ -72,7 +72,7 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
 
           val androidMain by getting {
             dependencies {
-              implementation(compose.dependencies.uiTooling)
+              implementation(libs.findLibrary("compose-ui-tooling").get())
             }
           }
 
@@ -101,7 +101,6 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
           val desktopMain by getting {
             dependencies {
               api(compose.dependencies.desktop.currentOs)
-              implementation(compose.dependencies.desktop.common)
             }
           }
         }
