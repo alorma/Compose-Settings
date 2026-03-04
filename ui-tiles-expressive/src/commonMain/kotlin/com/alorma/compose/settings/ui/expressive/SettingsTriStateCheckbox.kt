@@ -47,7 +47,11 @@ fun SettingsTriStateCheckbox(
       .fillMaxWidth()
       .semantics(properties = semanticProperties)
       .then(modifier),
-    checked = true,
+    checked = when(state) {
+      ToggleableState.On -> true
+      ToggleableState.Indeterminate -> true
+      ToggleableState.Off -> false
+    },
     onCheckedChange = { update() },
     shapes = shapes,
     enabled = enabled,

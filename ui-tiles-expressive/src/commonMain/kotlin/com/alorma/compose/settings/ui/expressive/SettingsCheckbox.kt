@@ -39,7 +39,7 @@ fun SettingsCheckbox(
       .fillMaxWidth()
       .semantics(properties = semanticProperties)
       .then(modifier),
-    checked = true,
+    checked = state,
     onCheckedChange = { update(!state) },
     shapes = shapes,
     enabled = enabled,

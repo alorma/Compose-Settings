@@ -34,7 +34,8 @@ import com.alorma.compose.settings.ui.SettingsTriStateCheckbox
 fun StandardMaterial3Samples() {
   Column(
     modifier = Modifier
-      .verticalScroll(rememberScrollState()),
+      .verticalScroll(rememberScrollState())
+      .padding(bottom = 90.dp),
     verticalArrangement = Arrangement.spacedBy(8.dp),
   ) {
     val colors = ListItemDefaults.colors()
