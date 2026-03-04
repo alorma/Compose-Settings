@@ -3,7 +3,7 @@ plugins {
 }
 
 kotlin {
-  androidLibrary {
+  android {
     namespace = libs.versions.namespace.get() + ".ui.extended"
   }
 
