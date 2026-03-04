@@ -25,7 +25,10 @@
 This library provides a set of **Settings** like composable items to help android *Jetpack Compose*
 developers build complex settings screens without all the boilerplate.
 
-**Ui tiles**
+Two flavors are available: standard **Material 3** components and **Material 3 Expressive** components.
+The expressive variants are built on `SegmentedListItem` and support segmented list styling.
+
+**Ui tiles** (`ui-tiles`) — Material 3
 
 | Component                                             | Screenshot                                                                       |
 |-------------------------------------------------------|----------------------------------------------------------------------------------|
@@ -36,22 +39,40 @@ developers build complex settings screens without all the boilerplate.
 | [SettingsSwitch](#SettingsSwitch)                     | <img width="200" alt="switch.png" src="docs/art/switch.png" />                   |
 | [SettingsGroup](#SettingsGroup)                       | <img width="200" alt="group.png" src="docs/art/group.png" />                     |
 
-**Ui tiles expanded**
+**Ui tiles extended** (`ui-tiles-extended`) — Material 3
 
-| Component                         | Screenshot                                                     |
-|-----------------------------------|----------------------------------------------------------------|
-| [SettingsSlider](#SettingsSlider) | <img width="200" alt="slider.png" src="docs/art/slider.png" /> |
+| Component                                   | Screenshot                                                     |
+|---------------------------------------------|----------------------------------------------------------------|
+| [SettingsSlider](#SettingsSlider)           | <img width="200" alt="slider.png" src="docs/art/slider.png" /> |
+| [SettingsSegmented](#SettingsSegmented)     |                                                                |
 
-**Ui tiles expressive**
+**Ui tiles expressive** (`ui-tiles-expressive`) — Material 3 Expressive
 
-| Component                                   | Screenshot                                                                 |
-|---------------------------------------------|----------------------------------------------------------------------------|
-| [SettingsButtonGroup](#SettingsButtonGroup) | <img width="200" alt="button-group.png" src="docs/art/button-group.png" /> |
+> Requires Material 3 Expressive API (`@OptIn(ExperimentalMaterial3ExpressiveApi::class)`).
+> All components support segmented list styling via the `shapes` parameter.
+
+| Component                                                         | Screenshot                                                                 |
+|-------------------------------------------------------------------|----------------------------------------------------------------------------|
+| [SettingsMenuLink (Expressive)](#SettingsMenuLink-Expressive)     | <img width="200" alt="menu.png" src="docs/art/menu-link.png" />            |
+| [SettingsCheckbox (Expressive)](#SettingsCheckbox-Expressive)     | <img width="200" alt="checkbox.png" src="docs/art/checkbox.png" />         |
+| [SettingsTriStateCheckbox (Expressive)](#SettingsTriStateCheckbox-Expressive) |                                                                |
+| [SettingsRadioButton (Expressive)](#SettingsRadioButton-Expressive) | <img width="200" alt="radiobutton.png" src="docs/art/radiobutton.png" /> |
+| [SettingsSwitch (Expressive)](#SettingsSwitch-Expressive)         | <img width="200" alt="switch.png" src="docs/art/switch.png" />             |
+| [SettingsGroup (Expressive)](#SettingsGroup-Expressive)           |                                                                            |
+| [SettingsButtonGroup](#SettingsButtonGroup)                       | <img width="200" alt="button-group.png" src="docs/art/button-group.png" /> |
 
 ## Install
 
+Pick the module(s) you need:
+
+| Module | Contents |
+|--------|----------|
+| `ui-tiles` | Standard M3: MenuLink, Checkbox, TriStateCheckbox, RadioButton, Switch, Group |
+| `ui-tiles-extended` | Standard M3: Slider, Segmented |
+| `ui-tiles-expressive` | Expressive M3: all of the above + ButtonGroup, with segmented list support |
+
 ```
-##// groovy
+// groovy
 implementation 'com.github.alorma.compose-settings:ui-tiles:$version'
 implementation 'com.github.alorma.compose-settings:ui-tiles-extended:$version'
 implementation 'com.github.alorma.compose-settings:ui-tiles-expressive:$version'
@@ -126,6 +147,8 @@ This allows you to:
 - Match your app's typography system
 
 ### Components
+
+#### Material 3 (`ui-tiles`, `ui-tiles-extended`)
 
 ##### SettingsMenuLink:
 
@@ -225,9 +248,25 @@ SettingsSlider(
 
 <img width="300" alt="slider.png" src="docs/art/slider.png" />
 
+##### SettingsSegmented:
+
+```kotlin
+SettingsSegmented(
+  title = { Text(text = "Setting title") },
+  items = listOf(1, 2, 3),
+  selectedItem = 2,
+  itemTitleMap = { item -> "#$item" },
+  onItemSelected = { selectedItem -> },
+  modifier = Modifier,
+  enabled = false / true,
+  subtitle = { Text(text = "Setting subtitle") },
+  icon = { Icon(...) },
+)
+```
+
 ##### SettingsGroup
 
-> Updates on `enabled` will be reflected on it's internal components unless you change their
+> Updates on `enabled` will be reflected on its internal components unless you change their
 `enabled` state manually.
 
 ```kotlin
@@ -268,10 +307,152 @@ SettingsGroup(
 
 <img width="300" alt="group.png" src="docs/art/group.png" />
 
+---
+
+#### Material 3 Expressive (`ui-tiles-expressive`)
+
+> These components require `@OptIn(ExperimentalMaterial3ExpressiveApi::class)`.
+>
+> They are built on `SegmentedListItem` and expose a `shapes: ListItemShapes` parameter,
+> which enables the segmented list visual style (rounded groups of items with connected borders).
+
+**Segmented list example:**
+
+```kotlin
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+val colors = ListItemDefaults.segmentedColors(
+  containerColor = MaterialTheme.colorScheme.surfaceContainer,
+)
+
+SettingsSwitch(
+  state = switchState,
+  title = { Text("Wi-Fi") },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index = 0, count = 3),
+  onCheckedChange = { switchState = it },
+)
+SettingsSwitch(
+  state = switchState2,
+  title = { Text("Bluetooth") },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index = 1, count = 3),
+  onCheckedChange = { switchState2 = it },
+)
+SettingsMenuLink(
+  title = { Text("Airplane mode") },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index = 2, count = 3),
+  onClick = { },
+)
+```
+
+> Use `ListItemDefaults.segmentedShapes(index, count)` to give each item the correct corner
+> rounding based on its position in the group. Pair with
+> `Arrangement.spacedBy(ListItemDefaults.SegmentedGap)` between items.
+
+##### SettingsMenuLink (Expressive):
+
+```kotlin
+SettingsMenuLink(
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  action = { IconButton() },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index, count),
+  onClick = { ... },
+)
+```
+
+##### SettingsCheckbox (Expressive):
+
+```kotlin
+SettingsCheckbox(
+  state = false / true,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index, count),
+  onCheckedChange = { newState: Boolean -> },
+)
+```
+
+##### SettingsTriStateCheckbox (Expressive):
+
+```kotlin
+SettingsTriStateCheckbox(
+  state = ToggleableState.On / ToggleableState.Off / ToggleableState.Indeterminate,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index, count),
+  onCheckedChange = { newState: ToggleableState -> },
+)
+```
+
+##### SettingsRadioButton (Expressive):
+
+```kotlin
+SettingsRadioButton(
+  state = false / true,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index, count),
+  onClick = { },
+)
+```
+
+##### SettingsSwitch (Expressive):
+
+```kotlin
+SettingsSwitch(
+  state = false / true,
+  title = { Text(text = "Setting title") },
+  subtitle = { Text(text = "Setting subtitle") },
+  modifier = Modifier,
+  enabled = false / true,
+  icon = { Icon(...) },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index, count),
+  onCheckedChange = { newState: Boolean -> },
+)
+```
+
+##### SettingsGroup (Expressive):
+
+> Works exactly like the M3 version. Pair with `Arrangement.spacedBy(ListItemDefaults.SegmentedGap)`
+> and `ListItemDefaults.segmentedShapes` on children to achieve a connected segmented look.
+
+```kotlin
+SettingsGroup(
+  modifier = Modifier,
+  enabled = false / true,
+  title = { Text(text = "SettingsGroup") },
+  contentPadding = PaddingValues(16.dp),
+  verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap),
+) {
+    SettingsMenuLink(...)
+    SettingsCheckbox(...)
+    SettingsSwitch(...)
+    ...
+}
+```
+
 ##### SettingsButtonGroup
 
-> Requires Material 3 Expressive components (uses `OutlinedToggleButton` from Material 3 Expressive
-> API).
+> Exclusive to the expressive module. Uses `OutlinedToggleButton` from Material 3 Expressive.
 
 ```kotlin
 SettingsButtonGroup(
@@ -284,6 +465,8 @@ SettingsButtonGroup(
   enabled = false / true,
   subtitle = { Text(text = "Setting subtitle") },
   icon = { Icon(...) },
+  colors = colors,
+  shapes = ListItemDefaults.segmentedShapes(index, count),
 )
 ```
 

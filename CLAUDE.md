@@ -37,25 +37,36 @@ The project is organized into four main library modules:
     - Components: `SettingsSlider`, `SettingsSegmented`
     - Published as: `com.github.alorma.compose-settings:ui-tiles-extended`
 
-4. **ui-tiles-expressive** - Expressive Material 3 components
+4. **ui-tiles-expressive** - Expressive Material 3 components (full tile set + expressive-only)
     - Location: `ui-tiles-expressive/src/commonMain/kotlin/com/alorma/compose/settings/ui/expressive/`
     - Depends on: `ui-core`, Material 3 Expressive
-    - Components: `SettingsButtonGroup`
+    - Components: `SettingsMenuLink`, `SettingsCheckbox`, `SettingsTriStateCheckbox`,
+      `SettingsRadioButton`, `SettingsSwitch`, `SettingsGroup`, `SettingsButtonGroup`
+    - All components (except `SettingsGroup` and `SettingsButtonGroup`) are built on
+      `SegmentedListItem` and accept a `shapes: ListItemShapes` parameter instead of `shape: Shape`
+    - Requires `@OptIn(ExperimentalMaterial3ExpressiveApi::class)`
     - Published as: `com.github.alorma.compose-settings:ui-tiles-expressive`
 
 ### Design Patterns
 
-All settings components follow a consistent pattern:
+Settings components follow one of two patterns depending on the module:
 
+**Standard M3 pattern** (`ui-tiles`, `ui-tiles-extended`):
 1. Built on top of `SettingsTileScaffold` (from `ui-core`)
-2. Accept common parameters: `title`, `subtitle`, `icon`, `modifier`, `enabled`, `colors`
-3. Use Material 3 components internally (ListItem, Checkbox, Switch, etc.)
-4. Support `LocalSettingsGroupEnabled` for hierarchical enabled state
-5. Leverage `SettingsTileColors` and `SettingsTextStyles` (from `ui-core`) for consistent theming
-   across all components
+2. Accept common parameters: `title`, `subtitle`, `icon`, `modifier`, `enabled`, `colors`, `shape`
+3. Use Material 3 `ListItem` internally
+
+**Expressive M3 pattern** (`ui-tiles-expressive`):
+1. Built directly on Material 3 Expressive `SegmentedListItem`
+2. Accept `shapes: ListItemShapes` instead of `shape: Shape`, enabling segmented list styling
+3. Use `ListItemDefaults.segmentedShapes(index, count)` to connect items into groups
+
+Both patterns:
+- Support `LocalSettingsGroupEnabled` for hierarchical enabled state
+- Leverage `SettingsTileColors` (from `ui-core`) for consistent theming
 
 The `SettingsTileScaffold` wraps Material 3's `ListItem` and provides consistent layout and color
-handling.
+handling (standard modules only).
 
 ### Architecture Layers
 

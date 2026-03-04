@@ -82,6 +82,7 @@ ui-tiles-expressive┘
 
 **Components**:
 - `SettingsSlider` - Numeric value selection with slider
+- `SettingsSegmented` - Single-choice selection using Material 3 `SingleChoiceSegmentedButtonRow`
 
 **Artifact**: `com.github.alorma.compose-settings:ui-tiles-extended`
 
@@ -89,6 +90,36 @@ ui-tiles-expressive┘
 - Keeps the core module lightweight
 - Advanced components may have different Material 3 requirements
 - Users can opt-in to extended features as needed
+
+#### ui-tiles-expressive
+
+**Purpose**: Expressive Material 3 variants of all standard tiles, plus expressive-only components
+
+**Location**: `ui-tiles-expressive/src/commonMain/kotlin/com/alorma/compose/settings/ui/expressive/`
+
+**Components**:
+- `SettingsMenuLink` - Expressive variant built on `SegmentedListItem`
+- `SettingsCheckbox` - Expressive variant built on `SegmentedListItem`
+- `SettingsTriStateCheckbox` - Expressive variant built on `SegmentedListItem`
+- `SettingsRadioButton` - Expressive variant built on `SegmentedListItem`
+- `SettingsSwitch` - Expressive variant built on `SegmentedListItem`
+- `SettingsGroup` - Expressive variant (same API as M3 version)
+- `SettingsButtonGroup` - Button group using `OutlinedToggleButton` (expressive-only)
+
+All components expose a `shapes: ListItemShapes` parameter (instead of `shape: Shape`) enabling
+the connected/grouped visual treatment via `ListItemDefaults.segmentedShapes(index, count)`.
+
+**Requires**: `@OptIn(ExperimentalMaterial3ExpressiveApi::class)`
+
+**Artifact**: `com.github.alorma.compose-settings:ui-tiles-expressive`
+
+**Why mirror the standard tiles?**
+- Consumers can build a full settings screen using only the expressive module, without
+  also depending on `ui-tiles`
+- The `shapes` parameter allows precise control of corner rounding so groups of items
+  connect visually as a single segmented unit
+- `SegmentedListItem` provides the interactive checked state and segmented appearance
+  out of the box, which standard `ListItem` does not
 
 ## Design Patterns
 
