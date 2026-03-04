@@ -109,7 +109,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
                 |Each library module must set a unique namespace in its build.gradle.kts:
                 |
                 |  kotlin {
-                |    androidLibrary {
+                |    android {
                 |      namespace = libs.versions.namespace.get() + ".your.unique.suffix"
                 |    }
                 |  }
