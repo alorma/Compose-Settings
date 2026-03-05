@@ -1,6 +1,5 @@
 package com.alorma.compose.settings.ui.expressive
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
