@@ -15,6 +15,7 @@ fun SettingsTileScaffold(
   title: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
+  onClick: () -> Unit = {},
   supportingContent: @Composable (() -> Unit)? = null,
   leadingContent: @Composable (() -> Unit)? = null,
   colors: ListItemColors = SettingsTileDefaults.colors(),
@@ -24,7 +25,7 @@ fun SettingsTileScaffold(
 ) {
   SegmentedListItem(
     selected = false,
-    onClick = {},
+    onClick = onClick,
     shapes = shapes,
     modifier = Modifier.fillMaxWidth().then(modifier),
     enabled = enabled,

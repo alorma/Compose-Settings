@@ -1,6 +1,5 @@
 package com.alorma.compose.settings.ui.expressive
 
-import androidx.compose.foundation.clickable
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemElevation
@@ -29,12 +28,10 @@ fun SettingsMenuLink(
   SettingsTileScaffold(
     modifier =
       Modifier
-        .clickable(
-          enabled = enabled,
-          onClick = onClick,
-        ).semantics(properties = semanticProperties)
+        .semantics(properties = semanticProperties)
         .then(modifier),
     enabled = enabled,
+    onClick = onClick,
     title = title,
     supportingContent = subtitle,
     leadingContent = icon,
