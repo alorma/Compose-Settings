@@ -1,7 +1,7 @@
 [versions]
 # Kotlin & Compose
 kotlin = "2.3.21"
-compose-plugin = "1.10.3"
+compose-plugin = "1.11.0"
 compose = "1.10.3"
 
 # Android Gradle Plugin
