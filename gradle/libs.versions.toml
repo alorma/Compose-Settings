@@ -25,7 +25,7 @@ dokka = "2.2.0"
 compose-detekt-rules = "0.0.26"
 
 # Publishing
-mavenPlugin = "0.36.0"
+mavenPlugin = "0.37.0"
 
 # Other Libraries
 compose-material3 = "1.9.0"
