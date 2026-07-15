@@ -1,6 +1,6 @@
 [versions]
 # Kotlin & Compose
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 compose-plugin = "1.11.1"
 compose = "1.11.1"
 
