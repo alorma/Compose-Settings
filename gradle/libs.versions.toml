@@ -5,7 +5,7 @@ compose-plugin = "1.11.1"
 compose = "1.11.1"
 
 # Android Gradle Plugin
-agp = "9.3.1"
+agp = "9.3.2"
 
 # Android SDK
 android-minSdk = "21"
