@@ -10,8 +10,8 @@ agp = "9.3.2"
 # Android SDK
 android-minSdk = "21"
 android-minSdkSample = "26"
-android-compileSdk = "36"
-android-targetSdk = "36"
+android-compileSdk = "37"
+android-targetSdk = "37"
 
 # Project
 namespace = "com.alorma.compose.settings"
