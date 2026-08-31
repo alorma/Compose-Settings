@@ -14,9 +14,12 @@ plugins {
 
 buildscript {
   repositories {
-    dependencies {
-      classpath(libs.plugin.gradle.maven.publish)
-    }
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  dependencies {
+    classpath(libs.plugin.gradle.maven.publish)
   }
 }
 
@@ -24,7 +27,6 @@ allprojects {
   repositories {
     google()
     mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
   }
 }
 
@@ -52,3 +54,5 @@ dependencies {
     projects.uiTilesExpressive,
   ).forEach { dep -> dokka(dep) }
 }
+
+
