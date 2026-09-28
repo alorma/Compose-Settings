@@ -2,7 +2,7 @@
 # Kotlin & Compose
 kotlin = "2.4.10"
 compose-plugin = "1.12.0"
-compose = "1.12.0"
+compose = "1.12.1"
 
 # Android Gradle Plugin
 agp = "9.4.0"
