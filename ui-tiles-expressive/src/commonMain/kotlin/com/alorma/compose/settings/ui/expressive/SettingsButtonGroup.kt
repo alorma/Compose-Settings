@@ -55,7 +55,7 @@ fun <T> SettingsButtonGroup(
               checked = item == selectedItem,
               onCheckedChange = { onItemSelected(item) },
               enabled = enabled,
-              colors = ToggleButtonDefaults.toggleButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+              colors = ToggleButtonDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
             ) {
               Text(text = itemTitleMap(item).toString())
             }
