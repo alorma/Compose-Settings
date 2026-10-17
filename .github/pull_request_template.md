@@ -75,7 +75,7 @@ Fixes #(issue number)
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing tests pass locally with my changes
 - [ ] I have checked that my changes work across all relevant platforms
-- [ ] I have updated CLAUDE.md if architectural changes were made
+- [ ] I have updated AGENTS.md if architectural changes were made
 
 ## Breaking Changes
 

@@ -61,6 +61,12 @@ The expressive variants are built on `SegmentedListItem` and support segmented l
 | [SettingsGroup (Expressive)](#SettingsGroup-Expressive)           |                                                                            |
 | [SettingsButtonGroup](#SettingsButtonGroup)                       | <img width="200" alt="button-group.png" src="docs/art/button-group.png" /> |
 
+## For AI agents
+
+Using an AI coding agent (Claude, Codex, Copilot, ...) to integrate this library? Point it to
+[docs/AGENT_INSTRUCTIONS.md](docs/AGENT_INSTRUCTIONS.md) (also indexed in [llms.txt](llms.txt)).
+Contributors' agents should read [AGENTS.md](AGENTS.md).
+
 ## Install
 
 Pick the module(s) you need:

@@ -475,4 +475,4 @@ Current approach prioritizes:
 ---
 
 For implementation guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
-For project overview, see [CLAUDE.md](CLAUDE.md).
+For project overview, see [AGENTS.md](AGENTS.md).

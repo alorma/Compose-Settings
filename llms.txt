@@ -1,0 +1,18 @@
+# Compose Settings
+
+> Kotlin Multiplatform library with ready-made Settings screen tiles for Jetpack / Compose Multiplatform (Material 3 and Material 3 Expressive). Targets Android, iOS, Desktop (JVM), JS and WasmJS. Maven group: `com.github.alorma.compose-settings`.
+
+## Using the library
+
+- [Agent instructions](https://raw.githubusercontent.com/alorma/Compose-Settings/main/docs/AGENT_INSTRUCTIONS.md): module choice, dependencies, component signatures, minimal examples, common mistakes. Start here.
+- [README](https://raw.githubusercontent.com/alorma/Compose-Settings/main/README.md): screenshots and per-component examples.
+- [API reference (Dokka)](https://alorma.github.io/Compose-Settings/dokka)
+
+## Working on the library itself
+
+- [AGENTS.md](https://raw.githubusercontent.com/alorma/Compose-Settings/main/AGENTS.md): architecture, build commands, conventions.
+- [ARCHITECTURE.md](https://raw.githubusercontent.com/alorma/Compose-Settings/main/ARCHITECTURE.md)
+
+## Optional
+
+- [Sample apps](https://github.com/alorma/Compose-Settings/tree/main/samples/shared): compilable usage of every component.
