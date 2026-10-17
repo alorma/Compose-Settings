@@ -112,7 +112,8 @@ All settings components support customization through common parameters:
 
 #### Shape
 
-Customize the shape of any settings component using the `shape` parameter:
+Customize the shape of any Material 3 (`ui-tiles`, `ui-tiles-extended`) settings component using
+the `shape` parameter (Expressive components use `shapes`, see below):
 
 ```kotlin
 SettingsSwitch(
@@ -131,26 +132,28 @@ Available shapes include:
 
 #### Text Styles
 
-Customize title and subtitle text styles using the `textStyles` parameter:
+`title` and `subtitle` are composable slots, so style the text you pass in directly:
 
 ```kotlin
 SettingsCheckbox(
   state = checkboxState,
-  title = { Text("Custom styled title") },
-  subtitle = { Text("Custom styled subtitle") },
-  textStyles = SettingsTileDefaults.textStyles(
-    titleStyle = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-    subtitleStyle = MaterialTheme.typography.bodyLarge,
-  ),
+  title = {
+    Text(
+      text = "Custom styled title",
+      style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+    )
+  },
+  subtitle = {
+    Text(
+      text = "Custom styled subtitle",
+      style = MaterialTheme.typography.bodyLarge,
+    )
+  },
   onCheckedChange = { checkboxState = it },
 )
 ```
 
-This allows you to:
-- Change font sizes, weights, and families
-- Adjust letter spacing and line height
-- Apply custom colors and decorations
-- Match your app's typography system
+For text and tile colors use the `colors` parameter (`ListItemColors`).
 
 ### Components
 

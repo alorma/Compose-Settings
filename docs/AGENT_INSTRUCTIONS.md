@@ -175,7 +175,7 @@ directly in `item { }`.
 - Treating tiles as stateful. They never store their own value; update your state in the callback.
 - `SettingsRadioButton` takes `onClick`, not `onCheckedChange`.
 - Not adding `ui-tiles-extended` when using `SettingsSlider` / `SettingsSegmented`.
-- Inventing parameters (for example `textStyles`). Only use those listed above or in the KDoc.
+- Inventing parameters (for example `textStyles`, which does not exist: style the `Text` inside `title`/`subtitle`). Only use those listed above or in the KDoc.
 
 ## 7. Where to look for more
 
