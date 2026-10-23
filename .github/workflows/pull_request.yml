@@ -34,18 +34,18 @@ jobs:
           cache: gradle
 
       - name: Build
-        run: ./gradlew :ui-core:build :ui-tiles:build :ui-tiles-extended:build :ui-tiles-expressive:build
+        run: ./gradlew :ui-core:build :ui-tiles:build :ui-tiles-extended:build :ui-tiles-expressive:build --max-workers 2
 
   build-sample:
     name: Build sample ${{ matrix.config.target }} - PR
     strategy:
       matrix:
         config: [
-          { target: android, module: androidApp, os: ubuntu-latest, tasks: assembleDebug },
+          { target: android, module: androidApp, os: ubuntu-24.04, tasks: assembleDebug },
           { target: iOS, module: iosApp, os: macos-latest, tasks: compileKotlinIosArm64 },
-          { target: js, module: webApp, os: ubuntu-latest, tasks: jsBrowserDistribution },
-          { target: wasm, module: webApp, os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
-          { target: desktop, module: desktopApp, os: ubuntu-latest, tasks: assemble }
+          { target: js, module: webApp, os: ubuntu-24.04, tasks: jsBrowserDistribution },
+          { target: wasm, module: webApp, os: ubuntu-24.04, tasks: wasmJsBrowserDistribution },
+          { target: desktop, module: desktopApp, os: ubuntu-24.04, tasks: assemble }
         ]
     runs-on: ${{ matrix.config.os }}
     steps:
