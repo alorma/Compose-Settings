@@ -18,26 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  get-version:
-    name: Get Version
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get_version.outputs.version }}
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v7
-
-      - name: Get current version
-        id: get_version
-        run: |
-          CURRENT_VERSION=$(grep "^libVersion=" gradle.properties | cut -d'=' -f2)
-          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          echo "Current version: $CURRENT_VERSION"
-
-  build-lib-core:
-    name: Build core - Main
-    if: ${{ success() }}
-    needs: [ get-version ]
+  build-libs:
+    name: Build libraries - Main
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -48,48 +30,22 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: gradle
 
       - name: Build
-        run: ./gradlew :ui-core:build
-
-  build-lib-ui:
-    strategy:
-      matrix:
-        config: [
-          { target: tiles, module: ui-tiles, task: build, continueOnError: false },
-          { target: tiles expanded, module: ui-tiles-extended, task: build, continueOnError: false },
-          { target: tiles expressive, module: ui-tiles-expressive, task: build, continueOnError: false },
-        ]
-    name: Build ${{ matrix.config.target }} - Main
-    if: ${{ success() }}
-    needs: [ build-lib-core ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v7
-
-      - name: Set up JDK
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Build
-        continue-on-error: ${{ matrix.config.continueOnError }}
-        run: ./gradlew :${{ matrix.config.module }}:${{ matrix.config.task }}
+        run: ./gradlew :ui-core:build :ui-tiles:build :ui-tiles-extended:build :ui-tiles-expressive:build
 
   build-sample:
+    name: Build sample ${{ matrix.config.target }} - Main
     strategy:
       matrix:
         config: [
-          { target: android,  module: androidApp, os: ubuntu-latest, tasks: assembleDebug },
-          { target: iOS,  module: iosApp, os: macos-latest, tasks: compileKotlinIosArm64 },
-          { target: js,  module: webApp, os: ubuntu-latest, tasks: jsBrowserDistribution },
-          { target: wasm,  module: webApp, os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
-          { target: desktop,  module: desktopApp, os: ubuntu-latest, tasks: assemble }
+          { target: android, module: androidApp, os: ubuntu-latest, tasks: assembleDebug },
+          { target: iOS, module: iosApp, os: macos-latest, tasks: compileKotlinIosArm64 },
+          { target: js, module: webApp, os: ubuntu-latest, tasks: jsBrowserDistribution },
+          { target: wasm, module: webApp, os: ubuntu-latest, tasks: wasmJsBrowserDistribution },
+          { target: desktop, module: desktopApp, os: ubuntu-latest, tasks: assemble }
         ]
-    if: ${{ success() }}
-    needs: [ build-lib-ui ]
     runs-on: ${{ matrix.config.os }}
     steps:
       - name: Check out code
@@ -100,15 +56,13 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: gradle
 
-      - name: Build sample ${{ matrix.config.target }} - Main
-        continue-on-error: false
+      - name: Build sample
         run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
 
-  check-sign:
-    name: Check signature - Main
-    if: ${{ success() }}
-    needs: [ build-lib-ui ]
+  publish-check:
+    name: Check publication - Main
     runs-on: macos-latest
     steps:
       - name: Check out code
@@ -119,56 +73,13 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: gradle
 
-      - name: Check signature - Main
-        env:
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
-        run: ./gradlew ui-core:signKotlinMultiplatformPublication ui-tiles:signKotlinMultiplatformPublication ui-tiles-extended:signKotlinMultiplatformPublication ui-tiles-expressive:signKotlinMultiplatformPublication
-
-  fake-publish:
-    name: Fake publish - Main
-    if: ${{ success() }}
-    needs: [ check-sign ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v7
-
-      - name: Set up JDK
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Publish to MavenLocal
+      - name: Sign and publish to MavenLocal
         env:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
         run: ./gradlew publishToMavenLocal
-
-  publish-dry:
-    name: Dry run publish - Main
-    if: ${{ success() }}
-    needs: [ check-sign ]
-    runs-on: macos-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v7
-
-      - name: Set up JDK
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Publish to MavenCentral (dry)
-        env:
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache --max-workers 1 --dry-run
 
   # Deployment job
   deploy:
@@ -178,7 +89,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [ build-sample ]
+    needs: [ build-libs, build-sample, publish-check ]
     steps:
       - name: Check out code
         uses: actions/checkout@v7
