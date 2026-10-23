@@ -25,7 +25,11 @@ class ComposeSampleConventionPlugin : Plugin<Project> {
       extensions.configure<KotlinMultiplatformExtension> {
         extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
           namespace = libs.findVersion("namespace").get().toString() + ".sample.shared"
-          compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
+          compileSdk {
+            version = release(libs.findVersion("android-compileSdk").get().toString().toInt()) {
+              minorApiLevel = libs.findVersion("android-compileSdkMinor").get().toString().toInt()
+            }
+          }
           minSdk = libs.findVersion("android-minSdkSample").get().toString().toInt()
 
           packaging {
