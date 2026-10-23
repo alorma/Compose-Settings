@@ -11,6 +11,7 @@ agp = "9.4.1"
 android-minSdk = "21"
 android-minSdkSample = "26"
 android-compileSdk = "37"
+android-compileSdkMinor = "1"
 android-targetSdk = "37"
 
 # Project

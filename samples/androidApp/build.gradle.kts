@@ -6,10 +6,12 @@ plugins {
 
 android {
   namespace = libs.versions.namespace.get() + ".sample.shared.android"
-  compileSdk =
-    libs.versions.android.compileSdk
-      .get()
-      .toInt()
+  compileSdk {
+    version =
+      release(libs.versions.android.compileSdk.get().toInt()) {
+        minorApiLevel = libs.versions.android.compileSdkMinor.get().toInt()
+      }
+  }
 
   defaultConfig {
     minSdk = libs.versions.android.minSdkSample
