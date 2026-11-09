@@ -22,7 +22,7 @@ androidxactivity = "1.13.0"
 
 # Code Quality
 detekt = "1.23.8"
-dokka = "2.2.0"
+dokka = "2.3.0"
 compose-detekt-rules = "0.0.26"
 
 # Publishing
