@@ -48,6 +48,7 @@ class ComposeLibraryConventionPlugin : Plugin<Project> {
       extensions.configure<KotlinMultiplatformExtension> {
         applyDefaultHierarchyTemplate()
         withSourcesJar()
+        jvmToolchain(17)
 
         extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
           // Default namespace - modules MUST override this with their unique namespace
