@@ -31,7 +31,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Build
         run: ./gradlew :ui-core:build :ui-tiles:build :ui-tiles-extended:build :ui-tiles-expressive:build --max-workers 2
@@ -39,6 +41,7 @@ jobs:
   build-sample:
     name: Build sample ${{ matrix.config.target }} - PR
     strategy:
+      fail-fast: false
       matrix:
         config: [
           { target: android, module: androidApp, os: ubuntu-24.04, tasks: assembleDebug },
@@ -57,7 +60,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Build sample
         run: ./gradlew :samples:${{ matrix.config.module }}:${{ matrix.config.tasks }}
@@ -74,7 +79,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Sign and publish to MavenLocal
         env:
